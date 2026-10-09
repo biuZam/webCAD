@@ -67,7 +67,8 @@ const GREY = 150
 export const latin1 = (s: string) => Array.from(s, (c) => (c.codePointAt(0)! > 0xff ? '?' : c)).join('')
 
 /** True if any of the strings has a character Helvetica can't print. */
-export const needsCjk = (texts: readonly string[]) => texts.some((t) => /[^\u0000-\u00ff]/.test(t))
+export const needsCjk = (texts: readonly string[]) =>
+  texts.some((t) => Array.from(t).some((c) => c.codePointAt(0)! > 0xff))
 
 /** Which font the page text uses, and how strings are prepared for it. */
 interface Fonts {
