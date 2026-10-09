@@ -20,7 +20,7 @@ pnpm test -t "rounds coordinates"     # tests matching a name
 pnpm e2e                     # Playwright browser tests in e2e/ (starts its own dev server on :5199; first run: pnpm exec playwright install chromium-headless-shell)
 # DOM/component tests: `// @vitest-environment happy-dom` at the top (+ `import '../test/canvas-stub'` if they touch geometry).
 # Never add jsdom: Paper.js's Node build picks it up and then every geometry test fails (needs native `canvas`).
-pnpm i18n:check [--strict]   # keys missing from non-en locales; --strict exits non-zero
+pnpm i18n:check [--strict]   # keys missing from non-en locales; --strict exits non-zero (check/verify/CI use --strict)
 pnpm check                   # typecheck + lint + test + i18n:check (quick)
 pnpm verify                  # everything CI runs: check + format:check + build + bundle:check
 pnpm bundle:check            # after build: initial download must stay < 600 KB gzipped
@@ -50,7 +50,7 @@ Layers, importing only downward: `app`/`ui`/`i18n` (React) → `canvas`/`tools`/
 ## i18n
 
 - All UI strings go in `src/locales/<lang>/{common,tools,export,errors}.json` with semantic keys (`tools.fillet.radius`); ICU syntax for plurals (`{count, plural, one {# hole} other {# holes}}`). Default namespace is `common`; other namespaces use `t('tools:…')`.
-- `en` is bundled; other locales are lazy chunks (`setLanguage` in `src/i18n/index.ts`). Add new keys to `en` first.
+- `en` is bundled; other locales are lazy chunks (`setLanguage` in `src/i18n/index.ts`). Add new keys to `en` first, then `zh-CN` in the same change: `pnpm check` runs `i18n:check --strict`, and `src/i18n/locales.test.ts` fails if a translation's ICU placeholders differ from `en`.
 - Number formatting via `Intl.NumberFormat`; unit symbols (mm, cm, in) stay Latin. No text in icons.
 - Tool strings live in the `tools` namespace and are typed as `ParseKeys<'tools'>` (`I18nKey` in `src/tools/types.ts`); translate them with `useTranslation('tools')`. Namespace-prefixed keys like `'tools:line.name'` don't type-check with the default `t`.
 - Default layer names equal their `kind` and are shown translated until the user renames them.

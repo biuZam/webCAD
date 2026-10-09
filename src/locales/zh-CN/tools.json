@@ -1,78 +1,227 @@
 {
-  "fillet": {
-    "name": "圆角",
-    "radius": "半径"
-  },
-  "stitchHoles": {
-    "name": "缝孔",
-    "pitch": "针距",
-    "count": "{count} 个孔",
-    "preset": "菱斩",
-    "shape": "孔形"
-  },
-  "common": {
-    "x": "X",
-    "y": "Y"
+  "select": {
+    "name": "选择",
+    "prompt": "单击选择 · Shift+单击加选或减选 · 从左向右框选完全包含的对象，从右向左框选接触到的对象 · 拖动已选对象可移动（Alt：复制）· Delete 删除。",
+    "promptPoints": "拖动节点或控制柄 · 双击节点：平滑 ↔ 尖角 · 双击轮廓：添加节点 · 单击节点后按 Delete：删除节点 · Esc 取消选择。"
   },
   "line": {
     "name": "直线",
     "length": "长度",
-    "angle": "角度"
+    "angle": "角度",
+    "promptFirst": "单击或输入第一个点。",
+    "promptNext": "单击下一个点，或输入长度和角度。按住 Shift 锁定 15°。",
+    "promptMore": "下一个点 · 单击第一个点闭合 · Enter、双击或右键结束 · Backspace 撤回一个点。"
   },
   "rectangle": {
     "name": "矩形",
     "width": "宽度",
     "height": "高度",
-    "cornerRadius": "圆角半径"
+    "cornerRadius": "圆角半径",
+    "promptFirst": "单击或输入第一个角点。按住 Alt 从中心绘制。",
+    "promptCorner": "单击对角点，或输入宽度和高度。",
+    "promptCentre": "从中心绘制：单击一个角点，或输入总宽度和总高度。"
   },
   "circle": {
     "name": "圆",
-    "radius": "半径"
+    "radius": "半径",
+    "promptCentre": "单击或输入圆心。",
+    "promptRadius": "单击圆上一点，或输入半径。",
+    "mode": "方式",
+    "modeCentre": "圆心 + 半径",
+    "modeThree": "三点",
+    "modeEllipse": "椭圆",
+    "radius2": "第二半径",
+    "promptP1": "单击圆上的第一个点。",
+    "promptP2": "单击第二个点。",
+    "promptP3": "单击第三个点。",
+    "promptAxis": "单击第一条轴的端点（确定其半径和方向）。",
+    "promptOther": "单击确定另一半径，或直接输入。"
   },
-  "select": {
-    "name": "选择"
+  "fillet": {
+    "name": "圆角",
+    "radius": "半径",
+    "promptPick": "将鼠标移到两条直边之间的拐角上。Shift：该图形的所有拐角。",
+    "promptApply": "单击为此拐角倒圆角（Shift：所有拐角）。输入半径可修改。",
+    "tooLarge": "对此拐角过大：可容纳的最大半径为 {max} mm。",
+    "notApplicable": "无法为此拐角倒圆角。"
+  },
+  "stitchHoles": {
+    "name": "缝孔",
+    "pitch": "针距",
+    "count": "{count, plural, other {# 个孔}}",
+    "preset": "菱斩",
+    "custom": "自定义",
+    "size": "孔径",
+    "shape": "孔形",
+    "round": "圆孔",
+    "slit": "斜孔（菱斩）",
+    "corners": "每个拐角都打孔",
+    "promptPick": "将鼠标移到缝线（或任意线）上预览缝孔。",
+    "promptClick": "单击添加这些缝孔。缝孔与线保持关联并随之更新。"
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "当前图层已锁定或隐藏。请解锁或显示它，或在“图层”面板中选择其他图层。",
+    "joinNone": "请选择要连接的开放路径（或一条首尾相接的路径以将其闭合）。",
+    "booleanNone": "请选择两个或更多闭合图形（轮廓或圆）。"
+  },
+  "transform": {
+    "promptPick": "选择对象（单击、Shift+单击或拖框），然后按 Enter 或右键。",
+    "copy": "保留原对象（复制）"
   },
   "move": {
-    "name": "移动"
+    "name": "移动",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "单击或输入基点。",
+    "promptTarget": "单击目标点，或输入 ΔX 和 ΔY。按住 Shift 锁定 15°。"
   },
   "rotate": {
     "name": "旋转",
-    "angle": "角度"
+    "angle": "角度",
+    "promptCentre": "单击或输入旋转中心。",
+    "promptAngle": "单击确定角度（自 +X 方向起算），或直接输入。按住 Shift 取整到 15°。"
   },
   "scale": {
     "name": "缩放",
-    "factor": "比例"
+    "factor": "比例",
+    "promptBase": "单击或输入基点（保持不动）。",
+    "promptRef": "输入比例，或单击一个参考点。",
+    "promptTarget": "单击参考点的目标位置，或输入比例。"
   },
   "mirror": {
-    "name": "镜像"
-  },
-  "transform": {
-    "copy": "保留原对象（复制）"
+    "name": "镜像",
+    "angle": "轴线角度",
+    "promptFirst": "单击一条中心线以其为轴镜像，或单击轴线的第一个点。",
+    "promptSecond": "单击轴线的第二个点，或输入轴线角度。按住 Shift 锁定 15°。"
   },
   "offset": {
     "name": "偏移",
     "distance": "距离",
-    "join": "拐角"
+    "through": "通过光标",
+    "join": "拐角",
+    "joinMiter": "尖角（斜接）",
+    "joinRound": "圆角",
+    "joinBevel": "斜切",
+    "promptPick": "单击要偏移的路径、圆或中心线。",
+    "promptSide": "单击偏移的一侧（距离跟随光标，或直接输入）。再次单击可继续偏移；Esc 重新选择对象。",
+    "promptApprox": "已偏移。部分曲线以细密折线偏移，以保证误差在 0.02 mm 以内。再次单击可继续偏移。"
   },
   "stitchLine": {
-    "name": "缝线"
+    "name": "缝线",
+    "promptPick": "单击要添加缝线的轮廓。",
+    "promptSide": "单击内侧或外侧以确定方向（边距取自项目设置，或直接输入）。缝线与轮廓保持关联。",
+    "promptApprox": "已添加缝线；部分曲线为细密折线，以保证误差在 0.02 mm 以内。请单击下一个轮廓。"
   },
   "chamfer": {
-    "name": "倒角"
+    "name": "倒角",
+    "d1": "距离",
+    "d2": "第二距离",
+    "angle": "角度",
+    "promptPick": "将鼠标移到两条直边之间的拐角上。Shift：该图形的所有拐角。",
+    "promptApply": "单击切去此拐角（Shift：所有拐角）。输入两个距离，或一个距离和一个角度。",
+    "tooLarge": "对此拐角过大：沿每条边最多 {max} mm。",
+    "notApplicable": "无法以该角度切去此拐角。"
   },
   "pen": {
-    "name": "钢笔（曲线）"
+    "name": "钢笔（曲线）",
+    "promptFirst": "单击创建尖角点，拖动创建平滑曲线点。",
+    "promptNext": "单击创建尖角，拖动创建曲线。输入长度和角度可画直边。按住 Shift 锁定 15°。",
+    "promptMore": "单击第一个点闭合 · Enter、双击或右键结束 · Backspace 删除最后一个点。"
   },
   "arc": {
-    "name": "三点圆弧"
+    "name": "三点圆弧",
+    "promptStart": "单击或输入圆弧起点。",
+    "promptEnd": "单击或输入圆弧终点。",
+    "promptThrough": "单击圆弧经过的一点。",
+    "collinear": "三点共线：请选择不在该直线上的点。"
   },
   "centreLine": {
-    "name": "中心线"
+    "name": "中心线",
+    "mode": "方式",
+    "modeShape": "穿过图形中心",
+    "modePoints": "两点",
+    "orientation": "方向",
+    "vertical": "竖直",
+    "horizontal": "水平",
+    "promptShape": "单击一个图形，在其中心添加中心线。镜像工具可将其用作轴线。",
+    "promptFirst": "单击或输入第一个点。",
+    "promptSecond": "单击第二个点。按住 Shift 锁定 15°。"
+  },
+  "label": {
+    "name": "标注",
+    "mode": "方式",
+    "modeText": "文字",
+    "modeGrain": "纹理方向箭头",
+    "text": "文字",
+    "size": "字号",
+    "angle": "角度",
+    "length": "长度",
+    "promptPlace": "单击或输入文字起点（基线左端）。标注放在“备注”图层。",
+    "promptText": "输入文字，例如部件名称和“裁 2 片”，然后按 Enter。单击别处可移动位置 · Esc 取消。",
+    "promptGrainStart": "单击或输入纹理方向箭头的一端。",
+    "promptGrainEnd": "单击另一端，或输入长度和角度。按住 Shift 锁定 15°。"
+  },
+  "parallel": {
+    "name": "平行线",
+    "distance": "距离",
+    "promptEdge": "单击一条直边。",
+    "promptPlace": "在所需一侧和距离处单击，或输入距离（光标决定方向）。Esc 重新选择直边。"
+  },
+  "trim": {
+    "name": "修剪 / 延伸 / 打断",
+    "mode": "方式",
+    "modeTrim": "修剪",
+    "modeExtend": "延伸",
+    "modeSplit": "打断",
+    "promptTrim": "单击要删除的线段：将修剪到最近的交点。Shift+单击改为延伸。",
+    "promptExtend": "单击线的端点附近，将其延伸到遇到的下一条线。Shift+单击改为修剪。",
+    "promptSplit": "单击线或轮廓，在该点将其打断。"
+  },
+  "punch": {
+    "name": "冲孔 / 腰圆孔",
+    "kind": "形状",
+    "round": "圆孔",
+    "slot": "腰圆孔",
+    "preset": "圆冲",
+    "custom": "自定义",
+    "diameter": "直径",
+    "width": "宽度",
+    "length": "长度",
+    "angle": "角度",
+    "prompt": "单击放置圆孔（可捕捉圆心和端点），或输入 X/Y 后按 Enter。请按铆钉、四合扣或螺丝扣的杆径选择孔径。",
+    "promptSlot": "单击以中心放置腰圆孔，或输入 X/Y 后按 Enter。长度为两端总长；宽度即圆冲直径。"
+  },
+  "seamAllowance": {
+    "name": "缝份",
+    "allowance": "缝份",
+    "promptPick": "单击一个闭合轮廓，为其添加缝份。",
+    "promptAll": "缝份（mm）：{values}。输入数值应用到所有边，或单击某条边（Shift+单击多选）单独设置。Enter 添加轮廓 · Esc 重新选择。",
+    "promptEdges": "缝份（mm）：{values}。为高亮的边输入缝份后按 Enter。未输入时按 Enter 添加轮廓 · Esc 取消边的选择。"
   },
   "perpendicular": {
-    "name": "垂线"
+    "name": "垂线",
+    "along": "沿边距离",
+    "length": "长度",
+    "promptEdge": "单击一条直边。",
+    "promptPlace": "单击放置垂线，或输入沿边距离和长度。Esc 重新选择直边。"
   },
   "measure": {
-    "name": "测量"
+    "name": "测量",
+    "mode": "测量",
+    "distance": "距离",
+    "angle": "角度",
+    "length": "长度",
+    "promptDistance": "单击两点测量距离。",
+    "promptAngle": "依次单击一点、角点和另一点。",
+    "holes": "孔数",
+    "edgeA": "边 1",
+    "edgeB": "边 2",
+    "promptHolesFirst": "单击缝孔的一条边，统计其孔数（含拐角孔）。",
+    "promptHolesSecond": "单击与之缝合的边。",
+    "holesMatch": "两条边都是 {count, plural, other {# 个孔}}：孔数一致。单击可比较另一对边。",
+    "holesDiffer": "孔数不一致：{a} 对 {b} 个孔（相差 {diff, plural, other {# 个孔}}）。请调整针距或边长，使两边能均匀缝合。",
+    "promptLength": "将鼠标移到图形上查看其长度。"
   }
 }

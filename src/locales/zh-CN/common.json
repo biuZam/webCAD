@@ -1,4 +1,8 @@
 {
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "未命名"
+  },
   "menu": {
     "undo": "撤销",
     "redo": "重做",
@@ -6,7 +10,51 @@
     "new": "新建",
     "open": "打开…",
     "save": "保存",
-    "export": "导出…"
+    "export": "导出…",
+    "importSvg": "导入 SVG…",
+    "shortcuts": "快捷键…"
+  },
+  "history": {
+    "add": "添加",
+    "edit": "编辑",
+    "delete": "删除",
+    "layer": "更改图层",
+    "addLine": "添加直线",
+    "addRectangle": "添加矩形",
+    "addCircle": "添加圆",
+    "move": "移动",
+    "rotate": "旋转",
+    "scale": "缩放",
+    "mirror": "镜像",
+    "flip": "翻转",
+    "rename": "重命名项目",
+    "units": "更改单位",
+    "offset": "偏移",
+    "stitchLine": "添加缝线",
+    "detach": "解除关联",
+    "stitchHoles": "添加缝孔",
+    "settings": "更改项目设置",
+    "fillet": "圆角",
+    "chamfer": "倒角",
+    "addPath": "添加路径",
+    "addArc": "添加圆弧",
+    "editNodes": "编辑节点",
+    "addPoint": "添加节点",
+    "deletePoint": "删除节点",
+    "addLabel": "添加标注",
+    "importSvg": "导入 SVG",
+    "addGrainArrow": "添加纹理方向箭头",
+    "addPunch": "添加冲孔",
+    "addSlot": "添加腰圆孔",
+    "seamAllowance": "添加缝份",
+    "trim": "修剪",
+    "extend": "延伸",
+    "split": "打断",
+    "join": "连接",
+    "union": "并集",
+    "difference": "差集",
+    "addCentreLine": "添加中心线",
+    "addEllipse": "添加椭圆"
   },
   "layers": {
     "title": "图层",
@@ -15,11 +63,33 @@
       "stitch": "缝线",
       "reference": "参考",
       "notes": "备注"
-    }
+    },
+    "show": "显示 {name}",
+    "hide": "隐藏 {name}",
+    "active": "在 {name} 上绘制",
+    "lock": "锁定 {name}",
+    "unlock": "解锁 {name}",
+    "color": "{name} 的颜色"
+  },
+  "status": {
+    "cursor": "X {x}  Y {y}",
+    "zoom": "缩放 {percent}",
+    "entities": "{count, plural, other {# 个对象}}",
+    "grid": "网格 {spacing}",
+    "selected": "已选 {count} 个",
+    "unit": "单位"
   },
   "languages": {
     "en": "English",
     "zh-CN": "简体中文"
+  },
+  "tools": {
+    "label": "工具",
+    "shortcut": "{name}（{key}）"
+  },
+  "input": {
+    "label": "数值输入",
+    "hint": "输入数值，Tab 切换到下一项，Enter 确认，Esc 清除。"
   },
   "snap": {
     "title": "捕捉 ({count})",
@@ -37,23 +107,120 @@
   },
   "modify": {
     "flipH": "水平翻转",
-    "flipV": "垂直翻转"
+    "flipV": "垂直翻转",
+    "join": "连接路径",
+    "union": "并集",
+    "difference": "差集（最大的减去其余）"
+  },
+  "file": {
+    "projectName": "项目名称",
+    "unsaved": "有未保存的更改",
+    "saved": "已保存 {name}",
+    "opened": "已打开 {name}",
+    "created": "新项目",
+    "restored": "已恢复上次的工作",
+    "discardConfirm": "放弃此项目未保存的更改？",
+    "exported": "已导出 {name}",
+    "offlineReady": "已可离线使用",
+    "imported": "已从 {name} 导入 {count, plural, other {# 个图形}}并选中{skipped, plural, =0 {} other {；跳过 # 个文字或图片}}。"
+  },
+  "notice": {
+    "dismiss": "关闭"
   },
   "properties": {
     "title": "属性",
+    "empty": "选择对象以查看和编辑其属性。",
+    "mixed": "—",
+    "count": "{count, plural, other {# 个对象}}",
+    "type": {
+      "path": "路径",
+      "circle": "圆",
+      "text": "文字",
+      "holeSet": "缝孔",
+      "centreLine": "中心线",
+      "stitchLine": "缝线（已关联）"
+    },
     "layer": "图层",
     "lineStyle": "线型",
+    "strokeWidth": "线宽（导出）",
+    "width": "宽",
+    "height": "高",
     "length": "长度",
+    "points": "节点",
+    "closed": "闭合",
+    "yes": "是",
+    "no": "否",
+    "centreX": "圆心 X",
+    "centreY": "圆心 Y",
     "radius": "半径",
     "diameter": "直径",
+    "radiusX": "X 半径",
+    "radiusY": "Y 半径",
     "rotation": "旋转",
+    "fromX": "起点 X",
+    "fromY": "起点 Y",
+    "toX": "终点 X",
+    "toY": "终点 Y",
     "pitch": "针距",
-    "margin": "边距"
+    "holeSize": "孔径",
+    "margin": "边距",
+    "holes": "孔数",
+    "holesPerEdge": "每边孔数",
+    "text": "文字",
+    "textSize": "字号",
+    "linkedTo": "跟随",
+    "detach": "解除关联",
+    "inside": "内侧",
+    "outside": "外侧",
+    "holeShape": "孔形",
+    "slitAngle": "斜孔角度",
+    "cornerAware": "每个拐角都打孔",
+    "round": "圆孔",
+    "slit": "斜孔（菱斩）",
+    "project": "项目",
+    "projectHint": "新缝线和缝孔的默认值。",
+    "stitchMargin": "缝线边距",
+    "defaultPitch": "针距",
+    "defaultHoleSize": "孔径"
   },
   "lineStyle": {
     "solid": "实线（裁切）",
     "dashed": "虚线（折线/压痕）",
     "dotted": "点线（参考）",
     "dashDot": "点划线（中心线）"
+  },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "取消"
+  },
+  "shortcuts": {
+    "title": "键盘快捷键",
+    "hint": "可使用字母键，可加 Shift。数字键用于输入数值，空格键用于平移视图。",
+    "change": "更改",
+    "changeFor": "更改「{name}」的快捷键",
+    "remove": "移除",
+    "removeFor": "移除「{name}」的快捷键",
+    "none": "无",
+    "pressKey": "请按键…",
+    "pressKeyFor": "请按下「{name}」的新快捷键，按 Esc 保留原快捷键。",
+    "invalid": "请使用字母键，可加 Shift。",
+    "set": "{name}：{key}",
+    "moved": "{key} 现在用于「{to}」；「{from}」已没有快捷键。",
+    "removed": "「{name}」现在没有快捷键。",
+    "reset": "全部恢复默认",
+    "resetDone": "所有快捷键已恢复默认。",
+    "done": "完成"
+  },
+  "canvas": {
+    "label": "绘图区",
+    "help": "按字母键选择工具（L 直线、R 矩形、C 圆、P 钢笔、V 选择…）。可直接输入坐标：开始输入数字即可在输入栏中填写坐标或长度，Tab 切换输入项，Enter 确认，Esc 取消。"
+  },
+  "update": {
+    "available": "新版本已就绪。",
+    "reload": "重新加载"
   }
 }

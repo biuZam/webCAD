@@ -1,1 +1,46 @@
-{}
+{
+  "title": "导出",
+  "format": "格式",
+  "formats": {
+    "pdf": "PDF，1:1 打印",
+    "svg": "SVG，1:1，用于激光切割机或其他软件",
+    "dxf": "DXF，1:1（毫米），用于激光与 CNC 软件",
+    "png": "PNG 图片，用于分享或预览"
+  },
+  "dxf": {
+    "noLabels": "DXF 只包含图形，不含标注文字。"
+  },
+  "png": {
+    "resolution": "分辨率",
+    "hint": "用于分享的图片。制作版型请使用 PDF、SVG 或 DXF。"
+  },
+  "layers": "内容",
+  "cutOnly": "仅裁切图层（激光）",
+  "includeLabels": "包含标注",
+  "polyline": "曲线转为短直线（适用于激光软件）",
+  "strokeWidth": "线宽",
+  "strokeAsDrawn": "按原线宽",
+  "working": "正在导出…",
+  "export": "导出 {format}",
+  "svg": {
+    "title": "导出 SVG",
+    "cutOnly": "仅裁切图层（激光）",
+    "includeLabels": "包含标注"
+  },
+  "pdf": {
+    "paper": "纸张",
+    "single": "单页，按版型尺寸",
+    "orientation": "方向",
+    "auto": "页数最少",
+    "portrait": "纵向",
+    "landscape": "横向",
+    "overlap": "重叠",
+    "printHint": "请按 100%（“实际大小”）打印，切勿选择“适合页面”。然后测量第一页上的 50 mm 方块。",
+    "scale": "比例 1:1",
+    "calibration": "50 mm：测量此方块以检查打印比例",
+    "instructions1": "请按 100% /“实际大小”打印。不要使用“适合页面”或“缩小超大页面”。",
+    "instructions2": "测量方块：每边必须正好为 50 mm。否则请检查打印机缩放设置后重新打印。",
+    "assembly": "各页重叠 {overlap} mm。沿虚线裁剪或叠放各页，对齐角标和页边的页码标签。",
+    "sheets": "页面"
+  }
+}
