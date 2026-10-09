@@ -15,6 +15,7 @@ import { PunchTool } from './punch'
 import { RectangleTool } from './rectangle'
 import { RotateTool } from './rotate'
 import { ScaleTool } from './scale'
+import { SeamAllowanceTool } from './seam-allowance'
 import { SelectTool } from './select'
 import { StitchHolesTool } from './stitch-holes'
 import { StitchLineTool } from './stitch-line'
@@ -45,6 +46,7 @@ export function createTools(): Record<ToolId, Tool> {
     parallel: new ParallelTool(),
     trim: new TrimTool(),
     punch: new PunchTool(),
+    seamAllowance: new SeamAllowanceTool(),
   }
 }
 
@@ -72,6 +74,7 @@ export const TOOL_SHORTCUTS: Record<string, ToolId> = {
   g: 'parallel',
   w: 'trim',
   u: 'punch',
+  y: 'seamAllowance',
 }
 
 /** Palette order; `null` draws a divider between groups. */
@@ -97,6 +100,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'fillet',
   'chamfer',
   'offset',
+  'seamAllowance',
   'stitchLine',
   'stitchHoles',
   'punch',

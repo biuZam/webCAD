@@ -193,6 +193,13 @@
     "prompt": "Click to place a hole (snaps to centres and points), or type X/Y and Enter. Use the diameter your rivet, snap or screw post needs.",
     "promptSlot": "Click to place a slot at its centre, or type X/Y and Enter. Length is end to end; width is the punch diameter."
   },
+  "seamAllowance": {
+    "name": "Seam allowance",
+    "allowance": "Allowance",
+    "promptPick": "Click a closed outline to add a seam allowance round it.",
+    "promptAll": "Allowances (mm): {values}. Type a value for every edge, or click an edge (Shift-click for more) to set its own. Enter adds the outline · Esc picks another.",
+    "promptEdges": "Allowances (mm): {values}. Type the allowance for the highlighted edges and press Enter. Enter with nothing typed adds the outline · Esc clears the edge choice."
+  },
   "perpendicular": {
     "name": "Perpendicular",
     "along": "Along",

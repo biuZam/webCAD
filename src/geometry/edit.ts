@@ -36,7 +36,7 @@ export const isEditable = (entity: Entity) =>
   entity.type === 'path' ? entity.segments.length > 1 : entity.type === 'circle' || entity.type === 'centreLine'
 
 /** The part of an *open* path between two offsets along it. */
-function subPath(path: paper.Path, from: number, to: number): paper.Path | null {
+export function subPath(path: paper.Path, from: number, to: number): paper.Path | null {
   if (to - from < EPS) return null
   const part = path.clone({ insert: false })
   if (to < part.length - EPS) part.splitAt(to)
@@ -45,7 +45,7 @@ function subPath(path: paper.Path, from: number, to: number): paper.Path | null 
 }
 
 /** A closed path opened at `offset`, so it starts and ends there. */
-function openAt(path: paper.Path, offset: number): paper.Path {
+export function openAt(path: paper.Path, offset: number): paper.Path {
   const open = path.clone({ insert: false })
   open.splitAt(offset > EPS && offset < open.length - EPS ? offset : 0)
   // Opening at the very start: Paper leaves it closed; open it explicitly, repeating the first point.

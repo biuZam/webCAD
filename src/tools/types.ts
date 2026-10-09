@@ -30,6 +30,7 @@ export type ToolId =
   | 'parallel'
   | 'trim'
   | 'punch'
+  | 'seamAllowance'
 
 /** A key in the `tools` namespace (translate with `useTranslation('tools')`). */
 export type I18nKey = ParseKeys<'tools'>

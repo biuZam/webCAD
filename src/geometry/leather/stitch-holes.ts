@@ -71,7 +71,7 @@ function edgesOf(offsets: readonly number[], corners: readonly number[], length:
 }
 
 /** Arc-length offsets of the anchors where the path turns sharply. */
-function cornerOffsets(path: paper.Path): number[] {
+export function cornerOffsets(path: paper.Path): number[] {
   const curves = path.curves
   const out: number[] = []
   let offset = 0

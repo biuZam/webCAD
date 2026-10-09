@@ -45,6 +45,9 @@ const ICONS: Record<ToolId | Action, string> = {
   label: 'M3 10l4-6h10v12H7zM9 10h6M9 10l2-2M9 10l2 2M15 10l-2-2M15 10l-2 2',
   // A round hole and a slot.
   punch: 'M6 7a3 3 0 1 0 0.01 0M11 13h4a2 2 0 0 1 0 4h-4a2 2 0 0 1 0-4z',
+  // An outline inside a dashed, wider one with a different gap on one side.
+  seamAllowance:
+    'M7 7h8v8H7zM3 3h2M7 3h2M11 3h2M15 3h2M19 3v2M19 7v2M19 11v2M19 15v2M3 3v2M3 7v2M3 11v2M3 15v2M3 19h2M7 19h2M11 19h2M15 19h2',
   join: 'M2 14h6l2-4M18 6h-6l-2 4',
   union: 'M3 5h8v3h6v9H9v-3H3z',
   difference: 'M3 5h8v3M11 8v6H3V5M11 8h6v9H9v-3',

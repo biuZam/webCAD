@@ -55,7 +55,7 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | D | Measure | K | Stitch line |
 | N | Label / grain arrow | H | Stitch holes |
 | G | Parallel line | W | Trim / extend / split |
-| U | Punch hole / slot |  |  |
+| U | Punch hole / slot | Y | Seam allowance (per edge) |
 | Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
 
 While drawing: **start typing a number** to enter it in the input bar, **Tab** moves between fields, **Enter** applies, **Esc** cancels, **Backspace** removes the last point, **Shift** locks angles to 15° steps. **Space-drag** or middle-drag pans, the wheel zooms. **⌘/Ctrl+Z / ⇧⌘Z** undo/redo, **⌘/Ctrl+S** save, **⌘/Ctrl+O** open, **⌘/Ctrl+A** select all.
