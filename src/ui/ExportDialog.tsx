@@ -1,4 +1,5 @@
 // T3.4 Export options: SVG or 1:1 PDF (single page or tiled), layer choice, laser-friendly options.
+// T4.6 DXF (lazy, via the Maker.js adapter) and a PNG preview.
 
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,12 +8,13 @@ import { useUiStore } from '../canvas/ui-store'
 import { documentStore, useDocument } from '../document/store'
 import { exportSvg, type SvgExportOptions } from '../export/svg'
 import type { PdfStrings } from '../export/pdf'
+import { PNG_DPI } from '../export/png'
 import type { Orientation, PaperSize } from '../export/pdf/layout'
 import { downloadBlob } from './download'
 import { useLayerName } from './layerName'
 
 interface ExportSettings {
-  format: 'svg' | 'pdf'
+  format: 'svg' | 'pdf' | 'dxf' | 'png'
   /** null = all visible layers. */
   layerIds: string[] | null
   cutOnly: boolean
@@ -23,7 +25,10 @@ interface ExportSettings {
   paper: PaperSize | 'single'
   orientation: Orientation | 'auto'
   overlap: number
+  dpi: number
 }
+
+const MIME = { svg: 'image/svg+xml', dxf: 'application/dxf' } as const
 
 const DEFAULTS: ExportSettings = {
   format: 'pdf',
@@ -35,6 +40,7 @@ const DEFAULTS: ExportSettings = {
   paper: 'a4',
   orientation: 'auto',
   overlap: 10,
+  dpi: 150,
 }
 
 // Remembered per browser for convenience only (not part of the project).
@@ -105,7 +111,14 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
     setBusy(true)
     try {
       if (settings.format === 'svg') {
-        downloadBlob(`${base}.svg`, new Blob([exportSvg(project, svgOptions)], { type: 'image/svg+xml' }))
+        downloadBlob(`${base}.svg`, new Blob([exportSvg(project, svgOptions)], { type: MIME.svg }))
+      } else if (settings.format === 'dxf') {
+        // Lazy: Maker.js is only loaded for DXF.
+        const { exportDxf } = await import('../export/dxf')
+        downloadBlob(`${base}.dxf`, new Blob([exportDxf(project, svgOptions)], { type: MIME.dxf }))
+      } else if (settings.format === 'png') {
+        const { svgToPng } = await import('../export/png')
+        downloadBlob(`${base}.png`, await svgToPng(exportSvg(project, { ...svgOptions, margin: 5 }), settings.dpi))
       } else {
         // Lazy: jsPDF + svg2pdf.js are only loaded when someone actually exports a PDF.
         const { exportPdf } = await import('../export/pdf')
@@ -145,7 +158,7 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
 
         <fieldset className="dialog-group">
           <legend>{t('format')}</legend>
-          {(['pdf', 'svg'] as const).map((f) => (
+          {(['pdf', 'svg', 'dxf', 'png'] as const).map((f) => (
             <label key={f} className="dialog-check">
               <input type="radio" name="format" checked={settings.format === f} onChange={() => set({ format: f })} />
               {t(`formats.${f}`)}
@@ -199,6 +212,23 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
           </fieldset>
         )}
 
+        {settings.format === 'png' && (
+          <fieldset className="dialog-group">
+            <legend>{t('png.resolution')}</legend>
+            <label className="dialog-row">
+              <span>{t('png.resolution')}</span>
+              <select value={settings.dpi} onChange={(e) => set({ dpi: Number(e.target.value) })}>
+                {PNG_DPI.map((d) => (
+                  <option key={d} value={d}>
+                    {d} dpi
+                  </option>
+                ))}
+              </select>
+            </label>
+            <p className="dialog-hint">{t('png.hint')}</p>
+          </fieldset>
+        )}
+
         <fieldset className="dialog-group">
           <legend>{t('layers')}</legend>
           {layers.map((l) => (
@@ -219,12 +249,14 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
           <label className="dialog-check">
             <input
               type="checkbox"
-              checked={settings.includeLabels}
+              checked={settings.includeLabels && settings.format !== 'dxf'}
+              disabled={settings.format === 'dxf'}
               onChange={(e) => set({ includeLabels: e.target.checked })}
             />
             {t('includeLabels')}
           </label>
-          {settings.format === 'svg' && (
+          {settings.format === 'dxf' && <p className="dialog-hint">{t('dxf.noLabels')}</p>}
+          {(settings.format === 'svg' || settings.format === 'dxf') && (
             <label className="dialog-check">
               <input
                 type="checkbox"

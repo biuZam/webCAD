@@ -3,7 +3,16 @@
   "format": "Format",
   "formats": {
     "pdf": "PDF, 1:1 for printing",
-    "svg": "SVG, 1:1 for laser, cutter or other apps"
+    "svg": "SVG, 1:1 for laser, cutter or other apps",
+    "dxf": "DXF, 1:1 in mm for laser and CNC software",
+    "png": "PNG picture, to share or preview"
+  },
+  "dxf": {
+    "noLabels": "DXF has the shapes only: labels are left out."
+  },
+  "png": {
+    "resolution": "Resolution",
+    "hint": "A picture for sharing. For making the pattern, use PDF, SVG or DXF."
   },
   "layers": "Content",
   "cutOnly": "Cut layers only (laser)",

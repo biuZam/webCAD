@@ -118,14 +118,25 @@ function entityElement(entity: Entity, layer: Layer, options: SvgExportOptions):
   }
 }
 
-export function exportSvg(project: Project, options: SvgExportOptions = {}): string {
+/** The layers and entities an export includes (shared by SVG and DXF). */
+export function exportSelection(
+  project: Project,
+  options: Pick<SvgExportOptions, 'layerIds' | 'cutOnly' | 'includeLabels'>,
+): { layers: Layer[]; entities: Entity[] } {
   const layers = project.layers.filter((l) => {
     if (options.cutOnly && l.kind !== 'cut') return false
     return options.layerIds ? options.layerIds.includes(l.id) : l.visible
   })
   const layerIds = new Set(layers.map((l) => l.id))
-  const entities = project.pieces.flatMap((p) => p.entities).filter((e) => layerIds.has(e.layerId))
-  const exported = entities.filter((e) => !(e.type === 'text' && options.includeLabels === false))
+  const entities = project.pieces
+    .flatMap((p) => p.entities)
+    .filter((e) => layerIds.has(e.layerId))
+    .filter((e) => !(e.type === 'text' && options.includeLabels === false))
+  return { layers, entities }
+}
+
+export function exportSvg(project: Project, options: SvgExportOptions = {}): string {
+  const { layers, entities: exported } = exportSelection(project, options)
 
   const b = emptyBounds()
   for (const e of exported) entityBounds(e, b)

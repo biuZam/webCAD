@@ -12,6 +12,16 @@ async function exportSvg(page: Page): Promise<string> {
   return readFile(file, 'utf8')
 }
 
+/** Export in another format through the Export dialog; returns the downloaded bytes. */
+async function exportAs(page: Page, format: 'DXF' | 'PNG'): Promise<Buffer> {
+  await page.getByRole('button', { name: 'Export…' }).click()
+  const dialog = page.getByRole('dialog', { name: 'Export' })
+  await dialog.getByRole('radio', { name: new RegExp(`^${format}`) }).check()
+  const download = page.waitForEvent('download')
+  await dialog.getByRole('button', { name: `Export ${format}` }).click()
+  return readFile(await (await download).path())
+}
+
 /** Draw a rectangle with typed corner and size. */
 async function typedRectangle(page: Page, x: number, y: number, w: number, h: number) {
   await page.getByRole('button', { name: 'Rectangle', exact: true }).click()
@@ -98,4 +108,20 @@ test('add a text label: the text field takes focus after placing it', async ({ p
 
   const svg = await exportSvg(page)
   expect(svg).toMatch(/inkscape:label="notes"><text [^>]*>Front · cut 2<\/text>/)
+})
+
+test('export DXF (millimetres, y up) and a PNG preview with its resolution', async ({ page }) => {
+  await typedRectangle(page, 10, 20, 100, 60)
+
+  const dxf = (await exportAs(page, 'DXF')).toString('utf8')
+  expect(dxf).toMatch(/\$INSUNITS\s+70\s+4\b/)
+  expect(dxf.match(/\nLINE\n/g)).toHaveLength(4)
+  expect(dxf).toMatch(/\n20\n-80\n/) // the rectangle's bottom edge, y = 80 → −80
+
+  const png = await exportAs(page, 'PNG')
+  expect([...png.subarray(1, 4)].map((c) => String.fromCharCode(c)).join('')).toBe('PNG')
+  // 110 × 70 mm (5 mm margin) at the default 150 dpi.
+  expect(png.readUInt32BE(16)).toBe(Math.round((110 * 150) / 25.4))
+  expect(png.readUInt32BE(20)).toBe(Math.round((70 * 150) / 25.4))
+  expect(png.subarray(37, 41).toString('latin1')).toBe('pHYs')
 })
