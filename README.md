@@ -29,6 +29,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 - Holes follow their stitch line, which follows its outline, all in one undo step
 - **Hole count per edge**, and a check that two edges to be sewn together have the same count (Measure → Hole count)
 - **Punch holes and slots** for rivets, snaps and buckles, with common punch diameters
+- **Notches**: single or double alignment marks on any edge, as snips or V notches
 
 **Output**
 
@@ -58,7 +59,7 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | N | Label / grain arrow | H | Stitch holes |
 | G | Parallel line | W | Trim / extend / split |
 | U | Punch hole / slot | Y | Seam allowance (per edge) |
-| Q | Array (linear / circular) |  |  |
+| Q | Array (linear / circular) | J | Notch |
 | Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
 
 Every tool and action key can be changed under **Shortcuts…** in the toolbar (kept per browser).

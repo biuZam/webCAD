@@ -32,6 +32,7 @@ export type ToolId =
   | 'punch'
   | 'seamAllowance'
   | 'array'
+  | 'notch'
 
 /** A key in the `tools` namespace (translate with `useTranslation('tools')`). */
 export type I18nKey = ParseKeys<'tools'>

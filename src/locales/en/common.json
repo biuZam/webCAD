@@ -52,6 +52,7 @@
     "split": "Split",
     "join": "Join",
     "array": "Array",
+    "addNotch": "Add notch",
     "union": "Union",
     "difference": "Difference",
     "addCentreLine": "Add centre line",

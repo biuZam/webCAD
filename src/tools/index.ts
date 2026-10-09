@@ -7,6 +7,7 @@ import { LabelTool } from './label'
 import { LineTool } from './line'
 import { MeasureTool } from './measure'
 import { MirrorTool } from './mirror'
+import { NotchTool } from './notch'
 import { MoveTool } from './move'
 import { OffsetTool } from './offset'
 import { ParallelTool } from './parallel'
@@ -49,6 +50,7 @@ export function createTools(): Record<ToolId, Tool> {
     punch: new PunchTool(),
     seamAllowance: new SeamAllowanceTool(),
     array: new ArrayTool(),
+    notch: new NotchTool(),
   }
 }
 
@@ -78,6 +80,7 @@ export const TOOL_SHORTCUTS: Record<string, ToolId> = {
   u: 'punch',
   y: 'seamAllowance',
   q: 'array',
+  j: 'notch',
 }
 
 /** Palette order; `null` draws a divider between groups. */
@@ -108,6 +111,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'stitchLine',
   'stitchHoles',
   'punch',
+  'notch',
   null,
   'measure',
 ]

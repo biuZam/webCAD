@@ -39,6 +39,8 @@ const ICONS: Record<ToolId | ActionId, string> = {
     'M7 7h8v8H7zM3 3h2M7 3h2M11 3h2M15 3h2M19 3v2M19 7v2M19 11v2M19 15v2M3 3v2M3 7v2M3 11v2M3 15v2M3 19h2M7 19h2M11 19h2M15 19h2',
   // Three squares in a row.
   array: 'M2 8h4v4H2zM8 8h4v4H8zM14 8h4v4h-4z',
+  // An edge with two snips into it.
+  notch: 'M2 6h16M8 6v6M12 6v6M3 16h14',
   join: 'M2 14h6l2-4M18 6h-6l-2 4',
   union: 'M3 5h8v3h6v9H9v-3H3z',
   difference: 'M3 5h8v3M11 8v6H3V5M11 8h6v9H9v-3',

@@ -212,6 +212,19 @@
     "promptCentre": "Circular array: click or type the centre. Count includes the original.",
     "promptCircular": "Press Enter or click to make the array: 360° spreads the copies evenly round; less spans first to last."
   },
+  "notch": {
+    "name": "Notch",
+    "count": "Notch",
+    "single": "Single",
+    "double": "Double",
+    "style": "Style",
+    "line": "Snip (line)",
+    "v": "V notch",
+    "length": "Depth",
+    "gap": "Gap",
+    "width": "Width",
+    "prompt": "Click an edge to add an alignment notch there (into the piece; for open lines, on the cursor’s side). Snaps apply."
+  },
   "perpendicular": {
     "name": "Perpendicular",
     "along": "Along",
