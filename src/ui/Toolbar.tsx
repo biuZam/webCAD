@@ -7,6 +7,7 @@ import { setLanguage, SUPPORTED_LANGUAGES, type Language } from '../i18n'
 import { reloadForUpdate } from '../app/pwa'
 import { ExportDialog } from './ExportDialog'
 import { importSvgFile } from './import-svg'
+import { ShortcutsDialog } from './ShortcutsDialog'
 import { useFileActions, useUnsaved } from './useFileActions'
 
 /** How long an info notice stays up. Errors stay until replaced or dismissed. */
@@ -97,6 +98,7 @@ export function Toolbar() {
   const files = useFileActions()
 
   const [exportOpen, setExportOpen] = useState(false)
+  const [shortcutsOpen, setShortcutsOpen] = useState(false)
 
   return (
     <div className="toolbar" role="toolbar">
@@ -114,6 +116,8 @@ export function Toolbar() {
       <button onClick={() => void importSvgFile()}>{t('menu.importSvg')}</button>
       <button onClick={() => setExportOpen(true)}>{t('menu.export')}</button>
       <ExportDialog open={exportOpen} onClose={() => setExportOpen(false)} />
+      <button onClick={() => setShortcutsOpen(true)}>{t('menu.shortcuts')}</button>
+      <ShortcutsDialog open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
       <NoticeView />
       <label className="toolbar-language">
         <span>{t('menu.language')}</span>

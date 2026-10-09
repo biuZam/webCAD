@@ -618,3 +618,38 @@ input[type='radio'] {
 .input-unit {
   min-width: 1.5em;
 }
+
+/* T4.8 Keyboard shortcuts dialog */
+.shortcuts-table {
+  width: 100%;
+  margin: 8px 0;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.shortcuts-table th {
+  font-weight: normal;
+  text-align: left;
+}
+.shortcuts-table th,
+.shortcuts-table td {
+  padding: 3px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.shortcuts-table kbd {
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  padding: 1px 6px;
+  border: 1px solid var(--control-border);
+  border-radius: 4px;
+}
+.shortcut-none,
+.shortcut-capture {
+  color: var(--muted);
+}
+.shortcut-actions {
+  text-align: right;
+  white-space: nowrap;
+}
+.shortcut-actions button + button {
+  margin-left: 4px;
+}

@@ -11,7 +11,8 @@
     "open": "Open…",
     "save": "Save",
     "export": "Export…",
-    "importSvg": "Import SVG…"
+    "importSvg": "Import SVG…",
+    "shortcuts": "Shortcuts…"
   },
   "history": {
     "add": "Add",
@@ -195,6 +196,24 @@
   },
   "dialog": {
     "cancel": "Cancel"
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "hint": "Letter keys, with or without Shift. Numbers are kept for typing values; Space pans the view.",
+    "change": "Change",
+    "changeFor": "Change the shortcut for {name}",
+    "remove": "Remove",
+    "removeFor": "Remove the shortcut for {name}",
+    "none": "none",
+    "pressKey": "Press a key…",
+    "pressKeyFor": "Press the new key for {name}, or Esc to keep the current one.",
+    "invalid": "Use a letter key, with or without Shift.",
+    "set": "{name}: {key}",
+    "moved": "{key} now goes to {to}; {from} has no shortcut.",
+    "removed": "{name} has no shortcut now.",
+    "reset": "Reset all",
+    "resetDone": "All shortcuts are back to their defaults.",
+    "done": "Done"
   },
   "canvas": {
     "label": "Drawing area",

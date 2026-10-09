@@ -148,3 +148,23 @@ test('import an SVG for tracing: true size, on the Reference layer, selected', a
   expect(svg).toMatch(/width="80mm" height="40mm"/)
   expect(svg).toMatch(/inkscape:label="reference"><path [^>]*d="M0 40L0 0L80 0L80 40Z"/)
 })
+
+test('rebind a shortcut: the new key picks the tool, the old one is freed', async ({ page }) => {
+  await page.getByRole('button', { name: 'Shortcuts…' }).click()
+  const dialog = page.getByRole('dialog', { name: 'Keyboard shortcuts' })
+  await dialog.getByRole('button', { name: 'Change the shortcut for Trim / extend / split' }).click()
+  await page.keyboard.press('l')
+  await expect(dialog.getByText('L now goes to Trim / extend / split; Line has no shortcut.')).toBeVisible()
+  await dialog.getByRole('button', { name: 'Done' }).click()
+
+  await page.keyboard.press('l')
+  await expect(page.getByRole('button', { name: 'Trim / extend / split' })).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByRole('button', { name: 'Trim / extend / split' })).toHaveAttribute(
+    'title',
+    'Trim / extend / split (L)',
+  )
+  // Remembered across a reload.
+  await page.reload()
+  await page.keyboard.press('l')
+  await expect(page.getByRole('button', { name: 'Trim / extend / split' })).toHaveAttribute('aria-pressed', 'true')
+})

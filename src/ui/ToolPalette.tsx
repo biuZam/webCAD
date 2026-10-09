@@ -1,24 +1,13 @@
 import { useTranslation } from 'react-i18next'
 import { toolSession } from '../canvas/tool-session'
 import { useUiStore } from '../canvas/ui-store'
-import { TOOL_ORDER, TOOL_SHORTCUTS } from '../tools'
+import { TOOL_ORDER } from '../tools'
+import { ACTION_IDS, type ActionId } from '../tools/shortcuts'
 import type { ToolId } from '../tools/types'
-
-const SHORTCUT_FOR = Object.fromEntries(Object.entries(TOOL_SHORTCUTS).map(([k, id]) => [id, k.toUpperCase()]))
+import { runCommand, useShortcuts } from './shortcuts-store'
 
 /** Simple stroke icons, 20×20, drawn in currentColor. No text inside icons (i18n rule). */
-type Action = 'flipH' | 'flipV' | 'join' | 'union' | 'difference'
-
-/** Selection actions after the tools: shortcut and what they do. */
-const ACTIONS: Record<Action, { key: string; run: () => void }> = {
-  flipH: { key: 'Shift+H', run: () => toolSession.flip('horizontal') },
-  flipV: { key: 'Shift+V', run: () => toolSession.flip('vertical') },
-  join: { key: 'Shift+J', run: () => toolSession.join() },
-  union: { key: 'Shift+U', run: () => toolSession.boolean('union') },
-  difference: { key: 'Shift+D', run: () => toolSession.boolean('difference') },
-}
-
-const ICONS: Record<ToolId | Action, string> = {
+const ICONS: Record<ToolId | ActionId, string> = {
   select: 'M5 3l11 7-5 1.5L8.5 17z',
   line: 'M4 16L16 4M4 16h0M16 4h0',
   rectangle: 'M4 5h12v10H4z',
@@ -68,6 +57,9 @@ export function ToolPalette() {
   const { t: tTools } = useTranslation('tools')
   const active = useUiStore((s) => s.activeTool)
   const hasSelection = useUiStore((s) => s.selection.length > 0)
+  const bindings = useShortcuts((s) => s.bindings)
+  // "Line (L)", or just the name when the command has no key.
+  const title = (name: string, key: string | undefined) => (key ? t('tools.shortcut', { name, key }) : name)
 
   return (
     <nav className="tool-palette" aria-label={t('tools.label')}>
@@ -79,7 +71,7 @@ export function ToolPalette() {
             key={id}
             className="tool-button"
             aria-pressed={active === id}
-            title={t('tools.shortcut', { name, key: SHORTCUT_FOR[id] })}
+            title={title(name, bindings[id])}
             aria-label={name}
             onClick={() => toolSession.setTool(id)}
           >
@@ -87,16 +79,16 @@ export function ToolPalette() {
           </button>
         )
       })}
-      {(Object.keys(ACTIONS) as Action[]).map((action) => {
+      {ACTION_IDS.map((action) => {
         const name = t(`modify.${action}`)
         return (
           <button
             key={action}
             className="tool-button"
-            title={t('tools.shortcut', { name, key: ACTIONS[action].key })}
+            title={title(name, bindings[action])}
             aria-label={name}
             disabled={!hasSelection}
-            onClick={ACTIONS[action].run}
+            onClick={() => runCommand(action)}
           >
             <Icon d={ICONS[action]} />
           </button>
