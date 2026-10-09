@@ -103,8 +103,8 @@ export interface Tool {
   readonly snaps?: boolean
   /** Reference point for perpendicular/tangent snaps: usually the tool's previous point. */
   snapFrom?(): Vec2 | null
-  /** An entity to leave out of snapping (e.g. the path whose point is being dragged). */
-  snapExclude?(): Id | null
+  /** Entities to leave out of snapping (e.g. the path whose point is being dragged). */
+  snapExclude?(): readonly Id[]
   /** Double-click on the canvas. */
   onDoubleClick?(e: ToolPointerEvent, ctx: ToolContext): void
   /** Called when the tool becomes active; set the initial prompt here. */

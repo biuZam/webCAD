@@ -145,6 +145,53 @@ describe('select tool', () => {
   })
 })
 
+describe('drag to move in the Select tool', () => {
+  const ids = () => store.getState().project.pieces[0].entities.map((e) => e.id)
+  const circle = () => store.getState().project.pieces[0].entities.find((e) => e.id === 'b') as CircleEntity
+
+  it('dragging a selected entity moves the selection as one undo step', () => {
+    drag([-1, -1], [36, 12]) // a and b
+    session.pointerDown(ev([35, 5]))
+    session.pointerMove(ev([37, 5]))
+    session.pointerMove(ev([45.2, 15.3]))
+    expect(preview.filter((s) => s.kind === 'entity')).toHaveLength(2)
+    session.pointerUp(ev([45.2, 15.3]))
+    // The grid (1 mm at this zoom) quantises the cursor.
+    expect(circle().center).toEqual([40, 15])
+    expect(store.getState().past.at(-1)?.labelKey).toBe('history.move')
+    expect(selection).toEqual(['a', 'b'])
+    store.getState().undo()
+    expect(circle().center).toEqual([30, 5])
+  })
+
+  it('snaps the cursor to other geometry, not to the moving entities', () => {
+    click([35, 5])
+    drag([35, 5], [40.3, 20.2]) // the end of line c
+    expect(circle().center).toEqual([35, 20])
+  })
+
+  it('Alt-drag moves a copy; Esc during a drag abandons it', () => {
+    click([35, 5])
+    session.pointerDown(ev([35, 5]))
+    session.pointerMove(ev([35, 50]))
+    session.pointerUp({ ...ev([35, 50]), alt: true })
+    expect(ids()).toHaveLength(4)
+    expect(circle().center).toEqual([30, 5])
+    session.pointerDown(ev([35, 50]))
+    session.pointerMove(ev([60, 60]))
+    session.cancel()
+    session.pointerUp(ev([60, 60]))
+    expect(store.getState().past).toHaveLength(2) // add + copy
+  })
+
+  it('dragging an unselected entity box-selects instead', () => {
+    click([35, 5])
+    drag([20, 20.2], [50, 30])
+    expect(selection).toEqual([])
+    expect(circle().center).toEqual([30, 5])
+  })
+})
+
 describe('object snaps while drawing', () => {
   it('a line snaps its first point to an existing endpoint', () => {
     session.setTool('line')

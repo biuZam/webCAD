@@ -24,7 +24,7 @@ IDs in brackets (D1, M3, L2…) refer to the PRD requirement tables. `[x]` = don
 Canvas & editing
 - [x] T1.1 Selection tool: click, shift-click, window/crossing box, hover highlight, Delete, Select All; hit-testing via `src/geometry/query.ts`
 - [x] T1.2 Node editing for paths: drag anchors/handles, smooth/corner toggle [D3] — in the Select tool when one path is selected; anchors snap (excluding the path itself), handles don't; smooth anchors stay smooth; double-click toggles; Esc reverts a drag; stitch lines excluded
-- [ ] T1.2b Add/delete anchors on a path (click on a segment to insert, Delete on a selected anchor)
+- [x] T1.2b Add/delete anchors on a path — double-click the selected path's outline inserts a point (de Casteljau split, shape unchanged); click a point to pick it, Delete removes it (a path too short to lose one is deleted whole); Esc unpicks first; the status prompt switches to point-editing hints
 - [x] T1.3 Snapping engine with `rbush` index: endpoint, midpoint [D7], centre, intersection, perpendicular, tangent, nearest, grid; per-type toggles; snap marker overlay
 - [ ] T1.3b Snap tracking/extension lines (polar and object tracking), and quadrant snap on circles — not in PRD, nice to have
 - [x] T1.4 Layers panel: visibility, lock, colour, active layer [P0] (colour commits once when the picker closes; drawing on a locked/hidden layer explains itself)
@@ -44,7 +44,7 @@ Modify tools (all copy-or-move where applicable)
 - [x] T1.13 Move / copy / scale with typed deltas [M7] (scale is uniform: by factor or reference → target)
 - [x] T1.14 Rotate around pick point [M5]
 - [x] T1.15 Mirror across centre line or two points [M4]; flip H/V in place [M6]
-- [ ] T1.21 Drag-to-move in the Select tool (press on a selected entity and drag) — quality-of-life, uses the same transform command
+- [x] T1.21 Drag-to-move in the Select tool: press on a selected entity and drag (one `history.move` step via `transformEntities`); the cursor snaps to other geometry (moving entities excluded), Shift = 15° steps, Alt = move a copy, Esc abandons. Dragging an unselected entity still box-selects. The grab point itself isn't snapped — use Move (M) for point-to-point
 - [x] T1.22 Render on the first frame: i18n initialises synchronously with bundled `en`. (The "ignored first interaction" seen in browser tests turned out to be the automation dropping input sent right after a navigation, not the app: the page loads in ~80 ms.)
 - [x] T1.16 Offset open/closed paths, round/miter/bevel joins [M3]: paperjs-offset + adaptive subdivision, checked to ≤ 0.02 mm; Clipper (clipper-lib) fallback for closed shapes; exact circles/centre lines. Tool: E
 - [x] T1.16b Speed up precise offsets: bounding-box-pruned nearest search (check 13.7 → 1 ms), 'adaptive' instead of 'auto' (we run the analysis ourselves), and jump to the predicted subdivision (error ∝ 1/n²). 24-curve outline 308 → 47 ms; rounded rect 23 → 10 ms. `BENCH=1 pnpm test offset.bench` to re-measure

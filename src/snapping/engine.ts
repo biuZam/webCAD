@@ -45,8 +45,8 @@ export interface SnapOptions {
   gridStep: number
   /** The tool's previous point, for perpendicular and tangent snaps. */
   from?: Vec2 | null
-  /** Leave this entity out (e.g. the path being edited, so a dragged point doesn't snap to its old self). */
-  exclude?: string | null
+  /** Leave these entities out (e.g. the path being edited, so a dragged point doesn't snap to its old self). */
+  exclude?: readonly string[]
 }
 
 /** More candidates than this near the cursor and pairwise intersections are skipped (cost is quadratic). */
@@ -162,7 +162,7 @@ export function snap(project: Project, p: Vec2, options: SnapOptions): SnapResul
 
   const near = entitiesNear(project, p, tolerance)
     .map((n) => n.entity)
-    .filter((e) => e.id !== options.exclude)
+    .filter((e) => !options.exclude?.includes(e.id))
   for (const entity of near) {
     for (const q of anchors(entity)) offer('endpoint', q)
     if (enabled.has('centre')) for (const q of centres(entity)) offer('centre', q)

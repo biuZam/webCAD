@@ -3,7 +3,7 @@
 // so the cache never goes stale and unchanged entities are never rebuilt.
 
 import RBush from 'rbush'
-import type { Entity, Id, Layer, Project } from '../document/model'
+import type { Entity, Id, Layer, PathEntity, Project } from '../document/model'
 import type { Vec2 } from '../lib/vec2'
 import { emptyBounds, entityBounds, type Bounds } from './bounds'
 import { kernel, toPaperPath } from './kernel'
@@ -52,6 +52,15 @@ export function entityShape(entity: Entity): paper.PathItem {
 export function nearestPoint(entity: Entity, p: Vec2): { point: Vec2; distance: number } {
   const q = entityShape(entity).getNearestPoint(new (kernel().Point)(p[0], p[1]))
   return { point: [q.x, q.y], distance: Math.hypot(q.x - p[0], q.y - p[1]) }
+}
+
+/**
+ * The point of a path nearest `p` as a curve location: the curve from anchor `index` to the next one, at
+ * curve time `time` in [0, 1].
+ */
+export function nearestLocation(entity: PathEntity, p: Vec2): { index: number; time: number; distance: number } {
+  const loc = (entityShape(entity) as paper.Path).getNearestLocation(new (kernel().Point)(p[0], p[1]))
+  return { index: loc.curve.index, time: loc.time, distance: loc.point.getDistance(new (kernel().Point)(p[0], p[1])) }
 }
 
 export function intersections(a: Entity, b: Entity): Vec2[] {

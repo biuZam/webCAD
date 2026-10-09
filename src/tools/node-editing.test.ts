@@ -121,4 +121,46 @@ describe('node editing in the Select tool', () => {
     drag([40, 0], [45, 10])
     expect(get('p').segments[2].p).toEqual([40, 0])
   })
+
+  it('double-click on a segment adds a point there, as one undo step', () => {
+    session.doubleClick(ev([10, 0.2]))
+    expect(get('p').segments.map((seg) => seg.p)).toEqual([
+      [0, 0],
+      [10, 0],
+      [20, 0],
+      [40, 0],
+    ])
+    expect(store.getState().past.at(-1)?.labelKey).toBe('history.addPoint')
+    // The new point is picked, so Delete takes it out again.
+    session.deleteKey()
+    expect(get('p').segments.map((seg) => seg.p)).toEqual([
+      [0, 0],
+      [20, 0],
+      [40, 0],
+    ])
+    expect(selection).toEqual(['p'])
+  })
+
+  it('click a point, then Delete removes just that point', () => {
+    click([40, 0])
+    expect(preview.find((s) => s.kind === 'node' && s.at[0] === 40)).toMatchObject({ active: true })
+    session.deleteKey()
+    expect(get('p').segments.map((seg) => seg.p)).toEqual([
+      [0, 0],
+      [20, 0],
+    ])
+    expect(store.getState().past.at(-1)?.labelKey).toBe('history.deletePoint')
+    // With two points left, Delete on a point removes the whole path.
+    click([20, 0])
+    session.deleteKey()
+    expect(store.getState().project.pieces[0].entities.some((e) => e.id === 'p')).toBe(false)
+  })
+
+  it('Esc unpicks the point before it clears the selection', () => {
+    click([40, 0])
+    session.cancel()
+    expect(selection).toEqual(['p'])
+    session.deleteKey()
+    expect(store.getState().project.pieces[0].entities.some((e) => e.id === 'p')).toBe(false)
+  })
 })

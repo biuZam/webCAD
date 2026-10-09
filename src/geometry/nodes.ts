@@ -86,3 +86,57 @@ export function nodePosition(seg: Segment, part: NodePart): Vec2 | null {
   const h = seg[part]
   return h ? [seg.p[0] + h[0], seg.p[1] + h[1]] : null
 }
+
+const lerp = (a: Vec2, b: Vec2, t: number): Vec2 => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
+/** A relative handle, or undefined when it has zero length (a corner side). */
+const handleTo = (from: Vec2, to: Vec2): Vec2 | undefined => {
+  const h = sub(to, from)
+  return len(h) < 1e-12 ? undefined : h
+}
+
+function withHandle(seg: Segment, part: 'hi' | 'ho', h: Vec2 | undefined): Segment {
+  const next: Segment = { ...seg }
+  if (h) next[part] = h
+  else delete next[part]
+  return next
+}
+
+/**
+ * T1.2b Insert an anchor on the curve from anchor `i` to the next one (wrapping on a closed path) at curve
+ * time `t` in (0, 1). The shape is unchanged: the cubic is split by de Casteljau, so neighbouring handles
+ * shorten and the new anchor is smooth where the curve is curved.
+ */
+export function insertAnchor(segments: readonly Segment[], i: number, t: number): Segment[] {
+  const j = (i + 1) % segments.length
+  const a = segments[i]
+  const b = segments[j]
+  const out = [...segments]
+  if (!a.ho && !b.hi) {
+    out.splice(i + 1, 0, { p: lerp(a.p, b.p, t) })
+    return out
+  }
+  const p1 = nodePosition(a, 'ho') ?? a.p
+  const p2 = nodePosition(b, 'hi') ?? b.p
+  const q0 = lerp(a.p, p1, t)
+  const q1 = lerp(p1, p2, t)
+  const q2 = lerp(p2, b.p, t)
+  const r0 = lerp(q0, q1, t)
+  const r1 = lerp(q1, q2, t)
+  const s = lerp(r0, r1, t)
+  let mid: Segment = { p: s }
+  mid = withHandle(mid, 'hi', handleTo(s, r0))
+  mid = withHandle(mid, 'ho', handleTo(s, r1))
+  out[i] = withHandle(a, 'ho', handleTo(a.p, q0))
+  out[j] = withHandle(b, 'hi', handleTo(b.p, q2))
+  out.splice(i + 1, 0, mid)
+  return out
+}
+
+/** Fewest anchors a path may keep: a line for open paths, a triangle for closed ones. */
+export const minAnchors = (closed: boolean) => (closed ? 3 : 2)
+
+/** T1.2b Remove anchor `i`; null if the path would be left with too few anchors. Neighbours keep their handles. */
+export function removeAnchor(segments: readonly Segment[], closed: boolean, i: number): Segment[] | null {
+  if (segments.length <= minAnchors(closed)) return null
+  return segments.filter((_, k) => k !== i)
+}

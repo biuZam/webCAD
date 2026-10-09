@@ -37,6 +37,8 @@
     "addPath": "Add path",
     "addArc": "Add arc",
     "editNodes": "Edit points",
+    "addPoint": "Add point",
+    "deletePoint": "Delete point",
     "addCentreLine": "Add centre line",
     "addEllipse": "Add ellipse"
   },

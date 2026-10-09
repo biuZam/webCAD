@@ -1,7 +1,8 @@
 {
   "select": {
     "name": "Select",
-    "prompt": "Click to select · Shift-click adds or removes · drag left→right for items fully inside, right→left for anything touched · Delete removes."
+    "prompt": "Click to select · Shift-click adds or removes · drag left→right for items fully inside, right→left for anything touched · drag a selected item to move it (Alt: copy) · Delete removes.",
+    "promptPoints": "Drag points or handles · double-click a point: smooth ↔ corner · double-click the outline: add a point · click a point, then Delete: remove it · Esc deselects."
   },
   "line": {
     "name": "Line",

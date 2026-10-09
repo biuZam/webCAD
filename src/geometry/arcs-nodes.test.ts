@@ -3,7 +3,7 @@ import type { Segment } from '../document/model'
 import { distance, type Vec2 } from '../lib/vec2'
 import { arcThrough, circleThrough } from './arcs'
 import { toPaperPath } from './kernel'
-import { isSmooth, moveAnchor, moveHandle, nodePosition, toggleSmooth } from './nodes'
+import { insertAnchor, isSmooth, moveAnchor, moveHandle, nodePosition, removeAnchor, toggleSmooth } from './nodes'
 
 /** Max |distance to centre − r| sampled along the whole (open) path. */
 function radialError(segments: Segment[], centre: Vec2, r: number) {
@@ -94,5 +94,38 @@ describe('node editing', () => {
     expect(s[1].ho![0]).toBeCloseTo(Math.hypot(10, 10) / 3)
     expect(s[1].ho![1]).toBeCloseTo(0)
     expect(toggleSmooth(s, false, 1)[1]).toEqual({ p: [10, 10] })
+  })
+})
+
+describe('adding and removing points', () => {
+  it('splits a straight segment without adding handles', () => {
+    const square: Segment[] = [{ p: [0, 0] }, { p: [10, 0] }, { p: [10, 10] }, { p: [0, 10] }]
+    expect(insertAnchor(square, 0, 0.25)[1]).toEqual({ p: [2.5, 0] })
+    // The closing segment (last → first) of a closed path.
+    expect(insertAnchor(square, 3, 0.5)).toEqual([...square, { p: [0, 5] }])
+  })
+
+  it('splits a curve without changing its shape; the new point is smooth', () => {
+    const s: Segment[] = [
+      { p: [0, 0], ho: [5, -10] },
+      { p: [20, 0], hi: [0, -8] },
+    ]
+    const before = toPaperPath({ segments: s, closed: false })
+    const split = insertAnchor(s, 0, 0.4)
+    expect(split).toHaveLength(3)
+    expect(isSmooth(split[1])).toBe(true)
+    const after = toPaperPath({ segments: split, closed: false })
+    expect(after.length).toBeCloseTo(before.length, 9)
+    for (let i = 0; i <= 50; i++) {
+      const p = after.getPointAt((after.length * i) / 50)
+      expect(before.getNearestPoint(p).getDistance(p)).toBeLessThan(1e-6)
+    }
+  })
+
+  it('removes a point unless the path would get too short', () => {
+    const line: Segment[] = [{ p: [0, 0] }, { p: [5, 5] }, { p: [10, 0] }]
+    expect(removeAnchor(line, false, 1)).toEqual([{ p: [0, 0] }, { p: [10, 0] }])
+    expect(removeAnchor(line.slice(0, 2), false, 0)).toBeNull()
+    expect(removeAnchor(line, true, 0)).toBeNull()
   })
 })

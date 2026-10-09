@@ -238,7 +238,7 @@ export class ToolSession {
       tolerance: SNAP_TOLERANCE_PX / view.zoom,
       gridStep: gridSpacing(view.zoom).minor,
       from: this.tool.snapFrom?.() ?? null,
-      exclude: this.tool.snapExclude?.() ?? null,
+      exclude: this.tool.snapExclude?.(),
     })
     return { ...e, point: result?.point ?? e.raw, snap: result?.kind ?? null }
   }
