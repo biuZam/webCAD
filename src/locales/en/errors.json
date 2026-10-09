@@ -6,7 +6,7 @@
     "notJson": "This file is not valid JSON, so it can’t be a LeatherDraft project.",
     "ioFailed": "The file couldn’t be read or written. Check permissions and try again.",
     "exportFailed": "The export failed. Please try again; if it keeps failing, try fewer layers or SVG.",
-    "notSvg": "This file is not an SVG drawing.",
+    "notDrawing": "This file is not an SVG or DXF drawing.",
     "importNoLayer": "No layer to import onto: show or unlock the Reference layer or the active layer."
   }
 }

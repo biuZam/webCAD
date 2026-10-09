@@ -100,7 +100,7 @@ Quality
 
 - [ ] T5.1 planegcs WASM (separately loaded, LGPL) + constraint model in schema v2 with migration
 - [ ] T5.2 Constraint UI: parallel, perpendicular, tangent, distance; parametric dimensions
-- [ ] T5.3 Notches [L7]; linear/circular arrays [M10]; DXF import
+- [x] T5.3 Notches [L7] — tool J: single/double, snip or V, inward on closed outlines (cursor side on open lines), on the edge's layer. Arrays [M10] — tool Q: linear (base + step, count incl. original) and circular (centre, count, sweep; 360° = even spacing), one undo step via `arrayEntities`. DXF import — toolbar "Import…" now takes SVG or DXF (`src/persistence/dxf-import.ts`): $INSUNITS, LINE, (LW)POLYLINE with bulges, CIRCLE, ARC, ELLIPSE, SPLINE (exact Béziers by knot insertion; rational ones sampled); blocks/text/dimensions skipped and counted
 
 ## Open questions blocking tasks (from PRD)
 

@@ -128,7 +128,7 @@ test('export DXF (millimetres, y up) and a PNG preview with its resolution', asy
 
 test('import an SVG for tracing: true size, on the Reference layer, selected', async ({ page }) => {
   const chooser = page.waitForEvent('filechooser')
-  await page.getByRole('button', { name: 'Import SVG…' }).click()
+  await page.getByRole('button', { name: 'Import…' }).click()
   await (
     await chooser
   ).setFiles({
@@ -139,9 +139,7 @@ test('import an SVG for tracing: true size, on the Reference layer, selected', a
         '<rect x="0" y="0" width="80" height="40"/><circle cx="20" cy="20" r="5"/><text>Old</text></svg>',
     ),
   })
-  await expect(
-    page.getByText('Imported 2 shapes from old-pattern.svg, selected; 1 text or image item skipped.'),
-  ).toBeVisible()
+  await expect(page.getByText('Imported 2 shapes from old-pattern.svg, selected; 1 other item skipped.')).toBeVisible()
   await expect(page.getByText('2 objects')).toBeVisible() // Properties panel: the selection
 
   const svg = await exportSvg(page)
@@ -185,4 +183,47 @@ test('a PDF exported in Chinese embeds the CJK font; an English one does not', a
   const pdf = await exportPdf('导出…', '导出', /^导出 PDF/)
   expect(pdf).toContain('/FontFile2')
   expect(pdf).toMatch(/\/BaseFont \/\w*NotoSansSC/)
+})
+
+test('import a DXF in inches: converted to mm, y flipped, on the Reference layer', async ({ page }) => {
+  const dxf = [
+    '0',
+    'SECTION',
+    '2',
+    'HEADER',
+    '9',
+    '$INSUNITS',
+    '70',
+    '1',
+    '0',
+    'ENDSEC',
+    '0',
+    'SECTION',
+    '2',
+    'ENTITIES',
+    '0',
+    'LINE',
+    '8',
+    '0',
+    '10',
+    '0',
+    '20',
+    '0',
+    '11',
+    '2',
+    '21',
+    '1',
+    '0',
+    'ENDSEC',
+    '0',
+    'EOF',
+    '',
+  ].join('\n')
+  const chooser = page.waitForEvent('filechooser')
+  await page.getByRole('button', { name: 'Import…' }).click()
+  await (await chooser).setFiles({ name: 'strap.dxf', mimeType: 'application/dxf', buffer: Buffer.from(dxf) })
+  await expect(page.getByText('Imported 1 shape from strap.dxf, selected.')).toBeVisible()
+  const svg = await exportSvg(page)
+  expect(svg).toMatch(/width="50.8mm" height="25.4mm"/)
+  expect(svg).toMatch(/inkscape:label="reference"><path [^>]*d="M0 0L50.8 -25.4"/)
 })

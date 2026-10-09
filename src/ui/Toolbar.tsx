@@ -6,7 +6,7 @@ import { documentStore, useDocument } from '../document/store'
 import { setLanguage, SUPPORTED_LANGUAGES, type Language } from '../i18n'
 import { reloadForUpdate } from '../app/pwa'
 import { ExportDialog } from './ExportDialog'
-import { importSvgFile } from './import-svg'
+import { importFile } from './import-file'
 import { ShortcutsDialog } from './ShortcutsDialog'
 import { useFileActions, useUnsaved } from './useFileActions'
 
@@ -113,7 +113,7 @@ export function Toolbar() {
       <button onClick={() => documentStore.getState().redo()} disabled={!canRedo}>
         {t('menu.redo')}
       </button>
-      <button onClick={() => void importSvgFile()}>{t('menu.importSvg')}</button>
+      <button onClick={() => void importFile()}>{t('menu.import')}</button>
       <button onClick={() => setExportOpen(true)}>{t('menu.export')}</button>
       <ExportDialog open={exportOpen} onClose={() => setExportOpen(false)} />
       <button onClick={() => setShortcutsOpen(true)}>{t('menu.shortcuts')}</button>

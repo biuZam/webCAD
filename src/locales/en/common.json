@@ -11,7 +11,7 @@
     "open": "Open…",
     "save": "Save",
     "export": "Export…",
-    "importSvg": "Import SVG…",
+    "import": "Import…",
     "shortcuts": "Shortcuts…"
   },
   "history": {
@@ -42,7 +42,7 @@
     "addPoint": "Add point",
     "deletePoint": "Delete point",
     "addLabel": "Add label",
-    "importSvg": "Import SVG",
+    "import": "Import drawing",
     "addGrainArrow": "Add grain arrow",
     "addPunch": "Add punch hole",
     "addSlot": "Add slot",
@@ -127,7 +127,7 @@
     "discardConfirm": "Discard unsaved changes to this project?",
     "exported": "Exported {name}",
     "offlineReady": "Ready to work offline",
-    "imported": "Imported {count, plural, one {# shape} other {# shapes}} from {name}, selected{skipped, plural, =0 {} one {; # text or image item skipped} other {; # text or image items skipped}}."
+    "imported": "Imported {count, plural, one {# shape} other {# shapes}} from {name}, selected{skipped, plural, =0 {} one {; # other item skipped} other {; # other items skipped}}."
   },
   "notice": {
     "dismiss": "Dismiss"

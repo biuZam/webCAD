@@ -11,7 +11,7 @@
     "open": "打开…",
     "save": "保存",
     "export": "导出…",
-    "importSvg": "导入 SVG…",
+    "import": "导入…",
     "shortcuts": "快捷键…"
   },
   "history": {
@@ -42,7 +42,7 @@
     "addPoint": "添加节点",
     "deletePoint": "删除节点",
     "addLabel": "添加标注",
-    "importSvg": "导入 SVG",
+    "import": "导入图形",
     "addGrainArrow": "添加纹理方向箭头",
     "addPunch": "添加冲孔",
     "addSlot": "添加腰圆孔",
@@ -127,7 +127,7 @@
     "discardConfirm": "放弃此项目未保存的更改？",
     "exported": "已导出 {name}",
     "offlineReady": "已可离线使用",
-    "imported": "已从 {name} 导入 {count, plural, other {# 个图形}}并选中{skipped, plural, =0 {} other {；跳过 # 个文字或图片}}。"
+    "imported": "已从 {name} 导入 {count, plural, other {# 个图形}}并选中{skipped, plural, =0 {} other {；跳过 # 个其他项目}}。"
   },
   "notice": {
     "dismiss": "关闭"

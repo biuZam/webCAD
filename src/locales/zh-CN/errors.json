@@ -6,7 +6,7 @@
     "notJson": "此文件不是有效的 JSON，因此不可能是 LeatherDraft 项目。",
     "ioFailed": "无法读取或写入文件。请检查权限后重试。",
     "exportFailed": "导出失败。请重试；如仍失败，可减少图层或改用 SVG。",
-    "notSvg": "此文件不是 SVG 图形。",
+    "notDrawing": "此文件不是 SVG 或 DXF 图形。",
     "importNoLayer": "没有可导入的图层：请显示或解锁“参考”图层或当前图层。"
   }
 }
