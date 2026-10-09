@@ -39,6 +39,8 @@
     "editNodes": "Edit points",
     "addPoint": "Add point",
     "deletePoint": "Delete point",
+    "addLabel": "Add label",
+    "addGrainArrow": "Add grain arrow",
     "addCentreLine": "Add centre line",
     "addEllipse": "Add ellipse"
   },

@@ -1,6 +1,6 @@
 // Exact axis-aligned bounds of model entities, without the Paper.js kernel (export needs no canvas).
 
-import type { Entity, Segment } from '../document/model'
+import type { Entity, Segment, TextEntity } from '../document/model'
 import { add, type Vec2 } from '../lib/vec2'
 
 export interface Bounds {
@@ -18,6 +18,26 @@ function include(b: Bounds, [x, y]: Vec2) {
   if (y < b.minY) b.minY = y
   if (x > b.maxX) b.maxX = x
   if (y > b.maxY) b.maxY = y
+}
+
+/** Wide (CJK, full-width) characters take about 1 em; Latin text averages about 0.6 em. */
+const WIDE = /[\u1100-\u115f\u2e80-\ua4cf\uac00-\ud7a3\uf900-\ufaff\ufe30-\ufe4f\uff00-\uff60\uffe0-\uffe6]/
+
+/**
+ * Approximate box of a text label: corners in order baseline-left, baseline-right, top-right, top-left,
+ * rotated with the text about its position (rotation is clockwise in y-down). Width is estimated from the
+ * characters, since layout needs a font and the model must stay measurable without a canvas.
+ */
+export function textBox(entity: Pick<TextEntity, 'position' | 'text' | 'size' | 'rotation'>): Vec2[] {
+  let ems = 0
+  for (const ch of entity.text) ems += WIDE.test(ch) ? 1 : 0.6
+  const w = ems * entity.size
+  const h = entity.size
+  const r = (entity.rotation * Math.PI) / 180
+  const [cos, sin] = [Math.cos(r), Math.sin(r)]
+  const [x, y] = entity.position
+  const at = (dx: number, dy: number): Vec2 => [x + dx * cos - dy * sin, y + dx * sin + dy * cos]
+  return [at(0, 0), at(w, 0), at(w, -h), at(0, -h)]
 }
 
 /** Parameters t in (0,1) where one coordinate of a cubic Bézier has an extremum. */
@@ -115,10 +135,7 @@ function computeBounds(entity: Entity, into: Bounds): Bounds {
       break
     }
     case 'text': {
-      // Approximation until text layout lands (T4.3): 0.6 em per character, baseline at position.
-      const [x, y] = entity.position
-      include(into, [x, y - entity.size])
-      include(into, [x + entity.text.length * entity.size * 0.6, y])
+      for (const corner of textBox(entity)) include(into, corner)
       break
     }
   }

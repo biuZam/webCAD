@@ -147,6 +147,20 @@
     "promptFirst": "Click or type the first point.",
     "promptSecond": "Click the second point. Shift locks to 15°."
   },
+  "label": {
+    "name": "Label",
+    "mode": "Mode",
+    "modeText": "Text",
+    "modeGrain": "Grain arrow",
+    "text": "Text",
+    "size": "Size",
+    "angle": "Angle",
+    "length": "Length",
+    "promptPlace": "Click or type where the text starts (left end of its baseline). Labels go on the Notes layer.",
+    "promptText": "Type the text, e.g. piece name and \"cut 2\", then press Enter. Click elsewhere to move it · Esc cancels.",
+    "promptGrainStart": "Click or type one end of the grain arrow.",
+    "promptGrainEnd": "Click the other end, or type length and angle. Shift locks to 15°."
+  },
   "perpendicular": {
     "name": "Perpendicular",
     "along": "Along",

@@ -26,6 +26,7 @@ export type ToolId =
   | 'centreLine'
   | 'measure'
   | 'perpendicular'
+  | 'label'
 
 /** A key in the `tools` namespace (translate with `useTranslation('tools')`). */
 export type I18nKey = ParseKeys<'tools'>
@@ -38,9 +39,9 @@ export interface InputField {
   key: string
   /**
    * length: mm, typed in display units · angle: degrees · factor: plain number · toggle: checkbox, 1 or 0 ·
-   * choice: a select over `options`, value = option index.
+   * choice: a select over `options`, value = option index · text: free text, passed in `InputTexts`.
    */
-  kind: 'length' | 'angle' | 'factor' | 'toggle' | 'choice'
+  kind: 'length' | 'angle' | 'factor' | 'toggle' | 'choice' | 'text'
   /** A readout (e.g. a measurement): shown formatted, not editable. */
   readOnly?: boolean
   /** Option labels for `choice` fields: translation keys, or literal text such as "3.85 mm". */
@@ -48,10 +49,15 @@ export interface InputField {
   labelKey: I18nKey
   /** Current value implied by the mouse (or the toggle's state); shown as the placeholder. */
   live?: number
+  /** Placeholder for a `text` field. */
+  liveText?: string
 }
 
 /** Typed values by field key (mm or degrees). Missing = not typed, so the tool uses the mouse instead. */
 export type InputValues = Partial<Record<string, number>>
+
+/** Typed text by field key, for `text` fields. Missing or empty = not typed. */
+export type InputTexts = Partial<Record<string, string>>
 
 /** Preview geometry, in mm, drawn on the canvas overlay. */
 export type PreviewShape =
@@ -115,7 +121,7 @@ export interface Tool {
   /** The pointer left the canvas (e.g. to the panels). Drop hover-only feedback here. */
   onPointerLeave?(ctx: ToolContext): void
   /** Typed values changed (`commit` false: live preview) or Enter was pressed (`commit` true). */
-  onInput?(values: InputValues, commit: boolean, ctx: ToolContext): void
+  onInput?(values: InputValues, commit: boolean, ctx: ToolContext, texts: InputTexts): void
   /** Enter with nothing typed, double-click or right-click: complete the current operation. */
   finish?(ctx: ToolContext): void
   /** Backspace/Delete while drawing: step back one point. Takes precedence over onDelete. */

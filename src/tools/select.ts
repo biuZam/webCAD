@@ -6,8 +6,15 @@
 
 import { findEntity, removeEntities, transformEntities, updateEntity } from '../document/commands'
 import type { Entity, Id, PathEntity, Project, Segment } from '../document/model'
-import { entityBounds, type Bounds } from '../geometry/bounds'
-import { entitiesInRect, entitiesNear, nearestLocation, nearestPoint, touchesRect } from '../geometry/query'
+import type { Bounds } from '../geometry/bounds'
+import {
+  entitiesInRect,
+  entitiesNear,
+  insideShape,
+  nearestLocation,
+  nearestPoint,
+  touchesRect,
+} from '../geometry/query'
 import {
   insertAnchor,
   isSmooth,
@@ -35,8 +42,8 @@ export function hitTest(project: Project, p: Vec2, tolerance: number): Entity | 
     if (layer.locked) continue
     let d: number
     if (entity.type === 'text') {
-      const b = entityBounds(entity)
-      d = p[0] >= b.minX && p[0] <= b.maxX && p[1] >= b.minY && p[1] <= b.maxY ? 0 : Infinity
+      // Anywhere on the (rotated) text box picks it.
+      d = insideShape(entity, p) ? 0 : nearestPoint(entity, p).distance
     } else {
       d = nearestPoint(entity, p).distance
     }

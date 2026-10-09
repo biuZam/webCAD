@@ -15,6 +15,8 @@ const ICONS: Record<ToolId | 'flipH' | 'flipV', string> = {
   pen: 'M3 17C6 6 14 14 17 3M17 3l-3 1M17 3l-1 3',
   centreLine: 'M10 2v3M10 7v1M10 10v3M10 15v1M10 18v0M5 6h10v8H5z',
   perpendicular: 'M3 16h14M10 16V4M10 13h3v3',
+  // A tag with a double-headed grain arrow (no letters in icons).
+  label: 'M3 10l4-6h10v12H7zM9 10h6M9 10l2-2M9 10l2 2M15 10l-2-2M15 10l-2 2',
   measure: 'M2 13l11-11 5 5-11 11zM6 9l2 2M9 6l2 2M12 3l1 1',
   arc: 'M3 15A8 8 0 0 1 17 15M3 15h0M17 15h0M10 7h0',
   move: 'M10 2v16M2 10h16M7.5 4.5L10 2l2.5 2.5M7.5 15.5L10 18l2.5-2.5M4.5 7.5L2 10l2.5 2.5M15.5 7.5L18 10l-2.5 2.5',

@@ -31,3 +31,35 @@ export function rectangleSegments(a: Vec2, b: Vec2, radius = 0): Segment[] {
     { p: [x0, y0 + r], ho: [0, -k] },
   ]
 }
+
+/** Longest arrowhead of a grain arrow (mm); shorter arrows get heads a quarter of their length. */
+export const GRAIN_ARROW_HEAD = 5
+
+/**
+ * D10 Grain (backbone) arrow from `a` to `b` with a head at both ends, as one open polyline that runs
+ * through each head (barb → tip → barb → tip): a single path entity, exported as one `<path>`.
+ */
+export function grainArrowSegments(a: Vec2, b: Vec2): Segment[] {
+  const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+  if (len === 0) return []
+  const u: Vec2 = [(b[0] - a[0]) / len, (b[1] - a[1]) / len]
+  const head = Math.min(GRAIN_ARROW_HEAD, len / 4)
+  // Barbs at ±30° from the shaft.
+  const back = head * Math.cos(Math.PI / 6)
+  const side = head * Math.sin(Math.PI / 6)
+  const barb = (tip: Vec2, dir: 1 | -1, s: 1 | -1): Vec2 => [
+    tip[0] - dir * u[0] * back - s * u[1] * side,
+    tip[1] - dir * u[1] * back + s * u[0] * side,
+  ]
+  // Head at a points back towards b (dir −1), head at b points away from a (dir +1).
+  return [
+    { p: barb(a, -1, 1) },
+    { p: a },
+    { p: barb(a, -1, -1) },
+    { p: a },
+    { p: b },
+    { p: barb(b, 1, 1) },
+    { p: b },
+    { p: barb(b, 1, -1) },
+  ]
+}

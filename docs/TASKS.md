@@ -88,7 +88,7 @@ Quality
 
 - [ ] T4.1 Complete `zh-CN` translation; glossary review by native-speaking leatherworker; `i18n:check --strict` gate
 - [ ] T4.2 CJK PDF font: Noto Sans SC subset only when Chinese glyphs present
-- [ ] T4.3 Text/label tool: piece name, "cut 2", grain arrow [D10]
+- [x] T4.3 Text/label tool [D10] — tool N, on the Notes layer (active layer if Notes is locked/hidden): click, type text (free-text input-bar field, focused automatically), size and angle; last text/size/angle reused. Grain arrow mode: double-headed arrow as one open path, two clicks or typed length/angle. Text boxes are estimated (0.6 em Latin, 1 em CJK) and rotate with the text, for hit-testing and export bounds. Properties now shows rotations counter-clockwise like typed angles. Piece name / quantity are typed as text (no auto-fields)
 - [ ] T4.4 Parallel line [D9]; trim/extend/split [M8]; join + boolean union/difference [M9]
 - [ ] T4.5 Hole-count per edge + mismatch warning [L4]; punch marks [L5]; seam allowance per edge [L6]
 - [ ] T4.6 DXF export R12/R2000 via Maker.js adapter; PNG preview

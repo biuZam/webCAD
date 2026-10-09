@@ -36,6 +36,12 @@ const LINE_STYLES: readonly LineStyle[] = ['solid', 'dashed', 'dotted', 'dashDot
 const dispatch = (command: Command) => documentStore.getState().dispatch(command)
 
 /** The shared value of `pick` across entities, or null if they differ. */
+/**
+ * Model rotations are clockwise (y-down); the UI shows angles counter-clockwise, like every typed angle.
+ * The conversion is its own inverse.
+ */
+const ccw = (deg: number) => (deg === 0 ? 0 : -deg)
+
 function common<T>(entities: readonly Entity[], pick: (e: Entity) => T): T | null {
   const first = pick(entities[0])
   return entities.every((e) => pick(e) === first) ? first : null
@@ -350,8 +356,8 @@ function TypeFields({ entity }: { entity: Entity }) {
               <NumberField
                 label={t('properties.rotation')}
                 kind="angle"
-                value={entity.rotation}
-                onCommit={(rotation) => set({ rotation })}
+                value={ccw(entity.rotation)}
+                onCommit={(rotation) => set({ rotation: ccw(rotation) })}
               />
             </>
           )}
@@ -409,8 +415,8 @@ function TypeFields({ entity }: { entity: Entity }) {
           <NumberField
             label={t('properties.rotation')}
             kind="angle"
-            value={entity.rotation}
-            onCommit={(rotation) => set({ rotation })}
+            value={ccw(entity.rotation)}
+            onCommit={(rotation) => set({ rotation: ccw(rotation) })}
           />
         </div>
       )

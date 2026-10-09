@@ -86,3 +86,16 @@ test('select a rectangle and drag it to move it', async ({ page }) => {
   // Moved by (20, 20) mm, up to sub-pixel mouse rounding.
   numbers.forEach((n, i) => expect(Math.abs(n - expected[i])).toBeLessThan(0.05))
 })
+
+test('add a text label: the text field takes focus after placing it', async ({ page }) => {
+  await page.keyboard.press('n')
+  const spot = await toPage(page, [20, 30])
+  await page.mouse.move(...spot)
+  await page.mouse.click(...spot)
+  await expect(page.getByRole('textbox', { name: 'Text' })).toBeFocused()
+  await page.keyboard.type('Front · cut 2')
+  await page.keyboard.press('Enter')
+
+  const svg = await exportSvg(page)
+  expect(svg).toMatch(/inkscape:label="notes"><text [^>]*>Front · cut 2<\/text>/)
+})

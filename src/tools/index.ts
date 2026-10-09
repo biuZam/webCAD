@@ -2,6 +2,7 @@ import { ArcTool } from './arc'
 import { CentreLineTool } from './centre-line'
 import { CircleTool } from './circle'
 import { ChamferTool, FilletTool } from './corner-tools'
+import { LabelTool } from './label'
 import { LineTool } from './line'
 import { MeasureTool } from './measure'
 import { MirrorTool } from './mirror'
@@ -37,6 +38,7 @@ export function createTools(): Record<ToolId, Tool> {
     stitchHoles: new StitchHolesTool(),
     fillet: new FilletTool(),
     chamfer: new ChamferTool(),
+    label: new LabelTool(),
   }
 }
 
@@ -60,6 +62,7 @@ export const TOOL_SHORTCUTS: Record<string, ToolId> = {
   h: 'stitchHoles',
   f: 'fillet',
   b: 'chamfer',
+  n: 'label',
 }
 
 /** Palette order; `null` draws a divider between groups. */
@@ -73,6 +76,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'arc',
   'centreLine',
   'perpendicular',
+  'label',
   null,
   'move',
   'rotate',

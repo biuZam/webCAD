@@ -1,5 +1,6 @@
 // T0.12 Typed numeric input: the active tool's prompt plus its fields (length, angle, factor, and toggles).
-// Typing a number anywhere outside a text field jumps into the first field, as in desktop CAD.
+// Typing a number anywhere outside a text field jumps into the first numeric field, as in desktop CAD.
+// A step whose first field is free text (the label tool) focuses it straight away.
 
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,7 +8,7 @@ import { toolSession } from '../canvas/tool-session'
 import { useUiStore } from '../canvas/ui-store'
 import { useDocument } from '../document/store'
 import { formatLength, parseAngle, parseLength, parseNumber, type LengthUnit } from '../lib/units'
-import type { InputField, InputValues } from '../tools/types'
+import type { InputField, InputTexts, InputValues } from '../tools/types'
 
 const STARTS_NUMBER = /^[0-9.,-]$/
 
@@ -16,12 +17,19 @@ function parseValues(fields: InputField[], texts: Record<string, string>, unit: 
   const invalid = new Set<string>()
   for (const f of fields) {
     const text = texts[f.key]?.trim()
-    if (f.kind === 'toggle' || f.kind === 'choice' || !text) continue
+    if (f.kind === 'toggle' || f.kind === 'choice' || f.kind === 'text' || !text) continue
     const v = f.kind === 'length' ? parseLength(text, unit) : f.kind === 'angle' ? parseAngle(text) : parseNumber(text)
     if (v === null) invalid.add(f.key)
     else values[f.key] = v
   }
   return { values, invalid }
+}
+
+/** Typed free text, by field key; empty fields are left out. */
+function parseTexts(fields: InputField[], texts: Record<string, string>): InputTexts {
+  const out: InputTexts = {}
+  for (const f of fields) if (f.kind === 'text' && texts[f.key]?.trim()) out[f.key] = texts[f.key]
+  return out
 }
 
 export function InputBar() {
@@ -42,20 +50,30 @@ function InputFields() {
   const textFields = fields.filter((f) => f.kind !== 'toggle' && f.kind !== 'choice' && !f.readOnly)
   const readouts = fields.filter((f) => f.readOnly)
   const { values, invalid } = parseValues(fields, texts, unit)
+  const typedTexts = parseTexts(fields, texts)
 
   const update = (next: Record<string, string>) => {
     setTexts(next)
-    toolSession.input(parseValues(fields, next, unit).values, false)
+    toolSession.input(parseValues(fields, next, unit).values, false, parseTexts(fields, next))
   }
 
+  const focusText = textFields[0]?.kind === 'text'
   useEffect(() => {
-    const first = fields.find((f) => f.kind !== 'toggle' && f.kind !== 'choice' && !f.readOnly)
+    // Only when the step starts (the component remounts per step). Deferred: the step usually starts on a
+    // canvas pointerdown, whose default action (focusing the canvas) would otherwise take the focus back.
+    if (!focusText) return
+    const timer = setTimeout(() => firstRef.current?.focus())
+    return () => clearTimeout(timer)
+  }, [focusText])
+
+  useEffect(() => {
+    const first = fields.find((f) => f.kind !== 'toggle' && f.kind !== 'choice' && f.kind !== 'text' && !f.readOnly)
     if (!first) return
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof Element && e.target.closest('input, select, textarea, [contenteditable]')) return
       if (e.metaKey || e.ctrlKey || e.altKey || !STARTS_NUMBER.test(e.key)) return
       e.preventDefault()
-      firstRef.current?.focus()
+      document.querySelector<HTMLInputElement>(`.input-bar input[data-key="${first.key}"]`)?.focus()
       setTexts({ [first.key]: e.key })
       toolSession.input(parseValues(fields, { [first.key]: e.key }, unit).values, false)
     }
@@ -67,8 +85,8 @@ function InputFields() {
     if (e.key === 'Enter') {
       e.preventDefault()
       if (invalid.size > 0) return
-      if (Object.keys(values).length === 0) toolSession.finish()
-      else toolSession.input(values, true)
+      if (Object.keys(values).length === 0 && Object.keys(typedTexts).length === 0) toolSession.finish()
+      else toolSession.input(values, true, typedTexts)
       setTexts({})
       e.currentTarget.blur()
     } else if (e.key === 'Escape') {
@@ -83,6 +101,7 @@ function InputFields() {
   }
 
   const placeholder = (f: InputField) => {
+    if (f.kind === 'text') return f.liveText ?? ''
     if (f.live === undefined) return ''
     if (f.kind === 'length') return formatLength(f.live, unit, i18n.language, false)
     const n = new Intl.NumberFormat(i18n.language, { maximumFractionDigits: f.kind === 'factor' ? 4 : 2 }).format(
@@ -91,7 +110,8 @@ function InputFields() {
     return f.kind === 'angle' ? `${n}°` : n
   }
 
-  const suffix = (f: InputField) => (f.kind === 'length' ? unit : f.kind === 'angle' ? '°' : '×')
+  const suffix = (f: InputField) =>
+    f.kind === 'length' ? unit : f.kind === 'angle' ? '°' : f.kind === 'text' ? null : '×'
 
   return (
     <div className="input-bar" role="group" aria-label={t('input.label')}>
@@ -104,7 +124,8 @@ function InputFields() {
           <span>{tTools(f.labelKey)}</span>
           <input
             ref={i === 0 ? firstRef : undefined}
-            inputMode="decimal"
+            data-key={f.key}
+            inputMode={f.kind === 'text' ? 'text' : 'decimal'}
             autoComplete="off"
             spellCheck={false}
             value={texts[f.key] ?? ''}
@@ -114,7 +135,7 @@ function InputFields() {
             onChange={(e) => update({ ...texts, [f.key]: e.target.value })}
             onKeyDown={onKeyDown}
           />
-          <span className="input-unit">{suffix(f)}</span>
+          {suffix(f) && <span className="input-unit">{suffix(f)}</span>}
         </label>
       ))}
       {readouts.map((f) => (

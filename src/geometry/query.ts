@@ -5,7 +5,7 @@
 import RBush from 'rbush'
 import type { Entity, Id, Layer, PathEntity, Project } from '../document/model'
 import type { Vec2 } from '../lib/vec2'
-import { emptyBounds, entityBounds, type Bounds } from './bounds'
+import { emptyBounds, entityBounds, textBox, type Bounds } from './bounds'
 import { kernel, toPaperPath } from './kernel'
 
 const shapes = new WeakMap<Entity, paper.PathItem>()
@@ -39,11 +39,9 @@ export function entityShape(entity: Entity): paper.PathItem {
         insert: false,
       })
       break
-    case 'text': {
-      const b = entityBounds(entity)
-      shape = new ps.Path.Rectangle({ from: [b.minX, b.minY], to: [b.maxX, b.maxY], insert: false })
+    case 'text':
+      shape = new ps.Path({ segments: textBox(entity), closed: true, insert: false })
       break
-    }
   }
   shapes.set(entity, shape)
   return shape
@@ -61,6 +59,11 @@ export function nearestPoint(entity: Entity, p: Vec2): { point: Vec2; distance: 
 export function nearestLocation(entity: PathEntity, p: Vec2): { index: number; time: number; distance: number } {
   const loc = (entityShape(entity) as paper.Path).getNearestLocation(new (kernel().Point)(p[0], p[1]))
   return { index: loc.curve.index, time: loc.time, distance: loc.point.getDistance(new (kernel().Point)(p[0], p[1])) }
+}
+
+/** True if `p` lies inside the entity's outline. Paper.js closes open paths for this test. */
+export function insideShape(entity: Entity, p: Vec2): boolean {
+  return entityShape(entity).contains(new (kernel().Point)(p[0], p[1]))
 }
 
 export function intersections(a: Entity, b: Entity): Vec2[] {

@@ -12,6 +12,7 @@ import { gridSpacing } from '../snapping/grid'
 import type {
   I18nKey,
   InputField,
+  InputTexts,
   InputValues,
   PreviewShape,
   PromptParams,
@@ -174,8 +175,8 @@ export class ToolSession {
     this.emitPreview()
   }
 
-  input(values: InputValues, commit: boolean) {
-    this.tool.onInput?.(values, commit, this.ctx)
+  input(values: InputValues, commit: boolean, texts: InputTexts = {}) {
+    this.tool.onInput?.(values, commit, this.ctx, texts)
   }
 
   finish() {

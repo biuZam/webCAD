@@ -589,6 +589,9 @@ input[type='radio'] {
   border-radius: 4px;
   padding: 2px 6px;
 }
+.input-field input[inputmode='text'] {
+  width: 200px;
+}
 .input-field select {
   font: inherit;
   color: var(--text);
