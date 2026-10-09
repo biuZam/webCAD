@@ -16,7 +16,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 - Centre lines (usable as mirror axes) and perpendicular lines
 - Labels: text (piece name, "cut 2"…) and grain arrows, on the notes layer
 - Move, rotate, scale and mirror (each optionally as a copy), flip in place
-- Offset, fillet and chamfer
+- Offset, fillet and chamfer; parallel lines; trim, extend and split; join paths; union and difference of shapes
 - Edit points and Bézier handles directly; switch points between smooth and corner; add and delete points; drag selected shapes to move them
 - Object snapping: endpoint, midpoint, centre, intersection, perpendicular, tangent, nearest, grid
 - Exact values: type coordinates, lengths, angles and radii while drawing; edit numbers in the properties panel
@@ -52,6 +52,8 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | T | Perpendicular | B | Chamfer |
 | D | Measure | K | Stitch line |
 | N | Label / grain arrow | H | Stitch holes |
+| G | Parallel line | W | Trim / extend / split |
+| Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
 
 While drawing: **start typing a number** to enter it in the input bar, **Tab** moves between fields, **Enter** applies, **Esc** cancels, **Backspace** removes the last point, **Shift** locks angles to 15° steps. **Space-drag** or middle-drag pans, the wheel zooms. **⌘/Ctrl+Z / ⇧⌘Z** undo/redo, **⌘/Ctrl+S** save, **⌘/Ctrl+O** open, **⌘/Ctrl+A** select all.
 

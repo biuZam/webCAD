@@ -41,6 +41,12 @@
     "deletePoint": "Delete point",
     "addLabel": "Add label",
     "addGrainArrow": "Add grain arrow",
+    "trim": "Trim",
+    "extend": "Extend",
+    "split": "Split",
+    "join": "Join",
+    "union": "Union",
+    "difference": "Difference",
     "addCentreLine": "Add centre line",
     "addEllipse": "Add ellipse"
   },
@@ -95,7 +101,10 @@
   },
   "modify": {
     "flipH": "Flip horizontal",
-    "flipV": "Flip vertical"
+    "flipV": "Flip vertical",
+    "join": "Join paths",
+    "union": "Union",
+    "difference": "Difference (largest minus the others)"
   },
   "file": {
     "projectName": "Project name",

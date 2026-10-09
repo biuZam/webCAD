@@ -91,6 +91,20 @@ export const insertEntitiesAfter = (
   },
 })
 
+/**
+ * Replace entities in place, each by zero or more entities (trim, split, join, booleans), as one undo step.
+ * Give the first replacement the original id to keep links to it (stitch lines follow a trimmed outline).
+ */
+export const replaceEntities = (replacements: readonly { id: Id; with: Entity[] }[], labelKey: string): Command => ({
+  labelKey,
+  recipe: (draft) => {
+    for (const r of replacements) {
+      const found = findEntity(draft, r.id)
+      if (found) found.piece.entities.splice(found.index, 1, ...(r.with as Draft<Entity>[]))
+    }
+  },
+})
+
 /** Turn a derived (linked) entity into a free one, keeping its current geometry. */
 export const detachDerived = (id: Id): Command => ({
   labelKey: 'history.detach',

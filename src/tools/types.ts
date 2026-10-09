@@ -27,6 +27,8 @@ export type ToolId =
   | 'measure'
   | 'perpendicular'
   | 'label'
+  | 'parallel'
+  | 'trim'
 
 /** A key in the `tools` namespace (translate with `useTranslation('tools')`). */
 export type I18nKey = ParseKeys<'tools'>

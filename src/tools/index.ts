@@ -8,6 +8,7 @@ import { MeasureTool } from './measure'
 import { MirrorTool } from './mirror'
 import { MoveTool } from './move'
 import { OffsetTool } from './offset'
+import { ParallelTool } from './parallel'
 import { PenTool } from './pen'
 import { PerpendicularTool } from './perpendicular'
 import { RectangleTool } from './rectangle'
@@ -16,6 +17,7 @@ import { ScaleTool } from './scale'
 import { SelectTool } from './select'
 import { StitchHolesTool } from './stitch-holes'
 import { StitchLineTool } from './stitch-line'
+import { TrimTool } from './trim'
 import type { Tool, ToolId } from './types'
 
 export function createTools(): Record<ToolId, Tool> {
@@ -39,6 +41,8 @@ export function createTools(): Record<ToolId, Tool> {
     fillet: new FilletTool(),
     chamfer: new ChamferTool(),
     label: new LabelTool(),
+    parallel: new ParallelTool(),
+    trim: new TrimTool(),
   }
 }
 
@@ -63,6 +67,8 @@ export const TOOL_SHORTCUTS: Record<string, ToolId> = {
   f: 'fillet',
   b: 'chamfer',
   n: 'label',
+  g: 'parallel',
+  w: 'trim',
 }
 
 /** Palette order; `null` draws a divider between groups. */
@@ -76,6 +82,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'arc',
   'centreLine',
   'perpendicular',
+  'parallel',
   'label',
   null,
   'move',
@@ -83,6 +90,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'scale',
   'mirror',
   null,
+  'trim',
   'fillet',
   'chamfer',
   'offset',

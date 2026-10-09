@@ -7,7 +7,18 @@ import type { ToolId } from '../tools/types'
 const SHORTCUT_FOR = Object.fromEntries(Object.entries(TOOL_SHORTCUTS).map(([k, id]) => [id, k.toUpperCase()]))
 
 /** Simple stroke icons, 20×20, drawn in currentColor. No text inside icons (i18n rule). */
-const ICONS: Record<ToolId | 'flipH' | 'flipV', string> = {
+type Action = 'flipH' | 'flipV' | 'join' | 'union' | 'difference'
+
+/** Selection actions after the tools: shortcut and what they do. */
+const ACTIONS: Record<Action, { key: string; run: () => void }> = {
+  flipH: { key: 'Shift+H', run: () => toolSession.flip('horizontal') },
+  flipV: { key: 'Shift+V', run: () => toolSession.flip('vertical') },
+  join: { key: 'Shift+J', run: () => toolSession.join() },
+  union: { key: 'Shift+U', run: () => toolSession.boolean('union') },
+  difference: { key: 'Shift+D', run: () => toolSession.boolean('difference') },
+}
+
+const ICONS: Record<ToolId | Action, string> = {
   select: 'M5 3l11 7-5 1.5L8.5 17z',
   line: 'M4 16L16 4M4 16h0M16 4h0',
   rectangle: 'M4 5h12v10H4z',
@@ -15,8 +26,6 @@ const ICONS: Record<ToolId | 'flipH' | 'flipV', string> = {
   pen: 'M3 17C6 6 14 14 17 3M17 3l-3 1M17 3l-1 3',
   centreLine: 'M10 2v3M10 7v1M10 10v3M10 15v1M10 18v0M5 6h10v8H5z',
   perpendicular: 'M3 16h14M10 16V4M10 13h3v3',
-  // A tag with a double-headed grain arrow (no letters in icons).
-  label: 'M3 10l4-6h10v12H7zM9 10h6M9 10l2-2M9 10l2 2M15 10l-2-2M15 10l-2 2',
   measure: 'M2 13l11-11 5 5-11 11zM6 9l2 2M9 6l2 2M12 3l1 1',
   arc: 'M3 15A8 8 0 0 1 17 15M3 15h0M17 15h0M10 7h0',
   move: 'M10 2v16M2 10h16M7.5 4.5L10 2l2.5 2.5M7.5 15.5L10 18l2.5-2.5M4.5 7.5L2 10l2.5 2.5M15.5 7.5L18 10l-2.5 2.5',
@@ -29,6 +38,14 @@ const ICONS: Record<ToolId | 'flipH' | 'flipV', string> = {
   stitchLine: 'M3 17V7a4 4 0 0 1 4-4h10M7 15v-2M7 10v-1a2 2 0 0 1 2-2h1M13 7h2',
   stitchHoles:
     'M4 16a1 1 0 1 0 0.01 0M4 11a1 1 0 1 0 0.01 0M4 6a1 1 0 1 0 0.01 0M9 4a1 1 0 1 0 0.01 0M14 4a1 1 0 1 0 0.01 0',
+  parallel: 'M3 14L14 3M7 17L17 7',
+  // Scissors-like cut across a line.
+  trim: 'M2 12h16M6 4l8 14M14 4L6 18',
+  // A tag with a double-headed grain arrow (no letters in icons).
+  label: 'M3 10l4-6h10v12H7zM9 10h6M9 10l2-2M9 10l2 2M15 10l-2-2M15 10l-2 2',
+  join: 'M2 14h6l2-4M18 6h-6l-2 4',
+  union: 'M3 5h8v3h6v9H9v-3H3z',
+  difference: 'M3 5h8v3M11 8v6H3V5M11 8h6v9H9v-3',
   flipH: 'M10 2v16M7 6L3 10l4 4M13 6l4 4-4 4',
   flipV: 'M2 10h16M6 7l4-4 4 4M6 13l4 4 4-4',
 }
@@ -65,16 +82,16 @@ export function ToolPalette() {
           </button>
         )
       })}
-      {(['flipH', 'flipV'] as const).map((action) => {
+      {(Object.keys(ACTIONS) as Action[]).map((action) => {
         const name = t(`modify.${action}`)
         return (
           <button
             key={action}
             className="tool-button"
-            title={t('tools.shortcut', { name, key: action === 'flipH' ? 'Shift+H' : 'Shift+V' })}
+            title={t('tools.shortcut', { name, key: ACTIONS[action].key })}
             aria-label={name}
             disabled={!hasSelection}
-            onClick={() => toolSession.flip(action === 'flipH' ? 'horizontal' : 'vertical')}
+            onClick={ACTIONS[action].run}
           >
             <Icon d={ICONS[action]} />
           </button>

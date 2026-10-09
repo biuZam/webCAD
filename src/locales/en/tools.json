@@ -62,7 +62,9 @@
   "common": {
     "x": "X",
     "y": "Y",
-    "layerUnavailable": "The active layer is locked or hidden. Unlock or show it, or pick another layer in the Layers panel."
+    "layerUnavailable": "The active layer is locked or hidden. Unlock or show it, or pick another layer in the Layers panel.",
+    "joinNone": "Select open paths to join (or one whose ends meet, to close it).",
+    "booleanNone": "Select two or more closed shapes (outlines or circles)."
   },
   "transform": {
     "promptPick": "Select objects (click, Shift-click, or drag a box), then press Enter or right-click.",
@@ -160,6 +162,22 @@
     "promptText": "Type the text, e.g. piece name and \"cut 2\", then press Enter. Click elsewhere to move it · Esc cancels.",
     "promptGrainStart": "Click or type one end of the grain arrow.",
     "promptGrainEnd": "Click the other end, or type length and angle. Shift locks to 15°."
+  },
+  "parallel": {
+    "name": "Parallel line",
+    "distance": "Distance",
+    "promptEdge": "Click a straight edge.",
+    "promptPlace": "Click on the side and at the distance wanted, or type the distance (the cursor picks the side). Esc picks another edge."
+  },
+  "trim": {
+    "name": "Trim / extend / split",
+    "mode": "Mode",
+    "modeTrim": "Trim",
+    "modeExtend": "Extend",
+    "modeSplit": "Split",
+    "promptTrim": "Click the piece of a line to remove: it is cut back to the nearest crossings. Shift-click extends instead.",
+    "promptExtend": "Click near the end of a line to extend it to the next line it meets. Shift-click trims instead.",
+    "promptSplit": "Click a line or outline to split it at that point."
   },
   "perpendicular": {
     "name": "Perpendicular",

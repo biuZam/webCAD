@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 import { toolSession } from '../canvas/tool-session'
 import { TOOL_SHORTCUTS } from '../tools'
 
+/** Shift+letter → path operation on the selection. */
+export const PATH_OPS: Record<string, 'join' | 'union' | 'difference'> = { J: 'join', U: 'union', D: 'difference' }
+
 /** Tool shortcuts, Select All, and Esc / Enter / Backspace / Delete for the active tool; ignored while typing in a field. */
 export function useToolKeys() {
   useEffect(() => {
@@ -17,6 +20,14 @@ export function useToolKeys() {
       if (e.shiftKey && (e.key === 'H' || e.key === 'V')) {
         e.preventDefault()
         toolSession.flip(e.key === 'H' ? 'horizontal' : 'vertical')
+        return
+      }
+      // M9 path operations on the selection.
+      const pathOp = e.shiftKey ? PATH_OPS[e.key] : undefined
+      if (pathOp) {
+        e.preventDefault()
+        if (pathOp === 'join') toolSession.join()
+        else toolSession.boolean(pathOp)
         return
       }
       if (e.key === 'Enter' && target?.closest('button')) return

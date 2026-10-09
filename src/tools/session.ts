@@ -8,6 +8,7 @@ import { emptyBounds, entityBounds, isEmpty } from '../geometry/bounds'
 import { mirrorAcross } from '../geometry/transform'
 import type { Vec2 } from '../lib/vec2'
 import { snap, type SnapKind } from '../snapping/engine'
+import { booleanSelection, joinSelection, type PathOp } from './path-ops'
 import { gridSpacing } from '../snapping/grid'
 import type {
   I18nKey,
@@ -210,6 +211,22 @@ export class ToolSession {
     this.store
       .getState()
       .dispatch(transformEntities(this.selection, m, { copy: false, labelKey: 'history.flip' }).command)
+  }
+
+  /** M9 Join the selected open paths (or close one). */
+  join() {
+    this.applyPathOp(joinSelection(this.store.getState().project, this.selection), 'common.joinNone')
+  }
+
+  /** M9 Union of the selected closed shapes, or the largest minus the others. */
+  boolean(op: 'union' | 'difference') {
+    this.applyPathOp(booleanSelection(this.store.getState().project, this.selection, op), 'common.booleanNone')
+  }
+
+  private applyPathOp(op: PathOp | null, failKey: I18nKey) {
+    if (!op) return this.listener.prompt(failKey, [])
+    this.store.getState().dispatch(op.command)
+    this.setSelection(op.resultIds)
   }
 
   selectAll() {
