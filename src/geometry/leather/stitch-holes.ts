@@ -21,6 +21,11 @@ export interface HoleLayout {
   angles: number[]
   /** Arc-length positions of the corners that got a hole (cornerAware only), for tests and diagnostics. */
   corners: number[]
+  /**
+   * L4 Indices into `holes` for each edge (the spans between corners, in path order). A hole on a corner
+   * belongs to both edges it joins, as a leatherworker counts them. Without corners: one edge.
+   */
+  edges: number[][]
 }
 
 /**
@@ -37,7 +42,33 @@ export function slitEnds(hole: Vec2, pathAngle: number | undefined, slitAngle: n
   ]
 }
 
-const EMPTY: HoleLayout = { holes: [], angles: [], corners: [] }
+const EMPTY: HoleLayout = { holes: [], angles: [], corners: [], edges: [] }
+
+/** Tolerance (mm) for a hole sitting exactly on an edge's end. */
+const ON_EDGE = 1e-6
+
+/** Group hole offsets into the spans between corners (see HoleLayout.edges). */
+function edgesOf(offsets: readonly number[], corners: readonly number[], length: number, closed: boolean): number[][] {
+  const all = offsets.map((_, i) => i)
+  const inner = corners.filter((c) => c > ON_EDGE && c < length - ON_EDGE)
+  if (closed && corners.length === 0) return [all]
+  const stops = [0, ...inner, length]
+  const spans: [number, number][] = closed
+    ? corners.map((c, i) => [c, i + 1 < corners.length ? corners[i + 1] : corners[0] + length])
+    : stops.slice(0, -1).map((a, i) => [a, stops[i + 1]])
+  return spans.map(([a, b]) =>
+    all
+      // On a closed path a span may wrap past the start: try each offset one lap on too.
+      .map((i) => {
+        const o = offsets[i]
+        const lap = closed && o + length <= b + ON_EDGE && o < a - ON_EDGE ? o + length : o
+        return { i, o: lap }
+      })
+      .filter(({ o }) => o >= a - ON_EDGE && o <= b + ON_EDGE)
+      .sort((x, y) => x.o - y.o)
+      .map(({ i }) => i),
+  )
+}
 
 /** Arc-length offsets of the anchors where the path turns sharply. */
 function cornerOffsets(path: paper.Path): number[] {
@@ -74,13 +105,15 @@ export function distributeHoles(
 
   let offsets: number[]
   let corners: number[] = []
+  // Corners also split the edges for counting (L4), whatever the spacing mode.
+  const pathCorners = cornerOffsets(path)
   if (cornerMode === 'fixed') {
     offsets = []
     // Closed: stop half a pitch before the start so the last gap isn't a sliver next to the first hole.
     const end = geometry.closed ? length - pitch / 2 : length + 1e-9
     for (let k = 0; k * pitch <= end; k++) offsets.push(k * pitch)
   } else {
-    corners = cornerOffsets(path)
+    corners = pathCorners
     if (geometry.closed) {
       if (corners.length === 0) {
         offsets = evenSpan(0, length, pitch)
@@ -100,6 +133,7 @@ export function distributeHoles(
 
   const holes: Vec2[] = []
   const angles: number[] = []
+  const placed: number[] = []
   for (const o of offsets) {
     const at = Math.min(Math.max(o, 0), length)
     const p = path.getPointAt(at)
@@ -107,6 +141,7 @@ export function distributeHoles(
     if (!p || !t) continue
     holes.push([p.x, p.y])
     angles.push((Math.atan2(t.y, t.x) * 180) / Math.PI)
+    placed.push(at)
   }
-  return { holes, angles, corners }
+  return { holes, angles, corners, edges: edgesOf(placed, pathCorners, length, geometry.closed) }
 }

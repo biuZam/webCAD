@@ -23,6 +23,7 @@ import type {
   ProjectSettings,
   TextEntity,
 } from '../document/model'
+import { holeEdges } from '../document/derived'
 import { documentStore, useDocument } from '../document/store'
 import { emptyBounds, entityBounds } from '../geometry/bounds'
 import { pathLength } from '../geometry/kernel'
@@ -181,6 +182,7 @@ function HoleSetFields({ entity }: { entity: HoleSetEntity }) {
   const project = useDocument((s) => s.project)
   const set = (changes: Partial<HoleSetEntity>) => dispatch(updateEntity<HoleSetEntity>(entity.id, changes))
   const source = entity.sourceEntityId ? findEntity(project, entity.sourceEntityId)?.entity : undefined
+  const edges = holeEdges(project, entity)
   return (
     <div className="prop-group">
       {source && (
@@ -233,6 +235,9 @@ function HoleSetFields({ entity }: { entity: HoleSetEntity }) {
         onChange={(cornerMode) => set({ cornerMode })}
       />
       <ReadOnlyRow label={t('properties.holes')}>{entity.holes.length}</ReadOnlyRow>
+      {edges.length > 1 && (
+        <ReadOnlyRow label={t('properties.holesPerEdge')}>{edges.map((e) => e.length).join(' · ')}</ReadOnlyRow>
+      )}
       {source && (
         <div className="prop-row">
           <span />

@@ -158,6 +158,7 @@
     "holeSize": "Hole size",
     "margin": "Margin",
     "holes": "Holes",
+    "holesPerEdge": "Per edge",
     "text": "Text",
     "textSize": "Size",
     "linkedTo": "Follows",

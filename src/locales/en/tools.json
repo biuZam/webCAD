@@ -194,6 +194,13 @@
     "length": "Length",
     "promptDistance": "Click two points to measure the distance.",
     "promptAngle": "Click a point, the corner, then another point.",
+    "holes": "Hole count",
+    "edgeA": "Edge 1",
+    "edgeB": "Edge 2",
+    "promptHolesFirst": "Click an edge of a hole set to count its holes (corner holes included).",
+    "promptHolesSecond": "Click the edge it is sewn to.",
+    "holesMatch": "Both edges have {count, plural, one {# hole} other {# holes}}: they match. Click to compare another pair.",
+    "holesDiffer": "Mismatch: {a} vs {b} holes ({diff, plural, one {# hole} other {# holes}} apart). Adjust a pitch or the edge lengths so they sew up evenly.",
     "promptLength": "Hover a shape to see its length."
   }
 }

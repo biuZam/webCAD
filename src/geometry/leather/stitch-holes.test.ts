@@ -119,3 +119,29 @@ describe('distributeHoles — fixed pitch (L2)', () => {
     expect(distributeHoles(rect, 0, 'fixed').holes).toEqual([])
   })
 })
+
+describe('holes per edge (L4)', () => {
+  it('counts each side of a rectangle, corner holes on both sides: 27 + 17 + 27 + 17', () => {
+    const { edges, holes } = distributeHoles(rect, 3.85, 'cornerAware')
+    expect(edges.map((e) => e.length)).toEqual([27, 17, 27, 17])
+    // Every edge runs corner to corner, and neighbouring edges share their corner hole.
+    edges.forEach((e, i) => expect(e.at(-1)).toBe(edges[(i + 1) % edges.length][0]))
+    expect(new Set(edges.flat()).size).toBe(holes.length)
+  })
+
+  it('groups fixed-pitch holes by the same corners', () => {
+    const { edges } = distributeHoles(rect, 4, 'fixed')
+    // Holes every 4 mm from the top-left corner; 100 and 60 are multiples of 4, so corners get holes too.
+    expect(edges.map((e) => e.length)).toEqual([26, 16, 26, 16])
+  })
+
+  it('has one edge for shapes without corners, and splits open lines at their corners', () => {
+    const circle = shapeToPath({ type: 'circle', center: [0, 0], rx: 20, ry: 20, rotation: 0 })
+    expect(distributeHoles(circle, 4, 'cornerAware').edges).toHaveLength(1)
+    const ell = {
+      segments: [{ p: [0, 0] }, { p: [40, 0] }, { p: [40, 20] }] as Segment[],
+      closed: false,
+    }
+    expect(distributeHoles(ell, 4, 'cornerAware').edges.map((e) => e.length)).toEqual([11, 6])
+  })
+})

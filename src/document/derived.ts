@@ -119,6 +119,29 @@ function followedGeometry(
   }
 }
 
+const edgeCache = new WeakMap<HoleSetEntity, number[][]>()
+
+/**
+ * L4 The holes of a set grouped by edge (indices into `holes`, see HoleLayout.edges), recomputed from the line
+ * they follow. A detached set has no line any more: all its holes count as one edge.
+ */
+export function holeEdges(project: Project, set: HoleSetEntity): number[][] {
+  let edges = edgeCache.get(set)
+  if (edges) return edges
+  const source = set.sourceEntityId ? findEntityIn(project, set.sourceEntityId) : undefined
+  const geometry = source && followedGeometry(source, set.margin, 'miter')
+  const layout = geometry && distributeHoles(geometry, set.pitch, set.cornerMode)
+  // Only trust the regrouping if it reproduces the cached holes (it always should while linked).
+  edges = layout && layout.holes.length === set.holes.length ? layout.edges : [set.holes.map((_, i) => i)]
+  edgeCache.set(set, edges)
+  return edges
+}
+
+function findEntityIn(project: Project, id: Id): Entity | undefined {
+  for (const piece of project.pieces) for (const e of piece.entities) if (e.id === id) return e
+  return undefined
+}
+
 function regenerate(e: DerivedDraft, source: Entity) {
   if (e.type === 'path') {
     // Several pieces can result (an inset that pinches apart); the first is kept. Empty means the offset
