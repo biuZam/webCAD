@@ -35,6 +35,15 @@ export default defineConfig({
         // Headroom above workbox's 2 MiB default (the app chunk is ~760 KB raw today).
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         navigateFallback: 'index.html',
+        // T4.2 The CJK PDF font isn't precached (most users never need its 2 MB); once a Chinese PDF has
+        // fetched it, it is kept so that works offline too.
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.endsWith('.ttf'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'leatherdraft-fonts', expiration: { maxEntries: 4 } },
+          },
+        ],
         cleanupOutdatedCaches: true,
       },
     }),

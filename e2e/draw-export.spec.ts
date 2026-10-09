@@ -168,3 +168,21 @@ test('rebind a shortcut: the new key picks the tool, the old one is freed', asyn
   await page.keyboard.press('l')
   await expect(page.getByRole('button', { name: 'Trim / extend / split' })).toHaveAttribute('aria-pressed', 'true')
 })
+
+test('a PDF exported in Chinese embeds the CJK font; an English one does not', async ({ page }) => {
+  await typedRectangle(page, 0, 0, 50, 30)
+  const exportPdf = async (button: string, dialogName: string, submit: RegExp) => {
+    await page.getByRole('button', { name: button }).click()
+    const dialog = page.getByRole('dialog', { name: dialogName })
+    await dialog.getByRole('radio', { name: /^PDF/ }).check()
+    const download = page.waitForEvent('download')
+    await dialog.getByRole('button', { name: submit }).click()
+    return (await readFile(await (await download).path())).toString('latin1')
+  }
+  expect(await exportPdf('Export…', 'Export', /^Export PDF/)).not.toContain('/FontFile2')
+
+  await page.getByRole('combobox', { name: 'Language' }).selectOption('zh-CN')
+  const pdf = await exportPdf('导出…', '导出', /^导出 PDF/)
+  expect(pdf).toContain('/FontFile2')
+  expect(pdf).toMatch(/\/BaseFont \/\w*NotoSansSC/)
+})

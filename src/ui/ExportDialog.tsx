@@ -30,6 +30,13 @@ interface ExportSettings {
 
 const MIME = { svg: 'image/svg+xml', dxf: 'application/dxf' } as const
 
+/** T4.2 The CJK PDF font (public/fonts, ~1.4 MB gzipped); fetched only for PDFs with Chinese text. */
+async function loadCjkFont(): Promise<ArrayBuffer> {
+  const res = await fetch(`${import.meta.env.BASE_URL}fonts/NotoSansSC-GB2312.ttf`)
+  if (!res.ok) throw new Error(`CJK font: HTTP ${res.status}`)
+  return res.arrayBuffer()
+}
+
 const DEFAULTS: ExportSettings = {
   format: 'pdf',
   layerIds: null,
@@ -61,12 +68,9 @@ function saveSettings(s: ExportSettings) {
   }
 }
 
-/**
- * Text printed on the PDF pages. jsPDF's built-in font is Latin-1 only, so until CJK font embedding (T4.2)
- * the page furniture is always English; the dialog itself is translated as usual.
- */
+/** Text printed on the PDF pages, in the UI language (T4.2 embeds a CJK font when it is needed). */
 function pdfStrings(overlap: number): PdfStrings {
-  const t = i18next.getFixedT('en', 'export')
+  const t = i18next.getFixedT(i18next.language, 'export')
   return {
     scale: t('pdf.scale'),
     calibration: t('pdf.calibration'),
@@ -129,7 +133,8 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
           overlap: settings.overlap,
           svg: svgOptions,
           strings: pdfStrings(settings.overlap),
-          date: new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(new Date()),
+          date: new Intl.DateTimeFormat(i18next.language, { dateStyle: 'medium' }).format(new Date()),
+          loadCjkFont,
         })
         downloadBlob(`${base}.pdf`, blob)
       }
