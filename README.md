@@ -35,6 +35,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 - **SVG** at 1:1 (1 unit = 1 mm), one layer per group, with an option to turn curves into short straight lines for laser software
 - **PDF** for home printers: tiled on A4, Letter or A3 with overlap, crop marks and sheet labels, plus an assembly page with a **50 mm calibration square**. Or a single page sized to the pattern, for large-format printers.
 - **DXF** (mm) for laser and CNC software, and a **PNG** picture for sharing
+- **Import SVG** at true size onto the reference layer, to trace an existing pattern
 - Save and open `.json` project files. Work is autosaved in the browser and restored on reload.
 
 ### Printing at true size

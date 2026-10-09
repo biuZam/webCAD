@@ -229,6 +229,12 @@ export class ToolSession {
     this.setSelection(op.resultIds)
   }
 
+  /** Select these entities (switching to Select), e.g. what an import just added. */
+  select(ids: readonly Id[]) {
+    if (this.tool.id !== 'select') this.setTool('select')
+    this.setSelection(ids)
+  }
+
   selectAll() {
     if (this.tool.id !== 'select') this.setTool('select')
     this.setSelection(selectableIds(this.store.getState().project))

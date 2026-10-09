@@ -125,3 +125,26 @@ test('export DXF (millimetres, y up) and a PNG preview with its resolution', asy
   expect(png.readUInt32BE(20)).toBe(Math.round((70 * 150) / 25.4))
   expect(png.subarray(37, 41).toString('latin1')).toBe('pHYs')
 })
+
+test('import an SVG for tracing: true size, on the Reference layer, selected', async ({ page }) => {
+  const chooser = page.waitForEvent('filechooser')
+  await page.getByRole('button', { name: 'Import SVG…' }).click()
+  await (
+    await chooser
+  ).setFiles({
+    name: 'old-pattern.svg',
+    mimeType: 'image/svg+xml',
+    buffer: Buffer.from(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="80mm" height="40mm" viewBox="0 0 80 40">' +
+        '<rect x="0" y="0" width="80" height="40"/><circle cx="20" cy="20" r="5"/><text>Old</text></svg>',
+    ),
+  })
+  await expect(
+    page.getByText('Imported 2 shapes from old-pattern.svg, selected; 1 text or image item skipped.'),
+  ).toBeVisible()
+  await expect(page.getByText('2 objects')).toBeVisible() // Properties panel: the selection
+
+  const svg = await exportSvg(page)
+  expect(svg).toMatch(/width="80mm" height="40mm"/)
+  expect(svg).toMatch(/inkscape:label="reference"><path [^>]*d="M0 40L0 0L80 0L80 40Z"/)
+})

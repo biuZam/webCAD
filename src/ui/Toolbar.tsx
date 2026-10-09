@@ -6,6 +6,7 @@ import { documentStore, useDocument } from '../document/store'
 import { setLanguage, SUPPORTED_LANGUAGES, type Language } from '../i18n'
 import { reloadForUpdate } from '../app/pwa'
 import { ExportDialog } from './ExportDialog'
+import { importSvgFile } from './import-svg'
 import { useFileActions, useUnsaved } from './useFileActions'
 
 /** How long an info notice stays up. Errors stay until replaced or dismissed. */
@@ -35,7 +36,11 @@ function NoticeView() {
     )
   }
   if (notice.kind === 'info') {
-    return <output className="notice">{t(notice.key, { name: notice.name ?? '' })}</output>
+    return (
+      <output className="notice">
+        {t(notice.key, { name: notice.name ?? '', count: notice.count ?? 0, skipped: notice.skipped ?? 0 })}
+      </output>
+    )
   }
   // Error keys come from SchemaError messages or file I/O; fall back to a generic message for anything unknown.
   const key = i18n.exists(notice.errorKey, { ns: 'errors' }) ? notice.errorKey : 'file.ioFailed'
@@ -106,6 +111,7 @@ export function Toolbar() {
       <button onClick={() => documentStore.getState().redo()} disabled={!canRedo}>
         {t('menu.redo')}
       </button>
+      <button onClick={() => void importSvgFile()}>{t('menu.importSvg')}</button>
       <button onClick={() => setExportOpen(true)}>{t('menu.export')}</button>
       <ExportDialog open={exportOpen} onClose={() => setExportOpen(false)} />
       <NoticeView />

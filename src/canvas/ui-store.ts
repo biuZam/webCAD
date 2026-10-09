@@ -11,8 +11,17 @@ export type Notice =
   | { kind: 'error'; errorKey: string }
   | {
       kind: 'info'
-      key: 'file.saved' | 'file.opened' | 'file.restored' | 'file.created' | 'file.exported' | 'file.offlineReady'
+      key:
+        | 'file.saved'
+        | 'file.opened'
+        | 'file.restored'
+        | 'file.created'
+        | 'file.exported'
+        | 'file.offlineReady'
+        | 'file.imported'
       name?: string
+      count?: number
+      skipped?: number
     }
   /** A new version is installed and waiting; the notice offers Reload. */
   | { kind: 'update' }
