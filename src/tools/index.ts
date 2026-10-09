@@ -11,6 +11,7 @@ import { OffsetTool } from './offset'
 import { ParallelTool } from './parallel'
 import { PenTool } from './pen'
 import { PerpendicularTool } from './perpendicular'
+import { PunchTool } from './punch'
 import { RectangleTool } from './rectangle'
 import { RotateTool } from './rotate'
 import { ScaleTool } from './scale'
@@ -43,6 +44,7 @@ export function createTools(): Record<ToolId, Tool> {
     label: new LabelTool(),
     parallel: new ParallelTool(),
     trim: new TrimTool(),
+    punch: new PunchTool(),
   }
 }
 
@@ -69,6 +71,7 @@ export const TOOL_SHORTCUTS: Record<string, ToolId> = {
   n: 'label',
   g: 'parallel',
   w: 'trim',
+  u: 'punch',
 }
 
 /** Palette order; `null` draws a divider between groups. */
@@ -96,6 +99,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'offset',
   'stitchLine',
   'stitchHoles',
+  'punch',
   null,
   'measure',
 ]

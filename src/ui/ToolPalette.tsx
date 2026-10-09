@@ -43,6 +43,8 @@ const ICONS: Record<ToolId | Action, string> = {
   trim: 'M2 12h16M6 4l8 14M14 4L6 18',
   // A tag with a double-headed grain arrow (no letters in icons).
   label: 'M3 10l4-6h10v12H7zM9 10h6M9 10l2-2M9 10l2 2M15 10l-2-2M15 10l-2 2',
+  // A round hole and a slot.
+  punch: 'M6 7a3 3 0 1 0 0.01 0M11 13h4a2 2 0 0 1 0 4h-4a2 2 0 0 1 0-4z',
   join: 'M2 14h6l2-4M18 6h-6l-2 4',
   union: 'M3 5h8v3h6v9H9v-3H3z',
   difference: 'M3 5h8v3M11 8v6H3V5M11 8h6v9H9v-3',

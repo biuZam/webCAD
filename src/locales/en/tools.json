@@ -179,6 +179,20 @@
     "promptExtend": "Click near the end of a line to extend it to the next line it meets. Shift-click trims instead.",
     "promptSplit": "Click a line or outline to split it at that point."
   },
+  "punch": {
+    "name": "Punch hole / slot",
+    "kind": "Shape",
+    "round": "Round hole",
+    "slot": "Slot",
+    "preset": "Punch",
+    "custom": "Custom",
+    "diameter": "Diameter",
+    "width": "Width",
+    "length": "Length",
+    "angle": "Angle",
+    "prompt": "Click to place a hole (snaps to centres and points), or type X/Y and Enter. Use the diameter your rivet, snap or screw post needs.",
+    "promptSlot": "Click to place a slot at its centre, or type X/Y and Enter. Length is end to end; width is the punch diameter."
+  },
   "perpendicular": {
     "name": "Perpendicular",
     "along": "Along",

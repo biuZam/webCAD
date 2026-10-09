@@ -27,6 +27,8 @@ It runs entirely in your browser: no account, no server, and your files never le
 - **Stitch lines** at a set margin from an outline, linked to it: edit the outline and the stitch line follows
 - **Stitch holes** at chisel pitches (2.7, 3.0, 3.38, 3.85, 4.0 mm or custom), round or slanted slit. With "hole on every corner", spacing is evened out per edge so a hole lands exactly on each corner, the way you'd walk a chisel.
 - Holes follow their stitch line, which follows its outline, all in one undo step
+- **Hole count per edge**, and a check that two edges to be sewn together have the same count (Measure → Hole count)
+- **Punch holes and slots** for rivets, snaps and buckles, with common punch diameters
 
 **Output**
 
@@ -53,6 +55,7 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | D | Measure | K | Stitch line |
 | N | Label / grain arrow | H | Stitch holes |
 | G | Parallel line | W | Trim / extend / split |
+| U | Punch hole / slot |  |  |
 | Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
 
 While drawing: **start typing a number** to enter it in the input bar, **Tab** moves between fields, **Enter** applies, **Esc** cancels, **Backspace** removes the last point, **Shift** locks angles to 15° steps. **Space-drag** or middle-drag pans, the wheel zooms. **⌘/Ctrl+Z / ⇧⌘Z** undo/redo, **⌘/Ctrl+S** save, **⌘/Ctrl+O** open, **⌘/Ctrl+A** select all.

@@ -63,3 +63,39 @@ export function grainArrowSegments(a: Vec2, b: Vec2): Segment[] {
     { p: barb(b, 1, -1) },
   ]
 }
+
+/**
+ * L5 A slot (stadium): overall `length` along `angleDeg` (counter-clockwise on screen, as typed), `width` across,
+ * with semicircular ends. Closed, clockwise in y-down; a circle of diameter `width` if length ≤ width.
+ */
+export function slotSegments(center: Vec2, length: number, width: number, angleDeg: number): Segment[] {
+  const r = width / 2
+  const half = Math.max(0, length / 2 - r)
+  const a = (angleDeg * Math.PI) / 180
+  // Unit vectors along the slot and across it, in y-down model space.
+  const u: Vec2 = [Math.cos(a), -Math.sin(a)]
+  const n: Vec2 = [-u[1], u[0]]
+  const at = (s: number, t: number): Vec2 => [center[0] + u[0] * s + n[0] * t, center[1] + u[1] * s + n[1] * t]
+  const k = KAPPA * r
+  const along = (d: number): Vec2 => [u[0] * d, u[1] * d]
+  const across = (d: number): Vec2 => [n[0] * d, n[1] * d]
+  // Four anchors where the straight sides meet the end arcs, plus the two arc tips; quarter arcs between them.
+  return (
+    [
+      { p: at(-half, -r), hi: along(-k), ho: half > 0 ? undefined : along(k) },
+      { p: at(half, -r), hi: half > 0 ? undefined : along(-k), ho: along(k) },
+      { p: at(half + r, 0), hi: across(-k), ho: across(k) },
+      { p: at(half, r), hi: along(k), ho: half > 0 ? undefined : along(-k) },
+      { p: at(-half, r), hi: half > 0 ? undefined : along(k), ho: along(-k) },
+      { p: at(-half - r, 0), hi: across(k), ho: across(-k) },
+    ]
+      // No straight sides: anchors 1 and 4 would duplicate 0 and 3 (which then carry both handles).
+      .filter((_, i) => half > 0 || (i !== 1 && i !== 4))
+      .map((s) => {
+        const seg: Segment = { p: s.p }
+        if (s.hi) seg.hi = s.hi
+        if (s.ho) seg.ho = s.ho
+        return seg
+      })
+  )
+}
