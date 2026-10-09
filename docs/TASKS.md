@@ -52,7 +52,7 @@ Modify tools (all copy-or-move where applicable)
 - [x] T1.18 Chamfer by two distances or distance+angle [M2] — tool B
 
 Quality
-- [ ] T1.19 Playwright setup + first E2E (draw rect → export SVG)
+- [x] T1.19 Playwright setup + first E2E — `pnpm e2e` (`e2e/`, headless Chromium, own dev server on :5199; CI job `e2e`): typed rectangle → SVG export is exactly 100×60 mm at the typed corners; mouse-drawn rectangle + undo; drag-to-move (mm↔px via the dev view hook)
 - [x] T1.20 Perf harness: 2,000 entities (400 pieces: outline, linked stitch line, 44 linked slit holes, circle, centre line; 17,600 holes), `?fixture=perf`, `BENCH=1 pnpm test perf.bench`. Results after fixes:
   - full redraw, everything on screen: Paper 10.1 ms + grid/rulers/holes 1.9 ms (was ~49 ms); zoomed in 4.5 ms
   - style-only command 1.7 ms (was 5.4); move an outline + regenerate its line and holes 10.7 ms (was 13.9)

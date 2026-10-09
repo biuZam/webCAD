@@ -1,0 +1,88 @@
+import { expect, test, type Page } from '@playwright/test'
+import { readFile } from 'node:fs/promises'
+
+/** Export the drawing as SVG through the Export dialog and return the downloaded file's text. */
+async function exportSvg(page: Page): Promise<string> {
+  await page.getByRole('button', { name: 'Export…' }).click()
+  const dialog = page.getByRole('dialog', { name: 'Export' })
+  await dialog.getByRole('radio', { name: /^SVG/ }).check()
+  const download = page.waitForEvent('download')
+  await dialog.getByRole('button', { name: /^Export SVG/ }).click()
+  const file = await (await download).path()
+  return readFile(file, 'utf8')
+}
+
+/** Draw a rectangle with typed corner and size. */
+async function typedRectangle(page: Page, x: number, y: number, w: number, h: number) {
+  await page.getByRole('button', { name: 'Rectangle', exact: true }).click()
+  const input = page.getByRole('group', { name: 'Typed input' })
+  await input.getByRole('textbox', { name: /^X/ }).fill(String(x))
+  await input.getByRole('textbox', { name: /^Y/ }).fill(String(y))
+  await input.getByRole('textbox', { name: /^Y/ }).press('Enter')
+  await input.getByRole('textbox', { name: /^Width/ }).fill(String(w))
+  await input.getByRole('textbox', { name: /^Height/ }).fill(String(h))
+  await input.getByRole('textbox', { name: /^Height/ }).press('Enter')
+}
+
+/** Page coordinates (CSS px) of a drawing point in mm, via the dev-only view hook. */
+async function toPage(page: Page, mm: [number, number]): Promise<[number, number]> {
+  return page.evaluate(([x, y]) => {
+    type View = { projectToView(p: number[]): { x: number; y: number }; element: HTMLElement }
+    const { view } = (window as unknown as { __leatherdraftDev: { view: View } }).__leatherdraftDev
+    const p = view.projectToView([x, y])
+    const r = view.element.getBoundingClientRect()
+    return [r.left + p.x, r.top + p.y] as [number, number]
+  }, mm)
+}
+
+/** Every `<path d>` in the exported SVG. */
+const paths = (svg: string) => [...svg.matchAll(/<path\b[^>]*\sd="([^"]+)"/g)].map((m) => m[1])
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByRole('application', { name: 'Drawing area' })).toBeVisible()
+})
+
+test('draw a rectangle with typed values and export it as true-scale SVG', async ({ page }) => {
+  await typedRectangle(page, 10, 20, 100, 60)
+
+  const svg = await exportSvg(page)
+  // Sized in millimetres with a matching viewBox (1 user unit = 1 mm), cropped to the drawing.
+  expect(svg).toMatch(/<svg\b[^>]* width="100mm" height="60mm" viewBox="10 20 100 60"/)
+  // The rectangle's corners exactly where they were typed, on the cut layer.
+  expect(svg).toMatch(/inkscape:label="cut"><path [^>]*d="M10 20L110 20L110 80L10 80Z"/)
+})
+
+test('draw a rectangle with the mouse; undo removes it', async ({ page }) => {
+  const canvas = page.getByRole('application', { name: 'Drawing area' })
+  await page.keyboard.press('r')
+  const box = (await canvas.boundingBox())!
+  const at = (fx: number, fy: number) => [box.x + box.width * fx, box.y + box.height * fy] as const
+  await page.mouse.move(...at(0.3, 0.3))
+  await page.mouse.click(...at(0.3, 0.3))
+  await page.mouse.move(...at(0.6, 0.6), { steps: 5 })
+  await page.mouse.click(...at(0.6, 0.6))
+  expect(paths(await exportSvg(page))).toHaveLength(1)
+
+  await page.getByRole('button', { name: 'Undo' }).click()
+  expect(paths(await exportSvg(page))).toHaveLength(0)
+})
+
+test('select a rectangle and drag it to move it', async ({ page }) => {
+  await typedRectangle(page, 10, 20, 100, 60)
+  await page.keyboard.press('Escape') // back to Select
+  const edge = await toPage(page, [10, 50])
+  const target = await toPage(page, [30, 70])
+  await page.mouse.move(...edge)
+  await page.mouse.click(...edge)
+  await page.mouse.down()
+  await page.mouse.move(...target, { steps: 8 })
+  await page.mouse.up()
+
+  const [d] = paths(await exportSvg(page))
+  const numbers = d.match(/-?[\d.]+/g)!.map(Number)
+  const expected = [30, 40, 130, 40, 130, 100, 30, 100]
+  expect(numbers).toHaveLength(expected.length)
+  // Moved by (20, 20) mm, up to sub-pixel mouse rounding.
+  numbers.forEach((n, i) => expect(Math.abs(n - expected[i])).toBeLessThan(0.05))
+})

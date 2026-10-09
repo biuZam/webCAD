@@ -17,6 +17,7 @@ pnpm format                  # prettier --write (no semicolons, single quotes, 1
 pnpm test                    # vitest run
 pnpm test src/export/svg.test.ts      # one file
 pnpm test -t "rounds coordinates"     # tests matching a name
+pnpm e2e                     # Playwright browser tests in e2e/ (starts its own dev server on :5199; first run: pnpm exec playwright install chromium-headless-shell)
 # DOM/component tests: `// @vitest-environment happy-dom` at the top (+ `import '../test/canvas-stub'` if they touch geometry).
 # Never add jsdom: Paper.js's Node build picks it up and then every geometry test fails (needs native `canvas`).
 pnpm i18n:check [--strict]   # keys missing from non-en locales; --strict exits non-zero
