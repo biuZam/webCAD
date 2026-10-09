@@ -1,0 +1,78 @@
+{
+  "fillet": {
+    "name": "圆角",
+    "radius": "半径"
+  },
+  "stitchHoles": {
+    "name": "缝孔",
+    "pitch": "针距",
+    "count": "{count} 个孔",
+    "preset": "菱斩",
+    "shape": "孔形"
+  },
+  "common": {
+    "x": "X",
+    "y": "Y"
+  },
+  "line": {
+    "name": "直线",
+    "length": "长度",
+    "angle": "角度"
+  },
+  "rectangle": {
+    "name": "矩形",
+    "width": "宽度",
+    "height": "高度",
+    "cornerRadius": "圆角半径"
+  },
+  "circle": {
+    "name": "圆",
+    "radius": "半径"
+  },
+  "select": {
+    "name": "选择"
+  },
+  "move": {
+    "name": "移动"
+  },
+  "rotate": {
+    "name": "旋转",
+    "angle": "角度"
+  },
+  "scale": {
+    "name": "缩放",
+    "factor": "比例"
+  },
+  "mirror": {
+    "name": "镜像"
+  },
+  "transform": {
+    "copy": "保留原对象（复制）"
+  },
+  "offset": {
+    "name": "偏移",
+    "distance": "距离",
+    "join": "拐角"
+  },
+  "stitchLine": {
+    "name": "缝线"
+  },
+  "chamfer": {
+    "name": "倒角"
+  },
+  "pen": {
+    "name": "钢笔（曲线）"
+  },
+  "arc": {
+    "name": "三点圆弧"
+  },
+  "centreLine": {
+    "name": "中心线"
+  },
+  "perpendicular": {
+    "name": "垂线"
+  },
+  "measure": {
+    "name": "测量"
+  }
+}

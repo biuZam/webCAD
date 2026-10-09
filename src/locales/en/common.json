@@ -1,0 +1,187 @@
+{
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "Untitled"
+  },
+  "menu": {
+    "undo": "Undo",
+    "redo": "Redo",
+    "language": "Language",
+    "new": "New",
+    "open": "Open…",
+    "save": "Save",
+    "export": "Export…"
+  },
+  "history": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "layer": "Change layer",
+    "addLine": "Add line",
+    "addRectangle": "Add rectangle",
+    "addCircle": "Add circle",
+    "move": "Move",
+    "rotate": "Rotate",
+    "scale": "Scale",
+    "mirror": "Mirror",
+    "flip": "Flip",
+    "rename": "Rename project",
+    "units": "Change units",
+    "offset": "Offset",
+    "stitchLine": "Add stitch line",
+    "detach": "Detach",
+    "stitchHoles": "Add stitch holes",
+    "settings": "Change project settings",
+    "fillet": "Fillet",
+    "chamfer": "Chamfer",
+    "addPath": "Add path",
+    "addArc": "Add arc",
+    "editNodes": "Edit points",
+    "addCentreLine": "Add centre line",
+    "addEllipse": "Add ellipse"
+  },
+  "layers": {
+    "title": "Layers",
+    "kind": {
+      "cut": "Cut",
+      "stitch": "Stitch",
+      "reference": "Reference",
+      "notes": "Notes"
+    },
+    "show": "Show {name}",
+    "hide": "Hide {name}",
+    "active": "Draw on {name}",
+    "lock": "Lock {name}",
+    "unlock": "Unlock {name}",
+    "color": "Colour of {name}"
+  },
+  "status": {
+    "cursor": "X {x}  Y {y}",
+    "zoom": "Zoom {percent}",
+    "entities": "{count, plural, one {# entity} other {# entities}}",
+    "grid": "Grid {spacing}",
+    "selected": "{count} selected",
+    "unit": "Units"
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "简体中文"
+  },
+  "tools": {
+    "label": "Tools",
+    "shortcut": "{name} ({key})"
+  },
+  "input": {
+    "label": "Typed input",
+    "hint": "Type a value, Tab for the next field, Enter to apply, Esc to clear."
+  },
+  "snap": {
+    "title": "Snaps ({count})",
+    "legend": "Object snaps",
+    "kind": {
+      "endpoint": "Endpoint",
+      "midpoint": "Midpoint",
+      "centre": "Centre",
+      "intersection": "Intersection",
+      "perpendicular": "Perpendicular",
+      "tangent": "Tangent",
+      "nearest": "Nearest",
+      "grid": "Grid"
+    }
+  },
+  "modify": {
+    "flipH": "Flip horizontal",
+    "flipV": "Flip vertical"
+  },
+  "file": {
+    "projectName": "Project name",
+    "unsaved": "Unsaved changes",
+    "saved": "Saved {name}",
+    "opened": "Opened {name}",
+    "created": "New project",
+    "restored": "Restored your last session",
+    "discardConfirm": "Discard unsaved changes to this project?",
+    "exported": "Exported {name}",
+    "offlineReady": "Ready to work offline"
+  },
+  "notice": {
+    "dismiss": "Dismiss"
+  },
+  "properties": {
+    "title": "Properties",
+    "empty": "Select something to see and edit its properties.",
+    "mixed": "—",
+    "count": "{count, plural, one {# object} other {# objects}}",
+    "type": {
+      "path": "Path",
+      "circle": "Circle",
+      "text": "Text",
+      "holeSet": "Stitch holes",
+      "centreLine": "Centre line",
+      "stitchLine": "Stitch line (linked)"
+    },
+    "layer": "Layer",
+    "lineStyle": "Line style",
+    "strokeWidth": "Stroke (export)",
+    "width": "W",
+    "height": "H",
+    "length": "Length",
+    "points": "Points",
+    "closed": "Closed",
+    "yes": "Yes",
+    "no": "No",
+    "centreX": "Centre X",
+    "centreY": "Centre Y",
+    "radius": "Radius",
+    "diameter": "Diameter",
+    "radiusX": "Radius X",
+    "radiusY": "Radius Y",
+    "rotation": "Rotation",
+    "fromX": "From X",
+    "fromY": "From Y",
+    "toX": "To X",
+    "toY": "To Y",
+    "pitch": "Pitch",
+    "holeSize": "Hole size",
+    "margin": "Margin",
+    "holes": "Holes",
+    "text": "Text",
+    "textSize": "Size",
+    "linkedTo": "Follows",
+    "detach": "Detach",
+    "inside": "inside",
+    "outside": "outside",
+    "holeShape": "Shape",
+    "slitAngle": "Slit angle",
+    "cornerAware": "Hole on every corner",
+    "round": "Round",
+    "slit": "Slanted slit",
+    "project": "Project",
+    "projectHint": "Defaults for new stitch lines and holes.",
+    "stitchMargin": "Stitch margin",
+    "defaultPitch": "Pitch",
+    "defaultHoleSize": "Hole size"
+  },
+  "lineStyle": {
+    "solid": "Solid (cut)",
+    "dashed": "Dashed (fold/score)",
+    "dotted": "Dotted (reference)",
+    "dashDot": "Dash-dot (centre)"
+  },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "Cancel"
+  },
+  "canvas": {
+    "label": "Drawing area",
+    "help": "Choose a tool with its letter key (L line, R rectangle, C circle, P pen, V select…). Points can be typed: start typing a number to enter coordinates or lengths in the input bar, Tab to move between fields, Enter to apply, Esc to cancel."
+  },
+  "update": {
+    "available": "A new version is ready.",
+    "reload": "Reload"
+  }
+}

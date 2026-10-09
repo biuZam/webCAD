@@ -1,0 +1,158 @@
+# LeatherDraft — Architecture
+
+Status: v0 design, written at project init (2026-10-09). Source requirements: `PRD — Leather Pattern CAD (Web).md`.
+
+## 1. Guiding decisions
+
+| # | Decision | Why |
+| --- | --- | --- |
+| A1 | **The document is plain JSON in a Zustand store**, not Paper.js items. Paper.js is used as (a) the screen renderer and (b) a headless geometry kernel. | Immer patches give cheap unlimited undo/redo; JSON serialises directly to the `.json` project file and IndexedDB; exports and tests don't need a live canvas. The PRD's "Paper.js is source of truth" is honoured at the *geometry semantics* level: path data is stored in Paper.js segment form (point + relative handles), so it round-trips into `paper.Path` losslessly. |
+| A2 | **Tools never mutate the document.** They build a `Command` and `dispatch` it. One user action = one command = one undo step. | Undo, autosave and derived-entity regeneration all hang off a single choke point. |
+| A3 | **Previews live in the overlay, not in the store.** During a drag/rubber-band the tool draws into the canvas overlay layer; it dispatches once on commit. | No history spam, no re-render of the whole document per mouse move. |
+| A4 | **Millimetres everywhere, y-down.** Store, kernel, Paper.js project space and SVG user units are all mm with y pointing down. Units (mm/cm/in) exist only in formatting/parsing at the UI edge. | Matches SVG and Paper.js, so no axis flips anywhere in the pipeline. |
+| A5 | **SVG is the canonical export. PDF = our SVG → svg2pdf.js.** SVG is built by a hand-written serialiser from the document model (not `paper.exportSVG`). | Exact control over `width="…mm"`, `viewBox`, `<g inkscape:label>`, `stroke-dasharray` and 0.001 mm rounding. Screen, SVG and PDF can't drift. |
+| A6 | **Derived entities are recomputed inside the same command.** After a command's recipe runs, a derivation pass regenerates any stitch line / hole set whose source entity changed, inside the same Immer draft. | Editing an outline and its stitch holes is one undo step; the document is never left stale. |
+| A7 | **Heavy/optional libraries are lazy-loaded** (`jspdf`, `svg2pdf.js`, Maker.js, clipper2, planegcs WASM, `zh-CN` locale, Noto Sans SC). | Initial bundle budget is 600 KB gzipped; planegcs is LGPL and must stay a separate module. |
+| A8 | **Maker.js is only reachable through `src/geometry/maker-adapter.ts`.** | Avoids two competing geometry models (PRD risk table). |
+
+## 2. Layers and dependency rule
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│ 4. UI shell (React)        src/app, src/ui, src/i18n          │  panels, toolbar, dialogs, settings
+├──────────────────────────────────────────────────────────────┤
+│ 3. Interaction             src/canvas, src/tools, src/snapping│  viewport, renderer, tool state machines
+├──────────────────────────────────────────────────────────────┤
+│ 2. Document                src/document, src/persistence      │  model, commands, history, derivation, autosave
+├──────────────────────────────────────────────────────────────┤
+│ 1. Geometry & export       src/geometry, src/export, src/lib  │  kernel, leather algorithms, SVG/PDF/DXF
+└──────────────────────────────────────────────────────────────┘
+```
+
+Imports only point **downward** (UI → interaction → document → geometry/lib). Specifically:
+
+- `src/lib` (units, vec maths) and `src/document/model.ts` import nothing from the app.
+- `src/geometry` and `src/export` never import React, the stores, or `src/canvas`. They take model objects and return model objects / strings. This keeps them unit-testable in Node.
+- `src/tools` never import React. React only picks the active tool id.
+- Only `src/canvas` touches the on-screen `PaperScope`. The geometry kernel uses its own headless `PaperScope`.
+
+## 3. Data model (`src/document/model.ts`)
+
+```
+Project { schemaVersion, id, name, displayUnit, settings, layers[], pieces[] }
+Layer   { id, name, kind: cut|stitch|reference|notes, visible, locked, color }
+Piece   { id, name, quantity, mirrored, entities[] }
+Entity  = PathEntity | CircleEntity | TextEntity | HoleSetEntity | CentreLineEntity
+          common: { id, layerId, lineStyle: solid|dashed|dotted|dashDot, strokeWidth }
+PathEntity      { segments: Segment[], closed, derived?: { kind:'offset', sourceId, margin, join } }
+Segment         { p: Vec2, hi?: Vec2, ho?: Vec2 }   // handles relative to p, exactly like paper.Segment
+CircleEntity    { center, rx, ry, rotation }        // circle when rx === ry
+HoleSetEntity   { sourceEntityId, margin, pitch, holeShape: round|slit, holeSize, slitAngle, cornerMode,
+                  holes: Vec2[] /* cached output, regenerated */ }
+```
+
+Notes:
+- Rectangles, fillets, chamfers etc. all produce `PathEntity`; the model has no "rectangle" type. Parametric shapes are a v2 concern (constraints).
+- `HoleSetEntity.holes` is a cache so rendering/export never needs the kernel; it is regenerated by the derivation pass.
+- Every file carries `schemaVersion`. `src/document/schema.ts` holds an ordered list of migrations `vN → vN+1`; `loadProject(json)` runs them.
+
+## 4. Command and history pipeline (`src/document/store.ts`)
+
+```
+tool ──Command{labelKey, recipe(draft)}──▶ dispatch()
+                                              │ produceWithPatches(project, draft => {
+                                              │     recipe(draft)
+                                              │     regenerateDerived(draft, changedIds)   ← A6
+                                              │ })
+                                              ├─▶ history.past.push({labelKey, patches, inverse}); future = []
+                                              ├─▶ set({project})  → canvas reconciler, panels re-render
+                                              └─▶ autosave (debounced, idb-keyval)
+undo(): applyPatches(project, inverse); move entry to future.   redo(): the reverse.
+```
+
+UI-only state (active tool, selection, viewport, snap toggles, panel visibility) lives in a separate `useUiStore` and is not part of undo history or the project file.
+
+### Derived entities (`src/document/derived.ts`)
+
+`regenerateDerived(draft, base)` runs inside every dispatch. "Changed in this command" is a reference comparison of an entity's *geometric* fields against the pre-command project (Immer's `current()` returns the original object for untouched drafts); style-only changes never trigger a regeneration. A derived path is regenerated when its source geometry or its link changed (or it is new), detached when its own geometry was edited alone or its source was deleted, and otherwise left untouched (same object, so the renderer skips it). Chains (A → B → C) are processed sources-first. Regeneration uses the precise offset, so its cost is per derived entity whose source moved (~10–50 ms each, see T1.16b).
+
+## 5. Canvas (`src/canvas`)
+
+- One `PaperScope` bound to the `<canvas>`; Paper project units = mm, `view.zoom` = CSS px per mm (× devicePixelRatio handled by Paper).
+- The **grid and rulers are plain 2D canvases** (`src/canvas/chrome.ts`) under and beside the Paper canvas, redrawn at most once per animation frame on pan/zoom/cursor change. Grid spacing adapts to zoom (`src/snapping/grid.ts`: 0.1/1/10/100 mm minor, major every 10). The drawing area is always a light "sheet", even in dark UI, because layer colours are chosen for paper.
+- Paper layers, bottom to top: **one Paper layer per document layer**, then **overlay** (tool previews, cursor cross; later snap markers and selection handles).
+- **Reconciler**: subscribes to the store and diffs entities *by reference* (Immer structural sharing ⇒ unchanged entities keep identity). Only added/changed/removed entities rebuild their Paper item. This is the main lever for the 2,000-entity / 16 ms budget. Selected entities are restyled in place (`setSelection`), not rebuilt.
+- **Hit-testing does not use the on-screen Paper items.** It runs in the tool layer against the model (`src/geometry/query.ts`), so tools stay testable in Node.
+- **Stitch holes are not Paper items.** They are drawn on their own plain 2D canvas between the grid and the Paper canvas (`src/canvas/holes-layer.ts`): one path per colour, culled by cached bounds, redrawn only when the view, document, selection or theme changes. Paper pays per-item overhead even inside a CompoundPath; with 17,600 holes a full redraw went from ~49 ms to ~12 ms. Trade-off: holes draw beneath the Paper layers rather than in layer order.
+- Bounds are cached per entity object (`src/geometry/bounds.ts`), so rebuilding the spatial index after an edit only recomputes what changed. The derivation pass scans plain snapshots (`current()` of each entity array) instead of creating a draft proxy per entity.
+- Strokes use `strokeScaling = false` so lines are hairlines regardless of zoom; true stroke width matters only in export.
+
+## 6. Tools and snapping
+
+```ts
+interface Tool {
+  id: ToolId; cursor: string
+  inputs?: NumericInputSpec[]                 // typed length/angle/radius/count fields (CAD-style input bar)
+  onPointerDown/Move/Up(e: ToolPointerEvent, ctx: ToolContext): void
+  onInput?(values, ctx): void                 // typed numeric input committed
+  onKeyDown?(e, ctx): void
+  cancel(ctx): void                            // Esc
+}
+ToolContext = { project, dispatch, snap(pointMm) → SnapResult, overlay: OverlayApi, ui }
+```
+
+- Tools are small state machines (idle → firstPoint → …). `ToolSession` (`src/tools/session.ts`) applies snapping and routes pointer/key/typed-input events to the active tool; `src/canvas/CanvasView.tsx` converts DOM pointer events to mm and feeds it. The app-wide instance is `src/canvas/tool-session.ts`.
+- Tools never touch Paper.js: they publish previews as `PreviewShape` data (`ctx.setPreview`), which `src/canvas/overlay.ts` draws. Their prompt and input fields go to the UI store via `ctx.setPrompt`; each field carries a `live` value derived from the mouse, shown as the input placeholder.
+- Typed input (`src/ui/InputBar.tsx`): typing a digit anywhere jumps into the first field; Tab moves on; Enter commits (Enter with nothing typed finishes the tool); Esc clears, then cancels. A typed value overrides just that quantity and the mouse supplies the rest (e.g. length typed, angle from the mouse).
+- Angle convention: degrees counter-clockwise from +x as seen on screen, i.e. y negated against the y-down model (`polar` / `angleOf` in `src/lib/vec2.ts`).
+- **Geometry queries** (`src/geometry/query.ts`): an R-tree (`rbush`) of entity bounds on visible layers, built once per project object (bulk load ≈ 1 ms at 2,000 entities). Exact queries (nearest point, intersections, box crossing) use headless kernel shapes cached in a `WeakMap` keyed by entity object, so Immer's structural sharing means a changed entity simply misses the cache.
+- **Snapping engine** (`src/snapping/engine.ts`): `snap(project, cursor, options)` is a pure function. Candidates within a 10 px capture radius come from the R-tree, then per-kind generators (endpoint, midpoint, centre, intersection, perpendicular, tangent, nearest) are ranked: endpoint first, then intersection/centre/midpoint, then perpendicular/tangent, then nearest, closest within a rank. Grid applies only when no object snap is found. Perpendicular and tangent use the tool's `snapFrom()` point. Locked layers can be snapped to but not selected. Tangent and nearest are off by default because they capture almost everywhere along a curve.
+- **Transform tools** (move, rotate, scale, mirror) share `TransformTool` (`src/tools/transform-base.ts`): with an empty selection they first pick objects (delegating to the Select tool's click/box logic, Enter or right-click continues), then run their own steps with a live preview of the transformed selection. They commit one `transformEntities` command (`src/document/commands.ts`), which moves in place or inserts copies after the originals, and the result stays selected so the operation can be repeated. Matrices come from `src/geometry/transform.ts`, which only builds similarity transforms (translate, rotate, uniform scale, reflect), so circles and ellipses stay representable. The "Keep original" option is a sticky `toggle` input field; Mirror defaults it on.
+- Previews never go stale: when the project changes by other means (panel edit, undo), `ToolSession` replays the last pointer move in a microtask; when the pointer leaves the canvas, tools drop hover-only feedback (`onPointerLeave`).
+- Switching tools calls `Tool.deactivate` (default `cancel`). Select overrides it, because its Esc clears the selection but changing tools must not.
+- **Selection** is owned by `ToolSession` (mirrored into the UI store) and pruned automatically when entities disappear or their layer becomes hidden/locked. Box select follows CAD convention: left→right = window (fully inside), right→left = crossing (touching, drawn dashed).
+
+## 7. Geometry kernel (`src/geometry`)
+
+- `kernel.ts` — headless `PaperScope`; `toPaperPath(entity)` / `fromPaperPath(path)`; length, point-at, offset, boolean, intersections.
+- `offset.ts` — synchronous (A6). Circles and centre lines exactly; paths via `paperjs-offset`, accepted only if its structural analysis is clean **and** every curved part is within `OFFSET_TOLERANCE` (0.02 mm) of the requested distance. paperjs-offset alone was measured 0.15 mm off on an r10 corner (0.3 mm on r20), so on a miss the source curves are subdivided 4×/8×/16× and offset again (error falls ~4× per doubling). Closed shapes that still miss fall back to Clipper on a flattened polygon (~0.004 mm, polylines). `quality: 'preview'` is one unchecked pass for live previews only.
+  - **Deviation from the PRD stack:** Clipper 1 (`clipper-lib`, BSL-1.0, pure JS) instead of `clipper2-js`: offsets must be synchronous (A6) and `clipper2-js` declares Angular 15 peer dependencies. Clipper 1's polygon offsetting is mature; it can't offset open polylines one-sidedly, so open paths keep paperjs-offset's best result with a warning.
+  - `paperjs-offset` imports the full `paper` build; `vite.config.ts` aliases `paper` → `paper/dist/paper-core` (and inlines the package in Vitest) so there is a single Paper.js instance and the PaperScript compiler stays out of the bundle.
+- `leather/stitch-holes.ts` — hole distribution (L2/L3). Corner-aware: split the path at corners (anchors turning > 20°; smooth joins such as rounded corners are not corners), per span `n = round(len / pitch)` gaps of `len / n` by arc length, so a hole lands on every corner. Fixed: every `pitch` from the start. Also returns the path direction at each hole, which slit holes use (`slitEnds`). Golden-tested.
+- Hole sets are derived entities (`sourceEntityId`, null = detached) handled by the same derivation pass as stitch lines, so outline → stitch line → holes all update in one command.
+- `corners.ts` — fillet and chamfer on corners between two straight edges. Fillets are a native tangent-arc fit (no Maker.js): centre on the bisector at r / sin(θ/2), one cubic per ≤ 90° of sweep, since a single cubic's error grows ~φ⁶ (0.012 mm for r = 8 at 120°). Multi-corner edits run from the highest index down. Stitch lines are not offered for filleting (it would detach them); filleting the outline regenerates them.
+
+## 8. Export (`src/export`)
+
+- `svg.ts` — `exportSvg(project, options) → string`. Root `width/height` in `mm` + matching `viewBox` (1 unit = 1 mm), one `<g id inkscape:label>` per layer, dash patterns in mm, coordinates rounded to 0.001 mm.
+- `pdf/` (lazy chunk, loaded from the Export dialog) — `exportPdf(project, options)`. `layout.ts` is pure tiling maths (tested in Node): printable area = page − 10 mm margins − header; tiles step by printable − overlap; orientation 'auto' picks fewer pages; tiles with no entity in them are skipped. `index.ts` renders the exported SVG once per page with `svg2pdf(svg, doc, …)` (the named function, not the `doc.svg` plugin, which patches whichever jsPDF instance svg2pdf imported), positioned and clipped to the tile. Tiled PDFs start with an assembly sheet (50 mm calibration square, instructions, sheet map). Page text is jsPDF Helvetica, Latin-1 only (`latin1()` replaces the rest) until CJK fonts (T4.2). Tests interpret the PDF content stream (q/Q/cm/m/l) to assert the drawing lands at exact page millimetres.
+- `dxf/` (P1, lazy) — via Maker.js adapter.
+
+## 9. i18n (`src/i18n`, `src/locales`)
+
+- `src/locales/<lang>/{common,tools,export,errors}.json`. `en` is bundled statically; other locales are dynamic-import chunks loaded on switch.
+- ICU message format via `i18next-icu`.
+- `src/i18n/i18next.d.ts` types `t()` keys against the `en` resources, so **`tsc` (and therefore `pnpm build`) fails on any key missing from `en`**.
+- `pnpm i18n:check` reports keys missing from other locales (non-zero exit with `--strict`, used as the v1.1 release gate for `zh-CN`).
+
+## 10. Persistence and PWA
+
+- Autosave (`src/persistence/autosave.ts`): 500 ms after the last change (and on page hide) the project plus file metadata (name, File System Access handle, whether it was saved) is written to IndexedDB via an injected key-value storage; `src/app/startup.ts` restores it after the first render. Restore never overwrites work already started and ignores corrupt records. `?fixture=…` sessions never autosave.
+- Open/Save `.json` (`src/persistence/files.ts`): File System Access API where available, so Save keeps writing to the same file (the handle survives reloads via the autosave record; permission is re-requested on Save). Elsewhere: download / `<input type=file>`. Files go through `migrateProject`, which also checks basic shape.
+- Unsaved state (`src/persistence/file-session.ts`) is a reference comparison against the project object last saved or opened. A new project with nothing drawn counts as clean.
+- `DocumentState.loads` increments whenever `load()` replaces the project; the canvas zooms to fit on it.
+- PWA (`vite.config.ts`, `src/app/pwa.ts`): `vite-plugin-pwa` (workbox) precaches every built file, including the lazy PDF chunk and locale chunks, so drafting and export work offline. `registerType: 'prompt'`: a new version waits and the header shows "A new version is ready · Reload"; it never reloads by itself. No service worker in dev builds.
+
+## 12. Accessibility
+
+- Colour tokens are checked against WCAG 2.2 AA in CI for both themes (`src/app/contrast.test.ts`): 4.5:1 for text, 3:1 for focus rings, input borders and sheet graphics. Tool previews use `--preview`, not the theme accent, because the drawing sheet is light in both themes.
+- Checkboxes and radios are 18 px in rows at least 24 px apart (2.5.8 target size). The tool prompt is a polite live region; the canvas has an application role with keyboard help (tool letters + typed coordinates make keyboard-only drafting possible).
+- axe-core audits are run against the dev server (load `/node_modules/axe-core/axe.min.js` into the page and call `axe.run`).
+
+## 11. Testing strategy
+
+- **Test environments:** Node by default; DOM tests opt in with `// @vitest-environment happy-dom` and import `src/test/canvas-stub.ts` if they touch geometry. jsdom must stay out of the dependency tree: Paper.js's Node build switches to jsdom + native `canvas` whenever it can `require('jsdom')`, and every geometry test then fails.
+- **Unit (Vitest, Node):** units, model, commands/history, migrations, geometry, stitch-hole distribution, SVG serialiser (golden files).
+- **Component (Vitest + happy-dom + Testing Library):** panels and dialogs (e.g. `src/ui/PropertiesPanel.test.tsx`).
+- **E2E / visual (Playwright, M1+):** draw-and-export flows, canvas screenshots, PDF page snapshots.
+- **Print accuracy:** the PRD acceptance file (100×100 square, 50 mm circle, 3.85 mm holes) is kept as a fixture and checked numerically in SVG/PDF output; physical print check is manual per release.

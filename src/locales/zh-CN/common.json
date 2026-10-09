@@ -1,0 +1,59 @@
+{
+  "menu": {
+    "undo": "撤销",
+    "redo": "重做",
+    "language": "语言",
+    "new": "新建",
+    "open": "打开…",
+    "save": "保存",
+    "export": "导出…"
+  },
+  "layers": {
+    "title": "图层",
+    "kind": {
+      "cut": "裁切",
+      "stitch": "缝线",
+      "reference": "参考",
+      "notes": "备注"
+    }
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "简体中文"
+  },
+  "snap": {
+    "title": "捕捉 ({count})",
+    "legend": "对象捕捉",
+    "kind": {
+      "endpoint": "端点",
+      "midpoint": "中点",
+      "centre": "圆心",
+      "intersection": "交点",
+      "perpendicular": "垂足",
+      "tangent": "切点",
+      "nearest": "最近点",
+      "grid": "网格"
+    }
+  },
+  "modify": {
+    "flipH": "水平翻转",
+    "flipV": "垂直翻转"
+  },
+  "properties": {
+    "title": "属性",
+    "layer": "图层",
+    "lineStyle": "线型",
+    "length": "长度",
+    "radius": "半径",
+    "diameter": "直径",
+    "rotation": "旋转",
+    "pitch": "针距",
+    "margin": "边距"
+  },
+  "lineStyle": {
+    "solid": "实线（裁切）",
+    "dashed": "虚线（折线/压痕）",
+    "dotted": "点线（参考）",
+    "dashDot": "点划线（中心线）"
+  }
+}

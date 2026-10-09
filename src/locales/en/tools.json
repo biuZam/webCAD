@@ -1,0 +1,166 @@
+{
+  "select": {
+    "name": "Select",
+    "prompt": "Click to select · Shift-click adds or removes · drag left→right for items fully inside, right→left for anything touched · Delete removes."
+  },
+  "line": {
+    "name": "Line",
+    "length": "Length",
+    "angle": "Angle",
+    "promptFirst": "Click or type the first point.",
+    "promptNext": "Click the next point, or type length and angle. Shift locks to 15°.",
+    "promptMore": "Next point · click the first point to close · Enter, double-click or right-click to finish · Backspace undoes a point."
+  },
+  "rectangle": {
+    "name": "Rectangle",
+    "width": "Width",
+    "height": "Height",
+    "cornerRadius": "Corner radius",
+    "promptFirst": "Click or type the first corner. Hold Alt to draw from the centre.",
+    "promptCorner": "Click the opposite corner, or type width and height.",
+    "promptCentre": "From centre: click a corner, or type the full width and height."
+  },
+  "circle": {
+    "name": "Circle",
+    "radius": "Radius",
+    "promptCentre": "Click or type the centre.",
+    "promptRadius": "Click a point on the circle, or type the radius.",
+    "mode": "Mode",
+    "modeCentre": "Centre + radius",
+    "modeThree": "3 points",
+    "modeEllipse": "Ellipse",
+    "radius2": "2nd radius",
+    "promptP1": "Click the first point on the circle.",
+    "promptP2": "Click the second point.",
+    "promptP3": "Click the third point.",
+    "promptAxis": "Click the end of the first axis (sets its radius and direction).",
+    "promptOther": "Click to set the other radius, or type it."
+  },
+  "fillet": {
+    "name": "Fillet",
+    "radius": "Radius",
+    "promptPick": "Hover a corner between two straight edges. Shift: every corner of that shape.",
+    "promptApply": "Click to round this corner (Shift: all corners). Type a radius to change it.",
+    "tooLarge": "Too large for this corner: the largest radius that fits is {max} mm.",
+    "notApplicable": "Can’t round this corner."
+  },
+  "stitchHoles": {
+    "name": "Stitch holes",
+    "pitch": "Pitch",
+    "count": "{count, plural, one {# hole} other {# holes}}",
+    "preset": "Chisel",
+    "custom": "Custom",
+    "size": "Hole size",
+    "shape": "Shape",
+    "round": "Round",
+    "slit": "Slanted slit",
+    "corners": "Hole on every corner",
+    "promptPick": "Hover a stitch line (or any line) to preview its holes.",
+    "promptClick": "Click to add these holes. They stay linked to the line and follow it."
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "The active layer is locked or hidden. Unlock or show it, or pick another layer in the Layers panel."
+  },
+  "transform": {
+    "promptPick": "Select objects (click, Shift-click, or drag a box), then press Enter or right-click.",
+    "copy": "Keep original (copy)"
+  },
+  "move": {
+    "name": "Move",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "Click or type the base point.",
+    "promptTarget": "Click the destination, or type ΔX and ΔY. Shift locks to 15°."
+  },
+  "rotate": {
+    "name": "Rotate",
+    "angle": "Angle",
+    "promptCentre": "Click or type the centre of rotation.",
+    "promptAngle": "Click to set the angle (from the +X direction), or type it. Shift rounds to 15°."
+  },
+  "scale": {
+    "name": "Scale",
+    "factor": "Factor",
+    "promptBase": "Click or type the base point (it stays fixed).",
+    "promptRef": "Type a factor, or click a reference point.",
+    "promptTarget": "Click where the reference point should go, or type a factor."
+  },
+  "mirror": {
+    "name": "Mirror",
+    "angle": "Axis angle",
+    "promptFirst": "Click a centre line to mirror across it, or click the first point of the axis.",
+    "promptSecond": "Click the second axis point, or type the axis angle. Shift locks to 15°."
+  },
+  "offset": {
+    "name": "Offset",
+    "distance": "Distance",
+    "through": "Through cursor",
+    "join": "Corners",
+    "joinMiter": "Sharp (miter)",
+    "joinRound": "Round",
+    "joinBevel": "Bevel",
+    "promptPick": "Click a path, circle or centre line to offset.",
+    "promptSide": "Click the side to offset to (distance follows the cursor, or type it). Click again for another; Esc picks another source.",
+    "promptApprox": "Offset made. Some curves were offset as fine polylines to stay within 0.02 mm. Click again for another offset."
+  },
+  "stitchLine": {
+    "name": "Stitch line",
+    "promptPick": "Click an outline to add a stitch line to.",
+    "promptSide": "Click inside or outside for the side (margin from project settings, or type it). The line stays linked to the outline.",
+    "promptApprox": "Stitch line added; some curves are fine polylines to stay within 0.02 mm. Click the next outline."
+  },
+  "chamfer": {
+    "name": "Chamfer",
+    "d1": "Distance",
+    "d2": "2nd distance",
+    "angle": "Angle",
+    "promptPick": "Hover a corner between two straight edges. Shift: every corner of that shape.",
+    "promptApply": "Click to cut this corner (Shift: all corners). Type distances, or a distance and an angle.",
+    "tooLarge": "Too large for this corner: at most {max} mm along each edge.",
+    "notApplicable": "Can’t cut this corner at that angle."
+  },
+  "pen": {
+    "name": "Pen (curves)",
+    "promptFirst": "Click for a corner, drag for a smooth curve point.",
+    "promptNext": "Click for a corner, drag for a curve. Type length and angle for a straight edge. Shift locks to 15°.",
+    "promptMore": "Click the first point to close · Enter, double-click or right-click to finish · Backspace removes the last point."
+  },
+  "arc": {
+    "name": "Arc (3 points)",
+    "promptStart": "Click or type the start of the arc.",
+    "promptEnd": "Click or type the end of the arc.",
+    "promptThrough": "Click a point the arc passes through.",
+    "collinear": "The three points are on a line: pick a point off it."
+  },
+  "centreLine": {
+    "name": "Centre line",
+    "mode": "Mode",
+    "modeShape": "Through a shape’s centre",
+    "modePoints": "Two points",
+    "orientation": "Direction",
+    "vertical": "Vertical",
+    "horizontal": "Horizontal",
+    "promptShape": "Click a shape to add a centre line through its middle. Mirror can use it as an axis.",
+    "promptFirst": "Click or type the first point.",
+    "promptSecond": "Click the second point. Shift locks to 15°."
+  },
+  "perpendicular": {
+    "name": "Perpendicular",
+    "along": "Along",
+    "length": "Length",
+    "promptEdge": "Click a straight edge.",
+    "promptPlace": "Click to place a perpendicular line, or type how far along the edge and how long. Esc picks another edge."
+  },
+  "measure": {
+    "name": "Measure",
+    "mode": "Measure",
+    "distance": "Distance",
+    "angle": "Angle",
+    "length": "Length",
+    "promptDistance": "Click two points to measure the distance.",
+    "promptAngle": "Click a point, the corner, then another point.",
+    "promptLength": "Hover a shape to see its length."
+  }
+}

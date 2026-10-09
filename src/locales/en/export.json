@@ -1,0 +1,37 @@
+{
+  "title": "Export",
+  "format": "Format",
+  "formats": {
+    "pdf": "PDF, 1:1 for printing",
+    "svg": "SVG, 1:1 for laser, cutter or other apps"
+  },
+  "layers": "Content",
+  "cutOnly": "Cut layers only (laser)",
+  "includeLabels": "Include labels",
+  "polyline": "Curves as short straight lines (for laser software)",
+  "strokeWidth": "Line width",
+  "strokeAsDrawn": "as drawn",
+  "working": "Exporting…",
+  "export": "Export {format}",
+  "svg": {
+    "title": "Export SVG",
+    "cutOnly": "Cut layers only (laser)",
+    "includeLabels": "Include labels"
+  },
+  "pdf": {
+    "paper": "Paper",
+    "single": "One page, sized to the pattern",
+    "orientation": "Orientation",
+    "auto": "Fewest pages",
+    "portrait": "Portrait",
+    "landscape": "Landscape",
+    "overlap": "Overlap",
+    "printHint": "Print at 100 % (\"Actual size\"); never \"Fit to page\". Then measure the 50 mm square on the first page.",
+    "scale": "Scale 1:1",
+    "calibration": "50 mm: measure this square to check the print scale",
+    "instructions1": "Print at 100 % / \"Actual size\". Do not use \"Fit to page\" or \"Shrink oversized pages\".",
+    "instructions2": "Measure the square: it must be exactly 50 mm on each side. If not, check the printer scaling and print again.",
+    "assembly": "Sheets overlap by {overlap} mm. Trim along a dashed line or overlap the sheets, matching the corner marks and the sheet labels at the edges.",
+    "sheets": "Sheets"
+  }
+}

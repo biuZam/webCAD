@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- LeatherDraft: a leather piece with a stitched outline and stitch holes. -->
+  <rect width="64" height="64" rx="14" fill="#8a4b1f"/>
+  <rect x="12" y="14" width="40" height="36" rx="7" fill="none" stroke="#f3e2c7" stroke-width="2.5"/>
+  <rect x="17.5" y="19.5" width="29" height="25" rx="3.5" fill="none" stroke="#f3e2c7" stroke-width="1.6" stroke-dasharray="3 2.4"/>
+</svg>

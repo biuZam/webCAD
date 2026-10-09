@@ -1,0 +1,109 @@
+# LeatherDraft — Task breakdown
+
+IDs in brackets (D1, M3, L2…) refer to the PRD requirement tables. `[x]` = done. Each task should land with tests where it touches `src/document`, `src/geometry`, `src/export` or `src/snapping`.
+
+## M0 — Spike (2 weeks): canvas, true-scale SVG, i18n scaffold
+
+- [x] T0.1 Vite + React + TS + pnpm scaffold; oxlint, Prettier, Vitest; scripts `dev/build/typecheck/lint/test/i18n:check`
+- [x] T0.2 Folder layout and layering rule per `docs/ARCHITECTURE.md`
+- [x] T0.3 Units module: mm/cm/in conversion, locale-aware formatting, input parsing (`12.5`, `3cm`, `1.5in`)
+- [x] T0.4 Document model types, `createProject()` with default layers (cut, stitch, reference, notes), `schemaVersion` + migration runner
+- [x] T0.5 Document store: `dispatch(command)` with Immer patches, undo/redo, history labels
+- [x] T0.6 i18n: i18next + react-i18next + ICU, `en` namespaces, typed keys (tsc fails on missing `en` key), `zh-CN` stub, locale check script
+- [x] T0.7 SVG exporter v0: mm-sized root, layer groups with `inkscape:label`, dash styles, paths/circles, 0.001 mm rounding; golden test
+- [x] T0.8 Canvas shell: Paper.js view in mm, pan (middle-drag / space-drag) and zoom-to-cursor (wheel), reconciler from store, live cursor coordinates
+- [x] T0.9 mm grid (adaptive minor/major spacing by zoom) and rulers
+- [x] T0.10 Tool framework: `Tool` interface, tool manager (pointer → mm → tool), overlay API, Esc/Enter handling, toolbar wiring
+- [x] T0.11 Tools: line/polyline [D1], rectangle corner-corner + centre [D4], circle centre+radius [D5]
+- [x] T0.12 Typed numeric input bar (length/angle/radius) consumed by tools
+- [x] T0.13a "Export SVG" action + download (verified in-browser: drawn geometry exports at exact mm)
+- [ ] T0.13b Manual check of an exported file in Inkscape (100 mm document size) — needs a human
+
+## M1 — Core drafting
+
+Canvas & editing
+- [x] T1.1 Selection tool: click, shift-click, window/crossing box, hover highlight, Delete, Select All; hit-testing via `src/geometry/query.ts`
+- [x] T1.2 Node editing for paths: drag anchors/handles, smooth/corner toggle [D3] — in the Select tool when one path is selected; anchors snap (excluding the path itself), handles don't; smooth anchors stay smooth; double-click toggles; Esc reverts a drag; stitch lines excluded
+- [ ] T1.2b Add/delete anchors on a path (click on a segment to insert, Delete on a selected anchor)
+- [x] T1.3 Snapping engine with `rbush` index: endpoint, midpoint [D7], centre, intersection, perpendicular, tangent, nearest, grid; per-type toggles; snap marker overlay
+- [ ] T1.3b Snap tracking/extension lines (polar and object tracking), and quadrant snap on circles — not in PRD, nice to have
+- [x] T1.4 Layers panel: visibility, lock, colour, active layer [P0] (colour commits once when the picker closes; drawing on a locked/hidden layer explains itself)
+- [x] T1.5 Properties panel: editable numeric geometry and line style [D2] (common fields across a mixed selection; bounds X/Y/W/H; per-type fields; hole-set fields read-only until T2.3)
+- [x] T1.6 Measure tool: distance, angle, path length — tool D; read-only readouts in the input bar (display unit)
+- [x] T1.7 Autosave to IndexedDB + restore; open/save `.json` (File System Access + fallback); New; unsaved marker in title; editable project name
+- [ ] T1.7b Manual check of Open/Save/Save As through the native file pickers (Chrome) and the download/input fallback (Safari, Firefox) — needs a human
+- [x] T1.8 Display-unit switch (mm/cm/in) — in the status bar; panel, input bar, status and ruler labels follow it (grid stays on mm)
+
+Drawing tools
+- [x] T1.9 Cubic Bézier pen tool, 3-point arc [D3] — Pen (P): click = corner, drag = smooth; Arc (A): start, end, through; arcs share `src/geometry/arcs.ts` with fillet
+- [x] T1.10 3-point circle, ellipse by axes [D5] — modes of the Circle tool
+- [x] T1.11 Centre line through bbox centre or two points; usable as mirror axis [D6] — tool X, on the Reference layer
+- [x] T1.12 Perpendicular line from point / at distance [D8] — tool T: pick an edge; foot follows the cursor or typed "along"/"length"
+
+Modify tools (all copy-or-move where applicable)
+- [x] T1.13 Move / copy / scale with typed deltas [M7] (scale is uniform: by factor or reference → target)
+- [x] T1.14 Rotate around pick point [M5]
+- [x] T1.15 Mirror across centre line or two points [M4]; flip H/V in place [M6]
+- [ ] T1.21 Drag-to-move in the Select tool (press on a selected entity and drag) — quality-of-life, uses the same transform command
+- [x] T1.22 Render on the first frame: i18n initialises synchronously with bundled `en`. (The "ignored first interaction" seen in browser tests turned out to be the automation dropping input sent right after a navigation, not the app: the page loads in ~80 ms.)
+- [x] T1.16 Offset open/closed paths, round/miter/bevel joins [M3]: paperjs-offset + adaptive subdivision, checked to ≤ 0.02 mm; Clipper (clipper-lib) fallback for closed shapes; exact circles/centre lines. Tool: E
+- [x] T1.16b Speed up precise offsets: bounding-box-pruned nearest search (check 13.7 → 1 ms), 'adaptive' instead of 'auto' (we run the analysis ourselves), and jump to the predicted subdivision (error ∝ 1/n²). 24-curve outline 308 → 47 ms; rounded rect 23 → 10 ms. `BENCH=1 pnpm test offset.bench` to re-measure
+- [x] T1.17 Fillet [M1] — native tangent-arc fit (`src/geometry/corners.ts`), one cubic per ≤ 90° (≤ 0.001 mm off a true arc); tool F, Shift = all corners; "too large" prompt gives the max radius. No Maker.js needed
+- [x] T1.18 Chamfer by two distances or distance+angle [M2] — tool B
+
+Quality
+- [ ] T1.19 Playwright setup + first E2E (draw rect → export SVG)
+- [x] T1.20 Perf harness: 2,000 entities (400 pieces: outline, linked stitch line, 44 linked slit holes, circle, centre line; 17,600 holes), `?fixture=perf`, `BENCH=1 pnpm test perf.bench`. Results after fixes:
+  - full redraw, everything on screen: Paper 10.1 ms + grid/rulers/holes 1.9 ms (was ~49 ms); zoomed in 4.5 ms
+  - style-only command 1.7 ms (was 5.4); move an outline + regenerate its line and holes 10.7 ms (was 13.9)
+  - first snap after an edit 4.9 ms (was 12.1); steady-state snap 0.07 ms, hit-test 0.03 ms; SVG export 14 ms
+- [ ] T1.20b Re-measure in a visible tab and a production build (the automation tab is hidden, so frame-loop timings were taken by forcing synchronous paints), and on a mid-range laptop
+
+## M2 — Leather tools
+
+- [x] T2.1 Derivation pass in `dispatch` (regenerate derived entities whose source geometry changed, same undo step; dependency-ordered; detach on own edit or source deletion)
+- [x] T2.2 Stitch line: offset at margin (default 3–4 mm), dashed, linked to source [L1] — tool K; panel shows the link, editable margin, Detach. Links to a whole outline; stitching part of an edge needs split (M8)
+- [x] T2.3 Stitch-hole distribution, fixed pitch + presets 2.7/3.0/3.38/3.85/4.0 mm + custom [L2] — `src/geometry/leather/stitch-holes.ts`; tool H; linked hole sets follow their line
+- [x] T2.4 Corner-aware spacing (hole on every corner, even per-segment pitch) [L3] — corners = turns > 20°; smooth joins are one span; spacing by arc length
+- [x] T2.5 Hole shapes: round and slanted slit (path direction + slit angle, default 45°); hole size; render + export (slits as one path of M…L cuts; holes always solid)
+- [x] T2.6 Project settings: default margin, pitch, hole size — Properties panel with nothing selected
+- [x] T2.7 Golden tests for hole layouts: rect, rounded rect, circle, open L, D-shape (curve meets line), tiny spans, fixed pitch
+
+## M3 — PDF + v1 launch
+
+- [x] T3.1 Lazy-loaded PDF module (jsPDF + svg2pdf.js); single page 1:1 — own chunk (156 KB gz); 1:1 verified by interpreting the PDF content stream in tests
+- [x] T3.2 Tiled export A4/Letter/A3, overlap (default 10 mm), crop marks, row/col labels — auto orientation (fewest pages), empty tiles skipped, neighbour labels and dashed overlap guides
+- [x] T3.3 50 mm calibration square on page 1, page header (project, piece, "1:1", date), print instructions — assembly sheet as page 1 (square, instructions, sheet map); print hint in the export dialog. PDF page text is English/Latin-1 until T4.2
+- [x] T3.4 Export options: layer selection, cut-only, stroke width, labels on/off, polyline-for-laser — Export… dialog (SVG or PDF), remembered per browser
+- [ ] T3.5 Acceptance fixture (100×100 square, 50 mm circle, 3.85 mm holes): numeric check of SVG/PDF ✓ (automated); **manual print on A4 + Letter (±0.2 mm) and a visual look at the PDF pages — needs a human with a printer**
+- [ ] T3.6 SVG compatibility check in Inkscape, Illustrator, LightBurn
+- [x] T3.7 PWA (vite-plugin-pwa), offline drafting + export — whole build precached (20 files, 1.6 MB, incl. the PDF chunk); updates wait for the user ("A new version is ready · Reload"). Verified: production preview stopped → app reloads from the service worker and the PDF chunk still loads
+- [ ] T3.7b Check install prompt and the update flow on a real browser (desktop Chrome/Edge; iOS Safari "Add to Home Screen") — needs a human
+- [x] T3.8 Accessibility pass: keyboard panels, focus rings, WCAG 2.2 AA contrast — axe-core (WCAG 2.0–2.2 A/AA): 0 violations in default, selection, snap-menu, tool-fields and export-dialog states; contrast of every UI token pair enforced in CI for both themes (`src/app/contrast.test.ts`); 18 px checkboxes/radios in ≥ 24 px rows (2.5.8); live tool prompts; labelled drawing area with keyboard help
+- [ ] T3.8b Screen-reader walkthrough (VoiceOver/NVDA) of drawing with typed coordinates — needs a human
+- [x] T3.9 Bundle budget check in CI (< 600 KB gzipped initial) — `pnpm bundle:check` (initial = entry + modulepreloads + CSS; currently 235 KB; lazy chunks listed)
+- [x] T3.10 CI pipeline: typecheck, lint, test, build, i18n check — `pnpm verify` locally; `.github/workflows/ci.yml` (Node 20.19, pnpm from packageManager, frozen lockfile). licence: Apache-2.0
+
+## M4 — v1.1
+
+- [ ] T4.1 Complete `zh-CN` translation; glossary review by native-speaking leatherworker; `i18n:check --strict` gate
+- [ ] T4.2 CJK PDF font: Noto Sans SC subset only when Chinese glyphs present
+- [ ] T4.3 Text/label tool: piece name, "cut 2", grain arrow [D10]
+- [ ] T4.4 Parallel line [D9]; trim/extend/split [M8]; join + boolean union/difference [M9]
+- [ ] T4.5 Hole-count per edge + mismatch warning [L4]; punch marks [L5]; seam allowance per edge [L6]
+- [ ] T4.6 DXF export R12/R2000 via Maker.js adapter; PNG preview
+- [ ] T4.7 SVG import for tracing
+- [ ] T4.8 Rebindable keyboard shortcuts
+
+## M5 — v2
+
+- [ ] T5.1 planegcs WASM (separately loaded, LGPL) + constraint model in schema v2 with migration
+- [ ] T5.2 Constraint UI: parallel, perpendicular, tangent, distance; parametric dimensions
+- [ ] T5.3 Notches [L7]; linear/circular arrays [M10]; DXF import
+
+## Open questions blocking tasks (from PRD)
+
+- ~~Licence MIT vs Apache-2.0~~ → resolved: Apache-2.0 (LICENSE in the GitHub repo; `license` in package.json)
+- Slanted slit holes in v1? → affects T2.5 scope
+- Pull DXF into v1? → may move T4.6 into M3
+- Touch/pen on iPad in v1? → affects T0.10 pointer handling
