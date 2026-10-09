@@ -18,7 +18,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 - Move, rotate, scale and mirror (each optionally as a copy), flip in place
 - Offset, fillet and chamfer; parallel lines; trim, extend and split; join paths; union and difference of shapes
 - Edit points and Bézier handles directly; switch points between smooth and corner; add and delete points; drag selected shapes to move them
-- Object snapping: endpoint, midpoint, centre, intersection, perpendicular, tangent, nearest, grid
+- Object snapping: endpoint, midpoint, centre, quadrant, intersection, perpendicular, tangent, nearest, grid; polar and object tracking
 - Exact values: type coordinates, lengths, angles and radii while drawing; edit numbers in the properties panel
 - Layers (cut, stitch, reference, notes) with visibility, lock and colour; mm, cm or inch display
 

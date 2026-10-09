@@ -102,6 +102,9 @@
       "perpendicular": "Perpendicular",
       "tangent": "Tangent",
       "nearest": "Nearest",
+      "quadrant": "Quadrant",
+      "polar": "Polar tracking (45°)",
+      "tracking": "Object tracking",
       "grid": "Grid"
     }
   },

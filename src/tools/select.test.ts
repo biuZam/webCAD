@@ -208,3 +208,15 @@ describe('object snaps while drawing', () => {
     expect(preview.at(-1)).toEqual({ kind: 'snap', at: [0, 0], snapKind: 'endpoint' })
   })
 })
+
+describe('object tracking while drawing (T1.3b)', () => {
+  it('remembers snapped points and lines the next point up with them', () => {
+    view = { zoom: 10, snaps: new Set(['endpoint', 'tracking']), activeLayerId: null }
+    session.setTool('line')
+    session.pointerMove(ev([10.2, 0.3])) // hover the square's corner (10, 0): tracked
+    click([25, 40]) // first point, free
+    session.pointerMove(ev([10.4, 55])) // straight below the tracked corner
+    expect(preview.find((s) => s.kind === 'snap')).toMatchObject({ snapKind: 'tracking', at: [10, 55] })
+    expect(preview.some((s) => s.kind === 'path' && s.dashed)).toBe(true)
+  })
+})

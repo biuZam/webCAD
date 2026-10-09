@@ -102,6 +102,9 @@
       "perpendicular": "垂足",
       "tangent": "切点",
       "nearest": "最近点",
+      "quadrant": "象限点",
+      "polar": "极轴追踪（45°）",
+      "tracking": "对象追踪",
       "grid": "网格"
     }
   },

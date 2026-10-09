@@ -55,7 +55,16 @@ export const useUiStore = create<UiState>()((set) => ({
   activeLayerId: null,
   selection: [],
   // Tangent and nearest are off by default: they capture almost everywhere near a curve.
-  snaps: new Set<SnapKind>(['endpoint', 'midpoint', 'centre', 'intersection', 'perpendicular', 'grid']),
+  snaps: new Set<SnapKind>([
+    'endpoint',
+    'midpoint',
+    'centre',
+    'quadrant',
+    'intersection',
+    'perpendicular',
+    'polar',
+    'grid',
+  ]),
   activeTool: 'select',
   toolCursor: 'default',
   prompt: { key: 'select.prompt', fields: [] },

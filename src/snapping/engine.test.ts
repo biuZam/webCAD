@@ -68,3 +68,66 @@ describe('snap', () => {
     expect(snap(p, [13, 13], opts(only('endpoint')))).toBeNull()
   })
 })
+
+describe('quadrants and tracking (T1.3b)', () => {
+  const p = project(square, circle)
+  const tracking = (from: [number, number] | null, tracked: [number, number][], kinds: SnapKind[]) => ({
+    ...opts(only(...kinds), from),
+    tracked,
+  })
+
+  it('snaps to the quadrant points of circles, and of rotated ellipses', () => {
+    expect(snap(p, [35.4, 0.3], opts(only('quadrant')))).toEqual({ kind: 'quadrant', point: [35, 0] })
+    const ellipse: Entity = { ...base, id: 'e', type: 'circle', center: [0, 0], rx: 10, ry: 4, rotation: 90 }
+    const hit = snap(project(ellipse), [0.3, 9.6], opts(only('quadrant')))!
+    expect(hit.kind).toBe('quadrant')
+    expect(hit.point[0]).toBeCloseTo(0, 9)
+    expect(hit.point[1]).toBeCloseTo(10, 9)
+  })
+
+  it('polar tracking locks the cursor onto 45° rays from the previous point', () => {
+    const hit = snap(project(), [20.5, 19.4], tracking([0, 0], [], ['polar']))!
+    // The 315° ray (down-right on screen, y-down) through (20, 20).
+    expect(hit.kind).toBe('polar')
+    expect(hit.point[0]).toBeCloseTo(hit.point[1], 9)
+    expect(hit.guides).toEqual([[[0, 0], hit.point]])
+    // The 180° ray.
+    expect(snap(project(), [-5, 0.5], tracking([0, 0], [], ['polar']))?.point).toEqual([-5, 0])
+  })
+
+  it('object tracking follows horizontals and verticals through tracked points, and their crossings', () => {
+    const along = snap(project(), [50, 10.6], tracking(null, [[0, 10]], ['tracking']))!
+    expect(along).toEqual({
+      kind: 'tracking',
+      point: [50, 10],
+      guides: [
+        [
+          [0, 10],
+          [50, 10],
+        ],
+      ],
+    })
+    // x of one point, y of another: the corner of a rectangle you haven't drawn yet.
+    const corner = snap(
+      project(),
+      [30.8, 10.5],
+      tracking(
+        null,
+        [
+          [0, 10],
+          [30, 50],
+        ],
+        ['tracking'],
+      ),
+    )!
+    expect(corner.point).toEqual([30, 10])
+    expect(corner.guides).toHaveLength(2)
+  })
+
+  it('ranks below object snaps and above the grid', () => {
+    const o = tracking(null, [[10, 30]], ['endpoint', 'tracking', 'grid'])
+    expect(snap(p, [10.3, 10.4], o)?.kind).toBe('endpoint')
+    expect(snap(p, [10.3, 20.4], o)).toMatchObject({ kind: 'tracking', point: [10, 20.4] })
+    expect(snap(p, [15.3, 20.4], o)?.kind).toBe('grid')
+  })
+})

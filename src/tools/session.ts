@@ -7,7 +7,7 @@ import type { DocumentStore } from '../document/store'
 import { emptyBounds, entityBounds, isEmpty } from '../geometry/bounds'
 import { mirrorAcross } from '../geometry/transform'
 import type { Vec2 } from '../lib/vec2'
-import { snap, type SnapKind } from '../snapping/engine'
+import { snap, TRACKABLE, type SnapKind } from '../snapping/engine'
 import { booleanSelection, joinSelection, type PathOp } from './path-ops'
 import { gridSpacing } from '../snapping/grid'
 import type {
@@ -25,6 +25,8 @@ import type {
 
 /** Object snaps capture within this many CSS px of the cursor. */
 export const SNAP_TOLERANCE_PX = 10
+/** Object tracking follows this many recently snapped points. */
+const MAX_TRACKED = 4
 
 export interface SessionView {
   /** CSS px per mm. */
@@ -66,7 +68,11 @@ export class ToolSession {
   private readonly tools: Record<ToolId, Tool>
   private readonly getView: () => SessionView
   private readonly listener: SessionListener
-  private cursorMarker: PreviewShape | null = null
+  private cursorMarker: PreviewShape[] = []
+  /** T1.3b Points recently snapped to, tracked horizontally and vertically (newest last). */
+  private tracked: Vec2[] = []
+  /** Tracking guides of the last snap, drawn with the cursor marker. */
+  private guides: [Vec2, Vec2][] = []
   private toolPreview: PreviewShape[] = []
   /** Last pointer position over the canvas, replayed when the project changes so previews never go stale. */
   private lastMove: PointerInput | null = null
@@ -129,7 +135,15 @@ export class ToolSession {
     return this.tool.id
   }
 
+  /** Track a snapped point (most recent four; the same point isn't repeated). */
+  private remember(p: Vec2) {
+    const last = this.tracked[this.tracked.length - 1]
+    if (last && last[0] === p[0] && last[1] === p[1]) return
+    this.tracked = [...this.tracked.filter((q) => q[0] !== p[0] || q[1] !== p[1]), p].slice(-MAX_TRACKED)
+  }
+
   setTool(id: ToolId) {
+    this.tracked = []
     if (this.tool.deactivate) this.tool.deactivate(this.ctx)
     else this.tool.cancel(this.ctx)
     this.tool = this.tools[id]
@@ -151,10 +165,18 @@ export class ToolSession {
   pointerMove(e: PointerInput) {
     this.lastMove = e
     const te = this.toToolEvent(e)
-    this.cursorMarker =
+    this.cursorMarker = [
+      ...this.guides.map(([a, b]): PreviewShape => ({
+        kind: 'path',
+        segments: [{ p: a }, { p: b }],
+        closed: false,
+        dashed: true,
+      })),
       te.snap && te.snap !== 'grid'
         ? { kind: 'snap', at: te.point, snapKind: te.snap }
-        : { kind: 'point', at: te.point }
+        : { kind: 'point', at: te.point },
+    ]
+    if (te.snap && TRACKABLE.has(te.snap)) this.remember(te.point)
     this.listener.cursor(te.point)
     this.tool.onPointerMove?.(te, this.ctx)
     this.emitPreview()
@@ -171,7 +193,7 @@ export class ToolSession {
   pointerLeave() {
     this.lastMove = null
     this.tool.onPointerLeave?.(this.ctx)
-    this.cursorMarker = null
+    this.cursorMarker = []
     this.listener.cursor(null)
     this.emitPreview()
   }
@@ -263,11 +285,13 @@ export class ToolSession {
       gridStep: gridSpacing(view.zoom).minor,
       from: this.tool.snapFrom?.() ?? null,
       exclude: this.tool.snapExclude?.(),
+      tracked: this.tracked,
     })
+    this.guides = result?.guides ?? []
     return { ...e, point: result?.point ?? e.raw, snap: result?.kind ?? null }
   }
 
   private emitPreview() {
-    this.listener.preview(this.cursorMarker ? [...this.toolPreview, this.cursorMarker] : this.toolPreview)
+    this.listener.preview(this.cursorMarker.length > 0 ? [...this.toolPreview, ...this.cursorMarker] : this.toolPreview)
   }
 }

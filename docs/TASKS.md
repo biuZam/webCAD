@@ -26,7 +26,7 @@ Canvas & editing
 - [x] T1.2 Node editing for paths: drag anchors/handles, smooth/corner toggle [D3] — in the Select tool when one path is selected; anchors snap (excluding the path itself), handles don't; smooth anchors stay smooth; double-click toggles; Esc reverts a drag; stitch lines excluded
 - [x] T1.2b Add/delete anchors on a path — double-click the selected path's outline inserts a point (de Casteljau split, shape unchanged); click a point to pick it, Delete removes it (a path too short to lose one is deleted whole); Esc unpicks first; the status prompt switches to point-editing hints
 - [x] T1.3 Snapping engine with `rbush` index: endpoint, midpoint [D7], centre, intersection, perpendicular, tangent, nearest, grid; per-type toggles; snap marker overlay
-- [ ] T1.3b Snap tracking/extension lines (polar and object tracking), and quadrant snap on circles — not in PRD, nice to have
+- [x] T1.3b Quadrant snap (circles and rotated ellipses); polar tracking (45° rays from the previous point, on by default); object tracking (horizontals/verticals through the last 4 snapped points and their crossings, opt-in in the Snaps menu). Tracking ranks below object snaps and above the grid; guides drawn dashed
 - [x] T1.4 Layers panel: visibility, lock, colour, active layer [P0] (colour commits once when the picker closes; drawing on a locked/hidden layer explains itself)
 - [x] T1.5 Properties panel: editable numeric geometry and line style [D2] (common fields across a mixed selection; bounds X/Y/W/H; per-type fields; hole-set fields read-only until T2.3)
 - [x] T1.6 Measure tool: distance, angle, path length — tool D; read-only readouts in the input bar (display unit)

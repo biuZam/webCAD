@@ -28,6 +28,9 @@ const MARKERS: Record<Exclude<SnapKind, 'grid'>, { lines: [number, number][][]; 
   perpendicular: { lines: [[[-1, -1], [-1, 1], [1, 1]], [[-1, 0], [0, 0], [0, 1]]] }, // right-angle mark
   tangent:       { lines: [[[-1.2, -1], [1.2, -1]]], circle: true },              // circle with a tangent line
   nearest:       { lines: [[[-1, -1], [1, -1], [-1, 1], [1, 1], [-1, -1]]] },     // hourglass
+  quadrant:      { lines: [[[0, -1.2], [1.2, 0], [0, 1.2], [-1.2, 0], [0, -1.2]]] }, // diamond
+  polar:         { lines: [[[-1, 0], [1, 0]], [[0, -1], [0, 1]]] },               // small cross on the guide
+  tracking:      { lines: [[[-1, 0], [1, 0]], [[0, -1], [0, 1]]] },
 }
 
 export function renderOverlay(
