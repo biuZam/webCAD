@@ -19,7 +19,7 @@ function parseValues(fields: InputField[], texts: Record<string, string>, unit: 
     const text = texts[f.key]?.trim()
     if (f.kind === 'toggle' || f.kind === 'choice' || f.kind === 'text' || !text) continue
     const v = f.kind === 'length' ? parseLength(text, unit) : f.kind === 'angle' ? parseAngle(text) : parseNumber(text)
-    if (v === null) invalid.add(f.key)
+    if (v === null || (f.kind === 'count' && !Number.isInteger(v))) invalid.add(f.key)
     else values[f.key] = v
   }
   return { values, invalid }
@@ -111,7 +111,7 @@ function InputFields() {
   }
 
   const suffix = (f: InputField) =>
-    f.kind === 'length' ? unit : f.kind === 'angle' ? '°' : f.kind === 'text' ? null : '×'
+    f.kind === 'length' ? unit : f.kind === 'angle' ? '°' : f.kind === 'factor' ? '×' : null
 
   return (
     <div className="input-bar" role="group" aria-label={t('input.label')}>

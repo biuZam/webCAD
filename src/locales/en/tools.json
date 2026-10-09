@@ -200,6 +200,18 @@
     "promptAll": "Allowances (mm): {values}. Type a value for every edge, or click an edge (Shift-click for more) to set its own. Enter adds the outline · Esc picks another.",
     "promptEdges": "Allowances (mm): {values}. Type the allowance for the highlighted edges and press Enter. Enter with nothing typed adds the outline · Esc clears the edge choice."
   },
+  "array": {
+    "name": "Array",
+    "mode": "Mode",
+    "linear": "Linear",
+    "circular": "Circular",
+    "count": "Count",
+    "sweep": "Angle",
+    "promptBase": "Linear array: click or type a base point. Count includes the original.",
+    "promptStep": "Click where the next copy goes, or type ΔX and ΔY. Shift locks to 15°.",
+    "promptCentre": "Circular array: click or type the centre. Count includes the original.",
+    "promptCircular": "Press Enter or click to make the array: 360° spreads the copies evenly round; less spans first to last."
+  },
   "perpendicular": {
     "name": "Perpendicular",
     "along": "Along",

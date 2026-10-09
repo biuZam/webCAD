@@ -172,3 +172,24 @@ export function transformEntities(
     },
   }
 }
+
+/**
+ * M10 Array: copies of the entities under each matrix (e.g. k × a step for k = 1…n−1), as one undo step.
+ * `resultIds` lists the originals and then every copy.
+ */
+export function arrayEntities(
+  ids: readonly Id[],
+  matrices: readonly Affine[],
+  labelKey: string,
+): { command: Command; resultIds: Id[] } {
+  const copies = matrices.map((m) => transformEntities(ids, m, { copy: true, labelKey }))
+  return {
+    resultIds: [...ids, ...copies.flatMap((c) => c.resultIds)],
+    command: {
+      labelKey,
+      recipe: (draft) => {
+        for (const c of copies) c.command.recipe(draft)
+      },
+    },
+  }
+}

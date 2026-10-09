@@ -31,6 +31,7 @@ export type ToolId =
   | 'trim'
   | 'punch'
   | 'seamAllowance'
+  | 'array'
 
 /** A key in the `tools` namespace (translate with `useTranslation('tools')`). */
 export type I18nKey = ParseKeys<'tools'>
@@ -43,9 +44,10 @@ export interface InputField {
   key: string
   /**
    * length: mm, typed in display units · angle: degrees · factor: plain number · toggle: checkbox, 1 or 0 ·
-   * choice: a select over `options`, value = option index · text: free text, passed in `InputTexts`.
+   * choice: a select over `options`, value = option index · text: free text, passed in `InputTexts` ·
+   * count: a whole number.
    */
-  kind: 'length' | 'angle' | 'factor' | 'toggle' | 'choice' | 'text'
+  kind: 'length' | 'angle' | 'factor' | 'toggle' | 'choice' | 'text' | 'count'
   /** A readout (e.g. a measurement): shown formatted, not editable. */
   readOnly?: boolean
   /** Option labels for `choice` fields: translation keys, or literal text such as "3.85 mm". */

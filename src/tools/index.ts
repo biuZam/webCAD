@@ -1,4 +1,5 @@
 import { ArcTool } from './arc'
+import { ArrayTool } from './array'
 import { CentreLineTool } from './centre-line'
 import { CircleTool } from './circle'
 import { ChamferTool, FilletTool } from './corner-tools'
@@ -47,6 +48,7 @@ export function createTools(): Record<ToolId, Tool> {
     trim: new TrimTool(),
     punch: new PunchTool(),
     seamAllowance: new SeamAllowanceTool(),
+    array: new ArrayTool(),
   }
 }
 
@@ -75,6 +77,7 @@ export const TOOL_SHORTCUTS: Record<string, ToolId> = {
   w: 'trim',
   u: 'punch',
   y: 'seamAllowance',
+  q: 'array',
 }
 
 /** Palette order; `null` draws a divider between groups. */
@@ -95,6 +98,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'rotate',
   'scale',
   'mirror',
+  'array',
   null,
   'trim',
   'fillet',

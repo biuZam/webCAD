@@ -3,8 +3,9 @@
 //      Enter or right-click continues. With a selection already, this step is skipped.
 //   2. The tool's own steps (subclass), with a live preview of the transformed selection.
 // After each commit the result stays selected and the tool goes back to its first step, ready to repeat.
+// A step may produce several matrices (the Array tool): each makes a copy, all in one undo step.
 
-import { findEntity, transformEntities } from '../document/commands'
+import { arrayEntities, findEntity, transformEntities } from '../document/commands'
 import type { Affine } from '../geometry/transform'
 import { transformEntity } from '../geometry/transform'
 import type { Vec2 } from '../lib/vec2'
@@ -19,6 +20,12 @@ import type {
   ToolId,
   ToolPointerEvent,
 } from './types'
+
+/** One transform, or several (one copy each). */
+export type Transforms = Affine | readonly Affine[]
+
+const asList = (t: Transforms): readonly Affine[] =>
+  typeof t[0] === 'number' ? [t as Affine] : (t as readonly Affine[])
 
 export abstract class TransformTool implements Tool {
   abstract readonly id: ToolId
@@ -45,12 +52,14 @@ export abstract class TransformTool implements Tool {
   protected abstract resetSteps(): void
   /** True while the tool is part-way through its own steps (so Esc steps back instead of leaving). */
   protected abstract busy(): boolean
-  /** Handle a click in the tool's own steps. Return a matrix to commit it. */
-  protected abstract click(point: Vec2, ctx: ToolContext): Affine | null
-  /** Typed values committed with Enter. Return a matrix to commit it. */
-  protected abstract enter(values: InputValues, ctx: ToolContext): Affine | null
+  /** Handle a click in the tool's own steps. Return a matrix (or several) to commit it. */
+  protected abstract click(point: Vec2, ctx: ToolContext): Transforms | null
+  /** Typed values committed with Enter. Return a matrix (or several) to commit it. */
+  protected abstract enter(values: InputValues, ctx: ToolContext): Transforms | null
   /** The transform implied by the mouse and typed values right now, for the preview. */
-  protected abstract current(): Affine | null
+  protected abstract current(): Transforms | null
+  /** False for tools that always copy (Array): no "keep original" toggle. */
+  protected readonly copyToggle: boolean = true
   /** Extra preview shapes (rubber band, axis…). */
   protected abstract guides(): PreviewShape[]
   /** Prompt and fields for the current step (the copy toggle is appended automatically). */
@@ -136,10 +145,14 @@ export abstract class TransformTool implements Tool {
     return false
   }
 
-  private commit(matrix: Affine | null, ctx: ToolContext) {
-    if (matrix) {
+  protected commit(transforms: Transforms | null, ctx: ToolContext) {
+    if (transforms) {
       const ids = ctx.selection.filter((id) => findEntity(ctx.project, id))
-      const { command, resultIds } = transformEntities(ids, matrix, { copy: this.copy, labelKey: this.labelKey })
+      const list = asList(transforms)
+      const { command, resultIds } =
+        list === transforms || !this.copyToggle
+          ? arrayEntities(ids, list, this.labelKey)
+          : transformEntities(ids, list[0], { copy: this.copy, labelKey: this.labelKey })
       ctx.dispatch(command)
       ctx.setSelection(resultIds)
       this.resetSteps()
@@ -153,9 +166,9 @@ export abstract class TransformTool implements Tool {
       ctx.setPrompt('transform.promptPick', [])
       return
     }
-    const m = this.current()
+    const t = this.current()
     const preview: PreviewShape[] = []
-    if (m) {
+    for (const m of t ? asList(t) : []) {
       for (const id of ctx.selection) {
         const found = findEntity(ctx.project, id)
         if (found) preview.push({ kind: 'entity', entity: transformEntity(found.entity, m) })
@@ -163,9 +176,11 @@ export abstract class TransformTool implements Tool {
     }
     ctx.setPreview([...preview, ...this.guides()])
     const { prompt, fields } = this.step()
-    ctx.setPrompt(prompt, [
-      ...fields,
-      { key: 'copy', kind: 'toggle', labelKey: 'transform.copy', live: this.copy ? 1 : 0 },
-    ])
+    ctx.setPrompt(
+      prompt,
+      this.copyToggle
+        ? [...fields, { key: 'copy', kind: 'toggle', labelKey: 'transform.copy', live: this.copy ? 1 : 0 }]
+        : fields,
+    )
   }
 }

@@ -15,7 +15,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 - Lines, rectangles (with corner radius), circles (centre + radius, 3 points, ellipse), Bézier pen, 3-point arcs
 - Centre lines (usable as mirror axes) and perpendicular lines
 - Labels: text (piece name, "cut 2"…) and grain arrows, on the notes layer
-- Move, rotate, scale and mirror (each optionally as a copy), flip in place
+- Move, rotate, scale and mirror (each optionally as a copy), flip in place; linear and circular arrays
 - Offset, fillet and chamfer; parallel lines; trim, extend and split; join paths; union and difference of shapes
 - Edit points and Bézier handles directly; switch points between smooth and corner; add and delete points; drag selected shapes to move them
 - Object snapping: endpoint, midpoint, centre, quadrant, intersection, perpendicular, tangent, nearest, grid; polar and object tracking
@@ -58,6 +58,7 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | N | Label / grain arrow | H | Stitch holes |
 | G | Parallel line | W | Trim / extend / split |
 | U | Punch hole / slot | Y | Seam allowance (per edge) |
+| Q | Array (linear / circular) |  |  |
 | Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
 
 Every tool and action key can be changed under **Shortcuts…** in the toolbar (kept per browser).

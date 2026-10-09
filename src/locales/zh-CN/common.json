@@ -51,6 +51,7 @@
     "extend": "延伸",
     "split": "打断",
     "join": "连接",
+    "array": "阵列",
     "union": "并集",
     "difference": "差集",
     "addCentreLine": "添加中心线",

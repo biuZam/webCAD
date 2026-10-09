@@ -51,6 +51,7 @@
     "extend": "Extend",
     "split": "Split",
     "join": "Join",
+    "array": "Array",
     "union": "Union",
     "difference": "Difference",
     "addCentreLine": "Add centre line",
