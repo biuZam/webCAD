@@ -10,8 +10,7 @@ import type { PathEntity } from '../document/model'
 import { documentStore } from '../document/store'
 import { DxfImportError, importDxf } from '../persistence/dxf-import'
 import { importSvg, SvgImportError } from '../persistence/svg-import'
-import { DEFAULT_STROKE_MM } from '../tools/common'
-import { LINE_STYLE_FOR_LAYER } from '../tools/session'
+import { DEFAULT_STROKE_MM, LINE_STYLE_FOR_LAYER } from '../document/builders'
 
 function pickFile(): Promise<File | null> {
   return new Promise((resolve) => {

@@ -118,4 +118,16 @@ describe('derived stitch lines', () => {
     store.getState().dispatch(updateEntities(['outline'], { strokeWidth: 0.3 }))
     expect(get('stitch')).toBe(before[1])
   })
+
+  it('copies of an outline and its stitch line follow each other, not the originals', () => {
+    const { command, resultIds } = transformEntities(['outline', 'stitch'], translation(200, 0), {
+      copy: true,
+      labelKey: 'history.move',
+    })
+    store.getState().dispatch(command)
+    const [outlineCopy, stitchCopy] = resultIds.map(get)
+    expect(stitchCopy.derived?.sourceId).toBe(outlineCopy.id)
+    expect(boundsOf(stitchCopy)).toEqual([203.5, 3.5, 296.5, 56.5])
+    expect(get('stitch').derived?.sourceId).toBe('outline')
+  })
 })

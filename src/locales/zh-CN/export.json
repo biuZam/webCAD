@@ -42,5 +42,6 @@
     "instructions2": "测量方块：每边必须正好为 50 mm。否则请检查打印机缩放设置后重新打印。",
     "assembly": "各页重叠 {overlap} mm。沿虚线裁剪或叠放各页，对齐角标和页边的页码标签。",
     "sheets": "页面"
-  }
+  },
+  "aiUnreviewed": "{count, plural, other {有 # 个对象由 AI 创建，尚未复核。}}"
 }

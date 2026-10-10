@@ -1,12 +1,13 @@
 // D6 Centre line: a dash-dot axis through a shape's bounding-box centre (vertical or horizontal), or between
 // two points. Goes on the Reference layer. Mirror uses centre lines as axes.
 
+import { DEFAULT_STROKE_MM } from '../document/builders'
 import { addEntities } from '../document/commands'
 import { newId } from '../document/factory'
 import type { CentreLineEntity, Entity, Id } from '../document/model'
 import { entityBounds } from '../geometry/bounds'
 import { constrainAngle, distance, type Vec2 } from '../lib/vec2'
-import { ANGLE_STEP_DEG, DEFAULT_STROKE_MM, pointFields } from './common'
+import { ANGLE_STEP_DEG, pointFields } from './common'
 import { hitTest, PICK_TOLERANCE_PX } from './select'
 import type { InputField, InputValues, PreviewShape, Tool, ToolContext, ToolPointerEvent } from './types'
 

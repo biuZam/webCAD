@@ -1,12 +1,12 @@
 // L7 Notch tool: hover an edge (outline, line or circle) and click to add alignment notches there, on the
 // edge's own layer. Object snaps apply, so a notch can land on a midpoint, a quadrant or a tracked point.
 
+import { DEFAULT_STROKE_MM } from '../document/builders'
 import { insertEntitiesAfter } from '../document/commands'
 import { newId } from '../document/factory'
 import type { Entity, PathEntity } from '../document/model'
 import { DEFAULT_NOTCH, notchShapes, type NotchOptions } from '../geometry/leather/notches'
 import type { Vec2 } from '../lib/vec2'
-import { DEFAULT_STROKE_MM } from './common'
 import { hitTest, PICK_TOLERANCE_PX } from './select'
 import type { InputValues, PreviewShape, Tool, ToolContext, ToolPointerEvent } from './types'
 

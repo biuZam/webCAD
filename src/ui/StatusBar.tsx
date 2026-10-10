@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { toolSession } from '../canvas/tool-session'
 import { useUiStore } from '../canvas/ui-store'
 import { PX_PER_MM } from '../canvas/viewport'
 import { setDisplayUnit } from '../document/commands'
@@ -17,6 +18,9 @@ export function StatusBar() {
   const unit = useDocument((s) => s.project.displayUnit)
   const dispatch = useDocument((s) => s.dispatch)
   const count = useDocument((s) => s.project.pieces.reduce((n, p) => n + p.entities.length, 0))
+  const aiCount = useDocument((s) =>
+    s.project.pieces.reduce((n, p) => n + p.entities.filter((e) => e.aiCreated).length, 0),
+  )
   const percent = new Intl.NumberFormat(i18n.language, { style: 'percent', maximumFractionDigits: 0 })
   const fmt = (mm: number) => formatLength(mm, unit, i18n.language)
 
@@ -53,6 +57,15 @@ export function StatusBar() {
         {selected > 0 && <>{t('status.selected', { count: selected })} · </>}
         {t('status.entities', { count })}
       </span>
+      {aiCount > 0 && (
+        <button
+          className="status-ai"
+          title={t('status.aiUnreviewedHint')}
+          onClick={() => toolSession.selectAiCreated()}
+        >
+          {t('status.aiUnreviewed', { count: aiCount })}
+        </button>
+      )}
     </footer>
   )
 }

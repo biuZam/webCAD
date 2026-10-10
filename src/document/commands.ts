@@ -127,6 +127,17 @@ export const removeEntities = (ids: readonly Id[]): Command => ({
   },
 })
 
+/** Clear the AI-created mark (the person has checked these entities). Unmarked ids produce no patches. */
+export const markReviewed = (ids: readonly Id[]): Command => ({
+  labelKey: 'history.reviewAi',
+  recipe: (draft) => {
+    for (const id of ids) {
+      const found = findEntity(draft, id)
+      if (found?.entity.aiCreated) delete found.entity.aiCreated
+    }
+  },
+})
+
 export const renameProject = (name: string): Command => ({
   labelKey: 'history.rename',
   recipe: (draft) => {
@@ -142,6 +153,17 @@ export const updateLayer = (id: Id, changes: Partial<Omit<Layer, 'id'>>): Comman
     Object.assign(layer, changes)
   },
 })
+
+/**
+ * A copied stitch line or hole set whose source was copied with it follows that copy, not the original
+ * (otherwise the derivation pass would regenerate it on top of the original).
+ */
+function relinkCopy(copy: Entity, copyIds: ReadonlyMap<Id, Id>) {
+  if (copy.type === 'path' && copy.derived && copyIds.has(copy.derived.sourceId))
+    copy.derived = { ...copy.derived, sourceId: copyIds.get(copy.derived.sourceId)! }
+  if (copy.type === 'holeSet' && copy.sourceEntityId !== null && copyIds.has(copy.sourceEntityId))
+    copy.sourceEntityId = copyIds.get(copy.sourceEntityId)!
+}
 
 /**
  * Transform entities in place, or (copy) insert transformed copies right after each original.
@@ -164,6 +186,7 @@ export function transformEntities(
             const targetId = copyIds.get(original.id)
             if (targetId === undefined) continue
             const moved = { ...transformEntity(current(original) as Entity, matrix), id: targetId }
+            if (options.copy) relinkCopy(moved, copyIds)
             if (options.copy) piece.entities.splice(i + 1, 0, moved as Draft<Entity>)
             else piece.entities[i] = moved as Draft<Entity>
           }

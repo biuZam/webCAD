@@ -2,7 +2,7 @@
 // The canvas feeds it pointer events in mm; React feeds it keys and typed values.
 
 import { findEntity, transformEntities, type Command } from '../document/commands'
-import type { Id, Layer, LineStyle, Project } from '../document/model'
+import type { Id, Project } from '../document/model'
 import type { DocumentStore } from '../document/store'
 import { emptyBounds, entityBounds, isEmpty } from '../geometry/bounds'
 import { mirrorAcross } from '../geometry/transform'
@@ -46,14 +46,6 @@ export interface SessionListener {
 }
 
 export type PointerInput = Omit<ToolPointerEvent, 'point' | 'raw' | 'snap'> & { raw: Vec2 }
-
-/** Default line style for new entities, by the kind of layer they're drawn on. */
-export const LINE_STYLE_FOR_LAYER: Record<Layer['kind'], LineStyle> = {
-  cut: 'solid',
-  stitch: 'dashed',
-  reference: 'dotted',
-  notes: 'solid',
-}
 
 /** Ids of entities the user may select: on visible, unlocked layers. */
 export function selectableIds(project: Project): Id[] {
@@ -260,6 +252,14 @@ export class ToolSession {
   select(ids: readonly Id[]) {
     if (this.tool.id !== 'select') this.setTool('select')
     this.setSelection(ids)
+  }
+
+  /** Select the AI-created entities that are still unreviewed (on visible, unlocked layers). */
+  selectAiCreated() {
+    if (this.tool.id !== 'select') this.setTool('select')
+    const { project } = this.store.getState()
+    const ai = new Set(project.pieces.flatMap((p) => p.entities.filter((e) => e.aiCreated).map((e) => e.id)))
+    this.setSelection(selectableIds(project).filter((id) => ai.has(id)))
   }
 
   selectAll() {

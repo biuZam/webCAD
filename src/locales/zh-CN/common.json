@@ -57,7 +57,8 @@
     "union": "并集",
     "difference": "差集",
     "addCentreLine": "添加中心线",
-    "addEllipse": "添加椭圆"
+    "addEllipse": "添加椭圆",
+    "reviewAi": "标记为已复核"
   },
   "layers": {
     "title": "图层",
@@ -80,7 +81,9 @@
     "entities": "{count, plural, other {# 个对象}}",
     "grid": "网格 {spacing}",
     "selected": "已选 {count} 个",
-    "unit": "单位"
+    "unit": "单位",
+    "aiUnreviewed": "{count, plural, other {# 个 AI 创建的对象待复核}}",
+    "aiUnreviewedHint": "选中它们"
   },
   "languages": {
     "en": "English",
@@ -185,6 +188,8 @@
     "textSize": "字号",
     "linkedTo": "跟随",
     "detach": "解除关联",
+    "aiCreated": "{count, plural, other {# 个由 AI 创建，尚未复核}}",
+    "markReviewed": "标记为已复核",
     "inside": "内侧",
     "outside": "外侧",
     "holeShape": "孔形",

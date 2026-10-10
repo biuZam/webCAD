@@ -152,4 +152,22 @@ describe('PropertiesPanel', () => {
     })
     expect((entity('c') as CircleEntity).rx).toBe(5)
   })
+
+  it('flags AI-created entities and marks them reviewed in one undo step', () => {
+    act(() => {
+      documentStore.setState((st) => {
+        const project = structuredClone(st.project)
+        project.pieces[0].entities[0].aiCreated = true
+        return { project }
+      })
+      useUiStore.setState({ selection: ['sq', 'c'] })
+    })
+    render(<PropertiesPanel />)
+    expect(screen.getByRole('note').textContent).toContain('Created by AI')
+    const undoDepth = documentStore.getState().past.length
+    fireEvent.click(screen.getByRole('button', { name: 'Mark reviewed' }))
+    expect(entity('sq').aiCreated).toBeUndefined()
+    expect(documentStore.getState().past).toHaveLength(undoDepth + 1)
+    expect(screen.queryByRole('note')).toBeNull()
+  })
 })

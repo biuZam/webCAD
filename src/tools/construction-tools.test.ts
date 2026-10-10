@@ -6,7 +6,7 @@ import { createDocumentStore, type DocumentStore } from '../document/store'
 import { rectangleSegments } from '../geometry/shapes'
 import { distance, type Vec2 } from '../lib/vec2'
 import { createTools } from './index'
-import { angleBetween } from './measure'
+import { angleBetween } from '../geometry/measure'
 import { ToolSession, type SessionView } from './session'
 import type { InputField } from './types'
 

@@ -2,12 +2,13 @@
 //   Text:  click or type the position, then type the text (size and angle optional) and press Enter.
 //   Grain arrow: click both ends (Shift locks to 15°), or type length and angle for the second.
 
+import { DEFAULT_STROKE_MM } from '../document/builders'
 import { addEntities } from '../document/commands'
 import { newId } from '../document/factory'
 import type { Id, PathEntity, TextEntity } from '../document/model'
 import { grainArrowSegments } from '../geometry/shapes'
 import { angleOf, constrainAngle, distance, polar, type Vec2 } from '../lib/vec2'
-import { ANGLE_STEP_DEG, DEFAULT_STROKE_MM, pointFields, typedPoint } from './common'
+import { ANGLE_STEP_DEG, pointFields, typedPoint } from './common'
 import type { InputField, InputTexts, InputValues, PreviewShape, Tool, ToolContext, ToolPointerEvent } from './types'
 
 /** Default text height (mm): legible on a printed pattern without crowding small pieces. */

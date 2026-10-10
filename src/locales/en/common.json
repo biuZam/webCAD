@@ -57,7 +57,8 @@
     "union": "Union",
     "difference": "Difference",
     "addCentreLine": "Add centre line",
-    "addEllipse": "Add ellipse"
+    "addEllipse": "Add ellipse",
+    "reviewAi": "Mark reviewed"
   },
   "layers": {
     "title": "Layers",
@@ -80,7 +81,9 @@
     "entities": "{count, plural, one {# entity} other {# entities}}",
     "grid": "Grid {spacing}",
     "selected": "{count} selected",
-    "unit": "Units"
+    "unit": "Units",
+    "aiUnreviewed": "{count, plural, one {# AI-created object to review} other {# AI-created objects to review}}",
+    "aiUnreviewedHint": "Select them"
   },
   "languages": {
     "en": "English",
@@ -185,6 +188,8 @@
     "textSize": "Size",
     "linkedTo": "Follows",
     "detach": "Detach",
+    "aiCreated": "{count, plural, one {Created by AI, not reviewed yet} other {# created by AI, not reviewed yet}}",
+    "markReviewed": "Mark reviewed",
     "inside": "inside",
     "outside": "outside",
     "holeShape": "Shape",

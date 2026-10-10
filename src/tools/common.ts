@@ -1,11 +1,8 @@
+import { DEFAULT_STROKE_MM, LINE_STYLE_FOR_LAYER } from '../document/builders'
 import { newId } from '../document/factory'
 import type { Id } from '../document/model'
 import type { Vec2 } from '../lib/vec2'
-import { LINE_STYLE_FOR_LAYER } from './session'
 import type { InputField, InputValues, ToolContext } from './types'
-
-/** Default export stroke width for new entities (mm). */
-export const DEFAULT_STROKE_MM = 0.2
 
 /** Clicking within this many CSS px of a polyline's first point closes it. */
 export const CLOSE_TOLERANCE_PX = 8

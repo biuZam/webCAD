@@ -85,6 +85,9 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
   const { t: tc } = useTranslation()
   const ref = useRef<HTMLDialogElement>(null)
   const layers = useDocument((s) => s.project.layers)
+  const aiCount = useDocument((s) =>
+    s.project.pieces.reduce((n, p) => n + p.entities.filter((e) => e.aiCreated).length, 0),
+  )
   const layerName = useLayerName()
   const showNotice = useUiStore((s) => s.showNotice)
   const [settings, setSettings] = useState<ExportSettings>(loadSettings)
@@ -160,6 +163,7 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
         <h2 id="export-title" className="dialog-title">
           {t('title')}
         </h2>
+        {aiCount > 0 && <p className="dialog-hint dialog-warning">{t('aiUnreviewed', { count: aiCount })}</p>}
 
         <fieldset className="dialog-group">
           <legend>{t('format')}</legend>

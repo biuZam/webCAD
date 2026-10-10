@@ -2,6 +2,7 @@
 // Distance is "through the cursor" by default, or typed (then remembered for the next offsets).
 // The result is selected afterwards, so clicking again makes another concentric offset, e.g. a second stitch line.
 
+import { canOffset } from '../document/builders'
 import { insertEntitiesAfter } from '../document/commands'
 import { newId } from '../document/factory'
 import type { Entity, Id, JoinStyle } from '../document/model'
@@ -21,11 +22,6 @@ import type {
 } from './types'
 
 export const JOINS: readonly JoinStyle[] = ['miter', 'round', 'bevel']
-
-/** Entity types this tool can offset (stitch holes and text have no outline to offset). */
-export function canOffset(e: Entity): boolean {
-  return e.type === 'path' || e.type === 'circle' || e.type === 'centreLine'
-}
 
 function shapeToEntity(shape: OffsetShape, source: Entity): Entity {
   const style = { id: newId(), layerId: source.layerId, lineStyle: source.lineStyle, strokeWidth: source.strokeWidth }

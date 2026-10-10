@@ -24,6 +24,7 @@ pnpm i18n:check [--strict]   # keys missing from non-en locales; --strict exits 
 pnpm check                   # typecheck + lint + test + i18n:check (quick)
 pnpm verify                  # everything CI runs: check + format:check + build + bundle:check
 pnpm bundle:check            # after build: initial download must stay < 600 KB gzipped
+pnpm mcp:dev -- --root DIR   # MCP server over stdio (docs/MCP.md); pnpm mcp:build → dist-mcp/server.mjs
 ```
 
 The default npm registry is very slow from this machine; if installs stall, add `--registry=https://registry.npmmirror.com`.
@@ -43,6 +44,7 @@ Layers, importing only downward: `app`/`ui`/`i18n` (React) → `canvas`/`tools`/
 - `paper` is aliased to `paper/dist/paper-core` in `vite.config.ts` (paperjs-offset imports the full build). Keep it: two Paper.js instances break `instanceof` checks between libraries.
 - Offsets must stay within `OFFSET_TOLERANCE` (0.02 mm) of the requested distance; see `src/geometry/offset.ts` before changing offset code, and keep `quality: 'preview'` for live previews only.
 - Paper.js types are the global `paper` namespace (`paper.Item`, `paper.View`); don't `import type paper`. `PaperScope#remove` exists at runtime but isn't typed.
+- `src/mcp` is the headless MCP server (docs/MCP.md): a top layer beside `app`, Node-only (`tsconfig.mcp.json`, `vite.mcp.config.ts`). It must not import React/`canvas`/`ui`/`i18n`, and nothing in the App may import it (`src/mcp/server.test.ts` checks both). Entity construction shared with tools lives in `src/document/builders.ts`; every MCP change goes through `commit` in `src/mcp/edit.ts` (one dispatch, stamps `aiCreated`).
 - Model shape changes need a bump of `CURRENT_SCHEMA_VERSION` plus a new migration in `src/document/schema.ts`.
 - Performance budget: 2,000 entities at < 16 ms/frame. Re-measure with `BENCH=1 pnpm test perf.bench` (Node) and `?fixture=perf` + `window.__leatherdraftDev` (dev only) in the browser. Hole sets are drawn on a raw canvas layer, not as Paper items. Keep it that way.
 - Heavy or optional libraries (jsPDF, svg2pdf.js, Maker.js, clipper2, planegcs, CJK fonts) must be lazy-loaded; budget is 600 KB gzipped initial JS. planegcs is LGPL and must stay a separate WASM module. Maker.js is only reached through one adapter module.

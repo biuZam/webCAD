@@ -4,8 +4,8 @@
 
 import { holeEdges } from '../document/derived'
 import type { Entity, HoleSetEntity, Project } from '../document/model'
-import { pathLength } from '../geometry/kernel'
-import { entitiesNear, entityShape } from '../geometry/query'
+import { angleBetween, entityLength } from '../geometry/measure'
+import { entitiesNear } from '../geometry/query'
 import { angleOf, distance, type Vec2 } from '../lib/vec2'
 import { toSegment } from './edges'
 import { hitTest, PICK_TOLERANCE_PX } from './select'
@@ -35,26 +35,6 @@ export function holeEdgeNear(project: Project, p: Vec2, tolerance: number): Hole
     }
   }
   return best && { set: best.set, index: best.index, holes: best.holes }
-}
-
-/** Length of an entity's outline: path length, circumference, centre-line length. Null for holes and text. */
-export function entityLength(e: Entity): number | null {
-  switch (e.type) {
-    case 'path':
-      return pathLength(e)
-    case 'circle':
-      return e.rx === e.ry ? 2 * Math.PI * e.rx : (entityShape(e) as paper.Path).length
-    case 'centreLine':
-      return distance(e.from, e.to)
-    default:
-      return null
-  }
-}
-
-/** The angle at `vertex` between the rays to `a` and `b`, in degrees [0, 180]. */
-export function angleBetween(a: Vec2, vertex: Vec2, b: Vec2): number {
-  const d = Math.abs(angleOf(vertex, a) - angleOf(vertex, b))
-  return d > 180 ? 360 - d : d
 }
 
 export class MeasureTool implements Tool {

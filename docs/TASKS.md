@@ -107,9 +107,23 @@ Quality
 
 ## M5 — v2
 
-- [ ] T5.1 planegcs WASM (separately loaded, LGPL) + constraint model in schema v2 with migration
+- [ ] T5.1 planegcs WASM (separately loaded, LGPL) + constraint model in schema v3 with migration (v2 is taken by `aiCreated`, T6.3)
 - [ ] T5.2 Constraint UI: parallel, perpendicular, tangent, distance; parametric dimensions
 - [x] T5.3 Notches [L7] — tool J: single/double, snip or V, inward on closed outlines (cursor side on open lines), on the edge's layer. Arrays [M10] — tool Q: linear (base + step, count incl. original) and circular (centre, count, sweep; 360° = even spacing), one undo step via `arrayEntities`. DXF import — toolbar "Import…" now takes SVG or DXF (`src/persistence/dxf-import.ts`): $INSUNITS, LINE, (LW)POLYLINE with bulges, CIRCLE, ARC, ELLIPSE, SPLINE (exact Béziers by knot insertion; rational ones sampled); blocks/text/dimensions skipped and counted
+
+## M6 — MCP server (headless, `docs/MCP.md`)
+
+P1 — core
+- [x] T6.1 `src/document/builders.ts`: stitch-line / hole-set entity construction pulled out of the tools (shared by tools and MCP); `src/geometry/measure.ts` (length/area) pulled out of the Measure tool
+- [x] T6.2 MCP scaffold: `@modelcontextprotocol/sdk` + `zod` in this package, `vite.mcp.config.ts` (paper-core alias, inlined deps) → `dist-mcp/server.mjs`, `pnpm mcp:dev` / `mcp:build` (in `verify`); stdio; sessions (docId → store), `--root` path confinement, `--readonly` (write tools not registered, never writes `.json`); unified result/error format; InMemoryTransport tests
+- [x] T6.3 AI marker: `EntityBase.aiCreated?: true`, schema v2 + migration; MCP stamps every entity it creates (in `commit`, same recipe); App: Properties note + "Mark reviewed" (`markReviewed`, one undo step), status-bar count button that selects them (`ToolSession.selectAiCreated`), Export dialog hint; en + zh-CN. On-canvas badge deferred: selecting them already highlights them, and badges would touch the renderer's frame budget
+- [x] T6.4 Tools: project (new/open/save/close/get/update_settings/update_layer), query (list_entities/get_entity/measure), draw (add_lines default one entity per segment, add_rect/circle/arc/path/text/centre_line/grain_arrow, add_entities), edit (update_entity with `detach`, set_style, delete, transform, offset), undo/redo, export_svg/export_dxf
+
+P2 — leather
+- [x] T6.5 add_stitch_line (side inside/outside/left/right, optional withHoles in the same undo step), add_stitch_holes, add_seam_allowance, add_notch, fillet/chamfer, join/explode/boolean, array, outline_edges (edge indices for seam allowances); acceptance test: the PRD acceptance drawing built through MCP exports the same SVG as the fixture (ids aside). Fixed on the way: copying an outline together with its stitch line/holes (Move/Rotate copy, Array) left the copies linked to the original, so they were regenerated on top of it; `transformEntities` now relinks copies
+
+P3 — I/O
+- [x] T6.6 export_pdf (tiled/single, en or zh-CN print text from the App's locale files, CJK font read from `public/fonts`) and import_file (SVG/DXF, reference layer by default) via a happy-dom window installed lazily as Node globals (`src/mcp/headless-dom.ts`; canvas stub shared with tests in `src/lib/headless-canvas.ts`; happy-dom is now a runtime dependency, still never bundled into the App); resources `leatherdraft://{docId}/project.json` and `drawing.svg`; setup docs in `docs/MCP.md` §3.1
 
 ## Open questions blocking tasks (from PRD)
 

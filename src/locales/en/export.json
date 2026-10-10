@@ -42,5 +42,6 @@
     "instructions2": "Measure the square: it must be exactly 50 mm on each side. If not, check the printer scaling and print again.",
     "assembly": "Sheets overlap by {overlap} mm. Trim along a dashed line or overlap the sheets, matching the corner marks and the sheet labels at the edges.",
     "sheets": "Sheets"
-  }
+  },
+  "aiUnreviewed": "{count, plural, one {# object was created by AI and has not been reviewed.} other {# objects were created by AI and have not been reviewed.}}"
 }

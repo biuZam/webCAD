@@ -8,6 +8,12 @@ describe('migrateProject', () => {
     expect(migrateProject(JSON.parse(JSON.stringify(project)))).toEqual(project)
   })
 
+  it('upgrades v1 files unchanged apart from the version', () => {
+    const project = createProject()
+    const v1 = { ...JSON.parse(JSON.stringify(project)), schemaVersion: 1 }
+    expect(migrateProject(v1)).toEqual(project)
+  })
+
   it('rejects non-projects and newer files', () => {
     expect(() => migrateProject(null)).toThrow(SchemaError)
     expect(() => migrateProject({ name: 'x' })).toThrow('errors:file.notAProject')

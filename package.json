@@ -18,10 +18,14 @@
     "i18n:check": "tsx scripts/check-locales.ts",
     "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm i18n:check --strict",
     "bundle:check": "tsx scripts/check-bundle.ts",
-    "verify": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm i18n:check --strict && pnpm build && pnpm bundle:check"
+    "mcp:dev": "vite-node --config vite.mcp.config.ts src/mcp/server.ts --",
+    "mcp:build": "vite build --config vite.mcp.config.ts",
+    "verify": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm i18n:check --strict && pnpm build && pnpm bundle:check && pnpm mcp:build"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
     "clipper-lib": "^6.4.2",
+    "happy-dom": "^20.14.6",
     "i18next": "^26.4.2",
     "i18next-icu": "^2.5.0",
     "idb-keyval": "^6.3.0",
@@ -37,6 +41,7 @@
     "react-dom": "^19.2.8",
     "react-i18next": "^17.0.16",
     "svg2pdf.js": "^2.8.1",
+    "zod": "^4.6.5",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
@@ -50,12 +55,12 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "axe-core": "^4.14.0",
-    "happy-dom": "^20.14.6",
     "oxlint": "^1.81.0",
     "prettier": "^3.9.9",
     "tsx": "^4.23.15",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
+    "vite-node": "^6.0.0",
     "vite-plugin-pwa": "^2.0.0",
     "vitest": "^5.0.3",
     "workbox-build": "^7.4.1",

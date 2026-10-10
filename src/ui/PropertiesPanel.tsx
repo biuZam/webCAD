@@ -6,6 +6,7 @@ import { useUiStore } from '../canvas/ui-store'
 import {
   detachDerived,
   findEntity,
+  markReviewed,
   transformEntities,
   updateEntities,
   updateEntity,
@@ -94,6 +95,7 @@ export function PropertiesPanel() {
             ? t(`properties.type.${single.type}`)
             : t('properties.count', { count: entities.length })}
       </p>
+      <AiReview entities={entities} />
 
       <div className="prop-group">
         <SelectField
@@ -174,6 +176,21 @@ function DerivedFields({ entity }: { entity: PathEntity }) {
         </span>
       </div>
     </>
+  )
+}
+
+/** Shown when the selection holds AI-created entities: a note and "Mark reviewed" for all of them. */
+function AiReview({ entities }: { entities: readonly Entity[] }) {
+  const { t } = useTranslation()
+  const ai = entities.filter((e) => e.aiCreated).map((e) => e.id)
+  if (ai.length === 0) return null
+  return (
+    <div className="prop-ai" role="note">
+      <span>{t('properties.aiCreated', { count: ai.length })}</span>
+      <button className="prop-button" onClick={() => dispatch(markReviewed(ai))}>
+        {t('properties.markReviewed')}
+      </button>
+    </div>
   )
 }
 

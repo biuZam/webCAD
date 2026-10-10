@@ -2,32 +2,14 @@
 // The hole set is linked to that line (sourceEntityId), so it is re-laid-out whenever the line changes,
 // which, for a stitch line, is whenever the outline changes (src/document/derived.ts).
 
+import { DEFAULT_SLIT_ANGLE, holeLine, holeSet, stitchLayer } from '../document/builders'
 import { insertEntitiesAfter } from '../document/commands'
-import { newId } from '../document/factory'
-import { PITCH_PRESETS_MM, type Entity, type HoleSetEntity, type HoleShape } from '../document/model'
+import { PITCH_PRESETS_MM, type Entity, type HoleShape } from '../document/model'
 import { distributeHoles, slitEnds } from '../geometry/leather/stitch-holes'
-import { shapeToPath } from '../geometry/offset'
-import type { Segment } from '../document/model'
 import { hitTest, PICK_TOLERANCE_PX } from './select'
 import type { InputField, InputValues, PreviewShape, Tool, ToolContext, ToolPointerEvent } from './types'
 
 const SHAPES: readonly HoleShape[] = ['round', 'slit']
-/** Default slant of slit holes relative to the stitch line, like a diamond chisel's marks. */
-export const DEFAULT_SLIT_ANGLE = 45
-
-/** Lines holes can follow, as path geometry. */
-export function holeLine(e: Entity): { segments: Segment[]; closed: boolean } | null {
-  switch (e.type) {
-    case 'path':
-      return e.segments.length >= 2 ? { segments: e.segments, closed: e.closed } : null
-    case 'circle':
-      return shapeToPath({ type: 'circle', center: e.center, rx: e.rx, ry: e.ry, rotation: e.rotation })
-    case 'centreLine':
-      return { segments: [{ p: e.from }, { p: e.to }], closed: false }
-    default:
-      return null
-  }
-}
 
 export class StitchHolesTool implements Tool {
   readonly id = 'stitchHoles'
@@ -60,29 +42,17 @@ export class StitchHolesTool implements Tool {
 
   onPointerDown(e: ToolPointerEvent, ctx: ToolContext) {
     if (e.button !== 0 || !this.hover) return
-    const layer =
-      ctx.project.layers.find((l) => l.kind === 'stitch') ??
-      ctx.project.layers.find((l) => l.id === this.hover!.layerId)
-    if (!layer || layer.locked || !layer.visible) {
+    const layer = stitchLayer(ctx.project, this.hover)
+    if (!layer) {
       ctx.setPrompt('common.layerUnavailable', [])
       return
     }
-    const set: HoleSetEntity = {
-      id: newId(),
-      type: 'holeSet',
-      layerId: layer.id,
-      lineStyle: 'solid',
-      strokeWidth: this.hover.strokeWidth,
-      sourceEntityId: this.hover.id,
-      margin: 0,
+    const set = holeSet(this.hover, layer.id, {
       pitch: this.pitch!,
-      holeShape: this.shape,
       holeSize: this.holeSize!,
-      slitAngle: DEFAULT_SLIT_ANGLE,
+      holeShape: this.shape,
       cornerMode: this.cornerAware ? 'cornerAware' : 'fixed',
-      // Laid out by the derivation pass when the command runs (it's new).
-      holes: [],
-    }
+    })
     ctx.dispatch(insertEntitiesAfter([{ afterId: this.hover.id, entities: [set] }], 'history.stitchHoles'))
     ctx.setSelection([set.id])
     this.update(ctx)

@@ -1,6 +1,6 @@
 import type { Project } from './model'
 
-export const CURRENT_SCHEMA_VERSION = 1
+export const CURRENT_SCHEMA_VERSION = 2
 
 type Migration = (doc: Record<string, unknown>) => Record<string, unknown>
 
@@ -8,7 +8,10 @@ type Migration = (doc: Record<string, unknown>) => Record<string, unknown>
  * MIGRATIONS[n] upgrades a document from schemaVersion n to n + 1.
  * Add an entry here (never edit an old one) whenever the model changes shape.
  */
-const MIGRATIONS: Record<number, Migration> = {}
+const MIGRATIONS: Record<number, Migration> = {
+  // v2: optional `aiCreated` on entities. Nothing to convert.
+  1: (doc) => doc,
+}
 
 export class SchemaError extends Error {}
 

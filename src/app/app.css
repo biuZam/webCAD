@@ -430,6 +430,18 @@ input[type='radio'] {
   border-radius: 4px;
   padding: 2px 10px;
 }
+.prop-ai {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0 0 10px;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+}
 .prop-readonly {
   color: var(--text);
   padding: 2px 7px;
@@ -491,6 +503,9 @@ input[type='radio'] {
   margin: 4px 0 0;
   color: var(--muted);
   font-size: 12px;
+}
+.dialog-warning {
+  color: var(--accent);
 }
 .dialog-actions {
   display: flex;
@@ -639,6 +654,15 @@ input[type='radio'] {
 }
 .status-count {
   margin-left: auto;
+}
+.status-ai {
+  font: inherit;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 0 6px;
+  cursor: pointer;
 }
 
 .input-bar {

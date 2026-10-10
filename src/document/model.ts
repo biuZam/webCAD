@@ -27,6 +27,8 @@ interface EntityBase {
   lineStyle: LineStyle
   /** Export stroke width in mm. On screen strokes are hairlines. */
   strokeWidth: number
+  /** Created by an AI through the MCP server and not yet reviewed by a person. Never exported. */
+  aiCreated?: true
 }
 
 /** Same shape as paper.Segment: anchor plus handles relative to the anchor. */
