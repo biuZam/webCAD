@@ -103,6 +103,7 @@ Quality
 - [x] U3 Language picker: a globe icon instead of the word "Language" (the select keeps its accessible name)
 - [x] U4 Collapsible side panel (layers + properties), remembered per browser
 - [x] U5 CAD-style lines: the Line tool makes one entity per segment by default (AutoCAD LINE), so each segment selects alone; Polyline mode (palette group with Line) makes one path (PLINE). New Explode action (Shift+X, grouped with Join) splits paths into segments, curves keeping their handles
+- [x] U6 Pitch (针距/斩距) in the Properties panel — hole sets and project defaults — is a dropdown of chisel presets 2.7 / 3.38 / 3.85 / 4.0 / 5.0 mm plus Custom (a number field); the Stitch holes tool uses the same list (`PITCH_PRESETS_MM`; 3.0 dropped, 5.0 added)
 
 ## M5 — v2
 

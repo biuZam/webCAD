@@ -24,12 +24,13 @@ import type {
   TextEntity,
 } from '../document/model'
 import { holeEdges } from '../document/derived'
+import { PITCH_PRESETS_MM } from '../document/model'
 import { documentStore, useDocument } from '../document/store'
 import { emptyBounds, entityBounds } from '../geometry/bounds'
 import { pathLength } from '../geometry/kernel'
 import { scaleXYAbout, supportsNonUniformScale, translation } from '../geometry/transform'
 import { distance } from '../lib/vec2'
-import { NumberField, ReadOnlyRow, SelectField, TextField } from './fields'
+import { NumberField, PresetLengthField, ReadOnlyRow, SelectField, TextField } from './fields'
 import { useLayerName } from './layerName'
 
 const LINE_STYLES: readonly LineStyle[] = ['solid', 'dashed', 'dotted', 'dashDot']
@@ -192,12 +193,10 @@ function HoleSetFields({ entity }: { entity: HoleSetEntity }) {
             : t(`properties.type.${source.type}`)}
         </ReadOnlyRow>
       )}
-      <NumberField
+      <PresetLengthField
         label={t('properties.pitch')}
-        kind="length"
         value={entity.pitch}
-        min={0}
-        exclusiveMin
+        presets={PITCH_PRESETS_MM}
         onCommit={(pitch) => set({ pitch })}
       />
       <NumberField
@@ -269,12 +268,10 @@ function ProjectSettingsFields() {
         exclusiveMin
         onCommit={(stitchMargin) => set({ stitchMargin })}
       />
-      <NumberField
+      <PresetLengthField
         label={t('properties.defaultPitch')}
-        kind="length"
         value={settings.pitch}
-        min={0}
-        exclusiveMin
+        presets={PITCH_PRESETS_MM}
         onCommit={(pitch) => set({ pitch })}
       />
       <NumberField

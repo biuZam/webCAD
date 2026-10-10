@@ -125,7 +125,7 @@ export interface Project {
   pieces: Piece[]
 }
 
-export const PITCH_PRESETS_MM = [2.7, 3.0, 3.38, 3.85, 4.0] as const
+export const PITCH_PRESETS_MM = [2.7, 3.38, 3.85, 4.0, 5.0] as const
 
 export const LINE_DASH_MM: Record<LineStyle, number[] | null> = {
   solid: null,

@@ -175,6 +175,8 @@
     "toX": "终点 X",
     "toY": "终点 Y",
     "pitch": "针距",
+    "custom": "自定义",
+    "customValue": "自定义针距",
     "holeSize": "孔径",
     "margin": "边距",
     "holes": "孔数",

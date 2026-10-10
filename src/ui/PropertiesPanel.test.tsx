@@ -44,8 +44,21 @@ describe('PropertiesPanel', () => {
     render(<PropertiesPanel />)
     expect(screen.getByText(/Select something/)).toBeTruthy()
     expect(value('Stitch margin')).toBe('3.5')
-    act(() => edit('Pitch', '3.38'))
+    const pitch = screen.getByLabelText('Pitch') as HTMLSelectElement
+    // Chisel presets, then Custom.
+    expect([...pitch.options].map((o) => o.text)).toEqual(['2.7 mm', '3.38 mm', '3.85 mm', '4 mm', '5 mm', 'Custom'])
+    act(() => {
+      fireEvent.change(pitch, { target: { value: '1' } })
+    })
     expect(documentStore.getState().project.settings.pitch).toBe(3.38)
+    expect(screen.queryByLabelText('Custom pitch')).toBeNull()
+    // Custom: a number field appears for any other pitch.
+    act(() => {
+      fireEvent.change(pitch, { target: { value: 'custom' } })
+    })
+    act(() => edit('Custom pitch', '3.2'))
+    expect(documentStore.getState().project.settings.pitch).toBe(3.2)
+    expect((screen.getByLabelText('Pitch') as HTMLSelectElement).value).toBe('custom')
   })
 
   it('shows and edits a path’s bounds; W scales, X moves, each one undo step', () => {

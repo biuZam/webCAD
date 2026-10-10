@@ -165,3 +165,71 @@ export function ReadOnlyRow({ label, children }: { label: string; children: Reac
     </div>
   )
 }
+
+/** A preset this close counts as chosen (typed 3.85 matches the 3.85 mm chisel). */
+const PRESET_EPSILON = 1e-6
+
+/**
+ * A length chosen from presets (e.g. chisel pitches), or "Custom" with its own number field. Presets are named
+ * in mm, as chisels are sold; a custom value is typed in the display unit.
+ */
+export function PresetLengthField({
+  label,
+  value,
+  presets,
+  onCommit,
+}: {
+  label: string
+  /** mm; null = mixed. */
+  value: number | null
+  presets: readonly number[]
+  onCommit: (value: number) => void
+}) {
+  const { t, i18n } = useTranslation()
+  const id = useId()
+  const preset = value === null ? -1 : presets.findIndex((p) => Math.abs(p - value) < PRESET_EPSILON)
+  // "Custom" stays open after picking it, even while the value still equals a preset.
+  const [customChosen, setCustomChosen] = useState(false)
+  const custom = value !== null && (preset === -1 || customChosen)
+  const mm = new Intl.NumberFormat(i18n.language, { maximumFractionDigits: 3 })
+  return (
+    <>
+      <div className="prop-row">
+        <label htmlFor={id}>{label}</label>
+        <span className="prop-value">
+          <select
+            id={id}
+            value={value === null ? '' : custom ? 'custom' : String(preset)}
+            onChange={(e) => {
+              if (e.target.value === 'custom') return setCustomChosen(true)
+              setCustomChosen(false)
+              onCommit(presets[Number(e.target.value)])
+            }}
+          >
+            {value === null && (
+              <option value="" disabled>
+                {t('properties.mixed')}
+              </option>
+            )}
+            {presets.map((p, i) => (
+              <option key={p} value={String(i)}>
+                {mm.format(p)} mm
+              </option>
+            ))}
+            <option value="custom">{t('properties.custom')}</option>
+          </select>
+        </span>
+      </div>
+      {custom && (
+        <NumberField
+          label={t('properties.customValue')}
+          kind="length"
+          value={value}
+          min={0}
+          exclusiveMin
+          onCommit={onCommit}
+        />
+      )}
+    </>
+  )
+}

@@ -175,6 +175,8 @@
     "toX": "To X",
     "toY": "To Y",
     "pitch": "Pitch",
+    "custom": "Custom",
+    "customValue": "Custom pitch",
     "holeSize": "Hole size",
     "margin": "Margin",
     "holes": "Holes",
