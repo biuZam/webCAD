@@ -112,4 +112,13 @@ English is complete. Simplified Chinese (简体中文) is in progress, and the l
 
 ## License
 
-[Apache-2.0](LICENSE)
+LeatherDraft is **source-available** under the [PolyForm Noncommercial License 1.0.0](LICENSE):
+
+- **Free** for personal, hobby, study and research use, and for schools, charities and other noncommercial organisations. You may change the code and share your changes for noncommercial purposes.
+- **Your patterns and products are yours.** Drawings, exported files and the leather goods you make from them are not restricted; you may sell them.
+- **Commercial use of the software itself** (selling it or a modified version, offering it as a service, building it into a commercial product) needs a commercial license. Modified versions can't be used commercially. See [COMMERCIAL.md](COMMERCIAL.md).
+- Contributions are welcome; contributors sign a [CLA](CLA.md) once. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+"LeatherDraft" and its logo are not covered by the license. Versions up to commit `ca93653` / `7db180a` (10 October 2026) were released under Apache-2.0.
+
+许可：PolyForm 非商业许可证 1.0.0。个人和非商业用途免费；用它画出的版型和制作的产品归你所有，可以出售；将软件本身用于商业用途需获得授权，见 [COMMERCIAL.md](COMMERCIAL.md)。
