@@ -10,6 +10,15 @@
 
 > **狀態：1.0 之前。** 製圖、皮革專用功能與匯出均已實作並通過測試。發布前仍待完成：在實體印表機上做列印精度檢查，在 Inkscape、Illustrator 與 LightBurn 中做相容性檢查，以及一些較小的項目（見 [`docs/TASKS.md`](docs/TASKS.md)）。
 
+## 下載
+
+桌面版安裝檔請見 **[Releases 頁面](https://github.com/biuZam/webCAD/releases/latest)**：
+
+- Windows：`LeatherDraft_<版本>_x64-setup.exe`
+- macOS（Apple 晶片與 Intel 通用）：`LeatherDraft_<版本>_universal.dmg`
+
+安裝檔尚未進行程式碼簽署。Windows 上若出現 SmartScreen 提示，請點 **其他資訊 → 仍要執行**；macOS 首次開啟時請在應用程式上按右鍵並選 **打開**。Linux 請從原始碼建置（見下文「桌面應用程式」）。
+
 ## 操作手冊
 
 每個工具的逐步說明、依實際尺寸列印、快捷鍵，以及完整實例：

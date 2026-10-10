@@ -10,6 +10,15 @@ Funziona interamente nel browser: nessun account, nessun server, e i file non la
 
 > **Stato: pre-1.0.** Le funzioni di disegno, lavorazione della pelle ed esportazione sono implementate e testate. Restano da completare prima del rilascio: una verifica fisica della precisione di stampa su stampanti reali, controlli di compatibilità con Inkscape, Illustrator e LightBurn, e alcune voci minori (vedi [`docs/TASKS.md`](docs/TASKS.md)).
 
+## Download
+
+Gli installer desktop sono nella **[pagina Releases](https://github.com/biuZam/webCAD/releases/latest)**:
+
+- Windows: `LeatherDraft_<versione>_x64-setup.exe`
+- macOS (Apple Silicon e Intel): `LeatherDraft_<versione>_universal.dmg`
+
+Gli installer non sono ancora firmati. Su Windows, in SmartScreen fai clic su **Ulteriori informazioni → Esegui comunque**; su macOS, la prima volta fai clic destro sull'app e scegli **Apri**. Linux: compila dai sorgenti (vedi l'app desktop più sotto).
+
 ## Manuale utente
 
 Istruzioni passo passo per ogni strumento, stampa a dimensione reale, scorciatoie ed esempio completo:

@@ -10,6 +10,15 @@
 
 > **ステータス：1.0 前。** 作図、レザー、書き出しの機能は実装済みでテストも行っています。リリースまでに残っているのは、実際のプリンターでの印刷精度の物理的な確認、Inkscape、Illustrator、LightBurn との互換性確認、そのほかいくつかの小さな項目です（[`docs/TASKS.md`](docs/TASKS.md) を参照）。
 
+## ダウンロード
+
+デスクトップ版インストーラーは **[Releases ページ](https://github.com/biuZam/webCAD/releases/latest)** にあります：
+
+- Windows：`LeatherDraft_<バージョン>_x64-setup.exe`
+- macOS（Apple シリコン / Intel 両対応）：`LeatherDraft_<バージョン>_universal.dmg`
+
+インストーラーはまだコード署名されていません。Windows で SmartScreen が表示されたら **詳細情報 → 実行** をクリックしてください。macOS では初回のみアプリを右クリックして **開く** を選んでください。Linux はソースからビルドしてください（下記のデスクトップアプリを参照）。
+
 ## ユーザーガイド
 
 すべてのツールの手順、実寸印刷、ショートカット、実例を収録しています。

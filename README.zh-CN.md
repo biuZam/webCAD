@@ -10,6 +10,15 @@
 
 > **状态：1.0 之前。** 制图、皮具专用功能与导出均已实现并通过测试。发布前仍待完成：在真实打印机上做实物打印精度检查，在 Inkscape、Illustrator 和 LightBurn 中做兼容性检查，以及一些较小的事项（见 [`docs/TASKS.md`](docs/TASKS.md)）。
 
+## 下载
+
+桌面版安装包见 **[Releases 页面](https://github.com/biuZam/webCAD/releases/latest)**：
+
+- Windows：`LeatherDraft_<版本>_x64-setup.exe`
+- macOS（Apple 芯片与 Intel 通用）：`LeatherDraft_<版本>_universal.dmg`
+
+安装包暂未代码签名。Windows 上如出现 SmartScreen 提示，点 **更多信息 → 仍要运行**；macOS 首次打开时右键点应用并选 **打开**。Linux 请从源码构建（见下文“桌面应用”）。
+
 ## 操作手册
 
 每个工具的分步说明、按实际尺寸打印、快捷键以及完整实例：

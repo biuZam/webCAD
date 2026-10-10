@@ -10,6 +10,15 @@ It runs entirely in your browser: no account, no server, and your files never le
 
 > **Status: pre-1.0.** The v1 drafting, leather and export features are implemented and tested. Still open before release: a physical print-accuracy check on real printers, compatibility checks in Inkscape, Illustrator and LightBurn, and a few smaller items (see [`docs/TASKS.md`](docs/TASKS.md)).
 
+## Download
+
+Desktop installers are on the **[Releases page](https://github.com/biuZam/webCAD/releases/latest)**:
+
+- Windows: `LeatherDraft_<version>_x64-setup.exe`
+- macOS (Apple Silicon and Intel): `LeatherDraft_<version>_universal.dmg`
+
+The installers are not code-signed yet. On Windows, click **More info → Run anyway** in SmartScreen; on macOS, right-click the app and choose **Open** the first time. Linux: build from source (see [Desktop app](#desktop-app-tauri)).
+
 ## User guide
 
 Step-by-step instructions for every tool, printing at true size, shortcuts and a worked example:

@@ -10,6 +10,15 @@ Es läuft vollständig im Browser: kein Konto, kein Server, und Ihre Dateien ver
 
 > **Status: vor 1.0.** Die Funktionen für Zeichnen, Leder und Export sind umgesetzt und getestet. Vor der Veröffentlichung stehen noch offen: eine physische Druckgenauigkeitsprüfung auf echten Druckern, Kompatibilitätsprüfungen mit Inkscape, Illustrator und LightBurn sowie einige kleinere Punkte (siehe [`docs/TASKS.md`](docs/TASKS.md)).
 
+## Download
+
+Die Desktop-Installer gibt es auf der **[Releases-Seite](https://github.com/biuZam/webCAD/releases/latest)**:
+
+- Windows: `LeatherDraft_<Version>_x64-setup.exe`
+- macOS (Apple Silicon und Intel): `LeatherDraft_<Version>_universal.dmg`
+
+Die Installer sind noch nicht code-signiert. Unter Windows in SmartScreen auf **Weitere Informationen → Trotzdem ausführen** klicken; unter macOS beim ersten Start die App per Rechtsklick → **Öffnen** starten. Linux: aus dem Quellcode bauen (siehe Desktop-App weiter unten).
+
 ## Benutzerhandbuch
 
 Schritt-für-Schritt-Anleitungen zu jedem Werkzeug, zum Drucken im Originalmaß, zu Tastenkürzeln und ein durchgearbeitetes Beispiel:

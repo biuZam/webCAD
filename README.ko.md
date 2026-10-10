@@ -10,6 +10,15 @@
 
 > **상태: 1.0 이전.** 그리기, 가죽 전용 기능, 내보내기는 구현되어 있고 테스트도 마쳤습니다. 출시 전에 남은 작업은 실제 프린터에서의 인쇄 정확도 물리 점검, Inkscape, Illustrator, LightBurn과의 호환성 확인, 그리고 몇 가지 작은 항목입니다([`docs/TASKS.md`](docs/TASKS.md) 참고).
 
+## 다운로드
+
+데스크톱 설치 파일은 **[Releases 페이지](https://github.com/biuZam/webCAD/releases/latest)** 에 있습니다:
+
+- Windows: `LeatherDraft_<버전>_x64-setup.exe`
+- macOS(Apple 실리콘 및 Intel): `LeatherDraft_<버전>_universal.dmg`
+
+설치 파일은 아직 코드 서명이 되어 있지 않습니다. Windows에서는 SmartScreen에서 **추가 정보 → 실행** 을 누르고, macOS에서는 처음 실행할 때 앱을 오른쪽 클릭한 뒤 **열기** 를 선택하세요. Linux는 소스에서 빌드하세요(아래 데스크톱 앱 참고).
+
 ## 사용자 가이드
 
 모든 도구의 단계별 안내, 실척 인쇄, 단축키, 실습 예제를 담고 있습니다.
