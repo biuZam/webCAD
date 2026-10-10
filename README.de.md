@@ -14,8 +14,16 @@ Es läuft vollständig im Browser: kein Konto, kein Server, und Ihre Dateien ver
 
 Schritt-für-Schritt-Anleitungen zu jedem Werkzeug, zum Drucken im Originalmaß, zu Tastenkürzeln und ein durchgearbeitetes Beispiel:
 
-- [Benutzerhandbuch (Deutsch)](docs/USER_GUIDE.de.md)
-- [Benutzerhandbuch (English)](docs/USER_GUIDE.md)
+- [English](docs/USER_GUIDE.md)
+- [简体中文](docs/USER_GUIDE.zh-CN.md)
+- [繁體中文](docs/USER_GUIDE.zh-TW.md)
+- [Deutsch](docs/USER_GUIDE.de.md)
+- [Français](docs/USER_GUIDE.fr.md)
+- [Español](docs/USER_GUIDE.es.md)
+- [Italiano](docs/USER_GUIDE.it.md)
+- [Português](docs/USER_GUIDE.pt.md)
+- [日本語](docs/USER_GUIDE.ja.md)
+- [한국어](docs/USER_GUIDE.ko.md)
 
 ## Funktionsumfang
 

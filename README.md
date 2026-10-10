@@ -14,8 +14,16 @@ It runs entirely in your browser: no account, no server, and your files never le
 
 Step-by-step instructions for every tool, printing at true size, shortcuts and a worked example:
 
-- [User guide (English)](docs/USER_GUIDE.md)
-- [操作手册（简体中文）](docs/USER_GUIDE.zh-CN.md)
+- [English](docs/USER_GUIDE.md)
+- [简体中文](docs/USER_GUIDE.zh-CN.md)
+- [繁體中文](docs/USER_GUIDE.zh-TW.md)
+- [Deutsch](docs/USER_GUIDE.de.md)
+- [Français](docs/USER_GUIDE.fr.md)
+- [Español](docs/USER_GUIDE.es.md)
+- [Italiano](docs/USER_GUIDE.it.md)
+- [Português](docs/USER_GUIDE.pt.md)
+- [日本語](docs/USER_GUIDE.ja.md)
+- [한국어](docs/USER_GUIDE.ko.md)
 
 ## What it does
 

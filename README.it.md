@@ -14,8 +14,16 @@ Funziona interamente nel browser: nessun account, nessun server, e i file non la
 
 Istruzioni passo passo per ogni strumento, stampa a dimensione reale, scorciatoie ed esempio completo:
 
-- [Manuale utente (Italiano)](docs/USER_GUIDE.it.md)
-- [User guide (English)](docs/USER_GUIDE.md)
+- [English](docs/USER_GUIDE.md)
+- [简体中文](docs/USER_GUIDE.zh-CN.md)
+- [繁體中文](docs/USER_GUIDE.zh-TW.md)
+- [Deutsch](docs/USER_GUIDE.de.md)
+- [Français](docs/USER_GUIDE.fr.md)
+- [Español](docs/USER_GUIDE.es.md)
+- [Italiano](docs/USER_GUIDE.it.md)
+- [Português](docs/USER_GUIDE.pt.md)
+- [日本語](docs/USER_GUIDE.ja.md)
+- [한국어](docs/USER_GUIDE.ko.md)
 
 ## Cosa fa
 
