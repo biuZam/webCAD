@@ -1,17 +1,23 @@
+// Left tool palette: Photoshop-style groups (src/ui/palette-groups.ts). Each slot shows its group's active or
+// last-used member, with a corner mark when the group has more; right-click, a long press or → opens the group.
+
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toolSession } from '../canvas/tool-session'
 import { useUiStore } from '../canvas/ui-store'
-import { TOOL_ORDER } from '../tools'
-import { ACTION_IDS, type ActionId } from '../tools/shortcuts'
-import type { ToolId } from '../tools/types'
+import { activeVariant, GROUPS, usePaletteChoice, type Variant, type VariantId } from './palette-groups'
 import { runCommand, useShortcuts } from './shortcuts-store'
 
 /** Simple stroke icons, 20×20, drawn in currentColor. No text inside icons (i18n rule). */
-const ICONS: Record<ToolId | ActionId, string> = {
+const ICONS: Record<VariantId, string> = {
   select: 'M5 3l11 7-5 1.5L8.5 17z',
   line: 'M4 16L16 4M4 16h0M16 4h0',
   rectangle: 'M4 5h12v10H4z',
+  square: 'M4 4h12v12H4z',
   circle: 'M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12z',
+  // A circle with its three defining points.
+  circle3: 'M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12zM10 3h0M4.5 13h0M15.5 13h0',
+  ellipse: 'M10 6c4.4 0 8 1.8 8 4s-3.6 4-8 4-8-1.8-8-4 3.6-4 8-4z',
   pen: 'M3 17C6 6 14 14 17 3M17 3l-3 1M17 3l-1 3',
   centreLine: 'M10 2v3M10 7v1M10 10v3M10 15v1M10 18v0M5 6h10v8H5z',
   perpendicular: 'M3 16h14M10 16V4M10 13h3v3',
@@ -48,6 +54,9 @@ const ICONS: Record<ToolId | ActionId, string> = {
   flipV: 'M2 10h16M6 7l4-4 4 4M6 13l4 4 4-4',
 }
 
+/** A long press (touch, pen) opens the group menu, like a right-click. */
+const LONG_PRESS_MS = 450
+
 function Icon({ d }: { d: string }) {
   return (
     <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
@@ -56,48 +65,241 @@ function Icon({ d }: { d: string }) {
   )
 }
 
-export function ToolPalette() {
+function useVariantName() {
   const { t } = useTranslation()
   const { t: tTools } = useTranslation('tools')
-  const active = useUiStore((s) => s.activeTool)
+  return (v: Variant): string => {
+    if (v.action) return t(`modify.${v.action}`)
+    if (v.id === 'square') return tTools('rectangle.square')
+    if (v.id === 'circle3') return tTools('circle.threeName')
+    if (v.id === 'ellipse') return tTools('circle.ellipseName')
+    return tTools(`${v.tool!}.name`)
+  }
+}
+
+/** Activate a member: a tool (in its mode) or an action. */
+function run(v: Variant) {
+  if (v.action) return runCommand(v.action)
+  toolSession.setTool(v.tool!)
+  if (v.input) toolSession.input(v.input, false)
+}
+
+export function ToolPalette() {
+  const { t } = useTranslation()
+  const activeTool = useUiStore((s) => s.activeTool)
+  const fields = useUiStore((s) => s.prompt.fields)
   const hasSelection = useUiStore((s) => s.selection.length > 0)
   const bindings = useShortcuts((s) => s.bindings)
-  // "Line (L)", or just the name when the command has no key.
-  const title = (name: string, key: string | undefined) => (key ? t('tools.shortcut', { name, key }) : name)
+  const { chosen, choose } = usePaletteChoice()
+  const name = useVariantName()
+  const [menu, setMenu] = useState<{ group: number; x: number; y: number } | null>(null)
+
+  // The member shown per group: the active one, else the last used, else the first.
+  const shown = GROUPS.map((group, g) => {
+    if (!group) return null
+    const active = activeVariant(group, activeTool, fields)
+    return active ?? group.find((v) => v.id === chosen[g]) ?? group[0]
+  })
+  // Remember the active member as the group's choice (also when picked by shortcut or the mode field).
+  const activeIds = GROUPS.map((group) => (group ? activeVariant(group, activeTool, fields)?.id : undefined))
+  const activeKey = activeIds.join(',')
+  useEffect(() => {
+    activeKey.split(',').forEach((id, g) => id && choose(g, id as VariantId))
+  }, [activeKey, choose])
+
+  const keyFor = (v: Variant) =>
+    v.action ? bindings[v.action] : v.input && v.id !== v.tool ? undefined : bindings[v.tool!]
+  const title = (v: Variant, more: boolean) => {
+    const key = keyFor(v)
+    const label = key ? t('tools.shortcut', { name: name(v), key }) : name(v)
+    return more ? t('tools.more', { name: label }) : label
+  }
+
+  const openMenu = (g: number, el: HTMLElement) => {
+    const r = el.getBoundingClientRect()
+    setMenu({ group: g, x: r.right + 4, y: r.top })
+  }
 
   return (
     <nav className="tool-palette" aria-label={t('tools.label')}>
-      {TOOL_ORDER.map((id, i) => {
-        if (id === null) return <hr key={`divider-${i}`} className="tool-divider" />
-        const name = tTools(`${id}.name`)
+      {GROUPS.map((group, g) => {
+        if (!group) return <hr key={`divider-${g}`} className="tool-divider" />
+        const v = shown[g]!
         return (
-          <button
-            key={id}
-            className="tool-button"
-            aria-pressed={active === id}
-            title={title(name, bindings[id])}
-            aria-label={name}
-            onClick={() => toolSession.setTool(id)}
-          >
-            <Icon d={ICONS[id]} />
-          </button>
+          <Slot
+            key={g}
+            variant={v}
+            more={group.length > 1}
+            pressed={v.tool !== undefined && activeIds[g] !== undefined}
+            disabled={v.action !== undefined && !hasSelection}
+            title={title(v, group.length > 1)}
+            label={name(v)}
+            menuLabel={t('tools.group', { name: name(v) })}
+            menuOpen={menu?.group === g}
+            onRun={() => {
+              choose(g, v.id)
+              run(v)
+            }}
+            onOpenMenu={(el) => group.length > 1 && openMenu(g, el)}
+          />
         )
       })}
-      {ACTION_IDS.map((action) => {
-        const name = t(`modify.${action}`)
-        return (
-          <button
-            key={action}
-            className="tool-button"
-            title={title(name, bindings[action])}
-            aria-label={name}
-            disabled={!hasSelection}
-            onClick={() => runCommand(action)}
-          >
-            <Icon d={ICONS[action]} />
-          </button>
-        )
-      })}
+      {menu && (
+        <GroupMenu
+          group={GROUPS[menu.group]!}
+          current={shown[menu.group]!.id}
+          x={menu.x}
+          y={menu.y}
+          name={name}
+          shortcut={keyFor}
+          disabled={(v) => v.action !== undefined && !hasSelection}
+          onPick={(v) => {
+            choose(menu.group, v.id)
+            setMenu(null)
+            run(v)
+          }}
+          onClose={() => setMenu(null)}
+        />
+      )}
     </nav>
+  )
+}
+
+function Slot(props: {
+  variant: Variant
+  more: boolean
+  pressed: boolean
+  disabled: boolean
+  title: string
+  label: string
+  menuLabel: string
+  menuOpen: boolean
+  onRun: () => void
+  onOpenMenu: (el: HTMLElement) => void
+}) {
+  const ref = useRef<HTMLButtonElement>(null)
+  const timer = useRef<number | undefined>(undefined)
+  const longPressed = useRef(false)
+  const { variant: v, more } = props
+  const cancelPress = () => window.clearTimeout(timer.current)
+  return (
+    <button
+      ref={ref}
+      className={more ? 'tool-button tool-button-group' : 'tool-button'}
+      aria-pressed={v.tool !== undefined ? props.pressed : undefined}
+      aria-haspopup={more ? 'menu' : undefined}
+      aria-expanded={more ? props.menuOpen : undefined}
+      title={props.title}
+      aria-label={props.label}
+      aria-description={more ? props.menuLabel : undefined}
+      // A group stays focusable so its menu can open; a lone action that needs a selection is disabled.
+      disabled={props.disabled && !more}
+      aria-disabled={props.disabled && more ? true : undefined}
+      onClick={() => {
+        if (longPressed.current) {
+          longPressed.current = false
+          return
+        }
+        if (!props.disabled) props.onRun()
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault()
+        if (more) props.onOpenMenu(e.currentTarget)
+      }}
+      onPointerDown={(e) => {
+        if (!more || e.pointerType === 'mouse') return
+        longPressed.current = false
+        const el = e.currentTarget
+        timer.current = window.setTimeout(() => {
+          longPressed.current = true
+          props.onOpenMenu(el)
+        }, LONG_PRESS_MS)
+      }}
+      onPointerUp={cancelPress}
+      onPointerLeave={cancelPress}
+      onKeyDown={(e) => {
+        if (more && (e.key === 'ArrowRight' || (e.altKey && e.key === 'ArrowDown'))) {
+          e.preventDefault()
+          props.onOpenMenu(e.currentTarget)
+        }
+      }}
+    >
+      <Icon d={ICONS[v.id]} />
+    </button>
+  )
+}
+
+function GroupMenu(props: {
+  group: readonly Variant[]
+  current: VariantId
+  x: number
+  y: number
+  name: (v: Variant) => string
+  shortcut: (v: Variant) => string | undefined
+  disabled: (v: Variant) => boolean
+  onPick: (v: Variant) => void
+  onClose: () => void
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const opener = useRef<Element | null>(document.activeElement)
+  const { onClose } = props
+
+  useEffect(() => {
+    const items = ref.current?.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]:not(:disabled)')
+    const current = ref.current?.querySelector<HTMLButtonElement>('[aria-checked="true"]:not(:disabled)')
+    ;(current ?? items?.[0])?.focus()
+    const onDown = (e: PointerEvent) => {
+      if (!ref.current?.contains(e.target as Node)) onClose()
+    }
+    document.addEventListener('pointerdown', onDown, true)
+    return () => document.removeEventListener('pointerdown', onDown, true)
+  }, [onClose])
+
+  const close = () => {
+    onClose()
+    ;(opener.current as HTMLElement | null)?.focus?.()
+  }
+
+  return (
+    <div
+      ref={ref}
+      className="tool-menu"
+      role="menu"
+      style={{ left: props.x, top: props.y }}
+      onContextMenu={(e) => e.preventDefault()}
+      onKeyDown={(e) => {
+        const items = [
+          ...(ref.current?.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]:not(:disabled)') ?? []),
+        ]
+        const i = items.indexOf(document.activeElement as HTMLButtonElement)
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault()
+          const next = (i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length
+          items[next]?.focus()
+        } else if (e.key === 'Escape' || e.key === 'ArrowLeft') {
+          e.preventDefault()
+          e.stopPropagation()
+          close()
+        } else if (e.key === 'Tab') {
+          onClose()
+        }
+      }}
+    >
+      {props.group.map((v) => (
+        <button
+          key={v.id}
+          type="button"
+          role="menuitemradio"
+          aria-checked={v.id === props.current}
+          className="tool-menu-item"
+          disabled={props.disabled(v)}
+          onClick={() => props.onPick(v)}
+        >
+          <Icon d={ICONS[v.id]} />
+          <span>{props.name(v)}</span>
+          <kbd>{props.shortcut(v) ?? ''}</kbd>
+        </button>
+      ))}
+    </div>
   )
 }

@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { createProject } from '../document/factory'
 import type { CircleEntity, PathEntity } from '../document/model'
 import { createDocumentStore, type DocumentStore } from '../document/store'
+import { entityBounds } from '../geometry/bounds'
 import type { Vec2 } from '../lib/vec2'
 import { createTools } from './index'
 import { ToolSession, type SessionView } from './session'
@@ -223,5 +224,38 @@ describe('circle tool', () => {
     const e = entities()[0] as CircleEntity
     expect(e.center).toEqual([50, 50])
     expect(e.rx).toBe(25)
+  })
+})
+
+describe('rectangle: square mode', () => {
+  it('keeps the sides equal: the larger mouse distance, or the typed side', () => {
+    const store = createDocumentStore(createProject())
+    const session = new ToolSession(store, createTools(), () => ({ zoom: 10, snaps: new Set(), activeLayerId: null }), {
+      preview: () => {},
+      prompt: () => {},
+      tool: () => {},
+      cursor: () => {},
+      selection: () => {},
+    })
+    const at = (raw: [number, number]) => ({ raw, button: 0, shift: false, alt: false })
+    const press = (p: [number, number]) => {
+      session.pointerMove(at(p))
+      session.pointerDown(at(p))
+      session.pointerUp(at(p))
+    }
+    session.setTool('rectangle')
+    session.input({ shape: 1 }, false)
+    press([0, 0])
+    press([30, -10])
+    press([100, 100])
+    session.input({ width: 25 }, true)
+    const boxes = store
+      .getState()
+      .project.pieces[0].entities.map((e) => entityBounds(e))
+      .map((b) => [b.minX, b.minY, b.maxX, b.maxY])
+    expect(boxes).toEqual([
+      [0, -30, 30, 0],
+      [100, 100, 125, 125],
+    ])
   })
 })

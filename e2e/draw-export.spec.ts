@@ -227,3 +227,40 @@ test('import a DXF in inches: converted to mm, y flipped, on the Reference layer
   expect(svg).toMatch(/width="50.8mm" height="25.4mm"/)
   expect(svg).toMatch(/inkscape:label="reference"><path [^>]*d="M0 0L50.8 -25.4"/)
 })
+
+test('tool groups: right-click a slot to switch to Ellipse; the slot then shows it', async ({ page }) => {
+  const palette = page.getByRole('navigation', { name: 'Tools' })
+  await palette.getByRole('button', { name: 'Circle', exact: true }).click({ button: 'right' })
+  const menu = page.getByRole('menu')
+  await expect(menu.getByRole('menuitemradio', { name: /Circle/ })).toHaveAttribute('aria-checked', 'true')
+  await menu.getByRole('menuitemradio', { name: /Ellipse/ }).click()
+  await expect(menu).toBeHidden()
+  const slot = palette.getByRole('button', { name: 'Ellipse', exact: true })
+  await expect(slot).toHaveAttribute('aria-pressed', 'true')
+  // The circle tool is now in ellipse mode.
+  await expect(page.getByRole('combobox', { name: 'Mode' })).toHaveValue('2')
+  // Keyboard: → opens the group, Esc closes it again.
+  await slot.focus()
+  await page.keyboard.press('ArrowRight')
+  await expect(page.getByRole('menu')).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('menu')).toBeHidden()
+})
+
+test('no browser context menu on the app; language picker is an icon; the side panel collapses', async ({ page }) => {
+  const prevented = await page.evaluate(() => {
+    const e = new MouseEvent('contextmenu', { bubbles: true, cancelable: true })
+    document.querySelector('.app-header')!.dispatchEvent(e)
+    return e.defaultPrevented
+  })
+  expect(prevented).toBe(true)
+
+  await expect(page.getByRole('combobox', { name: 'Language' })).toBeVisible()
+  await expect(page.locator('.toolbar-language')).not.toContainText('Language')
+
+  await page.getByRole('button', { name: 'Hide side panel' }).click()
+  await expect(page.getByRole('heading', { name: 'Layers' })).toBeHidden()
+  await page.reload()
+  await page.getByRole('button', { name: 'Show side panel' }).click()
+  await expect(page.getByRole('heading', { name: 'Layers' })).toBeVisible()
+})

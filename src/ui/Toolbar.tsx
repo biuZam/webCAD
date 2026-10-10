@@ -119,9 +119,21 @@ export function Toolbar() {
       <button onClick={() => setShortcutsOpen(true)}>{t('menu.shortcuts')}</button>
       <ShortcutsDialog open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
       <NoticeView />
-      <label className="toolbar-language">
-        <span>{t('menu.language')}</span>
-        <select value={i18n.language} onChange={(e) => void setLanguage(e.target.value as Language)}>
+      <label className="toolbar-language" title={t('menu.language')}>
+        {/* A globe instead of the word "Language": recognisable whatever language the UI is in. */}
+        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+          <path
+            d="M10 2.5a7.5 7.5 0 1 0 0 15a7.5 7.5 0 1 0 0-15zM2.5 10h15M10 2.5c2.2 2 3.3 4.5 3.3 7.5s-1.1 5.5-3.3 7.5M10 2.5C7.8 4.5 6.7 7 6.7 10s1.1 5.5 3.3 7.5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+          />
+        </svg>
+        <select
+          aria-label={t('menu.language')}
+          value={i18n.language}
+          onChange={(e) => void setLanguage(e.target.value as Language)}
+        >
           {SUPPORTED_LANGUAGES.map((lng) => (
             <option key={lng} value={lng}>
               {t(`languages.${lng}`)}

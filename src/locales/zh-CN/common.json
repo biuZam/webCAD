@@ -87,7 +87,13 @@
   },
   "tools": {
     "label": "工具",
-    "shortcut": "{name}（{key}）"
+    "shortcut": "{name}（{key}）",
+    "more": "{name} · 右键查看同组工具",
+    "group": "与{name}同组的工具"
+  },
+  "panels": {
+    "hide": "收起侧边栏",
+    "show": "展开侧边栏"
   },
   "input": {
     "label": "数值输入",

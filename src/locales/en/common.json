@@ -87,7 +87,13 @@
   },
   "tools": {
     "label": "Tools",
-    "shortcut": "{name} ({key})"
+    "shortcut": "{name} ({key})",
+    "more": "{name} · right-click for more",
+    "group": "More tools like {name}"
+  },
+  "panels": {
+    "hide": "Hide side panel",
+    "show": "Show side panel"
   },
   "input": {
     "label": "Typed input",

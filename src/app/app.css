@@ -185,7 +185,7 @@ input[type='radio'] {
 .toolbar-language {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   margin-left: auto;
   color: var(--muted);
 }
@@ -222,9 +222,63 @@ input[type='radio'] {
   border: 1px solid transparent;
   border-radius: 6px;
 }
-.tool-button:disabled {
+.tool-button:disabled,
+.tool-button[aria-disabled='true'] {
   color: var(--muted);
   opacity: 0.5;
+}
+/* Grouped slot: a small triangle in the corner says "right-click for more", as in Photoshop. */
+.tool-button-group {
+  position: relative;
+}
+.tool-button-group::after {
+  content: '';
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  border-style: solid;
+  border-width: 0 0 5px 5px;
+  border-color: transparent transparent currentColor transparent;
+  opacity: 0.7;
+}
+.tool-menu {
+  position: fixed;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.18);
+}
+.tool-menu-item {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  color: var(--text);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+}
+.tool-menu-item:hover:not(:disabled),
+.tool-menu-item:focus-visible {
+  background: var(--pressed);
+}
+.tool-menu-item[aria-checked='true'] {
+  color: var(--accent);
+}
+.tool-menu-item:disabled {
+  color: var(--muted);
+}
+.tool-menu-item kbd {
+  font: inherit;
+  font-size: 12px;
+  color: var(--muted);
 }
 .tool-divider {
   width: 24px;
@@ -281,9 +335,33 @@ input[type='radio'] {
 }
 
 .side-panel {
+  position: relative;
   background: var(--surface);
   border-left: 1px solid var(--border);
   overflow: auto;
+}
+/* Collapsed: the panel shrinks to a strip holding only the toggle; the canvas takes the space. */
+.app-main.panel-collapsed {
+  grid-template-columns: auto 1fr 28px;
+}
+.panel-toggle {
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.panel-toggle:hover {
+  color: var(--text);
+  border-color: var(--border);
 }
 .panel {
   padding: 10px 12px;

@@ -96,6 +96,13 @@ Quality
 - [x] T4.7 SVG import for tracing — toolbar "Import SVG…" (`src/persistence/svg-import.ts`): mm/cm/in/pt/px units + viewBox, transforms, path data incl. arcs (Paper parses `d`), rect/circle/ellipse/line/polyline/polygon, compound paths split; defs/hidden skipped, text/images/<use> counted as skipped. Lands on the Reference layer (active layer if that's locked/hidden), selected, one undo step. Not modelled: preserveAspectRatio, nested <svg> viewBoxes, CSS transforms
 - [x] T4.8 Rebindable keyboard shortcuts — toolbar "Shortcuts…": every tool and selection action, letter keys ± Shift, matched by physical key (`KeyboardEvent.code`, so layouts/IMEs don't matter); taking a key from another command unbinds it and says so; Remove / Reset all; remembered per browser (`src/tools/shortcuts.ts` pure logic, `src/ui/shortcuts-store.ts`). Palette tooltips follow the bindings
 
+## UI refinements (requested)
+
+- [x] U1 Tool palette groups, Photoshop-style (`src/ui/palette-groups.ts`): one slot per group shows the active or last-used member (remembered per browser), corner triangle when there are more; right-click, long press (touch/pen) or → opens the group menu (role=menu, arrow keys, Esc). Groups: rectangle/square (new square mode in the Rectangle tool), circle/3-point/ellipse (Circle tool modes), pen/arc, perpendicular/parallel, fillet/chamfer, offset/seam allowance, punch/notch, flip H/V, union/difference
+- [x] U2 No browser context menu over the app (text fields keep theirs for copy/paste)
+- [x] U3 Language picker: a globe icon instead of the word "Language" (the select keeps its accessible name)
+- [x] U4 Collapsible side panel (layers + properties), remembered per browser
+
 ## M5 — v2
 
 - [ ] T5.1 planegcs WASM (separately loaded, LGPL) + constraint model in schema v2 with migration

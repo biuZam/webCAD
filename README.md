@@ -62,6 +62,8 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | Q | Array (linear / circular) | J | Notch |
 | Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
 
+Similar tools share a palette slot, as in Photoshop: **right-click** a slot with a corner triangle (or long-press, or press → on it) to pick another — rectangle / square, circle / 3-point circle / ellipse, pen / arc, perpendicular / parallel, fillet / chamfer, offset / seam allowance, punch / notch, flip horizontal / vertical, union / difference. The side panel folds away with the arrow at its top.
+
 Every tool and action key can be changed under **Shortcuts…** in the toolbar (kept per browser).
 
 While drawing: **start typing a number** to enter it in the input bar, **Tab** moves between fields, **Enter** applies, **Esc** cancels, **Backspace** removes the last point, **Shift** locks angles to 15° steps. **Space-drag** or middle-drag pans, the wheel zooms. **⌘/Ctrl+Z / ⇧⌘Z** undo/redo, **⌘/Ctrl+S** save, **⌘/Ctrl+O** open, **⌘/Ctrl+A** select all.

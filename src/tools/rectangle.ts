@@ -1,10 +1,12 @@
 // D4 Rectangle: corner to corner, or from the centre while Alt is held; typed width, height and corner radius.
+// Square mode (the `shape` choice; the palette's Square entry) keeps the sides equal: the larger of the two
+// mouse distances, or the typed width.
 
 import { addEntities } from '../document/commands'
 import { rectangleSegments } from '../geometry/shapes'
 import type { Vec2 } from '../lib/vec2'
 import { entityBase, pointFields, typedPoint } from './common'
-import type { InputValues, Tool, ToolContext, ToolPointerEvent } from './types'
+import type { InputField, InputValues, Tool, ToolContext, ToolPointerEvent } from './types'
 
 export class RectangleTool implements Tool {
   readonly id = 'rectangle'
@@ -16,6 +18,7 @@ export class RectangleTool implements Tool {
   private typed: InputValues = {}
   /** Corner radius is a sticky tool option: it stays until the user types another value. */
   private radius = 0
+  private square = false
 
   activate(ctx: ToolContext) {
     this.reset(ctx)
@@ -41,6 +44,9 @@ export class RectangleTool implements Tool {
   }
 
   onInput(values: InputValues, commit: boolean, ctx: ToolContext) {
+    const { shape, ...rest } = values
+    if (shape !== undefined) this.square = shape === 1
+    values = rest
     this.typed = values
     if (!commit) return this.update(ctx)
     if (!this.first) {
@@ -68,12 +74,17 @@ export class RectangleTool implements Tool {
     // Typed sizes are positive; the mouse decides which quadrant they extend into.
     const sx = dx < 0 ? -1 : 1
     const sy = dy < 0 ? -1 : 1
-    const w = this.typed.width !== undefined ? Math.abs(this.typed.width) * sx : dx
-    const h = this.typed.height !== undefined ? Math.abs(this.typed.height) * sy : dy
+    let w = this.typed.width !== undefined ? Math.abs(this.typed.width) * sx : dx
+    let h = this.typed.height !== undefined ? Math.abs(this.typed.height) * sy : dy
+    if (this.square) {
+      const side = this.typed.width !== undefined ? Math.abs(this.typed.width) : Math.max(Math.abs(dx), Math.abs(dy))
+      w = side * sx
+      h = side * sy
+    }
     if (this.fromCentre) {
       // In centre mode a typed size is the full width/height, centred on the first point.
       const hw = this.typed.width !== undefined ? w / 2 : w
-      const hh = this.typed.height !== undefined ? h / 2 : h
+      const hh = this.typed.height !== undefined || (this.square && this.typed.width !== undefined) ? h / 2 : h
       return [
         [first[0] - hw, first[1] - hh],
         [first[0] + hw, first[1] + hh],
@@ -118,10 +129,20 @@ export class RectangleTool implements Tool {
     this.update(ctx)
   }
 
+  private shapeField(): InputField {
+    return {
+      key: 'shape',
+      kind: 'choice',
+      labelKey: 'rectangle.shape',
+      options: ['rectangle.name', 'rectangle.square'],
+      live: this.square ? 1 : 0,
+    }
+  }
+
   private update(ctx: ToolContext) {
     if (!this.first) {
       ctx.setPreview([])
-      ctx.setPrompt('rectangle.promptFirst', pointFields(this.mouse))
+      ctx.setPrompt('rectangle.promptFirst', [this.shapeField(), ...pointFields(this.mouse)])
       return
     }
     const corners = this.corners()
@@ -132,8 +153,13 @@ export class RectangleTool implements Tool {
     )
     const size = corners ? [Math.abs(corners[1][0] - corners[0][0]), Math.abs(corners[1][1] - corners[0][1])] : []
     ctx.setPrompt(this.fromCentre ? 'rectangle.promptCentre' : 'rectangle.promptCorner', [
-      { key: 'width', kind: 'length', labelKey: 'rectangle.width', live: size[0] },
-      { key: 'height', kind: 'length', labelKey: 'rectangle.height', live: size[1] },
+      this.shapeField(),
+      this.square
+        ? { key: 'width', kind: 'length', labelKey: 'rectangle.side', live: size[0] }
+        : { key: 'width', kind: 'length', labelKey: 'rectangle.width', live: size[0] },
+      ...(this.square
+        ? []
+        : [{ key: 'height', kind: 'length' as const, labelKey: 'rectangle.height' as const, live: size[1] }]),
       { key: 'radius', kind: 'length', labelKey: 'rectangle.cornerRadius', live: this.radius },
     ])
   }

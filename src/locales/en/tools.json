@@ -14,6 +14,9 @@
   },
   "rectangle": {
     "name": "Rectangle",
+    "shape": "Shape",
+    "square": "Square",
+    "side": "Side",
     "width": "Width",
     "height": "Height",
     "cornerRadius": "Corner radius",
@@ -23,6 +26,8 @@
   },
   "circle": {
     "name": "Circle",
+    "threeName": "3-point circle",
+    "ellipseName": "Ellipse",
     "radius": "Radius",
     "promptCentre": "Click or type the centre.",
     "promptRadius": "Click a point on the circle, or type the radius.",

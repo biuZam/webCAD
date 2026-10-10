@@ -14,6 +14,9 @@
   },
   "rectangle": {
     "name": "矩形",
+    "shape": "形状",
+    "square": "正方形",
+    "side": "边长",
     "width": "宽度",
     "height": "高度",
     "cornerRadius": "圆角半径",
@@ -23,6 +26,8 @@
   },
   "circle": {
     "name": "圆",
+    "threeName": "三点圆",
+    "ellipseName": "椭圆",
     "radius": "半径",
     "promptCentre": "单击或输入圆心。",
     "promptRadius": "单击圆上一点，或输入半径。",
