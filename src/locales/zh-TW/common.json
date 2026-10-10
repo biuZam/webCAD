@@ -59,7 +59,10 @@
     "difference": "差集",
     "addCentreLine": "新增中心線",
     "addEllipse": "新增橢圓",
-    "reviewAi": "標記為已複核"
+    "reviewAi": "標記為已複核",
+    "constraint": "新增約束",
+    "solve": "求解約束",
+    "deleteConstraint": "刪除約束"
   },
   "layers": {
     "title": "圖層",
@@ -210,7 +213,21 @@
     "projectHint": "新縫線和縫孔的預設值。",
     "stitchMargin": "縫線邊距",
     "defaultPitch": "針距",
-    "defaultHoleSize": "孔徑"
+    "defaultHoleSize": "孔徑",
+    "constraints": {
+      "title": "約束",
+      "parallel": "平行",
+      "perpendicular": "垂直",
+      "tangent": "相切",
+      "coincident": "重合",
+      "distance": "距離",
+      "radius": "半徑",
+      "delete": "刪除約束",
+      "unsatisfied": "未滿足：求解後幾何已被移動",
+      "broken": "已失效：所引用的物件已改變或被刪除",
+      "solve": "求解",
+      "solveFailed": "無法求解：約束互相衝突"
+    }
   },
   "lineStyle": {
     "solid": "實線（裁切）",

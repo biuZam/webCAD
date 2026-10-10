@@ -8,6 +8,15 @@ import { kernel } from '../geometry/kernel'
 import { slitEnds } from '../geometry/leather/stitch-holes'
 import { entityShape } from '../geometry/query'
 import { add } from '../lib/vec2'
+import { GENERATOR_NOTE } from './provenance'
+import {
+  hasWatermark,
+  layoutWatermark,
+  WATERMARK_ANGLE,
+  WATERMARK_COLOR,
+  WATERMARK_OPACITY,
+  type Watermark,
+} from './watermark'
 
 export interface SvgExportOptions {
   /** Only export these layer ids. Default: all visible layers. */
@@ -21,6 +30,8 @@ export interface SvgExportOptions {
   margin?: number
   /** Flatten curves and circles to straight segments (some laser software handles those better). */
   polyline?: boolean
+  /** Repeated diagonal text over the drawing, in its own top layer. PDF draws it per page instead. */
+  watermark?: Watermark
 }
 
 /** Max deviation (mm) of a flattened curve from the true curve: far below laser kerf and print accuracy. */
@@ -118,6 +129,22 @@ function entityElement(entity: Entity, layer: Layer, options: SvgExportOptions):
   }
 }
 
+/** Watermark copies covering the viewBox, in its own Inkscape layer on top. */
+function watermarkGroup(watermark: Watermark, x: number, y: number, w: number, h: number): string {
+  const text = watermark.text.trim()
+  const { size, marks } = layoutWatermark(text, x, y, w, h)
+  // Baseline 0.35 em below the centre so the glyphs sit roughly centred on each mark.
+  const copies = marks.map(([mx, my]) => {
+    const rot = `rotate(${n(-WATERMARK_ANGLE)} ${n(mx)} ${n(my)})`
+    return `<text x="${n(mx)}" y="${n(my + 0.35 * size)}" transform="${rot}">${esc(text)}</text>`
+  })
+  const opacity = watermark.opacity ?? WATERMARK_OPACITY
+  return (
+    `<g id="watermark" inkscape:groupmode="layer" inkscape:label="Watermark" fill="${WATERMARK_COLOR}"` +
+    ` fill-opacity="${n(opacity)}" font-family="sans-serif" font-size="${n(size)}" text-anchor="middle">${copies.join('')}</g>`
+  )
+}
+
 /** The layers and entities an export includes (shared by SVG and DXF). */
 export function exportSelection(
   project: Project,
@@ -158,7 +185,9 @@ export function exportSvg(project: Project, options: SvgExportOptions = {}): str
     `<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"` +
       ` width="${n(w)}mm" height="${n(h)}mm" viewBox="${n(x)} ${n(y)} ${n(w)} ${n(h)}">`,
     `<title>${esc(project.name)}</title>`,
+    `<metadata id="leatherdraft">${esc(GENERATOR_NOTE)}</metadata>`,
     ...groups,
+    ...(hasWatermark(options.watermark) ? [watermarkGroup(options.watermark, x, y, w, h)] : []),
     `</svg>`,
     '',
   ].join('\n')

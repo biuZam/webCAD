@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LeatherDraft", "untitled": "Sans titre" },
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "Sans titre"
+  },
   "menu": {
     "undo": "Annuler",
     "redo": "Rétablir",
@@ -56,11 +59,19 @@
     "difference": "Différence",
     "addCentreLine": "Ajouter une ligne d’axe",
     "addEllipse": "Ajouter une ellipse",
-    "reviewAi": "Marquer comme relu"
+    "reviewAi": "Marquer comme relu",
+    "constraint": "Ajouter une contrainte",
+    "solve": "Résoudre les contraintes",
+    "deleteConstraint": "Supprimer la contrainte"
   },
   "layers": {
     "title": "Calques",
-    "kind": { "cut": "Coupe", "stitch": "Couture", "reference": "Référence", "notes": "Notes" },
+    "kind": {
+      "cut": "Coupe",
+      "stitch": "Couture",
+      "reference": "Référence",
+      "notes": "Notes"
+    },
     "show": "Afficher {name}",
     "hide": "Masquer {name}",
     "active": "Dessiner sur {name}",
@@ -96,7 +107,10 @@
     "more": "{name} · clic droit pour plus",
     "group": "Autres outils comme {name}"
   },
-  "panels": { "hide": "Masquer le panneau latéral", "show": "Afficher le panneau latéral" },
+  "panels": {
+    "hide": "Masquer le panneau latéral",
+    "show": "Afficher le panneau latéral"
+  },
   "input": {
     "label": "Saisie",
     "hint": "Saisissez une valeur, Tab pour le champ suivant, Entrée pour appliquer, Échap pour effacer."
@@ -138,7 +152,9 @@
     "offlineReady": "Prêt à fonctionner hors ligne",
     "imported": "{count, plural, one {# forme importée} other {# formes importées}} depuis {name}, sélectionnée(s){skipped, plural, =0 {} one {; # autre élément ignoré} other {; # autres éléments ignorés}}."
   },
-  "notice": { "dismiss": "Fermer" },
+  "notice": {
+    "dismiss": "Fermer"
+  },
   "properties": {
     "title": "Propriétés",
     "empty": "Sélectionnez un élément pour voir et modifier ses propriétés.",
@@ -197,7 +213,21 @@
     "projectHint": "Valeurs par défaut des nouvelles lignes de couture et des nouveaux trous.",
     "stitchMargin": "Marge de couture",
     "defaultPitch": "Pas",
-    "defaultHoleSize": "Taille des trous"
+    "defaultHoleSize": "Taille des trous",
+    "constraints": {
+      "title": "Contraintes",
+      "parallel": "Parallèle",
+      "perpendicular": "Perpendiculaire",
+      "tangent": "Tangent",
+      "coincident": "Coïncident",
+      "distance": "Distance",
+      "radius": "Rayon",
+      "delete": "Supprimer la contrainte",
+      "unsatisfied": "Non satisfaite : la géométrie a bougé depuis la résolution",
+      "broken": "Rompue : un élément référencé a changé ou a disparu",
+      "solve": "Résoudre",
+      "solveFailed": "Résolution impossible : les contraintes sont en conflit"
+    }
   },
   "lineStyle": {
     "solid": "Continu (coupe)",
@@ -205,8 +235,14 @@
     "dotted": "Pointillé (référence)",
     "dashDot": "Trait-point (axe)"
   },
-  "units": { "mm": "mm", "cm": "cm", "in": "in" },
-  "dialog": { "cancel": "Annuler" },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "Annuler"
+  },
   "shortcuts": {
     "title": "Raccourcis clavier",
     "hint": "Touches de lettre, avec ou sans Maj. Les chiffres sont réservés à la saisie de valeurs ; Espace déplace la vue.",
@@ -229,5 +265,8 @@
     "label": "Zone de dessin",
     "help": "Choisissez un outil avec sa touche de lettre (L ligne, R rectangle, C cercle, P plume, V sélection…). Les points peuvent être saisis : commencez à taper un nombre pour entrer des coordonnées ou des longueurs dans la barre de saisie, Tab pour changer de champ, Entrée pour appliquer, Échap pour annuler."
   },
-  "update": { "available": "Une nouvelle version est prête.", "reload": "Recharger" }
+  "update": {
+    "available": "Une nouvelle version est prête.",
+    "reload": "Recharger"
+  }
 }

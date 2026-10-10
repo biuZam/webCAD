@@ -1,0 +1,42 @@
+# Desktop installers (Tauri, src-tauri/). Tauri can't cross-compile, so each OS builds on its own runner:
+# Windows → NSIS .exe, macOS → universal .dmg. Run by hand or by pushing a `desktop-v*` tag.
+name: Desktop
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['desktop-v*']
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            args: --bundles nsis
+            artifact: src-tauri/target/release/bundle/nsis/*.exe
+          - os: macos-latest
+            args: --target universal-apple-darwin --bundles dmg
+            artifact: src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.19
+          cache: pnpm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.os == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm tauri build ${{ matrix.args }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: leatherdraft-${{ matrix.os }}
+          path: ${{ matrix.artifact }}

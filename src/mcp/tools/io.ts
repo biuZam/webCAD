@@ -65,6 +65,13 @@ const options = {
   includeLabels: z.boolean().optional().describe('Include text labels. Default true (SVG only).'),
   margin: z.number().min(0).optional().describe('Empty space around the drawing, mm. Default 0.'),
   polyline: z.boolean().optional().describe('Flatten curves to straight segments within 0.01 mm.'),
+  watermark: z
+    .object({
+      text: z.string().describe('Repeated diagonally over the drawing (SVG) or every page (PDF).'),
+      opacity: z.number().min(0).max(1).optional().describe('Default 0.15.'),
+    })
+    .optional()
+    .describe('Watermark text. Ignored by DXF.'),
 }
 
 export function registerIoTools(tool: Registrar, sessions: Sessions) {

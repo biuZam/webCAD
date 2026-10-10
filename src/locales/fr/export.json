@@ -43,5 +43,12 @@
     "assembly": "Les feuilles se recouvrent de {overlap} mm. Découpez le long d’une ligne en pointillés ou superposez les feuilles en faisant coïncider les repères de coin et les numéros de feuille sur les bords.",
     "sheets": "Feuilles"
   },
-  "aiUnreviewed": "{count, plural, one {# objet a été créé par l’IA et n’a pas été relu.} other {# objets ont été créés par l’IA et n’ont pas été relus.}}"
+  "aiUnreviewed": "{count, plural, one {# objet a été créé par l’IA et n’a pas été relu.} other {# objets ont été créés par l’IA et n’ont pas été relus.}}",
+  "watermark": {
+    "title": "Filigrane",
+    "text": "Texte",
+    "placeholder": "Aucun",
+    "opacity": "Opacité",
+    "pdfHint": "Répété sur chaque page."
+  }
 }

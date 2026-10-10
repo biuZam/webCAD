@@ -2,6 +2,7 @@ import { ArcTool } from './arc'
 import { ArrayTool } from './array'
 import { CentreLineTool } from './centre-line'
 import { CircleTool } from './circle'
+import { ConstrainTool } from './constrain'
 import { ChamferTool, FilletTool } from './corner-tools'
 import { LabelTool } from './label'
 import { LineTool } from './line'
@@ -51,6 +52,7 @@ export function createTools(): Record<ToolId, Tool> {
     seamAllowance: new SeamAllowanceTool(),
     array: new ArrayTool(),
     notch: new NotchTool(),
+    constrain: new ConstrainTool(),
   }
 }
 
@@ -81,6 +83,7 @@ export const TOOL_SHORTCUTS: Record<string, ToolId> = {
   y: 'seamAllowance',
   q: 'array',
   j: 'notch',
+  z: 'constrain',
 }
 
 /** Palette order; `null` draws a divider between groups. */
@@ -112,6 +115,7 @@ export const TOOL_ORDER: readonly (ToolId | null)[] = [
   'stitchHoles',
   'punch',
   'notch',
+  'constrain',
   null,
   'measure',
 ]

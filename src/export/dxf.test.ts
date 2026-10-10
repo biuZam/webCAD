@@ -4,6 +4,7 @@ import type { Entity, Project, Segment } from '../document/model'
 import { toPaperPath } from '../geometry/kernel'
 import { MAKER_ARC_ACCURACY } from '../geometry/maker-adapter'
 import { rectangleSegments } from '../geometry/shapes'
+import { acceptanceProject } from '../document/fixtures'
 import { exportDxf } from './dxf'
 
 interface DxfEntity {
@@ -35,6 +36,11 @@ function project(list: (layerIndex: number) => Entity[]): Project {
 const base = { lineStyle: 'solid', strokeWidth: 0.2, layerId: '' } as const
 
 describe('DXF export (T4.6)', () => {
+  it('starts with a LeatherDraft comment (group 999)', () => {
+    const dxf = exportDxf(acceptanceProject())
+    expect(dxf.startsWith('999\nCreated with LeatherDraft (https://github.com/biuZam/webCAD)\n0\nSECTION')).toBe(true)
+  })
+
   it('writes millimetre units, straight edges as LINEs on named layers, y up', () => {
     const p = project((i) =>
       i === 0 ? [{ ...base, id: 'r', type: 'path', segments: rectangleSegments([0, 0], [100, 60]), closed: true }] : [],

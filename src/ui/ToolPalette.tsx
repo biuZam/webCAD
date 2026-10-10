@@ -49,6 +49,8 @@ const ICONS: Record<VariantId, string> = {
   array: 'M2 8h4v4H2zM8 8h4v4H8zM14 8h4v4h-4z',
   // An edge with two snips into it.
   notch: 'M2 6h16M8 6v6M12 6v6M3 16h14',
+  // Two parallel lines linked by a small square (a constraint mark).
+  constrain: 'M3 6h14M3 14h14M10 8v4M8 10h4',
   join: 'M2 14h6l2-4M18 6h-6l-2 4',
   // A corner coming apart into separate segments.
   explode: 'M3 15l4-8M9 5l5 9M3 17h0M15 16l2 1',

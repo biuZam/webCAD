@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LeatherDraft", "untitled": "Sin título" },
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "Sin título"
+  },
   "menu": {
     "undo": "Deshacer",
     "redo": "Rehacer",
@@ -56,11 +59,19 @@
     "difference": "Diferencia",
     "addCentreLine": "Añadir línea de eje",
     "addEllipse": "Añadir elipse",
-    "reviewAi": "Marcar como revisado"
+    "reviewAi": "Marcar como revisado",
+    "constraint": "Añadir restricción",
+    "solve": "Resolver restricciones",
+    "deleteConstraint": "Eliminar restricción"
   },
   "layers": {
     "title": "Capas",
-    "kind": { "cut": "Corte", "stitch": "Costura", "reference": "Referencia", "notes": "Notas" },
+    "kind": {
+      "cut": "Corte",
+      "stitch": "Costura",
+      "reference": "Referencia",
+      "notes": "Notas"
+    },
     "show": "Mostrar {name}",
     "hide": "Ocultar {name}",
     "active": "Dibujar en {name}",
@@ -96,7 +107,10 @@
     "more": "{name} · clic derecho para más",
     "group": "Más herramientas como {name}"
   },
-  "panels": { "hide": "Ocultar panel lateral", "show": "Mostrar panel lateral" },
+  "panels": {
+    "hide": "Ocultar panel lateral",
+    "show": "Mostrar panel lateral"
+  },
   "input": {
     "label": "Entrada",
     "hint": "Escribe un valor, Tab para el siguiente campo, Intro para aplicar, Esc para borrar."
@@ -138,7 +152,9 @@
     "offlineReady": "Listo para trabajar sin conexión",
     "imported": "{count, plural, one {# forma importada} other {# formas importadas}} de {name} y seleccionadas{skipped, plural, =0 {} one {; # elemento más omitido} other {; # elementos más omitidos}}."
   },
-  "notice": { "dismiss": "Cerrar" },
+  "notice": {
+    "dismiss": "Cerrar"
+  },
   "properties": {
     "title": "Propiedades",
     "empty": "Selecciona algo para ver y editar sus propiedades.",
@@ -197,7 +213,21 @@
     "projectHint": "Valores por defecto de nuevas líneas de costura y agujeros.",
     "stitchMargin": "Margen de costura",
     "defaultPitch": "Paso",
-    "defaultHoleSize": "Tamaño de agujero"
+    "defaultHoleSize": "Tamaño de agujero",
+    "constraints": {
+      "title": "Restricciones",
+      "parallel": "Paralela",
+      "perpendicular": "Perpendicular",
+      "tangent": "Tangente",
+      "coincident": "Coincidente",
+      "distance": "Distancia",
+      "radius": "Radio",
+      "delete": "Eliminar restricción",
+      "unsatisfied": "No se cumple: la geometría se movió tras resolverla",
+      "broken": "Rota: algo a lo que se refiere cambió o ya no existe",
+      "solve": "Resolver",
+      "solveFailed": "No se pudo resolver: las restricciones entran en conflicto"
+    }
   },
   "lineStyle": {
     "solid": "Continua (corte)",
@@ -205,8 +235,14 @@
     "dotted": "Punteada (referencia)",
     "dashDot": "Trazo y punto (eje)"
   },
-  "units": { "mm": "mm", "cm": "cm", "in": "in" },
-  "dialog": { "cancel": "Cancelar" },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "Cancelar"
+  },
   "shortcuts": {
     "title": "Atajos de teclado",
     "hint": "Teclas de letra, con o sin Mayús. Los números se reservan para escribir valores; Espacio desplaza la vista.",
@@ -229,5 +265,8 @@
     "label": "Área de dibujo",
     "help": "Elige una herramienta con su letra (L línea, R rectángulo, C círculo, P pluma, V selección…). Los puntos se pueden escribir: empieza a teclear un número para introducir coordenadas o longitudes en la barra de entrada, Tab cambia de campo, Intro aplica, Esc cancela."
   },
-  "update": { "available": "Hay una nueva versión lista.", "reload": "Recargar" }
+  "update": {
+    "available": "Hay una nueva versión lista.",
+    "reload": "Recargar"
+  }
 }

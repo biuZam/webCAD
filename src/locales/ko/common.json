@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LeatherDraft", "untitled": "제목 없음" },
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "제목 없음"
+  },
   "menu": {
     "undo": "실행 취소",
     "redo": "다시 실행",
@@ -56,11 +59,19 @@
     "difference": "차집합",
     "addCentreLine": "중심선 추가",
     "addEllipse": "타원 추가",
-    "reviewAi": "검토 완료로 표시"
+    "reviewAi": "검토 완료로 표시",
+    "constraint": "구속 추가",
+    "solve": "구속 풀기",
+    "deleteConstraint": "구속 삭제"
   },
   "layers": {
     "title": "레이어",
-    "kind": { "cut": "재단", "stitch": "박음질", "reference": "참조", "notes": "메모" },
+    "kind": {
+      "cut": "재단",
+      "stitch": "박음질",
+      "reference": "참조",
+      "notes": "메모"
+    },
     "show": "{name} 표시",
     "hide": "{name} 숨기기",
     "active": "{name}에 그리기",
@@ -96,7 +107,10 @@
     "more": "{name} · 우클릭으로 더 보기",
     "group": "{name} 계열 도구 더 보기"
   },
-  "panels": { "hide": "사이드 패널 숨기기", "show": "사이드 패널 표시" },
+  "panels": {
+    "hide": "사이드 패널 숨기기",
+    "show": "사이드 패널 표시"
+  },
   "input": {
     "label": "값 입력",
     "hint": "값을 입력 · Tab으로 다음 칸 · Enter로 적용 · Esc로 지우기."
@@ -138,7 +152,9 @@
     "offlineReady": "오프라인으로 사용할 수 있습니다",
     "imported": "{name}에서 {count, plural, other {도형 #개}}를 가져와 선택했습니다{skipped, plural, =0 {} other {(다른 항목 #개 건너뜀)}}."
   },
-  "notice": { "dismiss": "닫기" },
+  "notice": {
+    "dismiss": "닫기"
+  },
   "properties": {
     "title": "속성",
     "empty": "항목을 선택하면 속성을 보고 편집할 수 있습니다.",
@@ -197,7 +213,21 @@
     "projectHint": "새 스티치선과 구멍의 기본값.",
     "stitchMargin": "스티치 여백",
     "defaultPitch": "피치",
-    "defaultHoleSize": "구멍 크기"
+    "defaultHoleSize": "구멍 크기",
+    "constraints": {
+      "title": "구속",
+      "parallel": "평행",
+      "perpendicular": "직각",
+      "tangent": "접선",
+      "coincident": "일치",
+      "distance": "거리",
+      "radius": "반지름",
+      "delete": "구속 삭제",
+      "unsatisfied": "미충족: 풀이 후 도형이 움직였습니다",
+      "broken": "끊김: 참조하던 대상이 바뀌었거나 없어졌습니다",
+      "solve": "풀기",
+      "solveFailed": "풀 수 없음: 구속이 서로 충돌합니다"
+    }
   },
   "lineStyle": {
     "solid": "실선(재단)",
@@ -205,8 +235,14 @@
     "dotted": "점선(참조)",
     "dashDot": "일점쇄선(중심)"
   },
-  "units": { "mm": "mm", "cm": "cm", "in": "in" },
-  "dialog": { "cancel": "취소" },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "취소"
+  },
   "shortcuts": {
     "title": "키보드 단축키",
     "hint": "문자 키(Shift 사용 여부 무관). 숫자는 값 입력용이며 Space로 화면을 이동합니다.",
@@ -229,5 +265,8 @@
     "label": "작업 영역",
     "help": "도구는 문자 키로 선택(L 선, R 사각형, C 원, P 펜, V 선택…). 점은 직접 입력할 수 있습니다. 숫자를 입력하기 시작하면 입력 바에 좌표나 길이를 넣을 수 있고, Tab으로 칸 이동, Enter로 적용, Esc로 취소합니다."
   },
-  "update": { "available": "새 버전이 준비되었습니다.", "reload": "새로고침" }
+  "update": {
+    "available": "새 버전이 준비되었습니다.",
+    "reload": "새로고침"
+  }
 }

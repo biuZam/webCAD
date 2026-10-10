@@ -4,3 +4,5 @@ node_modules
 pnpm-lock.yaml
 *.md
 rect_perimeter.html
+src-tauri/target
+src-tauri/gen

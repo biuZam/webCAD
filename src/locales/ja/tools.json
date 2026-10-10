@@ -258,5 +258,29 @@
     "holesMatch": "両辺とも {count, plural, other {# 穴}}で一致しています。クリックで別の組を比較。",
     "holesDiffer": "不一致: {a} 穴と {b} 穴（差 {diff, plural, other {# 穴}}）。ピッチか辺の長さを調整して、きれいに縫い合わせられるようにしてください。",
     "promptLength": "図形にカーソルを合わせると長さを表示します。"
+  },
+  "constrain": {
+    "name": "拘束",
+    "mode": "種類",
+    "modeParallel": "平行",
+    "modePerpendicular": "直角",
+    "modeTangent": "接線",
+    "modeCoincident": "一致",
+    "modeDistance": "距離",
+    "modeRadius": "半径",
+    "distance": "距離",
+    "radius": "半径",
+    "promptEdge1": "直線の辺をクリック：その辺は動きません。",
+    "promptEdge2": "拘束する辺をクリック：その辺が動きます。",
+    "promptTangent1": "直線の辺または円をクリック：動きません。",
+    "promptTangent2": "接線にする円（または直線の辺）をクリック：それが動きます。",
+    "promptPoint1": "点をクリック：その点は動きません。",
+    "promptPoint2": "2点目をクリック：その点が動きます。",
+    "promptCircle": "円をクリックしてください。",
+    "promptDistance": "距離を入力して Enter、または Enter で現在の値のままにします。",
+    "promptRadius": "半径を入力して Enter、または Enter で現在の値のままにします。",
+    "promptSolving": "計算中…",
+    "promptConflict": "この拘束は既存の拘束と矛盾するため、何も変更されませんでした。",
+    "promptFailed": "ソルバーがこの拘束を満たせなかったため、何も変更されませんでした。"
   }
 }

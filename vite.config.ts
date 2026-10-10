@@ -2,14 +2,22 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
 
+// Set by the Tauri CLI while it runs `beforeBuildCommand`/`beforeDevCommand` (src-tauri/tauri.conf.json).
+const desktop = Boolean(process.env.TAURI_ENV_PLATFORM)
+
 // https://vite.dev/config/
 export default defineConfig({
+  // Where the app is served from, e.g. BASE_PATH=/webcad/ for https://igami.top/webcad/. Assets, the PWA
+  // manifest and the service worker scope all follow it.
+  base: desktop ? '/' : (process.env.BASE_PATH ?? '/'),
   plugins: [
     react(),
     // T3.7 Installable, offline PWA: every built file is precached, including the lazy PDF chunk, so drafting
     // and export both work offline (PRD). Updates wait for the user ("prompt"): reloading mid-drawing would be
     // disruptive even with autosave. See src/app/useAppUpdate.ts.
     VitePWA({
+      // The desktop app (Tauri) has no service worker; see src/app/pwa.ts. The virtual module stays importable.
+      disable: desktop,
       registerType: 'prompt',
       injectRegister: false,
       // The glob below already precaches the icons; don't list them twice.

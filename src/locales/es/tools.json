@@ -258,5 +258,29 @@
     "holesMatch": "Ambos bordes tienen {count, plural, one {# agujero} other {# agujeros}}: coinciden. Clic para comparar otro par.",
     "holesDiffer": "No coinciden: {a} frente a {b} agujeros ({diff, plural, one {# agujero} other {# agujeros}} de diferencia). Ajusta un paso o las longitudes de borde para que la costura case.",
     "promptLength": "Pasa sobre una forma para ver su longitud."
+  },
+  "constrain": {
+    "name": "Restricción",
+    "mode": "Tipo",
+    "modeParallel": "Paralela",
+    "modePerpendicular": "Perpendicular",
+    "modeTangent": "Tangente",
+    "modeCoincident": "Coincidente",
+    "modeDistance": "Distancia",
+    "modeRadius": "Radio",
+    "distance": "Distancia",
+    "radius": "Radio",
+    "promptEdge1": "Haz clic en un borde recto: se queda donde está.",
+    "promptEdge2": "Haz clic en el borde a restringir: se mueve.",
+    "promptTangent1": "Haz clic en un borde recto o un círculo: se queda donde está.",
+    "promptTangent2": "Haz clic en el círculo (o el borde recto) que será tangente: se mueve.",
+    "promptPoint1": "Haz clic en un punto: se queda donde está.",
+    "promptPoint2": "Haz clic en el segundo punto: se mueve.",
+    "promptCircle": "Haz clic en un círculo.",
+    "promptDistance": "Escribe la distancia y pulsa Intro, o pulsa Intro para mantener la actual.",
+    "promptRadius": "Escribe el radio y pulsa Intro, o pulsa Intro para mantener el actual.",
+    "promptSolving": "Resolviendo…",
+    "promptConflict": "Estas restricciones entran en conflicto con las existentes; no se cambió nada.",
+    "promptFailed": "El solucionador no pudo cumplir esta restricción; no se cambió nada."
   }
 }

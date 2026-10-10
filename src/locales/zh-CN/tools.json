@@ -258,5 +258,29 @@
     "holesMatch": "两条边都是 {count, plural, other {# 个孔}}：孔数一致。单击可比较另一对边。",
     "holesDiffer": "孔数不一致：{a} 对 {b} 个孔（相差 {diff, plural, other {# 个孔}}）。请调整针距或边长，使两边能均匀缝合。",
     "promptLength": "将鼠标移到图形上查看其长度。"
+  },
+  "constrain": {
+    "name": "约束",
+    "mode": "类型",
+    "modeParallel": "平行",
+    "modePerpendicular": "垂直",
+    "modeTangent": "相切",
+    "modeCoincident": "重合",
+    "modeDistance": "距离",
+    "modeRadius": "半径",
+    "distance": "距离",
+    "radius": "半径",
+    "promptEdge1": "点击一条直边——它保持不动。",
+    "promptEdge2": "点击要约束的边——它会移动。",
+    "promptTangent1": "点击一条直边或一个圆——它保持不动。",
+    "promptTangent2": "点击圆（或直边）使其相切——它会移动。",
+    "promptPoint1": "点击一个点——它保持不动。",
+    "promptPoint2": "点击第二个点——它会移动。",
+    "promptCircle": "点击一个圆。",
+    "promptDistance": "输入距离后按 Enter，或直接按 Enter 保持当前值。",
+    "promptRadius": "输入半径后按 Enter，或直接按 Enter 保持当前值。",
+    "promptSolving": "正在求解…",
+    "promptConflict": "这些约束与已有约束冲突，未作任何更改。",
+    "promptFailed": "求解器无法满足此约束，未作任何更改。"
   }
 }

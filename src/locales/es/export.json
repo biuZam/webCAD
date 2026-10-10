@@ -43,5 +43,12 @@
     "assembly": "Las hojas se solapan {overlap} mm. Recorta por una línea discontinua o superpón las hojas haciendo coincidir las marcas de esquina y los números de hoja de los bordes.",
     "sheets": "Hojas"
   },
-  "aiUnreviewed": "{count, plural, one {# objeto fue creado por IA y no se ha revisado.} other {# objetos fueron creados por IA y no se han revisado.}}"
+  "aiUnreviewed": "{count, plural, one {# objeto fue creado por IA y no se ha revisado.} other {# objetos fueron creados por IA y no se han revisado.}}",
+  "watermark": {
+    "title": "Marca de agua",
+    "text": "Texto",
+    "placeholder": "Ninguna",
+    "opacity": "Opacidad",
+    "pdfHint": "Se repite en cada página."
+  }
 }

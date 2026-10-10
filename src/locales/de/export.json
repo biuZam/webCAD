@@ -43,5 +43,12 @@
     "assembly": "Die Blätter überlappen um {overlap} mm. Entlang einer gestrichelten Linie schneiden oder die Blätter überlappend legen; Eckmarken und Blattbeschriftungen am Rand müssen übereinstimmen.",
     "sheets": "Blätter"
   },
-  "aiUnreviewed": "{count, plural, one {# Objekt wurde von der KI erstellt und noch nicht geprüft.} other {# Objekte wurden von der KI erstellt und noch nicht geprüft.}}"
+  "aiUnreviewed": "{count, plural, one {# Objekt wurde von der KI erstellt und noch nicht geprüft.} other {# Objekte wurden von der KI erstellt und noch nicht geprüft.}}",
+  "watermark": {
+    "title": "Wasserzeichen",
+    "text": "Text",
+    "placeholder": "Keines",
+    "opacity": "Deckkraft",
+    "pdfHint": "Wird auf jeder Seite wiederholt."
+  }
 }

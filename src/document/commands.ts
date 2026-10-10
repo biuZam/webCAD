@@ -1,10 +1,11 @@
 // Every document change is a Command. Tools build commands; only the store applies them.
 
 import { current, type Draft } from 'immer'
+import { constraintEntities } from '../geometry/constraints'
 import { transformEntity, type Affine } from '../geometry/transform'
 import { newId } from './factory'
 import type { LengthUnit } from '../lib/units'
-import type { Entity, Id, Layer, LineStyle, Project, ProjectSettings } from './model'
+import type { Constraint, Entity, Id, Layer, LineStyle, Piece, Project, ProjectSettings } from './model'
 
 export interface Command {
   /** i18n key (namespace `common`, under `history.`) naming the action for undo/redo menus. */
@@ -123,6 +124,14 @@ export const removeEntities = (ids: readonly Id[]): Command => ({
       for (let i = piece.entities.length - 1; i >= 0; i--) {
         if (set.has(piece.entities[i].id)) piece.entities.splice(i, 1)
       }
+      // Constraints on deleted entities go with them.
+      const list = piece.constraints
+      if (list) {
+        for (let i = list.length - 1; i >= 0; i--) {
+          if (constraintEntities(list[i] as Constraint).some((id) => set.has(id))) list.splice(i, 1)
+        }
+        if (list.length === 0) delete piece.constraints
+      }
     }
   },
 })
@@ -216,3 +225,50 @@ export function arrayEntities(
     },
   }
 }
+
+/** Entities in the piece that holds `pieceId`, replaced by their solved versions (same ids). */
+function applySolved(piece: Draft<Piece>, solved: readonly Entity[]) {
+  for (const e of solved) {
+    const i = piece.entities.findIndex((x) => x.id === e.id)
+    if (i !== -1) piece.entities[i] = e as Draft<Entity>
+  }
+}
+
+/**
+ * Add a constraint, or replace one with the same id (a changed dimension), together with the geometry the
+ * solver moved to satisfy it: one undo step.
+ */
+export const setConstraint = (pieceId: Id, constraint: Constraint, solved: readonly Entity[]): Command => ({
+  labelKey: 'history.constraint',
+  recipe: (draft) => {
+    const piece = draft.pieces.find((p) => p.id === pieceId)
+    if (!piece) throw new Error(`Unknown piece ${pieceId}`)
+    const list = (piece.constraints ??= [])
+    const i = list.findIndex((c) => c.id === constraint.id)
+    if (i === -1) list.push(constraint)
+    else list[i] = constraint
+    applySolved(piece, solved)
+  },
+})
+
+/** Move geometry to satisfy the piece's existing constraints (Solve). */
+export const applySolution = (pieceId: Id, solved: readonly Entity[]): Command => ({
+  labelKey: 'history.solve',
+  recipe: (draft) => {
+    const piece = draft.pieces.find((p) => p.id === pieceId)
+    if (piece) applySolved(piece, solved)
+  },
+})
+
+export const removeConstraints = (ids: readonly Id[]): Command => ({
+  labelKey: 'history.deleteConstraint',
+  recipe: (draft) => {
+    const set = new Set(ids)
+    for (const piece of draft.pieces) {
+      const list = piece.constraints
+      if (!list) continue
+      for (let i = list.length - 1; i >= 0; i--) if (set.has(list[i].id)) list.splice(i, 1)
+      if (list.length === 0) delete piece.constraints
+    }
+  },
+})

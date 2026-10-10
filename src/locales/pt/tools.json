@@ -258,5 +258,29 @@
     "holesMatch": "As duas arestas têm {count, plural, one {# furo} other {# furos}}: coincidem. Clique para comparar outro par.",
     "holesDiffer": "Diferença: {a} contra {b} furos ({diff, plural, one {# furo} other {# furos}} de diferença). Ajuste um passo ou os comprimentos das arestas para a costura bater.",
     "promptLength": "Passe sobre uma forma para ver o comprimento."
+  },
+  "constrain": {
+    "name": "Restrição",
+    "mode": "Tipo",
+    "modeParallel": "Paralela",
+    "modePerpendicular": "Perpendicular",
+    "modeTangent": "Tangente",
+    "modeCoincident": "Coincidente",
+    "modeDistance": "Distância",
+    "modeRadius": "Raio",
+    "distance": "Distância",
+    "radius": "Raio",
+    "promptEdge1": "Clique numa aresta reta: ela fica onde está.",
+    "promptEdge2": "Clique na aresta a restringir: ela se move.",
+    "promptTangent1": "Clique numa aresta reta ou num círculo: fica onde está.",
+    "promptTangent2": "Clique no círculo (ou na aresta reta) a tornar tangente: ele se move.",
+    "promptPoint1": "Clique num ponto: ele fica onde está.",
+    "promptPoint2": "Clique no segundo ponto: ele se move.",
+    "promptCircle": "Clique num círculo.",
+    "promptDistance": "Digite a distância e pressione Enter, ou Enter para manter a atual.",
+    "promptRadius": "Digite o raio e pressione Enter, ou Enter para manter o atual.",
+    "promptSolving": "Resolvendo…",
+    "promptConflict": "Estas restrições entram em conflito com as existentes; nada foi alterado.",
+    "promptFailed": "O solucionador não conseguiu satisfazer esta restrição; nada foi alterado."
   }
 }

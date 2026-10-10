@@ -105,11 +105,12 @@ Quality
 - [x] U4 Collapsible side panel (layers + properties), remembered per browser
 - [x] U5 CAD-style lines: the Line tool makes one entity per segment by default (AutoCAD LINE), so each segment selects alone; Polyline mode (palette group with Line) makes one path (PLINE). New Explode action (Shift+X, grouped with Join) splits paths into segments, curves keeping their handles
 - [x] U6 Pitch (针距/斩距) in the Properties panel — hole sets and project defaults — is a dropdown of chisel presets 2.7 / 3.38 / 3.85 / 4.0 / 5.0 mm plus Custom (a number field); the Stitch holes tool uses the same list (`PITCH_PRESETS_MM`; 3.0 dropped, 5.0 added)
+- [x] U7 Export watermark (`src/export/watermark.ts`): custom text + opacity in the Export dialog (remembered per browser), repeated in staggered rows tilted 30°. SVG/PNG: a top `Watermark` Inkscape layer over the viewBox; PDF: drawn by jsPDF over every whole page (assembly page included), translucent via GState, CJK font loaded when the text needs it. DXF ignores it. MCP export tools take `watermark: {text, opacity}`
 
 ## M5 — v2
 
-- [ ] T5.1 planegcs WASM (separately loaded, LGPL) + constraint model in schema v3 with migration (v2 is taken by `aiCreated`, T6.3)
-- [ ] T5.2 Constraint UI: parallel, perpendicular, tangent, distance; parametric dimensions
+- [x] T5.1 planegcs WASM (own lazy chunk + .wasm asset, LGPL) in `src/geometry/solver.ts`; constraints are `Piece.constraints` (schema v3, no-op migration): coincident, distance, parallel, perpendicular, tangent (line–circle), radius, referencing path anchors / straight edges / circle ids by index. `src/geometry/constraints.ts` is the pure part (reference lookup, residuals). Solving is explicit, not on every edit: the first pick (or a dimension's first point / circle centre) is pinned, everything else moves minimally; the result is checked against every constraint in plain TS (the solver silently drops constraints between pinned points). Deleting an entity deletes its constraints
+- [x] T5.2 Constraint UI: tool Z (`src/tools/constrain.ts`, mode choice: parallel / perpendicular / tangent / coincident / distance / radius); the constraint and the geometry it moved are one undo step. Properties panel lists constraints on the selection (all when nothing is selected): distance and radius are editable parametric dimensions, ⚠ marks unsatisfied or broken ones, Solve re-applies them. Not done: auto re-solve while dragging or after other edits (moving geometry just flags the constraint), constraint glyphs on the canvas, constraints through MCP, curved edges and ellipses as references. Not checked in a real browser yet (WASM loading via `?url` is covered by the build, not by a run)
 - [x] T5.3 Notches [L7] — tool J: single/double, snip or V, inward on closed outlines (cursor side on open lines), on the edge's layer. Arrays [M10] — tool Q: linear (base + step, count incl. original) and circular (centre, count, sweep; 360° = even spacing), one undo step via `arrayEntities`. DXF import — toolbar "Import…" now takes SVG or DXF (`src/persistence/dxf-import.ts`): $INSUNITS, LINE, (LW)POLYLINE with bulges, CIRCLE, ARC, ELLIPSE, SPLINE (exact Béziers by knot insertion; rational ones sampled); blocks/text/dimensions skipped and counted
 
 ## M6 — MCP server (headless, `docs/MCP.md`)
@@ -126,9 +127,13 @@ P2 — leather
 P3 — I/O
 - [x] T6.6 export_pdf (tiled/single, en or zh-CN print text from the App's locale files, CJK font read from `public/fonts`) and import_file (SVG/DXF, reference layer by default) via a happy-dom window installed lazily as Node globals (`src/mcp/headless-dom.ts`; canvas stub shared with tests in `src/lib/headless-canvas.ts`; happy-dom is now a runtime dependency, still never bundled into the App); resources `leatherdraft://{docId}/project.json` and `drawing.svg`; setup docs in `docs/MCP.md` §3.1
 
+## Desktop app
+
+- [x] D1 Tauri 2 shell (`src-tauri/`, modelled on doodle-desktop): same Vite build, `pnpm desktop:dev` / `desktop:build`; native Save/Open (project `.json`, Save rewrites the same path until quit) and export Save dialogs via dialog + fs plugins (`src/lib/desktop.ts`, lazy), fs access limited to user-picked paths; no service worker in desktop builds; icons from `public/icon.svg`; CI workflow `desktop.yml` (Windows NSIS + universal macOS dmg, manual or `desktop-v*` tag). Not done: code signing/notarisation, auto-update, prompting about unsaved changes on window close, remembering the save path across restarts
+
 ## Open questions blocking tasks (from PRD)
 
-- ~~Licence MIT vs Apache-2.0~~ → resolved: Apache-2.0 (LICENSE in the GitHub repo; `license` in package.json)
-- Slanted slit holes in v1? → affects T2.5 scope
-- Pull DXF into v1? → may move T4.6 into M3
-- Touch/pen on iPad in v1? → affects T0.10 pointer handling
+- ~~Licence MIT vs Apache-2.0~~ → Apache-2.0 until `ca93653`; since 2026-10-10 **PolyForm Noncommercial 1.0.0** with separate commercial licenses (`LICENSE`, `NOTICE`, `COMMERCIAL.md`), contributor CLA (`CLA.md`, `.github/workflows/cla.yml`). Exports name LeatherDraft as generator (`src/export/provenance.ts`: SVG `<metadata>`, PDF Creator, DXF 999 comment)
+- ~~Slanted slit holes in v1?~~ → resolved: not in v1 (T2.5 already built them; they stay out of the v1 promise/UI emphasis until revisited)
+- ~~Pull DXF into v1?~~ → moot: DXF export (T4.6) and import (T5.3) are already built
+- ~~Touch/pen on iPad in v1?~~ → resolved: not supported in v1

@@ -43,5 +43,12 @@
     "assembly": "As folhas se sobrepõem em {overlap} mm. Corte ao longo de uma linha tracejada ou sobreponha as folhas, alinhando as marcas de canto e os números das folhas nas bordas.",
     "sheets": "Folhas"
   },
-  "aiUnreviewed": "{count, plural, one {# objeto foi criado por IA e não foi revisado.} other {# objetos foram criados por IA e não foram revisados.}}"
+  "aiUnreviewed": "{count, plural, one {# objeto foi criado por IA e não foi revisado.} other {# objetos foram criados por IA e não foram revisados.}}",
+  "watermark": {
+    "title": "Marca d'água",
+    "text": "Texto",
+    "placeholder": "Nenhuma",
+    "opacity": "Opacidade",
+    "pdfHint": "Repetida em todas as páginas."
+  }
 }

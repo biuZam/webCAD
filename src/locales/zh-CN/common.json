@@ -59,7 +59,10 @@
     "difference": "差集",
     "addCentreLine": "添加中心线",
     "addEllipse": "添加椭圆",
-    "reviewAi": "标记为已复核"
+    "reviewAi": "标记为已复核",
+    "constraint": "添加约束",
+    "solve": "求解约束",
+    "deleteConstraint": "删除约束"
   },
   "layers": {
     "title": "图层",
@@ -210,7 +213,21 @@
     "projectHint": "新缝线和缝孔的默认值。",
     "stitchMargin": "缝线边距",
     "defaultPitch": "针距",
-    "defaultHoleSize": "孔径"
+    "defaultHoleSize": "孔径",
+    "constraints": {
+      "title": "约束",
+      "parallel": "平行",
+      "perpendicular": "垂直",
+      "tangent": "相切",
+      "coincident": "重合",
+      "distance": "距离",
+      "radius": "半径",
+      "delete": "删除约束",
+      "unsatisfied": "未满足：求解后几何已被移动",
+      "broken": "已失效：所引用的对象已改变或被删除",
+      "solve": "求解",
+      "solveFailed": "无法求解：约束相互冲突"
+    }
   },
   "lineStyle": {
     "solid": "实线（裁切）",

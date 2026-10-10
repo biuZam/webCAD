@@ -32,6 +32,7 @@ import { pathLength } from '../geometry/kernel'
 import { scaleXYAbout, supportsNonUniformScale, translation } from '../geometry/transform'
 import { distance } from '../lib/vec2'
 import { NumberField, PresetLengthField, ReadOnlyRow, SelectField, TextField } from './fields'
+import { ConstraintsSection } from './ConstraintsSection'
 import { useLayerName } from './layerName'
 
 const LINE_STYLES: readonly LineStyle[] = ['solid', 'dashed', 'dotted', 'dashDot']
@@ -62,6 +63,7 @@ export function PropertiesPanel() {
       <section className="panel">
         <h2 className="panel-title">{t('properties.title')}</h2>
         <p className="panel-hint">{t('properties.empty')}</p>
+        <ConstraintsSection />
         <ProjectSettingsFields />
       </section>
     )
@@ -142,6 +144,7 @@ export function PropertiesPanel() {
       </div>
 
       {single && <TypeFields entity={single} />}
+      <ConstraintsSection />
     </section>
   )
 }

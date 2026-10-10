@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LeatherDraft", "untitled": "無題" },
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "無題"
+  },
   "menu": {
     "undo": "元に戻す",
     "redo": "やり直し",
@@ -56,11 +59,19 @@
     "difference": "差",
     "addCentreLine": "中心線を追加",
     "addEllipse": "楕円を追加",
-    "reviewAi": "確認済みにする"
+    "reviewAi": "確認済みにする",
+    "constraint": "拘束を追加",
+    "solve": "拘束を解く",
+    "deleteConstraint": "拘束を削除"
   },
   "layers": {
     "title": "レイヤー",
-    "kind": { "cut": "裁断", "stitch": "縫い", "reference": "参照", "notes": "メモ" },
+    "kind": {
+      "cut": "裁断",
+      "stitch": "縫い",
+      "reference": "参照",
+      "notes": "メモ"
+    },
     "show": "{name} を表示",
     "hide": "{name} を非表示",
     "active": "{name} に描画",
@@ -96,7 +107,10 @@
     "more": "{name} · 右クリックで他のツール",
     "group": "{name} の仲間のツール"
   },
-  "panels": { "hide": "サイドパネルを隠す", "show": "サイドパネルを表示" },
+  "panels": {
+    "hide": "サイドパネルを隠す",
+    "show": "サイドパネルを表示"
+  },
   "input": {
     "label": "数値入力",
     "hint": "値を入力 · Tab で次の欄 · Enter で適用 · Esc でクリア。"
@@ -138,7 +152,9 @@
     "offlineReady": "オフラインで使えます",
     "imported": "{name} から {count, plural, other {# 個の図形}}を読み込み、選択しました{skipped, plural, =0 {} other {（他の # 件はスキップ）}}。"
   },
-  "notice": { "dismiss": "閉じる" },
+  "notice": {
+    "dismiss": "閉じる"
+  },
   "properties": {
     "title": "プロパティ",
     "empty": "選択するとプロパティを確認・編集できます。",
@@ -197,7 +213,21 @@
     "projectHint": "新しい縫い線・穴の既定値。",
     "stitchMargin": "縫い線の余白",
     "defaultPitch": "ピッチ",
-    "defaultHoleSize": "穴のサイズ"
+    "defaultHoleSize": "穴のサイズ",
+    "constraints": {
+      "title": "拘束",
+      "parallel": "平行",
+      "perpendicular": "直角",
+      "tangent": "接線",
+      "coincident": "一致",
+      "distance": "距離",
+      "radius": "半径",
+      "delete": "拘束を削除",
+      "unsatisfied": "未達成：解いた後にジオメトリが動きました",
+      "broken": "無効：参照先が変更または削除されました",
+      "solve": "解く",
+      "solveFailed": "解けません：拘束が矛盾しています"
+    }
   },
   "lineStyle": {
     "solid": "実線（裁断）",
@@ -205,8 +235,14 @@
     "dotted": "点線（参照）",
     "dashDot": "一点鎖線（中心）"
   },
-  "units": { "mm": "mm", "cm": "cm", "in": "in" },
-  "dialog": { "cancel": "キャンセル" },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "キャンセル"
+  },
   "shortcuts": {
     "title": "キーボードショートカット",
     "hint": "英字キー（Shift の有無は問わない）。数字は値の入力用、Space でビューを移動します。",
@@ -229,5 +265,8 @@
     "label": "作図エリア",
     "help": "ツールは英字キーで選択（L 線、R 長方形、C 円、P ペン、V 選択…）。点は数値入力も可能: 数字を打ち始めると入力バーに座標や長さを入力でき、Tab で欄を移動、Enter で適用、Esc で取消。"
   },
-  "update": { "available": "新しいバージョンがあります。", "reload": "再読み込み" }
+  "update": {
+    "available": "新しいバージョンがあります。",
+    "reload": "再読み込み"
+  }
 }

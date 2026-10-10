@@ -258,5 +258,29 @@
     "holesMatch": "Entrambi i lati hanno {count, plural, one {# foro} other {# fori}}: corrispondono. Clicca per confrontare un’altra coppia.",
     "holesDiffer": "Non corrispondono: {a} contro {b} fori ({diff, plural, one {# foro} other {# fori}} di differenza). Regola un passo o le lunghezze dei lati perché la cucitura torni.",
     "promptLength": "Passa su una forma per vederne la lunghezza."
+  },
+  "constrain": {
+    "name": "Vincolo",
+    "mode": "Tipo",
+    "modeParallel": "Parallelo",
+    "modePerpendicular": "Perpendicolare",
+    "modeTangent": "Tangente",
+    "modeCoincident": "Coincidente",
+    "modeDistance": "Distanza",
+    "modeRadius": "Raggio",
+    "distance": "Distanza",
+    "radius": "Raggio",
+    "promptEdge1": "Fai clic su un bordo rettilineo: resta dov’è.",
+    "promptEdge2": "Fai clic sul bordo da vincolare: si sposta.",
+    "promptTangent1": "Fai clic su un bordo rettilineo o un cerchio: resta dov’è.",
+    "promptTangent2": "Fai clic sul cerchio (o sul bordo rettilineo) da rendere tangente: si sposta.",
+    "promptPoint1": "Fai clic su un punto: resta dov’è.",
+    "promptPoint2": "Fai clic sul secondo punto: si sposta.",
+    "promptCircle": "Fai clic su un cerchio.",
+    "promptDistance": "Digita la distanza e premi Invio, oppure Invio per mantenere quella attuale.",
+    "promptRadius": "Digita il raggio e premi Invio, oppure Invio per mantenere quello attuale.",
+    "promptSolving": "Risoluzione…",
+    "promptConflict": "Questi vincoli sono in conflitto con quelli esistenti; nulla è stato modificato.",
+    "promptFailed": "Il risolutore non ha potuto soddisfare questo vincolo; nulla è stato modificato."
   }
 }

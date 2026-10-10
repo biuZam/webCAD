@@ -43,5 +43,12 @@
     "assembly": "Sheets overlap by {overlap} mm. Trim along a dashed line or overlap the sheets, matching the corner marks and the sheet labels at the edges.",
     "sheets": "Sheets"
   },
-  "aiUnreviewed": "{count, plural, other {AI가 만든 객체 #개를 아직 검토하지 않았습니다.}}"
+  "aiUnreviewed": "{count, plural, other {AI가 만든 객체 #개를 아직 검토하지 않았습니다.}}",
+  "watermark": {
+    "title": "워터마크",
+    "text": "텍스트",
+    "placeholder": "없음",
+    "opacity": "불투명도",
+    "pdfHint": "모든 페이지에 반복 표시됩니다."
+  }
 }

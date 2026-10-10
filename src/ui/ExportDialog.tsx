@@ -27,6 +27,10 @@ interface ExportSettings {
   orientation: Orientation | 'auto'
   overlap: number
   dpi: number
+  /** Empty = no watermark. */
+  watermark: string
+  /** Percent. */
+  watermarkOpacity: number
 }
 
 const MIME = { svg: 'image/svg+xml', dxf: 'application/dxf' } as const
@@ -49,6 +53,8 @@ const DEFAULTS: ExportSettings = {
   orientation: 'auto',
   overlap: 10,
   dpi: 150,
+  watermark: '',
+  watermarkOpacity: 15,
 }
 
 // Remembered per browser for convenience only (not part of the project).
@@ -113,20 +119,28 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
       includeLabels: settings.includeLabels,
       strokeWidth: settings.strokeWidth ?? undefined,
       polyline: settings.polyline,
+      watermark:
+        settings.format !== 'dxf' && settings.watermark.trim()
+          ? { text: settings.watermark, opacity: settings.watermarkOpacity / 100 }
+          : undefined,
     }
     const base = project.name.trim() || 'pattern'
     saveSettings(settings)
     setBusy(true)
     try {
+      let saved: string | null
       if (settings.format === 'svg') {
-        downloadBlob(`${base}.svg`, new Blob([exportSvg(project, svgOptions)], { type: MIME.svg }))
+        saved = await downloadBlob(`${base}.svg`, new Blob([exportSvg(project, svgOptions)], { type: MIME.svg }))
       } else if (settings.format === 'dxf') {
         // Lazy: Maker.js is only loaded for DXF.
         const { exportDxf } = await import('../export/dxf')
-        downloadBlob(`${base}.dxf`, new Blob([exportDxf(project, svgOptions)], { type: MIME.dxf }))
+        saved = await downloadBlob(`${base}.dxf`, new Blob([exportDxf(project, svgOptions)], { type: MIME.dxf }))
       } else if (settings.format === 'png') {
         const { svgToPng } = await import('../export/png')
-        downloadBlob(`${base}.png`, await svgToPng(exportSvg(project, { ...svgOptions, margin: 5 }), settings.dpi))
+        saved = await downloadBlob(
+          `${base}.png`,
+          await svgToPng(exportSvg(project, { ...svgOptions, margin: 5 }), settings.dpi),
+        )
       } else {
         // Lazy: jsPDF + svg2pdf.js are only loaded when someone actually exports a PDF.
         const { exportPdf } = await import('../export/pdf')
@@ -140,9 +154,11 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
           date: new Intl.DateTimeFormat(i18next.language, { dateStyle: 'medium' }).format(new Date()),
           loadCjkFont,
         })
-        downloadBlob(`${base}.pdf`, blob)
+        saved = await downloadBlob(`${base}.pdf`, blob)
       }
-      showNotice({ kind: 'info', key: 'file.exported', name: `${base}.${settings.format}` })
+      // Cancelled the desktop Save dialog: keep the export dialog open.
+      if (saved === null) return
+      showNotice({ kind: 'info', key: 'file.exported', name: saved })
       onClose()
     } catch (e) {
       console.error('[LeatherDraft] Export failed', e)
@@ -289,6 +305,37 @@ export function ExportDialog({ open, onClose }: { open: boolean; onClose: () => 
             <span>mm</span>
           </label>
         </fieldset>
+
+        {settings.format !== 'dxf' && (
+          <fieldset className="dialog-group">
+            <legend>{t('watermark.title')}</legend>
+            <label className="dialog-row">
+              <span>{t('watermark.text')}</span>
+              <input
+                type="text"
+                maxLength={100}
+                placeholder={t('watermark.placeholder')}
+                value={settings.watermark}
+                onChange={(e) => set({ watermark: e.target.value })}
+              />
+              <span />
+            </label>
+            <label className="dialog-row">
+              <span>{t('watermark.opacity')}</span>
+              <input
+                type="number"
+                min={5}
+                max={100}
+                step={5}
+                disabled={!settings.watermark.trim()}
+                value={settings.watermarkOpacity}
+                onChange={(e) => set({ watermarkOpacity: Math.min(100, Math.max(5, Number(e.target.value) || 15)) })}
+              />
+              <span>%</span>
+            </label>
+            {settings.format === 'pdf' && <p className="dialog-hint">{t('watermark.pdfHint')}</p>}
+          </fieldset>
+        )}
 
         <div className="dialog-actions">
           <button type="button" onClick={onClose}>

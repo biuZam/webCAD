@@ -258,5 +258,29 @@
     "holesMatch": "두 변 모두 {count, plural, other {#개 구멍}}으로 일치합니다. 클릭해 다른 쌍을 비교하세요.",
     "holesDiffer": "불일치: {a}개 대 {b}개 구멍(차이 {diff, plural, other {#개}}). 피치나 변 길이를 조정해 딱 맞게 박음질하세요.",
     "promptLength": "도형 위에 커서를 올리면 길이를 표시합니다."
+  },
+  "constrain": {
+    "name": "구속",
+    "mode": "종류",
+    "modeParallel": "평행",
+    "modePerpendicular": "직각",
+    "modeTangent": "접선",
+    "modeCoincident": "일치",
+    "modeDistance": "거리",
+    "modeRadius": "반지름",
+    "distance": "거리",
+    "radius": "반지름",
+    "promptEdge1": "직선 모서리를 클릭하세요. 이 모서리는 움직이지 않습니다.",
+    "promptEdge2": "구속할 모서리를 클릭하세요. 이 모서리가 움직입니다.",
+    "promptTangent1": "직선 모서리나 원을 클릭하세요. 움직이지 않습니다.",
+    "promptTangent2": "접하게 할 원(또는 직선 모서리)을 클릭하세요. 이쪽이 움직입니다.",
+    "promptPoint1": "점을 클릭하세요. 이 점은 움직이지 않습니다.",
+    "promptPoint2": "두 번째 점을 클릭하세요. 이 점이 움직입니다.",
+    "promptCircle": "원을 클릭하세요.",
+    "promptDistance": "거리를 입력하고 Enter를 누르거나, Enter만 눌러 현재 값을 유지하세요.",
+    "promptRadius": "반지름을 입력하고 Enter를 누르거나, Enter만 눌러 현재 값을 유지하세요.",
+    "promptSolving": "계산 중…",
+    "promptConflict": "이 구속은 기존 구속과 충돌하여 아무것도 변경되지 않았습니다.",
+    "promptFailed": "솔버가 이 구속을 만족시키지 못해 아무것도 변경되지 않았습니다."
   }
 }

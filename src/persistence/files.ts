@@ -4,6 +4,7 @@
 
 import type { Project } from '../document/model'
 import { migrateProject, SchemaError } from '../document/schema'
+import { desktopOpenText, desktopSave, desktopWrite, isDesktop } from '../lib/desktop'
 
 // The pickers are not in TypeScript's DOM lib yet (WICG File System Access).
 interface FilePickerOptions {
@@ -23,6 +24,7 @@ declare global {
 }
 
 const PICKER_TYPES = [{ description: 'LeatherDraft project', accept: { 'application/json': ['.json'] } }]
+const DESKTOP_FILTERS = [{ name: 'LeatherDraft project', extensions: ['json'] }]
 
 export function serializeProject(project: Project): string {
   return JSON.stringify(project, null, 2) + '\n'
@@ -49,6 +51,8 @@ const isAbort = (e: unknown) => e instanceof DOMException && e.name === 'AbortEr
 export interface FileRef {
   fileName: string
   handle: FileSystemFileHandle | null
+  /** Desktop app only: the file's path, valid for writing until the app quits (not persisted). */
+  path?: string
 }
 
 async function writable(handle: FileSystemFileHandle): Promise<boolean> {
@@ -68,6 +72,14 @@ export async function saveProjectFile(
   saveAs: boolean,
 ): Promise<FileRef | null> {
   const text = serializeProject(project)
+  if (isDesktop()) {
+    if (!saveAs && current?.path) {
+      await desktopWrite(current.path, text)
+      return current
+    }
+    const saved = await desktopSave(current?.fileName ?? fileNameFor(project), DESKTOP_FILTERS, text, current?.path)
+    return saved && { fileName: saved.fileName, handle: null, path: saved.path }
+  }
   try {
     let handle = !saveAs ? (current?.handle ?? null) : null
     if (handle && !(await writable(handle))) handle = null
@@ -106,6 +118,14 @@ function pickWithInput(): Promise<File | null> {
 
 /** Ask for a project file and parse it. Returns null if the user cancelled; throws SchemaError for bad files. */
 export async function openProjectFile(): Promise<{ project: Project; file: FileRef } | null> {
+  if (isDesktop()) {
+    const picked = await desktopOpenText(DESKTOP_FILTERS)
+    if (!picked) return null
+    return {
+      project: parseProjectFile(picked.text),
+      file: { fileName: picked.fileName, handle: null, path: picked.path },
+    }
+  }
   let file: File | null
   let handle: FileSystemFileHandle | null = null
   try {

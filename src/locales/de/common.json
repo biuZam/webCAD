@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LeatherDraft", "untitled": "Unbenannt" },
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "Unbenannt"
+  },
   "menu": {
     "undo": "Rückgängig",
     "redo": "Wiederholen",
@@ -56,11 +59,19 @@
     "difference": "Differenz",
     "addCentreLine": "Mittellinie hinzufügen",
     "addEllipse": "Ellipse hinzufügen",
-    "reviewAi": "Als geprüft markieren"
+    "reviewAi": "Als geprüft markieren",
+    "constraint": "Bedingung hinzufügen",
+    "solve": "Bedingungen lösen",
+    "deleteConstraint": "Bedingung löschen"
   },
   "layers": {
     "title": "Ebenen",
-    "kind": { "cut": "Schnitt", "stitch": "Naht", "reference": "Referenz", "notes": "Notizen" },
+    "kind": {
+      "cut": "Schnitt",
+      "stitch": "Naht",
+      "reference": "Referenz",
+      "notes": "Notizen"
+    },
     "show": "{name} anzeigen",
     "hide": "{name} ausblenden",
     "active": "Auf {name} zeichnen",
@@ -96,7 +107,10 @@
     "more": "{name} · Rechtsklick für mehr",
     "group": "Weitere Werkzeuge wie {name}"
   },
-  "panels": { "hide": "Seitenleiste ausblenden", "show": "Seitenleiste einblenden" },
+  "panels": {
+    "hide": "Seitenleiste ausblenden",
+    "show": "Seitenleiste einblenden"
+  },
   "input": {
     "label": "Eingabe",
     "hint": "Wert eingeben, Tab für das nächste Feld, Eingabe zum Anwenden, Esc zum Leeren."
@@ -138,7 +152,9 @@
     "offlineReady": "Bereit für die Offline-Nutzung",
     "imported": "{count, plural, one {# Form} other {# Formen}} aus {name} importiert und ausgewählt{skipped, plural, =0 {} one {; # anderes Element übersprungen} other {; # andere Elemente übersprungen}}."
   },
-  "notice": { "dismiss": "Schließen" },
+  "notice": {
+    "dismiss": "Schließen"
+  },
   "properties": {
     "title": "Eigenschaften",
     "empty": "Wählen Sie etwas aus, um seine Eigenschaften zu sehen und zu bearbeiten.",
@@ -197,7 +213,21 @@
     "projectHint": "Standardwerte für neue Nahtlinien und Löcher.",
     "stitchMargin": "Nahtabstand",
     "defaultPitch": "Stichabstand",
-    "defaultHoleSize": "Lochgröße"
+    "defaultHoleSize": "Lochgröße",
+    "constraints": {
+      "title": "Bedingungen",
+      "parallel": "Parallel",
+      "perpendicular": "Senkrecht",
+      "tangent": "Tangential",
+      "coincident": "Deckungsgleich",
+      "distance": "Abstand",
+      "radius": "Radius",
+      "delete": "Bedingung löschen",
+      "unsatisfied": "Nicht erfüllt: Die Geometrie wurde seit dem Lösen verschoben",
+      "broken": "Defekt: Etwas, worauf sie sich bezieht, wurde geändert oder fehlt",
+      "solve": "Lösen",
+      "solveFailed": "Nicht lösbar: Die Bedingungen widersprechen sich"
+    }
   },
   "lineStyle": {
     "solid": "Durchgezogen (Schnitt)",
@@ -205,8 +235,14 @@
     "dotted": "Gepunktet (Referenz)",
     "dashDot": "Strich-Punkt (Mitte)"
   },
-  "units": { "mm": "mm", "cm": "cm", "in": "in" },
-  "dialog": { "cancel": "Abbrechen" },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "Abbrechen"
+  },
   "shortcuts": {
     "title": "Tastenkürzel",
     "hint": "Buchstabentasten, mit oder ohne Umschalt. Zahlen bleiben der Werteeingabe vorbehalten; mit der Leertaste wird die Ansicht verschoben.",
@@ -229,5 +265,8 @@
     "label": "Zeichenfläche",
     "help": "Wählen Sie ein Werkzeug mit seiner Buchstabentaste (L Linie, R Rechteck, C Kreis, P Stift, V Auswählen…). Punkte lassen sich eingeben: Beginnen Sie mit einer Zahl, um Koordinaten oder Längen in der Eingabeleiste einzugeben, Tab wechselt zwischen den Feldern, Eingabe wendet an, Esc bricht ab."
   },
-  "update": { "available": "Eine neue Version ist bereit.", "reload": "Neu laden" }
+  "update": {
+    "available": "Eine neue Version ist bereit.",
+    "reload": "Neu laden"
+  }
 }

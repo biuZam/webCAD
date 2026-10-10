@@ -258,5 +258,29 @@
     "holesMatch": "Both edges have {count, plural, one {# hole} other {# holes}}: they match. Click to compare another pair.",
     "holesDiffer": "Mismatch: {a} vs {b} holes ({diff, plural, one {# hole} other {# holes}} apart). Adjust a pitch or the edge lengths so they sew up evenly.",
     "promptLength": "Hover a shape to see its length."
+  },
+  "constrain": {
+    "name": "Constraint",
+    "mode": "Constraint",
+    "modeParallel": "Parallel",
+    "modePerpendicular": "Perpendicular",
+    "modeTangent": "Tangent",
+    "modeCoincident": "Coincident",
+    "modeDistance": "Distance",
+    "modeRadius": "Radius",
+    "distance": "Distance",
+    "radius": "Radius",
+    "promptEdge1": "Click a straight edge — it stays where it is.",
+    "promptEdge2": "Click the edge to constrain — it moves.",
+    "promptTangent1": "Click a straight edge or a circle — it stays where it is.",
+    "promptTangent2": "Click the circle (or the straight edge) to make tangent — it moves.",
+    "promptPoint1": "Click a point — it stays where it is.",
+    "promptPoint2": "Click the second point — it moves.",
+    "promptCircle": "Click a circle.",
+    "promptDistance": "Type the distance and press Enter, or press Enter to keep the current one.",
+    "promptRadius": "Type the radius and press Enter, or press Enter to keep the current one.",
+    "promptSolving": "Solving…",
+    "promptConflict": "These constraints conflict with the existing ones; nothing was changed.",
+    "promptFailed": "The solver could not satisfy this constraint; nothing was changed."
   }
 }

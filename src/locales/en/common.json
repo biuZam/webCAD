@@ -59,7 +59,10 @@
     "difference": "Difference",
     "addCentreLine": "Add centre line",
     "addEllipse": "Add ellipse",
-    "reviewAi": "Mark reviewed"
+    "reviewAi": "Mark reviewed",
+    "constraint": "Add constraint",
+    "solve": "Solve constraints",
+    "deleteConstraint": "Delete constraint"
   },
   "layers": {
     "title": "Layers",
@@ -210,7 +213,21 @@
     "projectHint": "Defaults for new stitch lines and holes.",
     "stitchMargin": "Stitch margin",
     "defaultPitch": "Pitch",
-    "defaultHoleSize": "Hole size"
+    "defaultHoleSize": "Hole size",
+    "constraints": {
+      "title": "Constraints",
+      "parallel": "Parallel",
+      "perpendicular": "Perpendicular",
+      "tangent": "Tangent",
+      "coincident": "Coincident",
+      "distance": "Distance",
+      "radius": "Radius",
+      "delete": "Delete constraint",
+      "unsatisfied": "Not satisfied: the geometry moved since it was solved",
+      "broken": "Broken: something it refers to changed or is gone",
+      "solve": "Solve",
+      "solveFailed": "Could not solve: the constraints conflict"
+    }
   },
   "lineStyle": {
     "solid": "Solid (cut)",

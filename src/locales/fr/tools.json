@@ -258,5 +258,29 @@
     "holesMatch": "Les deux arêtes ont {count, plural, one {# trou} other {# trous}} : elles correspondent. Cliquez pour comparer une autre paire.",
     "holesDiffer": "Écart : {a} contre {b} trous ({diff, plural, one {# trou} other {# trous}} de différence). Ajustez un pas ou les longueurs d’arête pour que la couture tombe juste.",
     "promptLength": "Survolez une forme pour voir sa longueur."
+  },
+  "constrain": {
+    "name": "Contrainte",
+    "mode": "Type",
+    "modeParallel": "Parallèle",
+    "modePerpendicular": "Perpendiculaire",
+    "modeTangent": "Tangent",
+    "modeCoincident": "Coïncident",
+    "modeDistance": "Distance",
+    "modeRadius": "Rayon",
+    "distance": "Distance",
+    "radius": "Rayon",
+    "promptEdge1": "Cliquez sur une arête droite : elle reste en place.",
+    "promptEdge2": "Cliquez sur l’arête à contraindre : elle se déplace.",
+    "promptTangent1": "Cliquez sur une arête droite ou un cercle : il reste en place.",
+    "promptTangent2": "Cliquez sur le cercle (ou l’arête droite) à rendre tangent : il se déplace.",
+    "promptPoint1": "Cliquez sur un point : il reste en place.",
+    "promptPoint2": "Cliquez sur le second point : il se déplace.",
+    "promptCircle": "Cliquez sur un cercle.",
+    "promptDistance": "Saisissez la distance puis Entrée, ou Entrée pour garder la valeur actuelle.",
+    "promptRadius": "Saisissez le rayon puis Entrée, ou Entrée pour garder la valeur actuelle.",
+    "promptSolving": "Résolution…",
+    "promptConflict": "Ces contraintes sont en conflit avec les existantes ; rien n’a été modifié.",
+    "promptFailed": "Le solveur n’a pas pu satisfaire cette contrainte ; rien n’a été modifié."
   }
 }

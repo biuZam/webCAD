@@ -258,5 +258,29 @@
     "holesMatch": "Beide Kanten haben {count, plural, one {# Loch} other {# Löcher}}: Sie stimmen überein. Klicken, um ein weiteres Paar zu vergleichen.",
     "holesDiffer": "Abweichung: {a} gegenüber {b} Löchern ({diff, plural, one {# Loch} other {# Löcher}} Unterschied). Passen Sie einen Stichabstand oder die Kantenlängen an, damit sich beide gleichmäßig vernähen lassen.",
     "promptLength": "Mit der Maus über eine Form fahren, um ihre Länge zu sehen."
+  },
+  "constrain": {
+    "name": "Bedingung",
+    "mode": "Typ",
+    "modeParallel": "Parallel",
+    "modePerpendicular": "Senkrecht",
+    "modeTangent": "Tangential",
+    "modeCoincident": "Deckungsgleich",
+    "modeDistance": "Abstand",
+    "modeRadius": "Radius",
+    "distance": "Abstand",
+    "radius": "Radius",
+    "promptEdge1": "Gerade Kante anklicken – sie bleibt, wo sie ist.",
+    "promptEdge2": "Kante anklicken, die eingeschränkt wird – sie bewegt sich.",
+    "promptTangent1": "Gerade Kante oder Kreis anklicken – bleibt, wo er ist.",
+    "promptTangent2": "Kreis (oder gerade Kante) anklicken, der tangential werden soll – er bewegt sich.",
+    "promptPoint1": "Punkt anklicken – er bleibt, wo er ist.",
+    "promptPoint2": "Zweiten Punkt anklicken – er bewegt sich.",
+    "promptCircle": "Kreis anklicken.",
+    "promptDistance": "Abstand eingeben und Enter drücken, oder Enter für den aktuellen Wert.",
+    "promptRadius": "Radius eingeben und Enter drücken, oder Enter für den aktuellen Wert.",
+    "promptSolving": "Wird gelöst …",
+    "promptConflict": "Diese Bedingungen widersprechen den vorhandenen; nichts wurde geändert.",
+    "promptFailed": "Der Löser konnte diese Bedingung nicht erfüllen; nichts wurde geändert."
   }
 }

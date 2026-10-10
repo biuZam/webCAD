@@ -190,6 +190,18 @@ input[type='radio'] {
   color: var(--muted);
 }
 
+.toolbar-github {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  color: var(--muted);
+  border-radius: 4px;
+}
+.toolbar-github:hover,
+.toolbar-github:focus-visible {
+  color: var(--text);
+}
+
 .app-main {
   display: grid;
   grid-template-columns: auto 1fr 260px;

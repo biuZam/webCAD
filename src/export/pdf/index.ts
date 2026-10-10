@@ -9,13 +9,15 @@
 // subset) is embedded for all text on the pages and the labels in the drawing; jsPDF subsets it again, so the
 // PDF only carries the glyphs it uses. Without a loader, non-Latin-1 characters print as "?".
 
-import { jsPDF } from 'jspdf'
+import { GState, jsPDF } from 'jspdf'
 // The named function, not the `doc.svg` plugin: the plugin patches whichever jsPDF module instance svg2pdf
 // imported, which (bundler/test-runner dependent) need not be ours.
 import { svg2pdf } from 'svg2pdf.js'
 import type { Project } from '../../document/model'
 import { emptyBounds, entityBounds, type Bounds } from '../../geometry/bounds'
+import { GENERATOR_NOTE } from '../provenance'
 import { exportSvg, type SvgExportOptions } from '../svg'
+import { hasWatermark, layoutWatermark, WATERMARK_ANGLE, WATERMARK_OPACITY, type Watermark } from '../watermark'
 import {
   CALIBRATION_MM,
   HEADER_HEIGHT,
@@ -112,6 +114,7 @@ function printedTexts(project: Project, opts: PdfOptions): string[] {
     s.sheets,
     opts.date,
     ...labels,
+    ...(hasWatermark(opts.svg.watermark) ? [opts.svg.watermark.text] : []),
   ]
 }
 
@@ -168,6 +171,29 @@ async function placeDrawing(doc: jsPDF, svg: Element, view: Rect, from: { x: num
   doc.clip()
   doc.discardPath()
   await svg2pdf(svg, doc, { x: to.x + (view.x - from.x), y: to.y + (view.y - from.y), width: view.w, height: view.h })
+  doc.restoreGraphicsState()
+}
+
+const PT_PER_MM = 72 / 25.4
+
+/** Watermark copies over the whole page, on top of everything else. */
+function watermarkPage(doc: jsPDF, fonts: Fonts, watermark: Watermark, pageWidth: number, pageHeight: number) {
+  const text = fonts.prepare(watermark.text.trim())
+  const { size, marks } = layoutWatermark(text, 0, 0, pageWidth, pageHeight)
+  doc.saveGraphicsState()
+  doc.setGState(new GState({ opacity: watermark.opacity ?? WATERMARK_OPACITY }))
+  doc.setFont(fonts.family, 'normal')
+  doc.setFontSize(size * PT_PER_MM)
+  doc.setTextColor(128)
+  const width = doc.getTextWidth(text)
+  const a = (WATERMARK_ANGLE * Math.PI) / 180
+  const [cos, sin] = [Math.cos(a), Math.sin(a)]
+  for (const [mx, my] of marks) {
+    // jsPDF rotates about the text's start point: step back half the width along the text, down 0.35 em.
+    const x = mx - (width / 2) * cos + 0.35 * size * sin
+    const y = my + (width / 2) * sin + 0.35 * size * cos
+    doc.text(text, x, y, { angle: WATERMARK_ANGLE })
+  }
   doc.restoreGraphicsState()
 }
 
@@ -261,7 +287,12 @@ function assemblyPage(
 }
 
 export async function exportPdf(project: Project, opts: PdfOptions): Promise<Blob> {
-  const { svg, view } = svgElement(project, opts.svg)
+  // The watermark covers whole pages (drawn per page below), not just the drawing's viewBox.
+  const { watermark, ...svgOptions } = opts.svg
+  const stamp = (doc: jsPDF, fonts: Fonts, w: number, h: number) => {
+    if (hasWatermark(watermark)) watermarkPage(doc, fonts, watermark, w, h)
+  }
+  const { svg, view } = svgElement(project, svgOptions)
   const drawing: Bounds = { minX: view.x, minY: view.y, maxX: view.x + view.w, maxY: view.y + view.h }
   const pieceName = project.pieces[0]?.name ?? ''
 
@@ -273,22 +304,26 @@ export async function exportPdf(project: Project, opts: PdfOptions): Promise<Blo
       orientation: l.pageWidth > l.pageHeight ? 'l' : 'p',
       compress: !opts.uncompressed,
     })
+    doc.setProperties({ title: project.name, creator: GENERATOR_NOTE })
     const fonts = await setUpFonts(doc, printedTexts(project, opts), opts)
     setLabelFont(svg, fonts)
     header(doc, fonts, l.pageWidth, `${project.name} · ${pieceName}`, `${opts.strings.scale} · ${opts.date}`)
     await placeDrawing(doc, svg, view, { x: view.x, y: view.y }, l.drawing)
     calibrationSquare(doc, fonts, l.calibration, opts.strings.calibration)
+    stamp(doc, fonts, l.pageWidth, l.pageHeight)
     return doc.output('blob')
   }
 
-  const layout = layoutTiles(drawing, contentBounds(project, opts.svg), opts)
+  const layout = layoutTiles(drawing, contentBounds(project, svgOptions), opts)
   const pageCount = layout.tiles.length + 1
   const format = [layout.pageWidth, layout.pageHeight]
   const orientation = layout.orientation === 'portrait' ? 'p' : 'l'
   const doc = new jsPDF({ unit: 'mm', format, orientation, compress: !opts.uncompressed })
+  doc.setProperties({ title: project.name, creator: GENERATOR_NOTE })
   const fonts = await setUpFonts(doc, printedTexts(project, opts), opts)
   setLabelFont(svg, fonts)
   assemblyPage(doc, fonts, project, layout, opts, pageCount)
+  stamp(doc, fonts, layout.pageWidth, layout.pageHeight)
   for (const [i, tile] of layout.tiles.entries()) {
     doc.addPage(format, orientation)
     header(
@@ -300,6 +335,7 @@ export async function exportPdf(project: Project, opts: PdfOptions): Promise<Blo
     )
     await placeDrawing(doc, svg, view, { x: tile.area.x, y: tile.area.y }, layout.printable)
     tileMarks(doc, layout, tile, opts.overlap)
+    stamp(doc, fonts, layout.pageWidth, layout.pageHeight)
   }
   return doc.output('blob')
 }

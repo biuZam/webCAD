@@ -43,5 +43,12 @@
     "assembly": "Sheets overlap by {overlap} mm. Trim along a dashed line or overlap the sheets, matching the corner marks and the sheet labels at the edges.",
     "sheets": "Sheets"
   },
-  "aiUnreviewed": "{count, plural, one {# object was created by AI and has not been reviewed.} other {# objects were created by AI and have not been reviewed.}}"
+  "aiUnreviewed": "{count, plural, one {# object was created by AI and has not been reviewed.} other {# objects were created by AI and have not been reviewed.}}",
+  "watermark": {
+    "title": "Watermark",
+    "text": "Text",
+    "placeholder": "None",
+    "opacity": "Opacity",
+    "pdfHint": "Repeated across every page."
+  }
 }

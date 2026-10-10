@@ -94,6 +94,12 @@ describe('PDF export', () => {
     expect(Math.max(...ys) - Math.min(...ys)).toBeCloseTo(100, 6)
   })
 
+  it('names LeatherDraft as the Creator, in both modes', async () => {
+    for (const mode of ['single', 'tiled'] as const) {
+      expect(await pdfText({ ...base, mode })).toContain('/Creator (Created with LeatherDraft')
+    }
+  })
+
   it('tiled: an assembly page plus one page per non-empty tile, all A4', async () => {
     const pdf = await pdfText({ ...base, mode: 'tiled' })
     const boxes = mediaBoxes(pdf)
@@ -115,5 +121,16 @@ describe('PDF export', () => {
     const blob = await exportPdf(big, { ...base, mode: 'tiled', uncompressed: true })
     const pdf = new TextDecoder('latin1').decode(await blob.arrayBuffer())
     expect(mediaBoxes(pdf).length).toBeGreaterThan(2)
+  })
+
+  it('stamps the watermark on every page, translucent and tilted', async () => {
+    const pdf = await pdfText({ ...base, mode: 'tiled', svg: { watermark: { text: 'COPY 42', opacity: 0.3 } } })
+    expect(pdf).toMatch(/\/ca 0\.3/)
+    const pages = (pdf.match(/\/Type \/Page\b/g) ?? []).length
+    const streams = [...pdf.matchAll(/stream\r?\n([\s\S]*?)endstream/g)].map((m) => m[1])
+    expect(pages).toBeGreaterThan(1)
+    expect(streams.filter((s) => s.includes('(COPY 42) Tj'))).toHaveLength(pages)
+    // Not drawn into the SVG as well.
+    expect(await pdfText({ ...base, mode: 'tiled' })).not.toContain('COPY 42')
   })
 })

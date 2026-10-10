@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LeatherDraft", "untitled": "Senza titolo" },
+  "app": {
+    "name": "LeatherDraft",
+    "untitled": "Senza titolo"
+  },
   "menu": {
     "undo": "Annulla",
     "redo": "Ripeti",
@@ -56,11 +59,19 @@
     "difference": "Differenza",
     "addCentreLine": "Aggiungi linea d’asse",
     "addEllipse": "Aggiungi ellisse",
-    "reviewAi": "Segna come revisionato"
+    "reviewAi": "Segna come revisionato",
+    "constraint": "Aggiungi vincolo",
+    "solve": "Risolvi vincoli",
+    "deleteConstraint": "Elimina vincolo"
   },
   "layers": {
     "title": "Livelli",
-    "kind": { "cut": "Taglio", "stitch": "Cucitura", "reference": "Riferimento", "notes": "Note" },
+    "kind": {
+      "cut": "Taglio",
+      "stitch": "Cucitura",
+      "reference": "Riferimento",
+      "notes": "Note"
+    },
     "show": "Mostra {name}",
     "hide": "Nascondi {name}",
     "active": "Disegna su {name}",
@@ -96,7 +107,10 @@
     "more": "{name} · clic destro per altri",
     "group": "Altri strumenti come {name}"
   },
-  "panels": { "hide": "Nascondi pannello laterale", "show": "Mostra pannello laterale" },
+  "panels": {
+    "hide": "Nascondi pannello laterale",
+    "show": "Mostra pannello laterale"
+  },
   "input": {
     "label": "Input",
     "hint": "Digita un valore, Tab per il campo successivo, Invio per applicare, Esc per cancellare."
@@ -138,7 +152,9 @@
     "offlineReady": "Pronto per l’uso offline",
     "imported": "{count, plural, one {# forma importata} other {# forme importate}} da {name} e selezionate{skipped, plural, =0 {} one {; # altro elemento saltato} other {; # altri elementi saltati}}."
   },
-  "notice": { "dismiss": "Chiudi" },
+  "notice": {
+    "dismiss": "Chiudi"
+  },
   "properties": {
     "title": "Proprietà",
     "empty": "Seleziona qualcosa per vederne e modificarne le proprietà.",
@@ -197,7 +213,21 @@
     "projectHint": "Valori predefiniti per nuove linee di cucitura e fori.",
     "stitchMargin": "Margine di cucitura",
     "defaultPitch": "Passo",
-    "defaultHoleSize": "Dimensione foro"
+    "defaultHoleSize": "Dimensione foro",
+    "constraints": {
+      "title": "Vincoli",
+      "parallel": "Parallelo",
+      "perpendicular": "Perpendicolare",
+      "tangent": "Tangente",
+      "coincident": "Coincidente",
+      "distance": "Distanza",
+      "radius": "Raggio",
+      "delete": "Elimina vincolo",
+      "unsatisfied": "Non soddisfatto: la geometria si è spostata dopo la risoluzione",
+      "broken": "Interrotto: qualcosa a cui fa riferimento è cambiato o non esiste più",
+      "solve": "Risolvi",
+      "solveFailed": "Impossibile risolvere: i vincoli sono in conflitto"
+    }
   },
   "lineStyle": {
     "solid": "Continua (taglio)",
@@ -205,8 +235,14 @@
     "dotted": "Punteggiata (riferimento)",
     "dashDot": "Tratto-punto (asse)"
   },
-  "units": { "mm": "mm", "cm": "cm", "in": "in" },
-  "dialog": { "cancel": "Annulla" },
+  "units": {
+    "mm": "mm",
+    "cm": "cm",
+    "in": "in"
+  },
+  "dialog": {
+    "cancel": "Annulla"
+  },
   "shortcuts": {
     "title": "Scorciatoie da tastiera",
     "hint": "Tasti lettera, con o senza Maiusc. I numeri sono riservati all’inserimento di valori; Spazio sposta la vista.",
@@ -229,5 +265,8 @@
     "label": "Area di disegno",
     "help": "Scegli uno strumento con il suo tasto (L linea, R rettangolo, C cerchio, P penna, V selezione…). I punti si possono digitare: inizia a scrivere un numero per inserire coordinate o lunghezze nella barra di input, Tab cambia campo, Invio applica, Esc annulla."
   },
-  "update": { "available": "È pronta una nuova versione.", "reload": "Ricarica" }
+  "update": {
+    "available": "È pronta una nuova versione.",
+    "reload": "Ricarica"
+  }
 }

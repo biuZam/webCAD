@@ -258,5 +258,29 @@
     "holesMatch": "兩條邊都是 {count, plural, other {# 個孔}}：孔數一致。按一下可比較另一對邊。",
     "holesDiffer": "孔數不一致：{a} 對 {b} 個孔（相差 {diff, plural, other {# 個孔}}）。請調整針距或邊長，使兩邊能均勻縫合。",
     "promptLength": "將滑鼠移到圖形上檢視其長度。"
+  },
+  "constrain": {
+    "name": "約束",
+    "mode": "類型",
+    "modeParallel": "平行",
+    "modePerpendicular": "垂直",
+    "modeTangent": "相切",
+    "modeCoincident": "重合",
+    "modeDistance": "距離",
+    "modeRadius": "半徑",
+    "distance": "距離",
+    "radius": "半徑",
+    "promptEdge1": "點擊一條直邊——它保持不動。",
+    "promptEdge2": "點擊要約束的邊——它會移動。",
+    "promptTangent1": "點擊一條直邊或一個圓——它保持不動。",
+    "promptTangent2": "點擊圓（或直邊）使其相切——它會移動。",
+    "promptPoint1": "點擊一個點——它保持不動。",
+    "promptPoint2": "點擊第二個點——它會移動。",
+    "promptCircle": "點擊一個圓。",
+    "promptDistance": "輸入距離後按 Enter，或直接按 Enter 保持目前的值。",
+    "promptRadius": "輸入半徑後按 Enter，或直接按 Enter 保持目前的值。",
+    "promptSolving": "求解中…",
+    "promptConflict": "這些約束與既有約束衝突，未作任何變更。",
+    "promptFailed": "求解器無法滿足此約束，未作任何變更。"
   }
 }

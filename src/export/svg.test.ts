@@ -10,6 +10,12 @@ describe('exportSvg', () => {
     expect(svg).toContain('width="100mm" height="100mm" viewBox="0 0 100 100"')
   })
 
+  it('names LeatherDraft as the generator in <metadata>, nothing about the user', () => {
+    expect(svg).toContain(
+      '<metadata id="leatherdraft">Created with LeatherDraft (https://github.com/biuZam/webCAD)</metadata>',
+    )
+  })
+
   it('writes one Inkscape layer group per visible layer', () => {
     for (const layer of project.layers) {
       expect(svg).toContain(`inkscape:groupmode="layer" inkscape:label="${layer.name}"`)

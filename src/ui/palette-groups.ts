@@ -46,6 +46,7 @@ export const GROUPS: readonly (readonly Variant[] | null)[] = [
   [tool('stitchLine')],
   [tool('stitchHoles')],
   [tool('punch'), tool('notch')],
+  [tool('constrain')],
   null,
   [tool('measure')],
   null,

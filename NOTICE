@@ -1,0 +1,5 @@
+Required Notice: Copyright (c) 2026 biuZam (https://github.com/biuZam/webCAD)
+Required Notice: LeatherDraft is licensed under the PolyForm Noncommercial License 1.0.0 (see LICENSE). Commercial use needs a separate commercial license from the licensor; see COMMERCIAL.md.
+Required Notice: "LeatherDraft" and the LeatherDraft logo are not licensed under LICENSE. Modified versions must not use them.
+
+Third-party components keep their own licenses: Paper.js, paperjs-offset, jsPDF, svg2pdf.js, Maker.js, clipper-lib and others (see each package), planegcs (LGPL-2.0-or-later, loaded as a separate WebAssembly module so it can be replaced), and Noto Sans SC (SIL Open Font License 1.1, public/fonts/NotoSansSC-OFL.txt).

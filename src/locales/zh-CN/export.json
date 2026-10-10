@@ -43,5 +43,12 @@
     "assembly": "各页重叠 {overlap} mm。沿虚线裁剪或叠放各页，对齐角标和页边的页码标签。",
     "sheets": "页面"
   },
-  "aiUnreviewed": "{count, plural, other {有 # 个对象由 AI 创建，尚未复核。}}"
+  "aiUnreviewed": "{count, plural, other {有 # 个对象由 AI 创建，尚未复核。}}",
+  "watermark": {
+    "title": "水印",
+    "text": "文字",
+    "placeholder": "无",
+    "opacity": "不透明度",
+    "pdfHint": "在每一页上重复显示。"
+  }
 }

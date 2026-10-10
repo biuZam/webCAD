@@ -43,5 +43,12 @@
     "assembly": "I fogli si sovrappongono di {overlap} mm. Taglia lungo una linea tratteggiata o sovrapponi i fogli facendo combaciare i segni d’angolo e i numeri dei fogli sui bordi.",
     "sheets": "Fogli"
   },
-  "aiUnreviewed": "{count, plural, one {# oggetto è stato creato dall’IA e non è stato revisionato.} other {# oggetti sono stati creati dall’IA e non sono stati revisionati.}}"
+  "aiUnreviewed": "{count, plural, one {# oggetto è stato creato dall’IA e non è stato revisionato.} other {# oggetti sono stati creati dall’IA e non sono stati revisionati.}}",
+  "watermark": {
+    "title": "Filigrana",
+    "text": "Testo",
+    "placeholder": "Nessuna",
+    "opacity": "Opacità",
+    "pdfHint": "Ripetuta su ogni pagina."
+  }
 }

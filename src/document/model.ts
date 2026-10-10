@@ -103,12 +103,43 @@ export interface HoleSetEntity extends EntityBase {
 export type Entity = PathEntity | CircleEntity | TextEntity | CentreLineEntity | HoleSetEntity
 export type EntityType = Entity['type']
 
+/**
+ * An anchor point of an entity: segment `index` of a path, `from` (0) / `to` (1) of a centre line, or the
+ * centre (0) of a circle.
+ */
+export interface PointRef {
+  entityId: Id
+  index: number
+}
+
+/** A straight edge: segment `edge` to the next one (wrapping when the path is closed), or a centre line (0). */
+export interface EdgeRef {
+  entityId: Id
+  edge: number
+}
+
+/**
+ * Geometric constraints (v2, schema v3). They are solved on demand by the planegcs solver, not on every edit;
+ * see src/geometry/constraints.ts. `distance` and `radius` are driving dimensions: editing `value` moves the
+ * geometry.
+ */
+export type Constraint = { id: Id } & (
+  | { type: 'coincident'; a: PointRef; b: PointRef }
+  | { type: 'distance'; a: PointRef; b: PointRef; value: number }
+  | { type: 'parallel'; a: EdgeRef; b: EdgeRef }
+  | { type: 'perpendicular'; a: EdgeRef; b: EdgeRef }
+  | { type: 'tangent'; line: EdgeRef; circle: Id }
+  | { type: 'radius'; circle: Id; value: number }
+)
+export type ConstraintType = Constraint['type']
+
 export interface Piece {
   id: Id
   name: string
   quantity: number
   mirrored: boolean
   entities: Entity[]
+  constraints?: Constraint[]
 }
 
 export interface ProjectSettings {

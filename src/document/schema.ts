@@ -1,6 +1,6 @@
 import type { Project } from './model'
 
-export const CURRENT_SCHEMA_VERSION = 2
+export const CURRENT_SCHEMA_VERSION = 3
 
 type Migration = (doc: Record<string, unknown>) => Record<string, unknown>
 
@@ -11,6 +11,8 @@ type Migration = (doc: Record<string, unknown>) => Record<string, unknown>
 const MIGRATIONS: Record<number, Migration> = {
   // v2: optional `aiCreated` on entities. Nothing to convert.
   1: (doc) => doc,
+  // v3: optional `constraints` on pieces. Nothing to convert.
+  2: (doc) => doc,
 }
 
 export class SchemaError extends Error {}

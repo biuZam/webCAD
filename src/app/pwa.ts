@@ -3,6 +3,7 @@
 
 import { registerSW } from 'virtual:pwa-register'
 import { useUiStore } from '../canvas/ui-store'
+import { isDesktop } from '../lib/desktop'
 
 let applyUpdate: ((reload?: boolean) => Promise<void>) | null = null
 
@@ -12,8 +13,9 @@ export function reloadForUpdate() {
 }
 
 export function registerServiceWorker() {
-  // Dev builds have no service worker (vite-plugin-pwa only generates one for production).
-  if (import.meta.env.DEV || !('serviceWorker' in navigator)) return
+  // Dev builds have no service worker (vite-plugin-pwa only generates one for production). The desktop app
+  // ships its files locally and updates by reinstalling, so it has none either.
+  if (import.meta.env.DEV || isDesktop() || !('serviceWorker' in navigator)) return
   applyUpdate = registerSW({
     onNeedRefresh() {
       useUiStore.getState().showNotice({ kind: 'update' })

@@ -1,12 +1,21 @@
 # LeatherDraft
 
+**English** · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
+
 A browser-based 2D CAD tool for drafting **leather patterns in millimetres** and printing or cutting them at **true 1:1 scale**.
 
-It runs entirely in your browser: no account, no server, and your files never leave your device. It installs as an app and works offline.
+It runs entirely in your browser: no account, no server, and your files never leave your device. It installs as an app and works offline, and there is also a desktop app for Windows, macOS and Linux.
 
 ![LeatherDraft: drawing a card-wallet piece, rounding its corners, adding a linked stitch line and chisel holes, resizing it, and exporting](docs/media/demo.gif)
 
-> **Status: pre-1.0.** The v1 drafting, leather and export features are implemented and tested. Still open before release: a physical print-accuracy check on real printers, completing the Simplified Chinese translation, and a few smaller items (see [`docs/TASKS.md`](docs/TASKS.md)).
+> **Status: pre-1.0.** The v1 drafting, leather and export features are implemented and tested. Still open before release: a physical print-accuracy check on real printers, compatibility checks in Inkscape, Illustrator and LightBurn, and a few smaller items (see [`docs/TASKS.md`](docs/TASKS.md)).
+
+## User guide
+
+Step-by-step instructions for every tool, printing at true size, shortcuts and a worked example:
+
+- [User guide (English)](docs/USER_GUIDE.md)
+- [操作手册（简体中文）](docs/USER_GUIDE.zh-CN.md)
 
 ## What it does
 
@@ -19,6 +28,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 - Offset, fillet and chamfer; parallel lines; trim, extend and split; join paths; union and difference of shapes
 - Edit points and Bézier handles directly; switch points between smooth and corner; add and delete points; drag selected shapes to move them
 - Object snapping: endpoint, midpoint, centre, quadrant, intersection, perpendicular, tangent, nearest, grid; polar and object tracking
+- Constraints: parallel, perpendicular, tangent, coincident, distance and radius, solved so the first object stays put and the second moves
 - Exact values: type coordinates, lengths, angles and radii while drawing; edit numbers in the properties panel
 - Layers (cut, stitch, reference, notes) with visibility, lock and colour; mm, cm or inch display
 
@@ -36,6 +46,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 - **SVG** at 1:1 (1 unit = 1 mm), one layer per group, with an option to turn curves into short straight lines for laser software
 - **PDF** for home printers: tiled on A4, Letter or A3 with overlap, crop marks and sheet labels, plus an assembly page with a **50 mm calibration square**. Or a single page sized to the pattern, for large-format printers.
 - **DXF** (mm) for laser and CNC software, and a **PNG** picture for sharing
+- Optional **watermark** text on exports (repeated on every PDF page)
 - **Import SVG or DXF** at true size onto the reference layer, to trace an existing pattern
 - Save and open `.json` project files. Work is autosaved in the browser and restored on reload.
 
@@ -61,7 +72,7 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | U | Punch hole / slot | Y | Seam allowance (per edge) |
 | Q | Array (linear / circular) | J | Notch |
 | Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
-| Shift+X | Explode into segments |  |  |
+| Z | Constraint | Shift+X | Explode into segments |
 
 Similar tools share a palette slot, as in Photoshop: **right-click** a slot with a corner triangle (or long-press, or press → on it) to pick another — line / polyline, rectangle / square, circle / 3-point circle / ellipse, pen / arc, perpendicular / parallel, fillet / chamfer, offset / seam allowance, punch / notch, flip horizontal / vertical, join / explode, union / difference. The side panel folds away with the arrow at its top.
 
@@ -97,6 +108,18 @@ Fixture sessions are never autosaved, so they can't overwrite your own work.
 
 If package installs are slow where you are, try a registry mirror, e.g. `pnpm install --registry=https://registry.npmmirror.com`.
 
+### Desktop app (Tauri)
+
+`src-tauri/` wraps the same Vite build in a native window (Windows, macOS, Linux). It needs a Rust toolchain plus the platform's build tools ([Tauri prerequisites](https://v2.tauri.app/start/prerequisites/)).
+
+```bash
+pnpm desktop:dev             # native window on the Vite dev server (hot reload)
+pnpm desktop:build           # installer for this OS in src-tauri/target/release/bundle/
+pnpm tauri build --bundles app   # macOS: just LeatherDraft.app, no .dmg
+```
+
+Differences from the web app: Save, Open and Export use native file dialogs (Save keeps writing to the same file until you quit), and there is no service worker; the app updates by installing a new version. Autosave works as in the browser. Tauri can't cross-compile, so Windows installers come from CI: run the **Desktop** workflow (`.github/workflows/desktop.yml`) or push a `desktop-v*` tag; it builds a Windows `.exe` (NSIS) and a universal macOS `.dmg` as workflow artifacts. App icons in `src-tauri/icons` are generated from `public/icon.svg` with `pnpm tauri icon public/icon.svg -o src-tauri/icons`.
+
 ### Tech stack
 
 React 19 + TypeScript + Vite · [Paper.js](http://paperjs.org) for geometry and rendering · Zustand + Immer (document store, undo/redo as patches) · [paperjs-offset](https://github.com/glenzli/paperjs-offset) with a Clipper fallback for offsets · jsPDF + svg2pdf.js for PDF (loaded on demand) · i18next · vite-plugin-pwa · Vitest.
@@ -111,6 +134,8 @@ React 19 + TypeScript + Vite · [Paper.js](http://paperjs.org) for geometry and 
 More detail:
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): design decisions, layers, data model, performance and accessibility notes
+- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) / [`docs/USER_GUIDE.zh-CN.md`](docs/USER_GUIDE.zh-CN.md): user guide in English and Simplified Chinese
+- [`docs/MCP.md`](docs/MCP.md): headless MCP server, so AI clients can draw, edit, stitch and export patterns
 - [`docs/TASKS.md`](docs/TASKS.md): task list and progress by milestone
 - [`PRD — Leather Pattern CAD (Web).md`](<PRD — Leather Pattern CAD (Web).md>): product requirements
 - [`CLAUDE.md`](CLAUDE.md): conventions for working on the code
@@ -123,8 +148,21 @@ More detail:
 
 ## Languages
 
-English is complete. Simplified Chinese (简体中文) is in progress, and the language can be switched in the header. PDF page text is English until CJK font embedding lands.
+The interface is available in English, 简体中文, 繁體中文, Deutsch, Français, Español, Italiano, Português, 日本語 and 한국어; switch it with the globe icon in the toolbar. PDF page text follows the interface language, and Chinese text in PDFs (page text, labels, names) is printed with an embedded Noto Sans SC font.
+
+The user guide is available in every interface language under `docs/` (for example [English](docs/USER_GUIDE.md), [简体中文](docs/USER_GUIDE.zh-CN.md), [繁體中文](docs/USER_GUIDE.zh-TW.md), [Deutsch](docs/USER_GUIDE.de.md), [Français](docs/USER_GUIDE.fr.md), [Español](docs/USER_GUIDE.es.md), [Italiano](docs/USER_GUIDE.it.md), [Português](docs/USER_GUIDE.pt.md), [日本語](docs/USER_GUIDE.ja.md), [한국어](docs/USER_GUIDE.ko.md)).
+
+This README is also available in these languages: [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt.md) · [日本語](README.ja.md) · [한국어](README.ko.md).
 
 ## License
 
-[Apache-2.0](LICENSE)
+LeatherDraft is **source-available** under the [PolyForm Noncommercial License 1.0.0](LICENSE):
+
+- **Free** for personal, hobby, study and research use, and for schools, charities and other noncommercial organisations. You may change the code and share your changes for noncommercial purposes.
+- **Your patterns and products are yours.** Drawings, exported files and the leather goods you make from them are not restricted; you may sell them.
+- **Commercial use of the software itself** (selling it or a modified version, offering it as a service, building it into a commercial product) needs a commercial license: email [igamitec@gmail.com](mailto:igamitec@gmail.com). Modified versions can't be used commercially. See [COMMERCIAL.md](COMMERCIAL.md).
+- Contributions are welcome; contributors sign a [CLA](CLA.md) once. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+"LeatherDraft" and its logo are not covered by the license. Versions up to commit `ca93653` / `7db180a` (10 October 2026) were released under Apache-2.0.
+
+许可：PolyForm 非商业许可证 1.0.0。个人和非商业用途免费；用它画出的版型和制作的产品归你所有，可以出售；将软件本身用于商业用途需获得授权，请联系 [igamitec@gmail.com](mailto:igamitec@gmail.com)，详见 [COMMERCIAL.md](COMMERCIAL.md)。

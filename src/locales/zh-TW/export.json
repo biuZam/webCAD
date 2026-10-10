@@ -43,5 +43,12 @@
     "assembly": "各頁重疊 {overlap} mm。沿虛線裁剪或疊放各頁，對齊角標和頁邊的頁碼標籤。",
     "sheets": "頁面"
   },
-  "aiUnreviewed": "{count, plural, other {有 # 個物件由 AI 建立，尚未複核。}}"
+  "aiUnreviewed": "{count, plural, other {有 # 個物件由 AI 建立，尚未複核。}}",
+  "watermark": {
+    "title": "浮水印",
+    "text": "文字",
+    "placeholder": "無",
+    "opacity": "不透明度",
+    "pdfHint": "在每一頁上重複顯示。"
+  }
 }
