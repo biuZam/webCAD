@@ -1,5 +1,6 @@
 # Desktop installers (Tauri, src-tauri/). Tauri can't cross-compile, so each OS builds on its own runner:
-# Windows → NSIS .exe, macOS → universal .dmg. Run by hand or by pushing a `desktop-v*` tag.
+# Windows → NSIS .exe, macOS → universal .dmg. Run by hand (artifacts only) or push a `desktop-v*` tag:
+# `git tag desktop-v0.1.0 && git push origin desktop-v0.1.0` builds version 0.1.0 and publishes a GitHub Release.
 name: Desktop
 
 on:
@@ -35,8 +36,40 @@ jobs:
         with:
           workspaces: src-tauri
       - run: pnpm install --frozen-lockfile
-      - run: pnpm tauri build ${{ matrix.args }}
+      # On a tag, the installer version comes from the tag (desktop-v0.1.0 → 0.1.0); otherwise tauri.conf.json's.
+      - name: Build
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/desktop-v* ]]; then
+            pnpm tauri build ${{ matrix.args }} --config "{\"version\":\"${GITHUB_REF_NAME#desktop-v}\"}"
+          else
+            pnpm tauri build ${{ matrix.args }}
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: leatherdraft-${{ matrix.os }}
           path: ${{ matrix.artifact }}
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/desktop-v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: installers
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: LeatherDraft ${{ github.ref_name }}
+          files: installers/*
+          generate_release_notes: true
+          body: |
+            ## Downloads
+            - **Windows**: `LeatherDraft_*_x64-setup.exe`
+            - **macOS** (Apple Silicon + Intel): `LeatherDraft_*_universal.dmg`
+
+            The installers are not code-signed yet. On Windows, click "More info → Run anyway" in SmartScreen.
+            On macOS, right-click the app → Open the first time (or run `xattr -cr /Applications/LeatherDraft.app`).
