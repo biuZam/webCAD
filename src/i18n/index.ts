@@ -10,7 +10,7 @@ import exportNs from '../locales/en/export.json'
 import tools from '../locales/en/tools.json'
 
 export const NAMESPACES = ['common', 'tools', 'export', 'errors'] as const
-export const SUPPORTED_LANGUAGES = ['en', 'zh-CN'] as const
+export const SUPPORTED_LANGUAGES = ['en', 'zh-CN', 'zh-TW', 'de', 'fr', 'es', 'it', 'pt', 'ja', 'ko'] as const
 export type Language = (typeof SUPPORTED_LANGUAGES)[number]
 
 export const enResources = { common, tools, export: exportNs, errors }
@@ -34,8 +34,17 @@ function readSavedLanguage(): string | null {
 export function detectLanguage(): Language {
   const saved = readSavedLanguage()
   if (saved && (SUPPORTED_LANGUAGES as readonly string[]).includes(saved)) return saved as Language
-  const browser = typeof navigator === 'undefined' ? 'en' : navigator.language
-  return browser.toLowerCase().startsWith('zh') ? 'zh-CN' : 'en'
+  const browser = (typeof navigator === 'undefined' ? 'en' : navigator.language).toLowerCase()
+  if (browser.startsWith('zh')) return /^zh-(tw|hk|mo|hant)/.test(browser) ? 'zh-TW' : 'zh-CN'
+  return SUPPORTED_LANGUAGES.find((l) => l !== 'en' && !l.includes('-') && browser.split('-')[0] === l) ?? 'en'
+}
+
+/**
+ * The language of the text printed on PDF pages. The bundled PDF font covers Latin-1 and simplified Chinese
+ * (GB2312) only, so Japanese, Korean and traditional Chinese pages print the English text instead.
+ */
+export function pdfLanguage(lng: string): Language {
+  return lng === 'ja' || lng === 'ko' || lng === 'zh-TW' ? 'en' : ((lng as Language) ?? 'en')
 }
 
 async function loadLanguage(lng: Language) {

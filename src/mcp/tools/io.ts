@@ -15,6 +15,11 @@ import { exportDxf } from '../../export/dxf'
 import type { PdfStrings } from '../../export/pdf'
 import { exportSvg, type SvgExportOptions } from '../../export/svg'
 import en from '../../locales/en/export.json'
+import de from '../../locales/de/export.json'
+import es from '../../locales/es/export.json'
+import fr from '../../locales/fr/export.json'
+import it from '../../locales/it/export.json'
+import pt from '../../locales/pt/export.json'
 import zhCN from '../../locales/zh-CN/export.json'
 import { importDxf } from '../../persistence/dxf-import'
 import type { ImportedShape } from '../../persistence/svg-import'
@@ -25,7 +30,8 @@ import { ToolError } from '../result'
 import { docId, layerRef, pieceId } from '../schemas'
 import type { Sessions } from '../sessions'
 
-const LOCALES = { en, 'zh-CN': zhCN } as const
+// Japanese, Korean and traditional Chinese print the English text: the bundled PDF font lacks their glyphs.
+const LOCALES = { en, 'zh-CN': zhCN, de, es, fr, it, pt, ja: en, ko: en, 'zh-TW': en } as const
 
 /** The text printed on PDF pages, from the App's own translations. */
 function pdfStrings(language: keyof typeof LOCALES, overlap: number): PdfStrings {
@@ -118,7 +124,10 @@ export function registerIoTools(tool: Registrar, sessions: Sessions) {
         paper: z.enum(['a4', 'letter', 'a3']).optional().describe("Default 'a4'."),
         orientation: z.enum(['auto', 'portrait', 'landscape']).optional().describe("Default 'auto': fewest sheets."),
         overlap: z.number().min(0).max(50).optional().describe('Sheet overlap, mm. Default 10.'),
-        language: z.enum(['en', 'zh-CN']).optional().describe("Printed instructions. Default 'en'."),
+        language: z
+          .enum(['en', 'zh-CN', 'zh-TW', 'de', 'fr', 'es', 'it', 'pt', 'ja', 'ko'])
+          .optional()
+          .describe("Printed instructions. Default 'en'."),
         ...options,
       },
       write: false,

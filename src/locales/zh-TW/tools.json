@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "選擇",
+    "prompt": "按一下選擇 · Shift+按一下加選或減選 · 從左向右框選完全包含的物件，從右向左框選接觸到的物件 · 拖動已選物件可移動（Alt：複製）· Delete 刪除。",
+    "promptPoints": "拖動節點或控制柄 · 按兩下節點：平滑 ↔ 尖角 · 按兩下輪廓：新增節點 · 按一下節點後按 Delete：刪除節點 · Esc 取消選擇。"
+  },
+  "line": {
+    "name": "直線",
+    "polylineName": "多段線",
+    "mode": "方式",
+    "modeSegments": "每段獨立",
+    "modePolyline": "整條多段線",
+    "length": "長度",
+    "angle": "角度",
+    "promptFirst": "按一下或輸入第一個點。",
+    "promptNext": "按一下下一個點，或輸入長度和角度。按住 Shift 鎖定 15°。",
+    "promptMore": "下一個點 · 按一下第一個點閉合 · Enter、按兩下或右鍵結束 · Backspace 撤回一個點。"
+  },
+  "rectangle": {
+    "name": "矩形",
+    "shape": "形狀",
+    "square": "正方形",
+    "side": "邊長",
+    "width": "寬度",
+    "height": "高度",
+    "cornerRadius": "圓角半徑",
+    "promptFirst": "按一下或輸入第一個角點。按住 Alt 從中心繪製。",
+    "promptCorner": "按一下對角點，或輸入寬度和高度。",
+    "promptCentre": "從中心繪製：按一下一個角點，或輸入總寬度和總高度。"
+  },
+  "circle": {
+    "name": "圓",
+    "threeName": "三點圓",
+    "ellipseName": "橢圓",
+    "radius": "半徑",
+    "promptCentre": "按一下或輸入圓心。",
+    "promptRadius": "按一下圓上一點，或輸入半徑。",
+    "mode": "方式",
+    "modeCentre": "圓心 + 半徑",
+    "modeThree": "三點",
+    "modeEllipse": "橢圓",
+    "radius2": "第二半徑",
+    "promptP1": "按一下圓上的第一個點。",
+    "promptP2": "按一下第二個點。",
+    "promptP3": "按一下第三個點。",
+    "promptAxis": "按一下第一條軸的端點（確定其半徑和方向）。",
+    "promptOther": "按一下確定另一半徑，或直接輸入。"
+  },
+  "fillet": {
+    "name": "圓角",
+    "radius": "半徑",
+    "promptPick": "將滑鼠移到兩條直邊之間的拐角上。Shift：該圖形的所有拐角。",
+    "promptApply": "按一下為此拐角倒圓角（Shift：所有拐角）。輸入半徑可修改。",
+    "tooLarge": "對此拐角過大：可容納的最大半徑為 {max} mm。",
+    "notApplicable": "無法為此拐角倒圓角。"
+  },
+  "stitchHoles": {
+    "name": "縫孔",
+    "pitch": "針距",
+    "count": "{count, plural, other {# 個孔}}",
+    "preset": "菱斬",
+    "custom": "自定義",
+    "size": "孔徑",
+    "shape": "孔形",
+    "round": "圓孔",
+    "slit": "斜孔（菱斬）",
+    "corners": "每個拐角都打孔",
+    "promptPick": "將滑鼠移到縫線（或任意線）上預覽縫孔。",
+    "promptClick": "按一下新增這些縫孔。縫孔與線保持連結並隨之更新。"
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "當前圖層已鎖定或隱藏。請解鎖或顯示它，或在“圖層”面板中選擇其他圖層。",
+    "explodeNone": "請選擇含多段的路徑進行分解（矩形、多段線、輪廓）。",
+    "joinNone": "請選擇要連線的開放路徑（或一條首尾相接的路徑以將其閉合）。",
+    "booleanNone": "請選擇兩個或更多閉合圖形（輪廓或圓）。"
+  },
+  "transform": {
+    "promptPick": "選擇物件（按一下、Shift+按一下或拖框），然後按 Enter 或右鍵。",
+    "copy": "保留原物件（複製）"
+  },
+  "move": {
+    "name": "移動",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "按一下或輸入基點。",
+    "promptTarget": "按一下目標點，或輸入 ΔX 和 ΔY。按住 Shift 鎖定 15°。"
+  },
+  "rotate": {
+    "name": "旋轉",
+    "angle": "角度",
+    "promptCentre": "按一下或輸入旋轉中心。",
+    "promptAngle": "按一下確定角度（自 +X 方向起算），或直接輸入。按住 Shift 取整到 15°。"
+  },
+  "scale": {
+    "name": "縮放",
+    "factor": "比例",
+    "promptBase": "按一下或輸入基點（保持不動）。",
+    "promptRef": "輸入比例，或按一下一個參考點。",
+    "promptTarget": "按一下參考點的目標位置，或輸入比例。"
+  },
+  "mirror": {
+    "name": "鏡射",
+    "angle": "軸線角度",
+    "promptFirst": "按一下一條中心線以其為軸鏡射，或按一下軸線的第一個點。",
+    "promptSecond": "按一下軸線的第二個點，或輸入軸線角度。按住 Shift 鎖定 15°。"
+  },
+  "offset": {
+    "name": "偏移",
+    "distance": "距離",
+    "through": "通過游標",
+    "join": "拐角",
+    "joinMiter": "尖角（斜接）",
+    "joinRound": "圓角",
+    "joinBevel": "斜切",
+    "promptPick": "按一下要偏移的路徑、圓或中心線。",
+    "promptSide": "按一下偏移的一側（距離跟隨游標，或直接輸入）。再次按一下可繼續偏移；Esc 重新選擇物件。",
+    "promptApprox": "已偏移。部分曲線以細密摺線偏移，以保證誤差在 0.02 mm 以內。再次按一下可繼續偏移。"
+  },
+  "stitchLine": {
+    "name": "縫線",
+    "promptPick": "按一下要新增縫線的輪廓。",
+    "promptSide": "按一下內側或外側以確定方向（邊距取自專案設定，或直接輸入）。縫線與輪廓保持連結。",
+    "promptApprox": "已新增縫線；部分曲線為細密摺線，以保證誤差在 0.02 mm 以內。請按一下下一個輪廓。"
+  },
+  "chamfer": {
+    "name": "倒角",
+    "d1": "距離",
+    "d2": "第二距離",
+    "angle": "角度",
+    "promptPick": "將滑鼠移到兩條直邊之間的拐角上。Shift：該圖形的所有拐角。",
+    "promptApply": "按一下切去此拐角（Shift：所有拐角）。輸入兩個距離，或一個距離和一個角度。",
+    "tooLarge": "對此拐角過大：沿每條邊最多 {max} mm。",
+    "notApplicable": "無法以該角度切去此拐角。"
+  },
+  "pen": {
+    "name": "鋼筆（曲線）",
+    "promptFirst": "按一下建立尖角點，拖動建立平滑曲線點。",
+    "promptNext": "按一下建立尖角，拖動建立曲線。輸入長度和角度可畫直邊。按住 Shift 鎖定 15°。",
+    "promptMore": "按一下第一個點閉合 · Enter、按兩下或右鍵結束 · Backspace 刪除最後一個點。"
+  },
+  "arc": {
+    "name": "三點圓弧",
+    "promptStart": "按一下或輸入圓弧起點。",
+    "promptEnd": "按一下或輸入圓弧終點。",
+    "promptThrough": "按一下圓弧經過的一點。",
+    "collinear": "三點共線：請選擇不在該直線上的點。"
+  },
+  "centreLine": {
+    "name": "中心線",
+    "mode": "方式",
+    "modeShape": "穿過圖形中心",
+    "modePoints": "兩點",
+    "orientation": "方向",
+    "vertical": "豎直",
+    "horizontal": "水平",
+    "promptShape": "按一下一個圖形，在其中心新增中心線。鏡射工具可將其用作軸線。",
+    "promptFirst": "按一下或輸入第一個點。",
+    "promptSecond": "按一下第二個點。按住 Shift 鎖定 15°。"
+  },
+  "label": {
+    "name": "標註",
+    "mode": "方式",
+    "modeText": "文字",
+    "modeGrain": "紋理方向箭頭",
+    "text": "文字",
+    "size": "字號",
+    "angle": "角度",
+    "length": "長度",
+    "promptPlace": "按一下或輸入文字起點（基線左端）。標註放在“備註”圖層。",
+    "promptText": "輸入文字，例如部件名稱和“裁 2 片”，然後按 Enter。按一下別處可移動位置 · Esc 取消。",
+    "promptGrainStart": "按一下或輸入紋理方向箭頭的一端。",
+    "promptGrainEnd": "按一下另一端，或輸入長度和角度。按住 Shift 鎖定 15°。"
+  },
+  "parallel": {
+    "name": "平行線",
+    "distance": "距離",
+    "promptEdge": "按一下一條直邊。",
+    "promptPlace": "在所需一側和距離處按一下，或輸入距離（游標決定方向）。Esc 重新選擇直邊。"
+  },
+  "trim": {
+    "name": "修剪 / 延伸 / 打斷",
+    "mode": "方式",
+    "modeTrim": "修剪",
+    "modeExtend": "延伸",
+    "modeSplit": "打斷",
+    "promptTrim": "按一下要刪除的線段：將修剪到最近的交點。Shift+按一下改為延伸。",
+    "promptExtend": "按一下線的端點附近，將其延伸到遇到的下一條線。Shift+按一下改為修剪。",
+    "promptSplit": "按一下線或輪廓，在該點將其打斷。"
+  },
+  "punch": {
+    "name": "衝孔 / 腰圓孔",
+    "kind": "形狀",
+    "round": "圓孔",
+    "slot": "腰圓孔",
+    "preset": "圓衝",
+    "custom": "自定義",
+    "diameter": "直徑",
+    "width": "寬度",
+    "length": "長度",
+    "angle": "角度",
+    "prompt": "按一下放置圓孔（可鎖點圓心和端點），或輸入 X/Y 後按 Enter。請按鉚釘、四合扣或螺絲扣的杆徑選擇孔徑。",
+    "promptSlot": "按一下以中心放置腰圓孔，或輸入 X/Y 後按 Enter。長度為兩端總長；寬度即圓衝直徑。"
+  },
+  "seamAllowance": {
+    "name": "縫份",
+    "allowance": "縫份",
+    "promptPick": "按一下一個閉合輪廓，為其新增縫份。",
+    "promptAll": "縫份（mm）：{values}。輸入數值應用到所有邊，或按一下某條邊（Shift+按一下多選）單獨設定。Enter 新增輪廓 · Esc 重新選擇。",
+    "promptEdges": "縫份（mm）：{values}。為高亮的邊輸入縫份後按 Enter。未輸入時按 Enter 新增輪廓 · Esc 取消邊的選擇。"
+  },
+  "array": {
+    "name": "陣列",
+    "mode": "方式",
+    "linear": "線性",
+    "circular": "環形",
+    "count": "數量",
+    "sweep": "角度",
+    "promptBase": "線性陣列：按一下或輸入基點。數量包含原物件。",
+    "promptStep": "按一下下一個副本的位置，或輸入 ΔX 和 ΔY。按住 Shift 鎖定 15°。",
+    "promptCentre": "環形陣列：按一下或輸入中心。數量包含原物件。",
+    "promptCircular": "按 Enter 或按一下生成陣列：360° 時副本均勻分佈一週；小於 360° 時首尾副本跨越該角度。"
+  },
+  "notch": {
+    "name": "對位刀口",
+    "count": "刀口",
+    "single": "單刀口",
+    "double": "雙刀口",
+    "style": "樣式",
+    "line": "直線刀口",
+    "v": "V 形刀口",
+    "length": "深度",
+    "gap": "間距",
+    "width": "寬度",
+    "prompt": "按一下邊緣新增對位刀口（朝向部件內側；開放線條朝向游標一側）。可使用鎖點。"
+  },
+  "perpendicular": {
+    "name": "垂線",
+    "along": "沿邊距離",
+    "length": "長度",
+    "promptEdge": "按一下一條直邊。",
+    "promptPlace": "按一下放置垂線，或輸入沿邊距離和長度。Esc 重新選擇直邊。"
+  },
+  "measure": {
+    "name": "測量",
+    "mode": "測量",
+    "distance": "距離",
+    "angle": "角度",
+    "length": "長度",
+    "promptDistance": "按一下兩點測量距離。",
+    "promptAngle": "依次按一下一點、角點和另一點。",
+    "holes": "孔數",
+    "edgeA": "邊 1",
+    "edgeB": "邊 2",
+    "promptHolesFirst": "按一下縫孔的一條邊，統計其孔數（含拐角孔）。",
+    "promptHolesSecond": "按一下與之縫合的邊。",
+    "holesMatch": "兩條邊都是 {count, plural, other {# 個孔}}：孔數一致。按一下可比較另一對邊。",
+    "holesDiffer": "孔數不一致：{a} 對 {b} 個孔（相差 {diff, plural, other {# 個孔}}）。請調整針距或邊長，使兩邊能均勻縫合。",
+    "promptLength": "將滑鼠移到圖形上檢視其長度。"
+  }
+}

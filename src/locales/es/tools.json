@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "Seleccionar",
+    "prompt": "Clic para seleccionar · Mayús+clic añade o quita · arrastra de izquierda a derecha para lo que queda dentro, de derecha a izquierda para lo que toca · arrastra un elemento seleccionado para moverlo (Alt: copiar) · Supr elimina.",
+    "promptPoints": "Arrastra puntos o tiradores · doble clic en un punto: suave ↔ esquina · doble clic en el contorno: añadir punto · clic en un punto y Supr: quitarlo · Esc deselecciona."
+  },
+  "line": {
+    "name": "Línea",
+    "polylineName": "Polilínea",
+    "mode": "Modo",
+    "modeSegments": "Segmentos sueltos",
+    "modePolyline": "Una polilínea",
+    "length": "Longitud",
+    "angle": "Ángulo",
+    "promptFirst": "Haz clic o escribe el primer punto.",
+    "promptNext": "Haz clic en el siguiente punto o escribe longitud y ángulo. Mayús fija 15°.",
+    "promptMore": "Siguiente punto · clic en el primero para cerrar · Intro, doble clic o clic derecho para terminar · Retroceso deshace un punto."
+  },
+  "rectangle": {
+    "name": "Rectángulo",
+    "shape": "Forma",
+    "square": "Cuadrado",
+    "side": "Lado",
+    "width": "Ancho",
+    "height": "Alto",
+    "cornerRadius": "Radio de esquina",
+    "promptFirst": "Haz clic o escribe la primera esquina. Alt dibuja desde el centro.",
+    "promptCorner": "Haz clic en la esquina opuesta o escribe ancho y alto.",
+    "promptCentre": "Desde el centro: haz clic en una esquina o escribe el ancho y alto totales."
+  },
+  "circle": {
+    "name": "Círculo",
+    "threeName": "Círculo por 3 puntos",
+    "ellipseName": "Elipse",
+    "radius": "Radio",
+    "promptCentre": "Haz clic o escribe el centro.",
+    "promptRadius": "Haz clic en un punto del círculo o escribe el radio.",
+    "mode": "Modo",
+    "modeCentre": "Centro + radio",
+    "modeThree": "3 puntos",
+    "modeEllipse": "Elipse",
+    "radius2": "2.º radio",
+    "promptP1": "Haz clic en el primer punto del círculo.",
+    "promptP2": "Haz clic en el segundo punto.",
+    "promptP3": "Haz clic en el tercer punto.",
+    "promptAxis": "Haz clic en el extremo del primer eje (define su radio y dirección).",
+    "promptOther": "Haz clic para fijar el otro radio o escríbelo."
+  },
+  "fillet": {
+    "name": "Empalme",
+    "radius": "Radio",
+    "promptPick": "Pasa sobre una esquina entre dos bordes rectos. Mayús: todas las esquinas de la forma.",
+    "promptApply": "Clic para redondear esta esquina (Mayús: todas). Escribe un radio para cambiarlo.",
+    "tooLarge": "Demasiado grande para esta esquina: el radio máximo es {max} mm.",
+    "notApplicable": "No se puede redondear esta esquina."
+  },
+  "stitchHoles": {
+    "name": "Agujeros de costura",
+    "pitch": "Paso",
+    "count": "{count, plural, one {# agujero} other {# agujeros}}",
+    "preset": "Punzón de costura",
+    "custom": "Personalizado",
+    "size": "Tamaño de agujero",
+    "shape": "Forma",
+    "round": "Redondo",
+    "slit": "Ranura inclinada",
+    "corners": "Agujero en cada esquina",
+    "promptPick": "Pasa sobre una línea de costura (o cualquier línea) para previsualizar sus agujeros.",
+    "promptClick": "Clic para añadir estos agujeros. Quedan vinculados a la línea y la siguen."
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "La capa activa está bloqueada u oculta. Desbloquéala o muéstrala, o elige otra en el panel Capas.",
+    "explodeNone": "Selecciona trazados de más de un segmento para descomponer (rectángulos, polilíneas, contornos).",
+    "joinNone": "Selecciona trazados abiertos para unir (o uno con los extremos juntos, para cerrarlo).",
+    "booleanNone": "Selecciona dos o más formas cerradas (contornos o círculos)."
+  },
+  "transform": {
+    "promptPick": "Selecciona objetos (clic, Mayús+clic o recuadro) y pulsa Intro o clic derecho.",
+    "copy": "Conservar original (copia)"
+  },
+  "move": {
+    "name": "Mover",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "Haz clic o escribe el punto base.",
+    "promptTarget": "Haz clic en el destino o escribe ΔX y ΔY. Mayús fija 15°."
+  },
+  "rotate": {
+    "name": "Girar",
+    "angle": "Ángulo",
+    "promptCentre": "Haz clic o escribe el centro de giro.",
+    "promptAngle": "Haz clic para fijar el ángulo (desde +X) o escríbelo. Mayús redondea a 15°."
+  },
+  "scale": {
+    "name": "Escala",
+    "factor": "Factor",
+    "promptBase": "Haz clic o escribe el punto base (queda fijo).",
+    "promptRef": "Escribe un factor o haz clic en un punto de referencia.",
+    "promptTarget": "Haz clic donde debe ir el punto de referencia o escribe un factor."
+  },
+  "mirror": {
+    "name": "Simetría",
+    "angle": "Ángulo del eje",
+    "promptFirst": "Haz clic en una línea de eje para reflejar respecto a ella, o en el primer punto del eje.",
+    "promptSecond": "Haz clic en el segundo punto del eje o escribe su ángulo. Mayús fija 15°."
+  },
+  "offset": {
+    "name": "Equidistancia",
+    "distance": "Distancia",
+    "through": "Por el cursor",
+    "join": "Esquinas",
+    "joinMiter": "Viva (inglete)",
+    "joinRound": "Redonda",
+    "joinBevel": "Bisel",
+    "promptPick": "Haz clic en un trazado, círculo o línea de eje para equidistar.",
+    "promptSide": "Haz clic en el lado (la distancia sigue al cursor o escríbela). Otro clic para otra; Esc elige otro origen.",
+    "promptApprox": "Equidistancia creada. Algunas curvas se hicieron como polilíneas finas para quedar a menos de 0,02 mm. Haz clic para otra."
+  },
+  "stitchLine": {
+    "name": "Línea de costura",
+    "promptPick": "Haz clic en un contorno para añadirle una línea de costura.",
+    "promptSide": "Haz clic dentro o fuera para elegir el lado (margen de los ajustes del proyecto o escríbelo). La línea queda vinculada al contorno.",
+    "promptApprox": "Línea de costura añadida; algunas curvas son polilíneas finas para quedar a menos de 0,02 mm. Haz clic en el siguiente contorno."
+  },
+  "chamfer": {
+    "name": "Chaflán",
+    "d1": "Distancia",
+    "d2": "2.ª distancia",
+    "angle": "Ángulo",
+    "promptPick": "Pasa sobre una esquina entre dos bordes rectos. Mayús: todas las esquinas de la forma.",
+    "promptApply": "Clic para cortar esta esquina (Mayús: todas). Escribe distancias, o una distancia y un ángulo.",
+    "tooLarge": "Demasiado grande para esta esquina: máximo {max} mm por borde.",
+    "notApplicable": "No se puede cortar esta esquina con ese ángulo."
+  },
+  "pen": {
+    "name": "Pluma (curvas)",
+    "promptFirst": "Clic para una esquina, arrastra para un punto de curva suave.",
+    "promptNext": "Clic para una esquina, arrastra para una curva. Escribe longitud y ángulo para un borde recto. Mayús fija 15°.",
+    "promptMore": "Clic en el primer punto para cerrar · Intro, doble clic o clic derecho para terminar · Retroceso quita el último punto."
+  },
+  "arc": {
+    "name": "Arco (3 puntos)",
+    "promptStart": "Haz clic o escribe el inicio del arco.",
+    "promptEnd": "Haz clic o escribe el final del arco.",
+    "promptThrough": "Haz clic en un punto por el que pase el arco.",
+    "collinear": "Los tres puntos están alineados: elige uno fuera de la línea."
+  },
+  "centreLine": {
+    "name": "Línea de eje",
+    "mode": "Modo",
+    "modeShape": "Por el centro de una forma",
+    "modePoints": "Dos puntos",
+    "orientation": "Dirección",
+    "vertical": "Vertical",
+    "horizontal": "Horizontal",
+    "promptShape": "Haz clic en una forma para añadir una línea de eje por su centro. Simetría puede usarla como eje.",
+    "promptFirst": "Haz clic o escribe el primer punto.",
+    "promptSecond": "Haz clic en el segundo punto. Mayús fija 15°."
+  },
+  "label": {
+    "name": "Etiqueta",
+    "mode": "Modo",
+    "modeText": "Texto",
+    "modeGrain": "Flecha de hilo",
+    "text": "Texto",
+    "size": "Tamaño",
+    "angle": "Ángulo",
+    "length": "Longitud",
+    "promptPlace": "Haz clic o escribe dónde empieza el texto (extremo izquierdo de la línea base). Las etiquetas van en la capa Notas.",
+    "promptText": "Escribe el texto, p. ej. nombre de pieza y «cortar 2», y pulsa Intro. Clic en otro sitio para moverlo · Esc cancela.",
+    "promptGrainStart": "Haz clic o escribe un extremo de la flecha de hilo.",
+    "promptGrainEnd": "Haz clic en el otro extremo o escribe longitud y ángulo. Mayús fija 15°."
+  },
+  "parallel": {
+    "name": "Línea paralela",
+    "distance": "Distancia",
+    "promptEdge": "Haz clic en un borde recto.",
+    "promptPlace": "Haz clic en el lado y la distancia deseados, o escribe la distancia (el cursor elige el lado). Esc elige otro borde."
+  },
+  "trim": {
+    "name": "Recortar / alargar / dividir",
+    "mode": "Modo",
+    "modeTrim": "Recortar",
+    "modeExtend": "Alargar",
+    "modeSplit": "Dividir",
+    "promptTrim": "Haz clic en el tramo a quitar: se recorta hasta los cruces más cercanos. Mayús+clic alarga.",
+    "promptExtend": "Haz clic cerca del extremo de una línea para alargarla hasta la siguiente. Mayús+clic recorta.",
+    "promptSplit": "Haz clic en una línea o contorno para dividirlo en ese punto."
+  },
+  "punch": {
+    "name": "Agujero / ranura de sacabocados",
+    "kind": "Forma",
+    "round": "Agujero redondo",
+    "slot": "Ranura",
+    "preset": "Sacabocados",
+    "custom": "Personalizado",
+    "diameter": "Diámetro",
+    "width": "Ancho",
+    "length": "Longitud",
+    "angle": "Ángulo",
+    "prompt": "Clic para colocar un agujero (se ajusta a centros y puntos) o escribe X/Y e Intro. Usa el diámetro que pida tu remache, broche o tornillo.",
+    "promptSlot": "Clic para colocar una ranura por su centro, o escribe X/Y e Intro. La longitud es de extremo a extremo; el ancho es el diámetro del sacabocados."
+  },
+  "seamAllowance": {
+    "name": "Margen de costura",
+    "allowance": "Margen",
+    "promptPick": "Haz clic en un contorno cerrado para añadirle margen de costura.",
+    "promptAll": "Márgenes (mm): {values}. Escribe un valor para todos los bordes, o haz clic en un borde (Mayús+clic para más) para fijar el suyo. Intro añade el contorno · Esc elige otro.",
+    "promptEdges": "Márgenes (mm): {values}. Escribe el margen de los bordes resaltados y pulsa Intro. Intro sin valor añade el contorno · Esc borra la selección de bordes."
+  },
+  "array": {
+    "name": "Matriz",
+    "mode": "Modo",
+    "linear": "Lineal",
+    "circular": "Polar",
+    "count": "Cantidad",
+    "sweep": "Ángulo",
+    "promptBase": "Matriz lineal: haz clic o escribe un punto base. La cantidad incluye el original.",
+    "promptStep": "Haz clic donde va la siguiente copia o escribe ΔX y ΔY. Mayús fija 15°.",
+    "promptCentre": "Matriz polar: haz clic o escribe el centro. La cantidad incluye el original.",
+    "promptCircular": "Pulsa Intro o haz clic para crear la matriz: 360° reparte las copias por igual; menos abarca de la primera a la última."
+  },
+  "notch": {
+    "name": "Piquete",
+    "count": "Piquete",
+    "single": "Simple",
+    "double": "Doble",
+    "style": "Estilo",
+    "line": "Corte (línea)",
+    "v": "Piquete en V",
+    "length": "Profundidad",
+    "gap": "Separación",
+    "width": "Ancho",
+    "prompt": "Haz clic en un borde para añadir un piquete de alineación (hacia dentro de la pieza; en líneas abiertas, del lado del cursor). Se aplican los ajustes."
+  },
+  "perpendicular": {
+    "name": "Perpendicular",
+    "along": "A lo largo",
+    "length": "Longitud",
+    "promptEdge": "Haz clic en un borde recto.",
+    "promptPlace": "Clic para colocar una línea perpendicular, o escribe la posición sobre el borde y la longitud. Esc elige otro borde."
+  },
+  "measure": {
+    "name": "Medir",
+    "mode": "Medir",
+    "distance": "Distancia",
+    "angle": "Ángulo",
+    "length": "Longitud",
+    "promptDistance": "Haz clic en dos puntos para medir la distancia.",
+    "promptAngle": "Haz clic en un punto, el vértice y otro punto.",
+    "holes": "Nº de agujeros",
+    "edgeA": "Borde 1",
+    "edgeB": "Borde 2",
+    "promptHolesFirst": "Haz clic en un borde de un juego de agujeros para contarlos (incluye los de esquina).",
+    "promptHolesSecond": "Haz clic en el borde con el que se cose.",
+    "holesMatch": "Ambos bordes tienen {count, plural, one {# agujero} other {# agujeros}}: coinciden. Clic para comparar otro par.",
+    "holesDiffer": "No coinciden: {a} frente a {b} agujeros ({diff, plural, one {# agujero} other {# agujeros}} de diferencia). Ajusta un paso o las longitudes de borde para que la costura case.",
+    "promptLength": "Pasa sobre una forma para ver su longitud."
+  }
+}

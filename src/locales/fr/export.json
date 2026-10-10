@@ -1,0 +1,47 @@
+{
+  "title": "Exporter",
+  "format": "Format",
+  "formats": {
+    "pdf": "PDF, 1:1 pour l’impression",
+    "svg": "SVG, 1:1 pour laser, plotter de découpe ou autres logiciels",
+    "dxf": "DXF, 1:1 en mm pour les logiciels laser et CNC",
+    "png": "Image PNG, pour partager ou prévisualiser"
+  },
+  "dxf": {
+    "noLabels": "Le DXF ne contient que les formes : les étiquettes sont omises."
+  },
+  "png": {
+    "resolution": "Résolution",
+    "hint": "Une image à partager. Pour fabriquer le patron, utilisez le PDF, le SVG ou le DXF."
+  },
+  "layers": "Contenu",
+  "cutOnly": "Calques de coupe uniquement (laser)",
+  "includeLabels": "Inclure les étiquettes",
+  "polyline": "Courbes en petits segments droits (pour les logiciels laser)",
+  "strokeWidth": "Épaisseur de trait",
+  "strokeAsDrawn": "comme dessiné",
+  "working": "Exportation…",
+  "export": "Exporter en {format}",
+  "svg": {
+    "title": "Exporter en SVG",
+    "cutOnly": "Calques de coupe uniquement (laser)",
+    "includeLabels": "Inclure les étiquettes"
+  },
+  "pdf": {
+    "paper": "Papier",
+    "single": "Une page, à la taille du patron",
+    "orientation": "Orientation",
+    "auto": "Le moins de pages possible",
+    "portrait": "Portrait",
+    "landscape": "Paysage",
+    "overlap": "Recouvrement",
+    "printHint": "Imprimez à 100 % (« Taille réelle ») ; jamais en « Ajuster à la page ». Mesurez ensuite le carré de 50 mm sur la première page.",
+    "scale": "Échelle 1:1",
+    "calibration": "50 mm : mesurez ce carré pour vérifier l’échelle d’impression",
+    "instructions1": "Imprimez à 100 % / « Taille réelle ». N’utilisez pas « Ajuster à la page » ni « Réduire les pages trop grandes ».",
+    "instructions2": "Mesurez le carré : chaque côté doit faire exactement 50 mm. Sinon, vérifiez la mise à l’échelle de l’imprimante et imprimez à nouveau.",
+    "assembly": "Les feuilles se recouvrent de {overlap} mm. Découpez le long d’une ligne en pointillés ou superposez les feuilles en faisant coïncider les repères de coin et les numéros de feuille sur les bords.",
+    "sheets": "Feuilles"
+  },
+  "aiUnreviewed": "{count, plural, one {# objet a été créé par l’IA et n’a pas été relu.} other {# objets ont été créés par l’IA et n’ont pas été relus.}}"
+}

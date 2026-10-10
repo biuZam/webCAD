@@ -12,7 +12,8 @@
     "save": "Save",
     "export": "Export…",
     "import": "Import…",
-    "shortcuts": "Shortcuts…"
+    "shortcuts": "Shortcuts…",
+    "github": "Source code on GitHub"
   },
   "history": {
     "add": "Add",
@@ -87,7 +88,15 @@
   },
   "languages": {
     "en": "English",
-    "zh-CN": "简体中文"
+    "zh-CN": "简体中文",
+    "zh-TW": "繁體中文",
+    "de": "Deutsch",
+    "fr": "Français",
+    "es": "Español",
+    "it": "Italiano",
+    "pt": "Português",
+    "ja": "日本語",
+    "ko": "한국어"
   },
   "tools": {
     "label": "Tools",

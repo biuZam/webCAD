@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "Sélectionner",
+    "prompt": "Cliquez pour sélectionner · Maj+clic ajoute ou retire · glissez de gauche à droite pour les éléments entièrement inclus, de droite à gauche pour tout ce qui est touché · glissez un élément sélectionné pour le déplacer (Alt : copier) · Suppr supprime.",
+    "promptPoints": "Glissez les points ou poignées · double-clic sur un point : lisse ↔ angle · double-clic sur le contour : ajouter un point · cliquez un point puis Suppr : le retirer · Échap désélectionne."
+  },
+  "line": {
+    "name": "Ligne",
+    "polylineName": "Polyligne",
+    "mode": "Mode",
+    "modeSegments": "Segments séparés",
+    "modePolyline": "Une polyligne",
+    "length": "Longueur",
+    "angle": "Angle",
+    "promptFirst": "Cliquez ou saisissez le premier point.",
+    "promptNext": "Cliquez le point suivant, ou saisissez longueur et angle. Maj verrouille à 15°.",
+    "promptMore": "Point suivant · cliquez le premier point pour fermer · Entrée, double-clic ou clic droit pour terminer · Retour arrière annule un point."
+  },
+  "rectangle": {
+    "name": "Rectangle",
+    "shape": "Forme",
+    "square": "Carré",
+    "side": "Côté",
+    "width": "Largeur",
+    "height": "Hauteur",
+    "cornerRadius": "Rayon des coins",
+    "promptFirst": "Cliquez ou saisissez le premier coin. Maintenez Alt pour dessiner depuis le centre.",
+    "promptCorner": "Cliquez le coin opposé, ou saisissez largeur et hauteur.",
+    "promptCentre": "Depuis le centre : cliquez un coin, ou saisissez la largeur et la hauteur totales."
+  },
+  "circle": {
+    "name": "Cercle",
+    "threeName": "Cercle par 3 points",
+    "ellipseName": "Ellipse",
+    "radius": "Rayon",
+    "promptCentre": "Cliquez ou saisissez le centre.",
+    "promptRadius": "Cliquez un point du cercle, ou saisissez le rayon.",
+    "mode": "Mode",
+    "modeCentre": "Centre + rayon",
+    "modeThree": "3 points",
+    "modeEllipse": "Ellipse",
+    "radius2": "2e rayon",
+    "promptP1": "Cliquez le premier point du cercle.",
+    "promptP2": "Cliquez le deuxième point.",
+    "promptP3": "Cliquez le troisième point.",
+    "promptAxis": "Cliquez l’extrémité du premier axe (définit son rayon et sa direction).",
+    "promptOther": "Cliquez pour définir l’autre rayon, ou saisissez-le."
+  },
+  "fillet": {
+    "name": "Raccord",
+    "radius": "Rayon",
+    "promptPick": "Survolez un coin entre deux arêtes droites. Maj : tous les coins de cette forme.",
+    "promptApply": "Cliquez pour arrondir ce coin (Maj : tous les coins). Saisissez un rayon pour le modifier.",
+    "tooLarge": "Trop grand pour ce coin : le plus grand rayon possible est {max} mm.",
+    "notApplicable": "Impossible d’arrondir ce coin."
+  },
+  "stitchHoles": {
+    "name": "Trous de couture",
+    "pitch": "Pas",
+    "count": "{count, plural, one {# trou} other {# trous}}",
+    "preset": "Fourchette",
+    "custom": "Personnalisé",
+    "size": "Taille des trous",
+    "shape": "Forme",
+    "round": "Rond",
+    "slit": "Fente oblique",
+    "corners": "Un trou à chaque coin",
+    "promptPick": "Survolez une ligne de couture (ou une ligne quelconque) pour prévisualiser ses trous.",
+    "promptClick": "Cliquez pour ajouter ces trous. Ils restent liés à la ligne et la suivent."
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "Le calque actif est verrouillé ou masqué. Déverrouillez-le ou affichez-le, ou choisissez un autre calque dans le panneau Calques.",
+    "explodeNone": "Sélectionnez des tracés de plus d’un segment à décomposer (rectangles, polylignes, contours).",
+    "joinNone": "Sélectionnez des tracés ouverts à joindre (ou un tracé dont les extrémités se rejoignent, pour le fermer).",
+    "booleanNone": "Sélectionnez au moins deux formes fermées (contours ou cercles)."
+  },
+  "transform": {
+    "promptPick": "Sélectionnez des objets (clic, Maj+clic ou cadre de sélection), puis appuyez sur Entrée ou faites un clic droit.",
+    "copy": "Conserver l’original (copie)"
+  },
+  "move": {
+    "name": "Déplacer",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "Cliquez ou saisissez le point de base.",
+    "promptTarget": "Cliquez la destination, ou saisissez ΔX et ΔY. Maj verrouille à 15°."
+  },
+  "rotate": {
+    "name": "Rotation",
+    "angle": "Angle",
+    "promptCentre": "Cliquez ou saisissez le centre de rotation.",
+    "promptAngle": "Cliquez pour définir l’angle (depuis la direction +X), ou saisissez-le. Maj arrondit à 15°."
+  },
+  "scale": {
+    "name": "Échelle",
+    "factor": "Facteur",
+    "promptBase": "Cliquez ou saisissez le point de base (il reste fixe).",
+    "promptRef": "Saisissez un facteur, ou cliquez un point de référence.",
+    "promptTarget": "Cliquez où le point de référence doit aller, ou saisissez un facteur."
+  },
+  "mirror": {
+    "name": "Miroir",
+    "angle": "Angle de l’axe",
+    "promptFirst": "Cliquez une ligne d’axe pour refléter par rapport à elle, ou cliquez le premier point de l’axe.",
+    "promptSecond": "Cliquez le second point de l’axe, ou saisissez l’angle de l’axe. Maj verrouille à 15°."
+  },
+  "offset": {
+    "name": "Décalage",
+    "distance": "Distance",
+    "through": "Par le curseur",
+    "join": "Coins",
+    "joinMiter": "Vif (onglet)",
+    "joinRound": "Arrondi",
+    "joinBevel": "Biseau",
+    "promptPick": "Cliquez un tracé, un cercle ou une ligne d’axe à décaler.",
+    "promptSide": "Cliquez le côté du décalage (la distance suit le curseur, ou saisissez-la). Cliquez à nouveau pour un autre ; Échap choisit une autre source.",
+    "promptApprox": "Décalage créé. Certaines courbes ont été décalées en fines polylignes pour rester à moins de 0,02 mm. Cliquez à nouveau pour un autre décalage."
+  },
+  "stitchLine": {
+    "name": "Ligne de couture",
+    "promptPick": "Cliquez un contour auquel ajouter une ligne de couture.",
+    "promptSide": "Cliquez à l’intérieur ou à l’extérieur pour choisir le côté (marge des paramètres du projet, ou saisissez-la). La ligne reste liée au contour.",
+    "promptApprox": "Ligne de couture ajoutée ; certaines courbes sont de fines polylignes pour rester à moins de 0,02 mm. Cliquez le contour suivant."
+  },
+  "chamfer": {
+    "name": "Chanfrein",
+    "d1": "Distance",
+    "d2": "2e distance",
+    "angle": "Angle",
+    "promptPick": "Survolez un coin entre deux arêtes droites. Maj : tous les coins de cette forme.",
+    "promptApply": "Cliquez pour couper ce coin (Maj : tous les coins). Saisissez des distances, ou une distance et un angle.",
+    "tooLarge": "Trop grand pour ce coin : au plus {max} mm le long de chaque arête.",
+    "notApplicable": "Impossible de couper ce coin avec cet angle."
+  },
+  "pen": {
+    "name": "Plume (courbes)",
+    "promptFirst": "Cliquez pour un angle, glissez pour un point de courbe lisse.",
+    "promptNext": "Cliquez pour un angle, glissez pour une courbe. Saisissez longueur et angle pour une arête droite. Maj verrouille à 15°.",
+    "promptMore": "Cliquez le premier point pour fermer · Entrée, double-clic ou clic droit pour terminer · Retour arrière retire le dernier point."
+  },
+  "arc": {
+    "name": "Arc (3 points)",
+    "promptStart": "Cliquez ou saisissez le début de l’arc.",
+    "promptEnd": "Cliquez ou saisissez la fin de l’arc.",
+    "promptThrough": "Cliquez un point par lequel l’arc passe.",
+    "collinear": "Les trois points sont alignés : choisissez un point hors de la ligne."
+  },
+  "centreLine": {
+    "name": "Ligne d’axe",
+    "mode": "Mode",
+    "modeShape": "Par le centre d’une forme",
+    "modePoints": "Deux points",
+    "orientation": "Direction",
+    "vertical": "Verticale",
+    "horizontal": "Horizontale",
+    "promptShape": "Cliquez une forme pour ajouter une ligne d’axe par son milieu. Miroir peut l’utiliser comme axe.",
+    "promptFirst": "Cliquez ou saisissez le premier point.",
+    "promptSecond": "Cliquez le second point. Maj verrouille à 15°."
+  },
+  "label": {
+    "name": "Étiquette",
+    "mode": "Mode",
+    "modeText": "Texte",
+    "modeGrain": "Flèche de droit-fil",
+    "text": "Texte",
+    "size": "Taille",
+    "angle": "Angle",
+    "length": "Longueur",
+    "promptPlace": "Cliquez ou saisissez où le texte commence (extrémité gauche de sa ligne de base). Les étiquettes vont sur le calque Notes.",
+    "promptText": "Saisissez le texte, par ex. nom de la pièce et « couper 2 », puis appuyez sur Entrée. Cliquez ailleurs pour le déplacer · Échap annule.",
+    "promptGrainStart": "Cliquez ou saisissez une extrémité de la flèche de droit-fil.",
+    "promptGrainEnd": "Cliquez l’autre extrémité, ou saisissez longueur et angle. Maj verrouille à 15°."
+  },
+  "parallel": {
+    "name": "Ligne parallèle",
+    "distance": "Distance",
+    "promptEdge": "Cliquez une arête droite.",
+    "promptPlace": "Cliquez du côté et à la distance voulus, ou saisissez la distance (le curseur choisit le côté). Échap choisit une autre arête."
+  },
+  "trim": {
+    "name": "Ajuster / prolonger / diviser",
+    "mode": "Mode",
+    "modeTrim": "Ajuster",
+    "modeExtend": "Prolonger",
+    "modeSplit": "Diviser",
+    "promptTrim": "Cliquez le morceau de ligne à retirer : il est coupé jusqu’aux intersections les plus proches. Maj+clic prolonge à la place.",
+    "promptExtend": "Cliquez près de l’extrémité d’une ligne pour la prolonger jusqu’à la prochaine ligne rencontrée. Maj+clic ajuste à la place.",
+    "promptSplit": "Cliquez une ligne ou un contour pour le diviser à cet endroit."
+  },
+  "punch": {
+    "name": "Trou / fente à l’emporte-pièce",
+    "kind": "Forme",
+    "round": "Trou rond",
+    "slot": "Fente",
+    "preset": "Emporte-pièce",
+    "custom": "Personnalisé",
+    "diameter": "Diamètre",
+    "width": "Largeur",
+    "length": "Longueur",
+    "angle": "Angle",
+    "prompt": "Cliquez pour placer un trou (s’aimante aux centres et aux points), ou saisissez X/Y puis Entrée. Utilisez le diamètre qu’exige votre rivet, bouton-pression ou vis.",
+    "promptSlot": "Cliquez pour placer une fente par son centre, ou saisissez X/Y puis Entrée. La longueur va d’un bout à l’autre ; la largeur est le diamètre de l’emporte-pièce."
+  },
+  "seamAllowance": {
+    "name": "Marge de couture",
+    "allowance": "Marge",
+    "promptPick": "Cliquez un contour fermé pour ajouter une marge de couture tout autour.",
+    "promptAll": "Marges (mm) : {values}. Saisissez une valeur pour toutes les arêtes, ou cliquez une arête (Maj+clic pour en ajouter) pour définir la sienne. Entrée ajoute le contour · Échap en choisit un autre.",
+    "promptEdges": "Marges (mm) : {values}. Saisissez la marge des arêtes en surbrillance puis appuyez sur Entrée. Entrée sans saisie ajoute le contour · Échap efface le choix d’arêtes."
+  },
+  "array": {
+    "name": "Réseau",
+    "mode": "Mode",
+    "linear": "Linéaire",
+    "circular": "Circulaire",
+    "count": "Nombre",
+    "sweep": "Angle",
+    "promptBase": "Réseau linéaire : cliquez ou saisissez un point de base. Le nombre inclut l’original.",
+    "promptStep": "Cliquez où va la copie suivante, ou saisissez ΔX et ΔY. Maj verrouille à 15°.",
+    "promptCentre": "Réseau circulaire : cliquez ou saisissez le centre. Le nombre inclut l’original.",
+    "promptCircular": "Appuyez sur Entrée ou cliquez pour créer le réseau : 360° répartit les copies uniformément ; moins couvre de la première à la dernière."
+  },
+  "notch": {
+    "name": "Cran",
+    "count": "Cran",
+    "single": "Simple",
+    "double": "Double",
+    "style": "Style",
+    "line": "Entaille (ligne)",
+    "v": "Cran en V",
+    "length": "Profondeur",
+    "gap": "Écart",
+    "width": "Largeur",
+    "prompt": "Cliquez une arête pour y ajouter un cran de repère (vers l’intérieur de la pièce ; pour les lignes ouvertes, du côté du curseur). L’aimantation s’applique."
+  },
+  "perpendicular": {
+    "name": "Perpendiculaire",
+    "along": "Le long",
+    "length": "Longueur",
+    "promptEdge": "Cliquez une arête droite.",
+    "promptPlace": "Cliquez pour placer une ligne perpendiculaire, ou saisissez la distance le long de l’arête et la longueur. Échap choisit une autre arête."
+  },
+  "measure": {
+    "name": "Mesurer",
+    "mode": "Mesure",
+    "distance": "Distance",
+    "angle": "Angle",
+    "length": "Longueur",
+    "promptDistance": "Cliquez deux points pour mesurer la distance.",
+    "promptAngle": "Cliquez un point, le sommet, puis un autre point.",
+    "holes": "Nombre de trous",
+    "edgeA": "Arête 1",
+    "edgeB": "Arête 2",
+    "promptHolesFirst": "Cliquez une arête d’un jeu de trous pour compter ses trous (trous de coin compris).",
+    "promptHolesSecond": "Cliquez l’arête à laquelle elle est cousue.",
+    "holesMatch": "Les deux arêtes ont {count, plural, one {# trou} other {# trous}} : elles correspondent. Cliquez pour comparer une autre paire.",
+    "holesDiffer": "Écart : {a} contre {b} trous ({diff, plural, one {# trou} other {# trous}} de différence). Ajustez un pas ou les longueurs d’arête pour que la couture tombe juste.",
+    "promptLength": "Survolez une forme pour voir sa longueur."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "file": {
+    "notAProject": "이 파일은 LeatherDraft 프로젝트가 아닙니다.",
+    "newerVersion": "이 프로젝트는 더 최신 버전의 LeatherDraft로 저장되었습니다.",
+    "noMigration": "이 프로젝트를 현재 버전으로 업그레이드할 수 없습니다.",
+    "notJson": "이 파일은 올바른 JSON이 아니므로 LeatherDraft 프로젝트가 될 수 없습니다.",
+    "ioFailed": "파일을 읽거나 쓸 수 없습니다. 권한을 확인한 후 다시 시도하세요.",
+    "exportFailed": "내보내기에 실패했습니다. 다시 시도하고, 계속 실패하면 레이어를 줄이거나 SVG를 사용하세요.",
+    "notDrawing": "이 파일은 SVG 또는 DXF 도면이 아닙니다.",
+    "importNoLayer": "가져올 레이어가 없습니다. '참조' 레이어 또는 현재 레이어를 표시하거나 잠금 해제하세요."
+  }
+}

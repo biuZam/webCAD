@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "Auswählen",
+    "prompt": "Klicken zum Auswählen · Umschalt+Klick fügt hinzu oder entfernt · von links nach rechts ziehen für vollständig umschlossene Objekte, von rechts nach links für jedes berührte · ausgewähltes Objekt ziehen zum Verschieben (Alt: kopieren) · Entf löscht.",
+    "promptPoints": "Punkte oder Griffe ziehen · Doppelklick auf einen Punkt: glatt ↔ Ecke · Doppelklick auf die Kontur: Punkt hinzufügen · Punkt anklicken, dann Entf: entfernen · Esc hebt die Auswahl auf."
+  },
+  "line": {
+    "name": "Linie",
+    "polylineName": "Polylinie",
+    "mode": "Modus",
+    "modeSegments": "Einzelne Segmente",
+    "modePolyline": "Eine Polylinie",
+    "length": "Länge",
+    "angle": "Winkel",
+    "promptFirst": "Ersten Punkt anklicken oder eingeben.",
+    "promptNext": "Nächsten Punkt anklicken oder Länge und Winkel eingeben. Umschalt rastet bei 15° ein.",
+    "promptMore": "Nächster Punkt · ersten Punkt anklicken zum Schließen · Eingabe, Doppelklick oder Rechtsklick beendet · Rücktaste macht einen Punkt rückgängig."
+  },
+  "rectangle": {
+    "name": "Rechteck",
+    "shape": "Form",
+    "square": "Quadrat",
+    "side": "Seite",
+    "width": "Breite",
+    "height": "Höhe",
+    "cornerRadius": "Eckenradius",
+    "promptFirst": "Erste Ecke anklicken oder eingeben. Alt gedrückt halten, um von der Mitte aus zu zeichnen.",
+    "promptCorner": "Gegenüberliegende Ecke anklicken oder Breite und Höhe eingeben.",
+    "promptCentre": "Von der Mitte aus: Ecke anklicken oder volle Breite und Höhe eingeben."
+  },
+  "circle": {
+    "name": "Kreis",
+    "threeName": "Kreis durch 3 Punkte",
+    "ellipseName": "Ellipse",
+    "radius": "Radius",
+    "promptCentre": "Mittelpunkt anklicken oder eingeben.",
+    "promptRadius": "Einen Punkt auf dem Kreis anklicken oder den Radius eingeben.",
+    "mode": "Modus",
+    "modeCentre": "Mittelpunkt + Radius",
+    "modeThree": "3 Punkte",
+    "modeEllipse": "Ellipse",
+    "radius2": "2. Radius",
+    "promptP1": "Ersten Punkt auf dem Kreis anklicken.",
+    "promptP2": "Zweiten Punkt anklicken.",
+    "promptP3": "Dritten Punkt anklicken.",
+    "promptAxis": "Ende der ersten Achse anklicken (legt Radius und Richtung fest).",
+    "promptOther": "Klicken, um den anderen Radius festzulegen, oder ihn eingeben."
+  },
+  "fillet": {
+    "name": "Abrunden",
+    "radius": "Radius",
+    "promptPick": "Mit der Maus über eine Ecke zwischen zwei geraden Kanten fahren. Umschalt: alle Ecken dieser Form.",
+    "promptApply": "Klicken, um diese Ecke abzurunden (Umschalt: alle Ecken). Radius eingeben, um ihn zu ändern.",
+    "tooLarge": "Zu groß für diese Ecke: Der größte passende Radius beträgt {max} mm.",
+    "notApplicable": "Diese Ecke kann nicht abgerundet werden."
+  },
+  "stitchHoles": {
+    "name": "Nahtlöcher",
+    "pitch": "Stichabstand",
+    "count": "{count, plural, one {# Loch} other {# Löcher}}",
+    "preset": "Nahtlocheisen",
+    "custom": "Benutzerdefiniert",
+    "size": "Lochgröße",
+    "shape": "Form",
+    "round": "Rund",
+    "slit": "Schrägschlitz",
+    "corners": "Loch an jeder Ecke",
+    "promptPick": "Mit der Maus über eine Nahtlinie (oder eine beliebige Linie) fahren, um die Löcher als Vorschau zu sehen.",
+    "promptClick": "Klicken, um diese Löcher hinzuzufügen. Sie bleiben mit der Linie verknüpft und folgen ihr."
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "Die aktive Ebene ist gesperrt oder ausgeblendet. Entsperren oder zeigen Sie sie an oder wählen Sie im Ebenenbedienfeld eine andere Ebene.",
+    "explodeNone": "Wählen Sie Pfade mit mehr als einem Segment zum Auflösen (Rechtecke, Polylinien, Konturen).",
+    "joinNone": "Wählen Sie offene Pfade zum Verbinden (oder einen, dessen Enden sich treffen, um ihn zu schließen).",
+    "booleanNone": "Wählen Sie zwei oder mehr geschlossene Formen (Konturen oder Kreise)."
+  },
+  "transform": {
+    "promptPick": "Objekte auswählen (klicken, Umschalt+Klick oder Rahmen aufziehen), dann Eingabe drücken oder rechtsklicken.",
+    "copy": "Original behalten (kopieren)"
+  },
+  "move": {
+    "name": "Verschieben",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "Basispunkt anklicken oder eingeben.",
+    "promptTarget": "Ziel anklicken oder ΔX und ΔY eingeben. Umschalt rastet bei 15° ein."
+  },
+  "rotate": {
+    "name": "Drehen",
+    "angle": "Winkel",
+    "promptCentre": "Drehpunkt anklicken oder eingeben.",
+    "promptAngle": "Klicken, um den Winkel festzulegen (von der +X-Richtung aus), oder ihn eingeben. Umschalt rundet auf 15°."
+  },
+  "scale": {
+    "name": "Skalieren",
+    "factor": "Faktor",
+    "promptBase": "Basispunkt anklicken oder eingeben (er bleibt fest).",
+    "promptRef": "Faktor eingeben oder einen Referenzpunkt anklicken.",
+    "promptTarget": "Klicken, wohin der Referenzpunkt soll, oder einen Faktor eingeben."
+  },
+  "mirror": {
+    "name": "Spiegeln",
+    "angle": "Achsenwinkel",
+    "promptFirst": "Eine Mittellinie anklicken, um an ihr zu spiegeln, oder den ersten Punkt der Achse anklicken.",
+    "promptSecond": "Zweiten Achsenpunkt anklicken oder den Achsenwinkel eingeben. Umschalt rastet bei 15° ein."
+  },
+  "offset": {
+    "name": "Versatz",
+    "distance": "Abstand",
+    "through": "Durch Cursor",
+    "join": "Ecken",
+    "joinMiter": "Spitz (Gehrung)",
+    "joinRound": "Rund",
+    "joinBevel": "Fase",
+    "promptPick": "Einen Pfad, Kreis oder eine Mittellinie zum Versetzen anklicken.",
+    "promptSide": "Seite für den Versatz anklicken (der Abstand folgt dem Cursor oder wird eingegeben). Erneut klicken für einen weiteren; Esc wählt eine andere Quelle.",
+    "promptApprox": "Versatz erstellt. Einige Kurven wurden als feine Polylinien versetzt, um innerhalb von 0,02 mm zu bleiben. Erneut klicken für einen weiteren Versatz."
+  },
+  "stitchLine": {
+    "name": "Nahtlinie",
+    "promptPick": "Eine Kontur anklicken, der eine Nahtlinie hinzugefügt werden soll.",
+    "promptSide": "Innen oder außen für die Seite anklicken (Abstand aus den Projekteinstellungen oder eingeben). Die Linie bleibt mit der Kontur verknüpft.",
+    "promptApprox": "Nahtlinie hinzugefügt; einige Kurven sind feine Polylinien, um innerhalb von 0,02 mm zu bleiben. Nächste Kontur anklicken."
+  },
+  "chamfer": {
+    "name": "Fase",
+    "d1": "Abstand",
+    "d2": "2. Abstand",
+    "angle": "Winkel",
+    "promptPick": "Mit der Maus über eine Ecke zwischen zwei geraden Kanten fahren. Umschalt: alle Ecken dieser Form.",
+    "promptApply": "Klicken, um diese Ecke abzuschrägen (Umschalt: alle Ecken). Abstände oder einen Abstand und einen Winkel eingeben.",
+    "tooLarge": "Zu groß für diese Ecke: höchstens {max} mm entlang jeder Kante.",
+    "notApplicable": "Diese Ecke kann mit diesem Winkel nicht abgeschrägt werden."
+  },
+  "pen": {
+    "name": "Stift (Kurven)",
+    "promptFirst": "Klicken für eine Ecke, ziehen für einen glatten Kurvenpunkt.",
+    "promptNext": "Klicken für eine Ecke, ziehen für eine Kurve. Länge und Winkel eingeben für eine gerade Kante. Umschalt rastet bei 15° ein.",
+    "promptMore": "Ersten Punkt anklicken zum Schließen · Eingabe, Doppelklick oder Rechtsklick beendet · Rücktaste entfernt den letzten Punkt."
+  },
+  "arc": {
+    "name": "Bogen (3 Punkte)",
+    "promptStart": "Bogenanfang anklicken oder eingeben.",
+    "promptEnd": "Bogenende anklicken oder eingeben.",
+    "promptThrough": "Einen Punkt anklicken, durch den der Bogen verläuft.",
+    "collinear": "Die drei Punkte liegen auf einer Linie: Wählen Sie einen Punkt abseits davon."
+  },
+  "centreLine": {
+    "name": "Mittellinie",
+    "mode": "Modus",
+    "modeShape": "Durch die Mitte einer Form",
+    "modePoints": "Zwei Punkte",
+    "orientation": "Richtung",
+    "vertical": "Vertikal",
+    "horizontal": "Horizontal",
+    "promptShape": "Eine Form anklicken, um eine Mittellinie durch ihre Mitte zu setzen. Spiegeln kann sie als Achse verwenden.",
+    "promptFirst": "Ersten Punkt anklicken oder eingeben.",
+    "promptSecond": "Zweiten Punkt anklicken. Umschalt rastet bei 15° ein."
+  },
+  "label": {
+    "name": "Beschriftung",
+    "mode": "Modus",
+    "modeText": "Text",
+    "modeGrain": "Fadenlaufpfeil",
+    "text": "Text",
+    "size": "Größe",
+    "angle": "Winkel",
+    "length": "Länge",
+    "promptPlace": "Klicken oder eingeben, wo der Text beginnt (linkes Ende der Grundlinie). Beschriftungen liegen auf der Ebene „Notizen“.",
+    "promptText": "Text eingeben, z. B. Teilename und „2× zuschneiden“, dann Eingabe drücken. Woanders klicken zum Verschieben · Esc bricht ab.",
+    "promptGrainStart": "Ein Ende des Fadenlaufpfeils anklicken oder eingeben.",
+    "promptGrainEnd": "Anderes Ende anklicken oder Länge und Winkel eingeben. Umschalt rastet bei 15° ein."
+  },
+  "parallel": {
+    "name": "Parallele Linie",
+    "distance": "Abstand",
+    "promptEdge": "Eine gerade Kante anklicken.",
+    "promptPlace": "Auf der gewünschten Seite und im gewünschten Abstand klicken oder den Abstand eingeben (der Cursor bestimmt die Seite). Esc wählt eine andere Kante."
+  },
+  "trim": {
+    "name": "Stutzen / Verlängern / Teilen",
+    "mode": "Modus",
+    "modeTrim": "Stutzen",
+    "modeExtend": "Verlängern",
+    "modeSplit": "Teilen",
+    "promptTrim": "Das zu entfernende Linienstück anklicken: Es wird bis zu den nächsten Schnittpunkten zurückgeschnitten. Umschalt+Klick verlängert stattdessen.",
+    "promptExtend": "Nahe dem Ende einer Linie klicken, um sie bis zur nächsten Linie zu verlängern. Umschalt+Klick stutzt stattdessen.",
+    "promptSplit": "Eine Linie oder Kontur anklicken, um sie an dieser Stelle zu teilen."
+  },
+  "punch": {
+    "name": "Stanzloch / Langloch",
+    "kind": "Form",
+    "round": "Rundes Loch",
+    "slot": "Langloch",
+    "preset": "Locheisen",
+    "custom": "Benutzerdefiniert",
+    "diameter": "Durchmesser",
+    "width": "Breite",
+    "length": "Länge",
+    "angle": "Winkel",
+    "prompt": "Klicken, um ein Loch zu setzen (rastet an Mittelpunkten und Punkten ein), oder X/Y eingeben und Eingabe drücken. Verwenden Sie den Durchmesser, den Ihre Niete, Ihr Druckknopf oder Ihr Schraubenschaft benötigt.",
+    "promptSlot": "Klicken, um ein Langloch an seiner Mitte zu setzen, oder X/Y eingeben und Eingabe drücken. Die Länge gilt von Ende zu Ende; die Breite ist der Locheisendurchmesser."
+  },
+  "seamAllowance": {
+    "name": "Nahtzugabe",
+    "allowance": "Zugabe",
+    "promptPick": "Eine geschlossene Kontur anklicken, um eine Nahtzugabe um sie herum hinzuzufügen.",
+    "promptAll": "Zugaben (mm): {values}. Wert für alle Kanten eingeben oder eine Kante anklicken (Umschalt+Klick für mehrere), um ihre eigene festzulegen. Eingabe fügt die Kontur hinzu · Esc wählt eine andere.",
+    "promptEdges": "Zugaben (mm): {values}. Zugabe für die markierten Kanten eingeben und Eingabe drücken. Eingabe ohne Wert fügt die Kontur hinzu · Esc hebt die Kantenauswahl auf."
+  },
+  "array": {
+    "name": "Anordnung",
+    "mode": "Modus",
+    "linear": "Linear",
+    "circular": "Kreisförmig",
+    "count": "Anzahl",
+    "sweep": "Winkel",
+    "promptBase": "Lineare Anordnung: Basispunkt anklicken oder eingeben. Die Anzahl schließt das Original ein.",
+    "promptStep": "Klicken, wohin die nächste Kopie soll, oder ΔX und ΔY eingeben. Umschalt rastet bei 15° ein.",
+    "promptCentre": "Kreisförmige Anordnung: Mittelpunkt anklicken oder eingeben. Die Anzahl schließt das Original ein.",
+    "promptCircular": "Eingabe drücken oder klicken, um die Anordnung zu erstellen: 360° verteilt die Kopien gleichmäßig rundum; weniger erstreckt sich von der ersten bis zur letzten."
+  },
+  "notch": {
+    "name": "Kerbe",
+    "count": "Kerbe",
+    "single": "Einfach",
+    "double": "Doppelt",
+    "style": "Stil",
+    "line": "Einschnitt (Linie)",
+    "v": "V-Kerbe",
+    "length": "Tiefe",
+    "gap": "Abstand",
+    "width": "Breite",
+    "prompt": "Eine Kante anklicken, um dort eine Passkerbe zu setzen (ins Teil hinein; bei offenen Linien auf der Seite des Cursors). Fangpunkte gelten."
+  },
+  "perpendicular": {
+    "name": "Senkrechte",
+    "along": "Entlang",
+    "length": "Länge",
+    "promptEdge": "Eine gerade Kante anklicken.",
+    "promptPlace": "Klicken, um eine senkrechte Linie zu setzen, oder eingeben, wie weit entlang der Kante und wie lang. Esc wählt eine andere Kante."
+  },
+  "measure": {
+    "name": "Messen",
+    "mode": "Messen",
+    "distance": "Abstand",
+    "angle": "Winkel",
+    "length": "Länge",
+    "promptDistance": "Zwei Punkte anklicken, um den Abstand zu messen.",
+    "promptAngle": "Einen Punkt, die Ecke und dann einen weiteren Punkt anklicken.",
+    "holes": "Lochanzahl",
+    "edgeA": "Kante 1",
+    "edgeB": "Kante 2",
+    "promptHolesFirst": "Eine Kante eines Lochsatzes anklicken, um seine Löcher zu zählen (Eckenlöcher eingeschlossen).",
+    "promptHolesSecond": "Die Kante anklicken, mit der sie vernäht wird.",
+    "holesMatch": "Beide Kanten haben {count, plural, one {# Loch} other {# Löcher}}: Sie stimmen überein. Klicken, um ein weiteres Paar zu vergleichen.",
+    "holesDiffer": "Abweichung: {a} gegenüber {b} Löchern ({diff, plural, one {# Loch} other {# Löcher}} Unterschied). Passen Sie einen Stichabstand oder die Kantenlängen an, damit sich beide gleichmäßig vernähen lassen.",
+    "promptLength": "Mit der Maus über eine Form fahren, um ihre Länge zu sehen."
+  }
+}

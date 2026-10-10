@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "선택",
+    "prompt": "클릭으로 선택 · Shift+클릭으로 추가/해제 · 왼쪽→오른쪽 드래그는 완전히 안쪽만, 오른쪽→왼쪽 드래그는 닿는 것 모두 · 선택한 항목을 드래그해 이동(Alt: 복사) · Delete로 삭제.",
+    "promptPoints": "점이나 핸들을 드래그 · 점 더블클릭: 부드럽게 ↔ 모서리 · 외곽선 더블클릭: 점 추가 · 점 클릭 후 Delete: 삭제 · Esc로 선택 해제."
+  },
+  "line": {
+    "name": "선",
+    "polylineName": "폴리선",
+    "mode": "모드",
+    "modeSegments": "개별 선분",
+    "modePolyline": "하나의 폴리선",
+    "length": "길이",
+    "angle": "각도",
+    "promptFirst": "첫 점을 클릭하거나 입력하세요.",
+    "promptNext": "다음 점을 클릭하거나 길이와 각도를 입력하세요. Shift는 15° 고정.",
+    "promptMore": "다음 점 · 첫 점 클릭으로 닫기 · Enter, 더블클릭, 우클릭으로 종료 · Backspace로 점 취소."
+  },
+  "rectangle": {
+    "name": "사각형",
+    "shape": "모양",
+    "square": "정사각형",
+    "side": "한 변",
+    "width": "너비",
+    "height": "높이",
+    "cornerRadius": "모서리 반경",
+    "promptFirst": "첫 모서리를 클릭하거나 입력하세요. Alt를 누르면 중심에서 그립니다.",
+    "promptCorner": "반대쪽 모서리를 클릭하거나 너비와 높이를 입력하세요.",
+    "promptCentre": "중심에서: 모서리를 클릭하거나 전체 너비와 높이를 입력하세요."
+  },
+  "circle": {
+    "name": "원",
+    "threeName": "3점 원",
+    "ellipseName": "타원",
+    "radius": "반지름",
+    "promptCentre": "중심을 클릭하거나 입력하세요.",
+    "promptRadius": "원 위의 점을 클릭하거나 반지름을 입력하세요.",
+    "mode": "모드",
+    "modeCentre": "중심 + 반지름",
+    "modeThree": "3점",
+    "modeEllipse": "타원",
+    "radius2": "두 번째 반지름",
+    "promptP1": "원 위의 첫 번째 점을 클릭하세요.",
+    "promptP2": "두 번째 점을 클릭하세요.",
+    "promptP3": "세 번째 점을 클릭하세요.",
+    "promptAxis": "첫 번째 축의 끝을 클릭하세요(반지름과 방향 결정).",
+    "promptOther": "클릭하거나 입력하여 다른 반지름을 정하세요."
+  },
+  "fillet": {
+    "name": "모깎기",
+    "radius": "반지름",
+    "promptPick": "두 직선 변 사이의 모서리 위에 커서를 올리세요. Shift: 해당 도형의 모든 모서리.",
+    "promptApply": "클릭하면 이 모서리를 둥글립니다(Shift: 모두). 반지름을 입력해 변경.",
+    "tooLarge": "이 모서리에는 너무 큽니다. 들어가는 최대 반지름은 {max} mm입니다.",
+    "notApplicable": "이 모서리는 둥글릴 수 없습니다."
+  },
+  "stitchHoles": {
+    "name": "스티치 구멍",
+    "pitch": "피치",
+    "count": "{count, plural, other {#개 구멍}}",
+    "preset": "스티칭 치즐",
+    "custom": "사용자 지정",
+    "size": "구멍 크기",
+    "shape": "모양",
+    "round": "원형",
+    "slit": "사선 슬릿",
+    "corners": "모서리마다 구멍",
+    "promptPick": "스티치선(또는 아무 선)에 커서를 올리면 구멍을 미리 봅니다.",
+    "promptClick": "클릭하면 이 구멍을 추가합니다. 선에 연결되어 선을 따라갑니다."
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "현재 레이어가 잠겼거나 숨겨져 있습니다. 잠금 해제하거나 표시하거나, 레이어 패널에서 다른 레이어를 고르세요.",
+    "explodeNone": "분해하려면 선분이 둘 이상인 패스를 선택하세요(사각형, 폴리선, 외곽선).",
+    "joinNone": "결합할 열린 패스를 선택하세요(끝이 맞닿은 패스는 닫힙니다).",
+    "booleanNone": "닫힌 도형(외곽선 또는 원)을 둘 이상 선택하세요."
+  },
+  "transform": {
+    "promptPick": "객체를 선택(클릭, Shift+클릭, 드래그 상자)한 뒤 Enter 또는 우클릭.",
+    "copy": "원본 유지(복사)"
+  },
+  "move": {
+    "name": "이동",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "기준점을 클릭하거나 입력하세요.",
+    "promptTarget": "목적지를 클릭하거나 ΔX와 ΔY를 입력하세요. Shift는 15° 고정."
+  },
+  "rotate": {
+    "name": "회전",
+    "angle": "각도",
+    "promptCentre": "회전 중심을 클릭하거나 입력하세요.",
+    "promptAngle": "클릭하여 각도를 정하거나(+X 방향 기준) 입력하세요. Shift는 15° 단위."
+  },
+  "scale": {
+    "name": "축척",
+    "factor": "배율",
+    "promptBase": "기준점을 클릭하거나 입력하세요(고정됩니다).",
+    "promptRef": "배율을 입력하거나 참조점을 클릭하세요.",
+    "promptTarget": "참조점이 갈 위치를 클릭하거나 배율을 입력하세요."
+  },
+  "mirror": {
+    "name": "대칭",
+    "angle": "축 각도",
+    "promptFirst": "중심선을 클릭하면 그 선을 기준으로 대칭하고, 아니면 축의 첫 점을 클릭하세요.",
+    "promptSecond": "축의 두 번째 점을 클릭하거나 축 각도를 입력하세요. Shift는 15° 고정."
+  },
+  "offset": {
+    "name": "간격 띄우기",
+    "distance": "거리",
+    "through": "커서 위치",
+    "join": "모서리",
+    "joinMiter": "뾰족(마이터)",
+    "joinRound": "둥글게",
+    "joinBevel": "모따기",
+    "promptPick": "간격 띄울 패스, 원 또는 중심선을 클릭하세요.",
+    "promptSide": "띄울 쪽을 클릭하세요(거리는 커서를 따르며 입력도 가능). 다시 클릭하면 하나 더, Esc로 다른 원본 선택.",
+    "promptApprox": "간격 띄우기 완료. 0.02 mm 이내를 지키려고 일부 곡선은 가는 폴리선으로 처리했습니다. 다시 클릭해 추가."
+  },
+  "stitchLine": {
+    "name": "스티치선",
+    "promptPick": "스티치선을 추가할 외곽선을 클릭하세요.",
+    "promptSide": "안쪽 또는 바깥쪽을 클릭해 방향을 정하세요(프로젝트 설정의 여백, 또는 입력). 선은 외곽선에 연결됩니다.",
+    "promptApprox": "스티치선 추가됨. 0.02 mm 이내를 지키려고 일부 곡선은 가는 폴리선입니다. 다음 외곽선을 클릭하세요."
+  },
+  "chamfer": {
+    "name": "모따기",
+    "d1": "거리",
+    "d2": "두 번째 거리",
+    "angle": "각도",
+    "promptPick": "두 직선 변 사이의 모서리 위에 커서를 올리세요. Shift: 해당 도형의 모든 모서리.",
+    "promptApply": "클릭하면 이 모서리를 자릅니다(Shift: 모두). 거리 또는 거리와 각도를 입력.",
+    "tooLarge": "이 모서리에는 너무 큽니다. 각 변을 따라 최대 {max} mm입니다.",
+    "notApplicable": "그 각도로는 이 모서리를 자를 수 없습니다."
+  },
+  "pen": {
+    "name": "펜(곡선)",
+    "promptFirst": "클릭하면 모서리, 드래그하면 부드러운 곡선 점.",
+    "promptNext": "클릭하면 모서리, 드래그하면 곡선. 직선 변은 길이와 각도를 입력. Shift는 15° 고정.",
+    "promptMore": "첫 점 클릭으로 닫기 · Enter, 더블클릭, 우클릭으로 종료 · Backspace로 마지막 점 삭제."
+  },
+  "arc": {
+    "name": "호(3점)",
+    "promptStart": "호의 시작점을 클릭하거나 입력하세요.",
+    "promptEnd": "호의 끝점을 클릭하거나 입력하세요.",
+    "promptThrough": "호가 지나는 점을 클릭하세요.",
+    "collinear": "세 점이 일직선입니다. 선에서 벗어난 점을 고르세요."
+  },
+  "centreLine": {
+    "name": "중심선",
+    "mode": "모드",
+    "modeShape": "도형 중심 통과",
+    "modePoints": "두 점",
+    "orientation": "방향",
+    "vertical": "수직",
+    "horizontal": "수평",
+    "promptShape": "도형을 클릭하면 중심을 지나는 중심선을 추가합니다. 대칭의 축으로 쓸 수 있습니다.",
+    "promptFirst": "첫 점을 클릭하거나 입력하세요.",
+    "promptSecond": "두 번째 점을 클릭하세요. Shift는 15° 고정."
+  },
+  "label": {
+    "name": "라벨",
+    "mode": "모드",
+    "modeText": "텍스트",
+    "modeGrain": "결 방향 화살표",
+    "text": "텍스트",
+    "size": "크기",
+    "angle": "각도",
+    "length": "길이",
+    "promptPlace": "텍스트가 시작할 위치(기준선 왼쪽 끝)를 클릭하거나 입력하세요. 라벨은 메모 레이어에 놓입니다.",
+    "promptText": "텍스트(예: 부품 이름과 '2장 재단')를 입력하고 Enter. 다른 곳을 클릭하면 이동 · Esc로 취소.",
+    "promptGrainStart": "결 방향 화살표의 한쪽 끝을 클릭하거나 입력하세요.",
+    "promptGrainEnd": "반대쪽 끝을 클릭하거나 길이와 각도를 입력하세요. Shift는 15° 고정."
+  },
+  "parallel": {
+    "name": "평행선",
+    "distance": "거리",
+    "promptEdge": "직선 변을 클릭하세요.",
+    "promptPlace": "원하는 쪽과 거리에서 클릭하거나 거리를 입력하세요(쪽은 커서가 결정). Esc로 다른 변 선택."
+  },
+  "trim": {
+    "name": "자르기 / 연장 / 분할",
+    "mode": "모드",
+    "modeTrim": "자르기",
+    "modeExtend": "연장",
+    "modeSplit": "분할",
+    "promptTrim": "지울 선 부분을 클릭하세요. 가장 가까운 교차점까지 잘립니다. Shift+클릭은 연장.",
+    "promptExtend": "선의 끝 근처를 클릭하면 만나는 다음 선까지 연장됩니다. Shift+클릭은 자르기.",
+    "promptSplit": "선이나 외곽선을 클릭하면 그 지점에서 분할합니다."
+  },
+  "punch": {
+    "name": "펀치 구멍 / 슬롯",
+    "kind": "모양",
+    "round": "원형 구멍",
+    "slot": "슬롯",
+    "preset": "펀치",
+    "custom": "사용자 지정",
+    "diameter": "지름",
+    "width": "너비",
+    "length": "길이",
+    "angle": "각도",
+    "prompt": "클릭하여 구멍을 배치(중심과 점에 스냅)하거나 X/Y를 입력하고 Enter. 리벳, 스냅 단추, 나사 기둥에 맞는 지름을 쓰세요.",
+    "promptSlot": "클릭하여 슬롯을 중심 기준으로 배치하거나 X/Y를 입력하고 Enter. 길이는 끝에서 끝까지, 너비는 펀치 지름입니다."
+  },
+  "seamAllowance": {
+    "name": "시접",
+    "allowance": "시접",
+    "promptPick": "닫힌 외곽선을 클릭하면 주위에 시접을 추가합니다.",
+    "promptAll": "시접(mm): {values}. 모든 변의 값을 입력하거나, 변을 클릭(Shift+클릭으로 여러 개)해 개별 설정. Enter로 외곽선 추가 · Esc로 다시 선택.",
+    "promptEdges": "시접(mm): {values}. 강조된 변의 시접을 입력하고 Enter. 입력 없이 Enter는 외곽선 추가 · Esc로 변 선택 해제."
+  },
+  "array": {
+    "name": "배열",
+    "mode": "모드",
+    "linear": "직사각형",
+    "circular": "원형",
+    "count": "개수",
+    "sweep": "각도",
+    "promptBase": "직선 배열: 기준점을 클릭하거나 입력하세요. 개수에 원본이 포함됩니다.",
+    "promptStep": "다음 복사본 위치를 클릭하거나 ΔX와 ΔY를 입력하세요. Shift는 15° 고정.",
+    "promptCentre": "원형 배열: 중심을 클릭하거나 입력하세요. 개수에 원본이 포함됩니다.",
+    "promptCircular": "Enter 또는 클릭으로 배열 생성: 360°는 균등 배치, 그보다 작으면 처음부터 끝까지의 범위."
+  },
+  "notch": {
+    "name": "노치",
+    "count": "노치",
+    "single": "한 줄",
+    "double": "두 줄",
+    "style": "스타일",
+    "line": "칼집(선)",
+    "v": "V 노치",
+    "length": "깊이",
+    "gap": "간격",
+    "width": "너비",
+    "prompt": "변을 클릭해 맞춤 노치를 추가합니다(조각 안쪽으로, 열린 선은 커서 쪽). 스냅이 적용됩니다."
+  },
+  "perpendicular": {
+    "name": "수직선",
+    "along": "변 위 위치",
+    "length": "길이",
+    "promptEdge": "직선 변을 클릭하세요.",
+    "promptPlace": "클릭하여 수직선을 배치하거나 변을 따른 위치와 길이를 입력하세요. Esc로 다른 변 선택."
+  },
+  "measure": {
+    "name": "측정",
+    "mode": "측정",
+    "distance": "거리",
+    "angle": "각도",
+    "length": "길이",
+    "promptDistance": "두 점을 클릭해 거리를 측정하세요.",
+    "promptAngle": "점, 꼭짓점, 다른 점 순으로 클릭하세요.",
+    "holes": "구멍 수",
+    "edgeA": "변 1",
+    "edgeB": "변 2",
+    "promptHolesFirst": "구멍 세트의 변을 클릭해 구멍 수를 셉니다(모서리 구멍 포함).",
+    "promptHolesSecond": "함께 박음질할 변을 클릭하세요.",
+    "holesMatch": "두 변 모두 {count, plural, other {#개 구멍}}으로 일치합니다. 클릭해 다른 쌍을 비교하세요.",
+    "holesDiffer": "불일치: {a}개 대 {b}개 구멍(차이 {diff, plural, other {#개}}). 피치나 변 길이를 조정해 딱 맞게 박음질하세요.",
+    "promptLength": "도형 위에 커서를 올리면 길이를 표시합니다."
+  }
+}

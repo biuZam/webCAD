@@ -12,7 +12,8 @@
     "save": "保存",
     "export": "导出…",
     "import": "导入…",
-    "shortcuts": "快捷键…"
+    "shortcuts": "快捷键…",
+    "github": "GitHub 源代码"
   },
   "history": {
     "add": "添加",
@@ -87,7 +88,15 @@
   },
   "languages": {
     "en": "English",
-    "zh-CN": "简体中文"
+    "zh-CN": "简体中文",
+    "zh-TW": "繁體中文",
+    "de": "Deutsch",
+    "fr": "Français",
+    "es": "Español",
+    "it": "Italiano",
+    "pt": "Português",
+    "ja": "日本語",
+    "ko": "한국어"
   },
   "tools": {
     "label": "工具",

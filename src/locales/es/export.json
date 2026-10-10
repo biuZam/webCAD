@@ -1,0 +1,47 @@
+{
+  "title": "Exportar",
+  "format": "Formato",
+  "formats": {
+    "pdf": "PDF, 1:1 para imprimir",
+    "svg": "SVG, 1:1 para láser, plóter de corte u otras apps",
+    "dxf": "DXF, 1:1 en mm para software láser y CNC",
+    "png": "Imagen PNG, para compartir o previsualizar"
+  },
+  "dxf": {
+    "noLabels": "El DXF solo incluye las formas: se omiten las etiquetas."
+  },
+  "png": {
+    "resolution": "Resolución",
+    "hint": "Una imagen para compartir. Para fabricar el patrón, usa PDF, SVG o DXF."
+  },
+  "layers": "Contenido",
+  "cutOnly": "Solo capas de corte (láser)",
+  "includeLabels": "Incluir etiquetas",
+  "polyline": "Curvas como segmentos rectos cortos (para software láser)",
+  "strokeWidth": "Grosor de línea",
+  "strokeAsDrawn": "según dibujo",
+  "working": "Exportando…",
+  "export": "Exportar {format}",
+  "svg": {
+    "title": "Exportar SVG",
+    "cutOnly": "Solo capas de corte (láser)",
+    "includeLabels": "Incluir etiquetas"
+  },
+  "pdf": {
+    "paper": "Papel",
+    "single": "Una página, al tamaño del patrón",
+    "orientation": "Orientación",
+    "auto": "Mínimo de páginas",
+    "portrait": "Vertical",
+    "landscape": "Horizontal",
+    "overlap": "Solape",
+    "printHint": "Imprime al 100 % («Tamaño real»), nunca con «Ajustar a la página». Luego mide el cuadrado de 50 mm de la primera página.",
+    "scale": "Escala 1:1",
+    "calibration": "50 mm: mide este cuadrado para comprobar la escala de impresión",
+    "instructions1": "Imprime al 100 % / «Tamaño real». No uses «Ajustar a la página» ni «Reducir páginas grandes».",
+    "instructions2": "Mide el cuadrado: cada lado debe medir 50 mm exactos. Si no, revisa la escala de la impresora e imprime de nuevo.",
+    "assembly": "Las hojas se solapan {overlap} mm. Recorta por una línea discontinua o superpón las hojas haciendo coincidir las marcas de esquina y los números de hoja de los bordes.",
+    "sheets": "Hojas"
+  },
+  "aiUnreviewed": "{count, plural, one {# objeto fue creado por IA y no se ha revisado.} other {# objetos fueron creados por IA y no se han revisado.}}"
+}

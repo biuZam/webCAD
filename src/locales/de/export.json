@@ -1,0 +1,47 @@
+{
+  "title": "Exportieren",
+  "format": "Format",
+  "formats": {
+    "pdf": "PDF, 1:1 zum Drucken",
+    "svg": "SVG, 1:1 für Laser, Schneideplotter oder andere Programme",
+    "dxf": "DXF, 1:1 in mm für Laser- und CNC-Software",
+    "png": "PNG-Bild zum Teilen oder als Vorschau"
+  },
+  "dxf": {
+    "noLabels": "DXF enthält nur die Formen: Beschriftungen entfallen."
+  },
+  "png": {
+    "resolution": "Auflösung",
+    "hint": "Ein Bild zum Teilen. Zum Fertigen des Schnittmusters verwenden Sie PDF, SVG oder DXF."
+  },
+  "layers": "Inhalt",
+  "cutOnly": "Nur Schnittebenen (Laser)",
+  "includeLabels": "Beschriftungen einschließen",
+  "polyline": "Kurven als kurze Geraden (für Laser-Software)",
+  "strokeWidth": "Linienstärke",
+  "strokeAsDrawn": "wie gezeichnet",
+  "working": "Export läuft…",
+  "export": "{format} exportieren",
+  "svg": {
+    "title": "SVG exportieren",
+    "cutOnly": "Nur Schnittebenen (Laser)",
+    "includeLabels": "Beschriftungen einschließen"
+  },
+  "pdf": {
+    "paper": "Papier",
+    "single": "Eine Seite in Mustergröße",
+    "orientation": "Ausrichtung",
+    "auto": "Möglichst wenige Seiten",
+    "portrait": "Hochformat",
+    "landscape": "Querformat",
+    "overlap": "Überlappung",
+    "printHint": "Mit 100 % drucken („Tatsächliche Größe“), niemals mit „An Seite anpassen“. Messen Sie dann das 50-mm-Quadrat auf der ersten Seite nach.",
+    "scale": "Maßstab 1:1",
+    "calibration": "50 mm: Messen Sie dieses Quadrat, um den Druckmaßstab zu prüfen",
+    "instructions1": "Mit 100 % / \"Tatsächliche Größe\" drucken. Nicht \"An Seite anpassen\" oder \"Zu große Seiten verkleinern\" verwenden.",
+    "instructions2": "Messen Sie das Quadrat: Jede Seite muss genau 50 mm lang sein. Falls nicht, prüfen Sie die Druckerskalierung und drucken Sie erneut.",
+    "assembly": "Die Blätter überlappen um {overlap} mm. Entlang einer gestrichelten Linie schneiden oder die Blätter überlappend legen; Eckmarken und Blattbeschriftungen am Rand müssen übereinstimmen.",
+    "sheets": "Blätter"
+  },
+  "aiUnreviewed": "{count, plural, one {# Objekt wurde von der KI erstellt und noch nicht geprüft.} other {# Objekte wurden von der KI erstellt und noch nicht geprüft.}}"
+}

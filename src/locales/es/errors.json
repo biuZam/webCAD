@@ -1,0 +1,12 @@
+{
+  "file": {
+    "notAProject": "Este archivo no es un proyecto de LeatherDraft.",
+    "newerVersion": "Este proyecto se guardó con una versión más reciente de LeatherDraft.",
+    "noMigration": "No se puede actualizar este proyecto a la versión actual.",
+    "notJson": "Este archivo no es un JSON válido, así que no puede ser un proyecto de LeatherDraft.",
+    "ioFailed": "No se pudo leer o escribir el archivo. Revisa los permisos e inténtalo de nuevo.",
+    "exportFailed": "Error al exportar. Inténtalo de nuevo; si falla, exporta menos capas o usa SVG.",
+    "notDrawing": "Este archivo no es un dibujo SVG ni DXF.",
+    "importNoLayer": "No hay capa donde importar: muestra o desbloquea la capa «Referencia» o la capa activa."
+  }
+}

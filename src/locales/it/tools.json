@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "Seleziona",
+    "prompt": "Clic per selezionare · Maiusc+clic aggiunge o toglie · trascina da sinistra a destra per ciò che è dentro, da destra a sinistra per ciò che tocca · trascina un elemento selezionato per spostarlo (Alt: copia) · Canc elimina.",
+    "promptPoints": "Trascina punti o maniglie · doppio clic su un punto: curvo ↔ spigolo · doppio clic sul contorno: aggiungi punto · clic su un punto e Canc: rimuovilo · Esc deseleziona."
+  },
+  "line": {
+    "name": "Linea",
+    "polylineName": "Polilinea",
+    "mode": "Modo",
+    "modeSegments": "Segmenti separati",
+    "modePolyline": "Una polilinea",
+    "length": "Lunghezza",
+    "angle": "Angolo",
+    "promptFirst": "Clicca o digita il primo punto.",
+    "promptNext": "Clicca il punto successivo o digita lunghezza e angolo. Maiusc blocca a 15°.",
+    "promptMore": "Punto successivo · clic sul primo per chiudere · Invio, doppio clic o clic destro per finire · Backspace annulla un punto."
+  },
+  "rectangle": {
+    "name": "Rettangolo",
+    "shape": "Forma",
+    "square": "Quadrato",
+    "side": "Lato",
+    "width": "Larghezza",
+    "height": "Altezza",
+    "cornerRadius": "Raggio angoli",
+    "promptFirst": "Clicca o digita il primo angolo. Tieni Alt per disegnare dal centro.",
+    "promptCorner": "Clicca l’angolo opposto o digita larghezza e altezza.",
+    "promptCentre": "Dal centro: clicca un angolo o digita larghezza e altezza totali."
+  },
+  "circle": {
+    "name": "Cerchio",
+    "threeName": "Cerchio per 3 punti",
+    "ellipseName": "Ellisse",
+    "radius": "Raggio",
+    "promptCentre": "Clicca o digita il centro.",
+    "promptRadius": "Clicca un punto del cerchio o digita il raggio.",
+    "mode": "Modo",
+    "modeCentre": "Centro + raggio",
+    "modeThree": "3 punti",
+    "modeEllipse": "Ellisse",
+    "radius2": "2° raggio",
+    "promptP1": "Clicca il primo punto del cerchio.",
+    "promptP2": "Clicca il secondo punto.",
+    "promptP3": "Clicca il terzo punto.",
+    "promptAxis": "Clicca l’estremo del primo asse (ne imposta raggio e direzione).",
+    "promptOther": "Clicca per impostare l’altro raggio o digitalo."
+  },
+  "fillet": {
+    "name": "Raccordo",
+    "radius": "Raggio",
+    "promptPick": "Passa su un angolo tra due lati retti. Maiusc: tutti gli angoli della forma.",
+    "promptApply": "Clic per arrotondare questo angolo (Maiusc: tutti). Digita un raggio per cambiarlo.",
+    "tooLarge": "Troppo grande per questo angolo: il raggio massimo è {max} mm.",
+    "notApplicable": "Impossibile arrotondare questo angolo."
+  },
+  "stitchHoles": {
+    "name": "Fori di cucitura",
+    "pitch": "Passo",
+    "count": "{count, plural, one {# foro} other {# fori}}",
+    "preset": "Bulino",
+    "custom": "Personalizzato",
+    "size": "Dimensione foro",
+    "shape": "Forma",
+    "round": "Tondo",
+    "slit": "Asola inclinata",
+    "corners": "Foro su ogni angolo",
+    "promptPick": "Passa su una linea di cucitura (o qualsiasi linea) per vedere l’anteprima dei fori.",
+    "promptClick": "Clic per aggiungere questi fori. Restano collegati alla linea e la seguono."
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "Il livello attivo è bloccato o nascosto. Sbloccalo o mostralo, oppure scegli un altro livello nel pannello Livelli.",
+    "explodeNone": "Seleziona percorsi con più di un segmento da scomporre (rettangoli, polilinee, contorni).",
+    "joinNone": "Seleziona percorsi aperti da unire (o uno con le estremità coincidenti, per chiuderlo).",
+    "booleanNone": "Seleziona due o più forme chiuse (contorni o cerchi)."
+  },
+  "transform": {
+    "promptPick": "Seleziona gli oggetti (clic, Maiusc+clic o riquadro), poi premi Invio o clic destro.",
+    "copy": "Mantieni originale (copia)"
+  },
+  "move": {
+    "name": "Sposta",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "Clicca o digita il punto base.",
+    "promptTarget": "Clicca la destinazione o digita ΔX e ΔY. Maiusc blocca a 15°."
+  },
+  "rotate": {
+    "name": "Ruota",
+    "angle": "Angolo",
+    "promptCentre": "Clicca o digita il centro di rotazione.",
+    "promptAngle": "Clicca per impostare l’angolo (dalla direzione +X) o digitalo. Maiusc arrotonda a 15°."
+  },
+  "scale": {
+    "name": "Scala",
+    "factor": "Fattore",
+    "promptBase": "Clicca o digita il punto base (resta fisso).",
+    "promptRef": "Digita un fattore o clicca un punto di riferimento.",
+    "promptTarget": "Clicca dove deve andare il punto di riferimento o digita un fattore."
+  },
+  "mirror": {
+    "name": "Specchio",
+    "angle": "Angolo asse",
+    "promptFirst": "Clicca una linea d’asse per specchiare rispetto a essa, o il primo punto dell’asse.",
+    "promptSecond": "Clicca il secondo punto dell’asse o digita l’angolo. Maiusc blocca a 15°."
+  },
+  "offset": {
+    "name": "Offset",
+    "distance": "Distanza",
+    "through": "Per il cursore",
+    "join": "Angoli",
+    "joinMiter": "Vivo (spigolo)",
+    "joinRound": "Arrotondato",
+    "joinBevel": "Smusso",
+    "promptPick": "Clicca un percorso, un cerchio o una linea d’asse da offsettare.",
+    "promptSide": "Clicca il lato dell’offset (la distanza segue il cursore, o digitala). Clicca ancora per un altro; Esc sceglie un’altra origine.",
+    "promptApprox": "Offset creato. Alcune curve sono state offsettate come polilinee fini per restare entro 0,02 mm. Clicca ancora per un altro offset."
+  },
+  "stitchLine": {
+    "name": "Linea di cucitura",
+    "promptPick": "Clicca un contorno a cui aggiungere una linea di cucitura.",
+    "promptSide": "Clicca dentro o fuori per il lato (margine dalle impostazioni del progetto, o digitalo). La linea resta collegata al contorno.",
+    "promptApprox": "Linea di cucitura aggiunta; alcune curve sono polilinee fini per restare entro 0,02 mm. Clicca il contorno successivo."
+  },
+  "chamfer": {
+    "name": "Smusso",
+    "d1": "Distanza",
+    "d2": "2ª distanza",
+    "angle": "Angolo",
+    "promptPick": "Passa su un angolo tra due lati retti. Maiusc: tutti gli angoli della forma.",
+    "promptApply": "Clic per smussare questo angolo (Maiusc: tutti). Digita le distanze, o una distanza e un angolo.",
+    "tooLarge": "Troppo grande per questo angolo: al massimo {max} mm lungo ogni lato.",
+    "notApplicable": "Impossibile smussare questo angolo con quell’angolo."
+  },
+  "pen": {
+    "name": "Penna (curve)",
+    "promptFirst": "Clic per uno spigolo, trascina per un punto di curva morbido.",
+    "promptNext": "Clic per uno spigolo, trascina per una curva. Digita lunghezza e angolo per un lato retto. Maiusc blocca a 15°.",
+    "promptMore": "Clic sul primo punto per chiudere · Invio, doppio clic o clic destro per finire · Backspace toglie l’ultimo punto."
+  },
+  "arc": {
+    "name": "Arco (3 punti)",
+    "promptStart": "Clicca o digita l’inizio dell’arco.",
+    "promptEnd": "Clicca o digita la fine dell’arco.",
+    "promptThrough": "Clicca un punto per cui passa l’arco.",
+    "collinear": "I tre punti sono allineati: scegline uno fuori dalla linea."
+  },
+  "centreLine": {
+    "name": "Linea d’asse",
+    "mode": "Modo",
+    "modeShape": "Per il centro di una forma",
+    "modePoints": "Due punti",
+    "orientation": "Direzione",
+    "vertical": "Verticale",
+    "horizontal": "Orizzontale",
+    "promptShape": "Clicca una forma per aggiungere una linea d’asse per il suo centro. Specchio può usarla come asse.",
+    "promptFirst": "Clicca o digita il primo punto.",
+    "promptSecond": "Clicca il secondo punto. Maiusc blocca a 15°."
+  },
+  "label": {
+    "name": "Etichetta",
+    "mode": "Modo",
+    "modeText": "Testo",
+    "modeGrain": "Freccia di filo",
+    "text": "Testo",
+    "size": "Dimensione",
+    "angle": "Angolo",
+    "length": "Lunghezza",
+    "promptPlace": "Clicca o digita dove inizia il testo (estremo sinistro della linea di base). Le etichette vanno nel livello Note.",
+    "promptText": "Digita il testo, ad es. nome del pezzo e «tagliare 2», poi premi Invio. Clicca altrove per spostarlo · Esc annulla.",
+    "promptGrainStart": "Clicca o digita un estremo della freccia di filo.",
+    "promptGrainEnd": "Clicca l’altro estremo o digita lunghezza e angolo. Maiusc blocca a 15°."
+  },
+  "parallel": {
+    "name": "Linea parallela",
+    "distance": "Distanza",
+    "promptEdge": "Clicca un lato retto.",
+    "promptPlace": "Clicca dal lato e alla distanza voluti, o digita la distanza (il cursore sceglie il lato). Esc sceglie un altro lato."
+  },
+  "trim": {
+    "name": "Taglia / estendi / dividi",
+    "mode": "Modo",
+    "modeTrim": "Taglia",
+    "modeExtend": "Estendi",
+    "modeSplit": "Dividi",
+    "promptTrim": "Clicca il tratto di linea da rimuovere: viene tagliato fino alle intersezioni più vicine. Maiusc+clic estende.",
+    "promptExtend": "Clicca vicino all’estremo di una linea per estenderla fino alla linea successiva. Maiusc+clic taglia.",
+    "promptSplit": "Clicca una linea o un contorno per dividerlo in quel punto."
+  },
+  "punch": {
+    "name": "Foro / asola a fustella",
+    "kind": "Forma",
+    "round": "Foro tondo",
+    "slot": "Asola",
+    "preset": "Fustella",
+    "custom": "Personalizzato",
+    "diameter": "Diametro",
+    "width": "Larghezza",
+    "length": "Lunghezza",
+    "angle": "Angolo",
+    "prompt": "Clic per posizionare un foro (si aggancia a centri e punti), o digita X/Y e Invio. Usa il diametro richiesto da rivetto, bottone a pressione o vite.",
+    "promptSlot": "Clic per posizionare un’asola dal centro, o digita X/Y e Invio. La lunghezza è da estremo a estremo; la larghezza è il diametro della fustella."
+  },
+  "seamAllowance": {
+    "name": "Margine di cucitura",
+    "allowance": "Margine",
+    "promptPick": "Clicca un contorno chiuso per aggiungere un margine di cucitura attorno.",
+    "promptAll": "Margini (mm): {values}. Digita un valore per tutti i lati, o clicca un lato (Maiusc+clic per altri) per impostarne uno proprio. Invio aggiunge il contorno · Esc ne sceglie un altro.",
+    "promptEdges": "Margini (mm): {values}. Digita il margine per i lati evidenziati e premi Invio. Invio senza valore aggiunge il contorno · Esc annulla la scelta dei lati."
+  },
+  "array": {
+    "name": "Serie",
+    "mode": "Modo",
+    "linear": "Lineare",
+    "circular": "Polare",
+    "count": "Quantità",
+    "sweep": "Angolo",
+    "promptBase": "Serie lineare: clicca o digita un punto base. La quantità include l’originale.",
+    "promptStep": "Clicca dove va la copia successiva o digita ΔX e ΔY. Maiusc blocca a 15°.",
+    "promptCentre": "Serie polare: clicca o digita il centro. La quantità include l’originale.",
+    "promptCircular": "Premi Invio o clicca per creare la serie: 360° distribuisce le copie in modo uniforme; meno copre dalla prima all’ultima."
+  },
+  "notch": {
+    "name": "Tacca",
+    "count": "Tacca",
+    "single": "Singola",
+    "double": "Doppia",
+    "style": "Stile",
+    "line": "Intaglio (linea)",
+    "v": "Tacca a V",
+    "length": "Profondità",
+    "gap": "Distanza",
+    "width": "Larghezza",
+    "prompt": "Clicca un lato per aggiungere una tacca di allineamento (verso l’interno del pezzo; per le linee aperte, dal lato del cursore). Valgono gli agganci."
+  },
+  "perpendicular": {
+    "name": "Perpendicolare",
+    "along": "Lungo",
+    "length": "Lunghezza",
+    "promptEdge": "Clicca un lato retto.",
+    "promptPlace": "Clic per posizionare una linea perpendicolare, o digita la posizione lungo il lato e la lunghezza. Esc sceglie un altro lato."
+  },
+  "measure": {
+    "name": "Misura",
+    "mode": "Misura",
+    "distance": "Distanza",
+    "angle": "Angolo",
+    "length": "Lunghezza",
+    "promptDistance": "Clicca due punti per misurare la distanza.",
+    "promptAngle": "Clicca un punto, il vertice, poi un altro punto.",
+    "holes": "N. di fori",
+    "edgeA": "Lato 1",
+    "edgeB": "Lato 2",
+    "promptHolesFirst": "Clicca un lato di una serie di fori per contarli (inclusi quelli d’angolo).",
+    "promptHolesSecond": "Clicca il lato a cui viene cucito.",
+    "holesMatch": "Entrambi i lati hanno {count, plural, one {# foro} other {# fori}}: corrispondono. Clicca per confrontare un’altra coppia.",
+    "holesDiffer": "Non corrispondono: {a} contro {b} fori ({diff, plural, one {# foro} other {# fori}} di differenza). Regola un passo o le lunghezze dei lati perché la cucitura torni.",
+    "promptLength": "Passa su una forma per vederne la lunghezza."
+  }
+}

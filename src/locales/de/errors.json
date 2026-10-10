@@ -1,0 +1,12 @@
+{
+  "file": {
+    "notAProject": "Diese Datei ist kein LeatherDraft-Projekt.",
+    "newerVersion": "Dieses Projekt wurde mit einer neueren Version von LeatherDraft gespeichert.",
+    "noMigration": "Dieses Projekt kann nicht auf die aktuelle Version aktualisiert werden.",
+    "notJson": "Diese Datei ist kein gültiges JSON und daher kein LeatherDraft-Projekt.",
+    "ioFailed": "Die Datei konnte nicht gelesen oder geschrieben werden. Prüfen Sie die Berechtigungen und versuchen Sie es erneut.",
+    "exportFailed": "Der Export ist fehlgeschlagen. Versuchen Sie es erneut; falls es wieder scheitert, exportieren Sie weniger Ebenen oder verwenden Sie SVG.",
+    "notDrawing": "Diese Datei ist keine SVG- oder DXF-Zeichnung.",
+    "importNoLayer": "Keine Ebene zum Importieren: Blenden Sie die Ebene „Referenz“ oder die aktive Ebene ein bzw. entsperren Sie sie."
+  }
+}

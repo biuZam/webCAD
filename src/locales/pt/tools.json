@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "Selecionar",
+    "prompt": "Clique para selecionar · Shift+clique adiciona ou remove · arraste da esquerda para a direita para o que está totalmente dentro, da direita para a esquerda para o que for tocado · arraste um item selecionado para mover (Alt: copiar) · Delete exclui.",
+    "promptPoints": "Arraste pontos ou alças · clique duplo num ponto: suave ↔ canto · clique duplo no contorno: adicionar ponto · clique num ponto e Delete: remover · Esc desmarca."
+  },
+  "line": {
+    "name": "Linha",
+    "polylineName": "Polilinha",
+    "mode": "Modo",
+    "modeSegments": "Segmentos separados",
+    "modePolyline": "Uma polilinha",
+    "length": "Comprimento",
+    "angle": "Ângulo",
+    "promptFirst": "Clique ou digite o primeiro ponto.",
+    "promptNext": "Clique no próximo ponto ou digite comprimento e ângulo. Shift trava em 15°.",
+    "promptMore": "Próximo ponto · clique no primeiro para fechar · Enter, clique duplo ou botão direito para terminar · Backspace desfaz um ponto."
+  },
+  "rectangle": {
+    "name": "Retângulo",
+    "shape": "Forma",
+    "square": "Quadrado",
+    "side": "Lado",
+    "width": "Largura",
+    "height": "Altura",
+    "cornerRadius": "Raio dos cantos",
+    "promptFirst": "Clique ou digite o primeiro canto. Segure Alt para desenhar a partir do centro.",
+    "promptCorner": "Clique no canto oposto ou digite largura e altura.",
+    "promptCentre": "Do centro: clique num canto ou digite a largura e a altura totais."
+  },
+  "circle": {
+    "name": "Círculo",
+    "threeName": "Círculo por 3 pontos",
+    "ellipseName": "Elipse",
+    "radius": "Raio",
+    "promptCentre": "Clique ou digite o centro.",
+    "promptRadius": "Clique num ponto do círculo ou digite o raio.",
+    "mode": "Modo",
+    "modeCentre": "Centro + raio",
+    "modeThree": "3 pontos",
+    "modeEllipse": "Elipse",
+    "radius2": "2º raio",
+    "promptP1": "Clique no primeiro ponto do círculo.",
+    "promptP2": "Clique no segundo ponto.",
+    "promptP3": "Clique no terceiro ponto.",
+    "promptAxis": "Clique na extremidade do primeiro eixo (define raio e direção).",
+    "promptOther": "Clique para definir o outro raio ou digite-o."
+  },
+  "fillet": {
+    "name": "Concordância",
+    "radius": "Raio",
+    "promptPick": "Passe sobre um canto entre duas arestas retas. Shift: todos os cantos da forma.",
+    "promptApply": "Clique para arredondar este canto (Shift: todos). Digite um raio para alterá-lo.",
+    "tooLarge": "Grande demais para este canto: o maior raio possível é {max} mm.",
+    "notApplicable": "Não é possível arredondar este canto."
+  },
+  "stitchHoles": {
+    "name": "Furos de costura",
+    "pitch": "Passo",
+    "count": "{count, plural, one {# furo} other {# furos}}",
+    "preset": "Pente de costura",
+    "custom": "Personalizado",
+    "size": "Tamanho do furo",
+    "shape": "Forma",
+    "round": "Redondo",
+    "slit": "Fenda inclinada",
+    "corners": "Furo em cada canto",
+    "promptPick": "Passe sobre uma linha de costura (ou qualquer linha) para ver os furos.",
+    "promptClick": "Clique para adicionar estes furos. Eles ficam vinculados à linha e a acompanham."
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "A camada ativa está bloqueada ou oculta. Desbloqueie-a ou mostre-a, ou escolha outra no painel Camadas.",
+    "explodeNone": "Selecione caminhos com mais de um segmento para decompor (retângulos, polilinhas, contornos).",
+    "joinNone": "Selecione caminhos abertos para unir (ou um com as pontas coincidentes, para fechá-lo).",
+    "booleanNone": "Selecione duas ou mais formas fechadas (contornos ou círculos)."
+  },
+  "transform": {
+    "promptPick": "Selecione objetos (clique, Shift+clique ou caixa) e pressione Enter ou botão direito.",
+    "copy": "Manter original (cópia)"
+  },
+  "move": {
+    "name": "Mover",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "Clique ou digite o ponto base.",
+    "promptTarget": "Clique no destino ou digite ΔX e ΔY. Shift trava em 15°."
+  },
+  "rotate": {
+    "name": "Girar",
+    "angle": "Ângulo",
+    "promptCentre": "Clique ou digite o centro de rotação.",
+    "promptAngle": "Clique para definir o ângulo (a partir de +X) ou digite-o. Shift arredonda para 15°."
+  },
+  "scale": {
+    "name": "Escala",
+    "factor": "Fator",
+    "promptBase": "Clique ou digite o ponto base (fica fixo).",
+    "promptRef": "Digite um fator ou clique num ponto de referência.",
+    "promptTarget": "Clique onde o ponto de referência deve ir ou digite um fator."
+  },
+  "mirror": {
+    "name": "Espelhar",
+    "angle": "Ângulo do eixo",
+    "promptFirst": "Clique numa linha de centro para espelhar em relação a ela, ou no primeiro ponto do eixo.",
+    "promptSecond": "Clique no segundo ponto do eixo ou digite o ângulo. Shift trava em 15°."
+  },
+  "offset": {
+    "name": "Deslocamento",
+    "distance": "Distância",
+    "through": "Pelo cursor",
+    "join": "Cantos",
+    "joinMiter": "Vivo (esquadria)",
+    "joinRound": "Arredondado",
+    "joinBevel": "Chanfro",
+    "promptPick": "Clique num caminho, círculo ou linha de centro para deslocar.",
+    "promptSide": "Clique no lado do deslocamento (a distância segue o cursor, ou digite-a). Clique de novo para outro; Esc escolhe outra origem.",
+    "promptApprox": "Deslocamento criado. Algumas curvas foram deslocadas como polilinhas finas para ficar dentro de 0,02 mm. Clique de novo para outro."
+  },
+  "stitchLine": {
+    "name": "Linha de costura",
+    "promptPick": "Clique num contorno para adicionar uma linha de costura.",
+    "promptSide": "Clique dentro ou fora para escolher o lado (margem das configurações do projeto, ou digite-a). A linha fica vinculada ao contorno.",
+    "promptApprox": "Linha de costura adicionada; algumas curvas são polilinhas finas para ficar dentro de 0,02 mm. Clique no próximo contorno."
+  },
+  "chamfer": {
+    "name": "Chanfro",
+    "d1": "Distância",
+    "d2": "2ª distância",
+    "angle": "Ângulo",
+    "promptPick": "Passe sobre um canto entre duas arestas retas. Shift: todos os cantos da forma.",
+    "promptApply": "Clique para cortar este canto (Shift: todos). Digite distâncias, ou uma distância e um ângulo.",
+    "tooLarge": "Grande demais para este canto: no máximo {max} mm ao longo de cada aresta.",
+    "notApplicable": "Não é possível cortar este canto com esse ângulo."
+  },
+  "pen": {
+    "name": "Caneta (curvas)",
+    "promptFirst": "Clique para um canto, arraste para um ponto de curva suave.",
+    "promptNext": "Clique para um canto, arraste para uma curva. Digite comprimento e ângulo para uma aresta reta. Shift trava em 15°.",
+    "promptMore": "Clique no primeiro ponto para fechar · Enter, clique duplo ou botão direito para terminar · Backspace remove o último ponto."
+  },
+  "arc": {
+    "name": "Arco (3 pontos)",
+    "promptStart": "Clique ou digite o início do arco.",
+    "promptEnd": "Clique ou digite o fim do arco.",
+    "promptThrough": "Clique num ponto por onde o arco passa.",
+    "collinear": "Os três pontos estão alinhados: escolha um fora da linha."
+  },
+  "centreLine": {
+    "name": "Linha de centro",
+    "mode": "Modo",
+    "modeShape": "Pelo centro de uma forma",
+    "modePoints": "Dois pontos",
+    "orientation": "Direção",
+    "vertical": "Vertical",
+    "horizontal": "Horizontal",
+    "promptShape": "Clique numa forma para adicionar uma linha de centro pelo meio. Espelhar pode usá-la como eixo.",
+    "promptFirst": "Clique ou digite o primeiro ponto.",
+    "promptSecond": "Clique no segundo ponto. Shift trava em 15°."
+  },
+  "label": {
+    "name": "Rótulo",
+    "mode": "Modo",
+    "modeText": "Texto",
+    "modeGrain": "Seta de fio",
+    "text": "Texto",
+    "size": "Tamanho",
+    "angle": "Ângulo",
+    "length": "Comprimento",
+    "promptPlace": "Clique ou digite onde o texto começa (ponta esquerda da linha de base). Os rótulos vão na camada Notas.",
+    "promptText": "Digite o texto, p. ex. nome da peça e «cortar 2», e pressione Enter. Clique em outro lugar para mover · Esc cancela.",
+    "promptGrainStart": "Clique ou digite uma ponta da seta de fio.",
+    "promptGrainEnd": "Clique na outra ponta ou digite comprimento e ângulo. Shift trava em 15°."
+  },
+  "parallel": {
+    "name": "Linha paralela",
+    "distance": "Distância",
+    "promptEdge": "Clique numa aresta reta.",
+    "promptPlace": "Clique no lado e na distância desejados, ou digite a distância (o cursor escolhe o lado). Esc escolhe outra aresta."
+  },
+  "trim": {
+    "name": "Aparar / estender / dividir",
+    "mode": "Modo",
+    "modeTrim": "Aparar",
+    "modeExtend": "Estender",
+    "modeSplit": "Dividir",
+    "promptTrim": "Clique no trecho de linha a remover: ele é cortado até os cruzamentos mais próximos. Shift+clique estende.",
+    "promptExtend": "Clique perto da ponta de uma linha para estendê-la até a próxima. Shift+clique apara.",
+    "promptSplit": "Clique numa linha ou contorno para dividi-lo nesse ponto."
+  },
+  "punch": {
+    "name": "Furo / rasgo com vazador",
+    "kind": "Forma",
+    "round": "Furo redondo",
+    "slot": "Rasgo",
+    "preset": "Vazador",
+    "custom": "Personalizado",
+    "diameter": "Diâmetro",
+    "width": "Largura",
+    "length": "Comprimento",
+    "angle": "Ângulo",
+    "prompt": "Clique para posicionar um furo (encaixa em centros e pontos) ou digite X/Y e Enter. Use o diâmetro que o rebite, botão de pressão ou parafuso pedir.",
+    "promptSlot": "Clique para posicionar um rasgo pelo centro, ou digite X/Y e Enter. O comprimento é de ponta a ponta; a largura é o diâmetro do vazador."
+  },
+  "seamAllowance": {
+    "name": "Margem de costura",
+    "allowance": "Margem",
+    "promptPick": "Clique num contorno fechado para adicionar margem de costura ao redor.",
+    "promptAll": "Margens (mm): {values}. Digite um valor para todas as arestas, ou clique numa aresta (Shift+clique para mais) para definir a dela. Enter adiciona o contorno · Esc escolhe outro.",
+    "promptEdges": "Margens (mm): {values}. Digite a margem das arestas destacadas e pressione Enter. Enter sem valor adiciona o contorno · Esc limpa a escolha de arestas."
+  },
+  "array": {
+    "name": "Matriz",
+    "mode": "Modo",
+    "linear": "Linear",
+    "circular": "Polar",
+    "count": "Quantidade",
+    "sweep": "Ângulo",
+    "promptBase": "Matriz linear: clique ou digite um ponto base. A quantidade inclui o original.",
+    "promptStep": "Clique onde vai a próxima cópia ou digite ΔX e ΔY. Shift trava em 15°.",
+    "promptCentre": "Matriz polar: clique ou digite o centro. A quantidade inclui o original.",
+    "promptCircular": "Pressione Enter ou clique para criar a matriz: 360° distribui as cópias por igual; menos vai da primeira à última."
+  },
+  "notch": {
+    "name": "Picote",
+    "count": "Picote",
+    "single": "Simples",
+    "double": "Duplo",
+    "style": "Estilo",
+    "line": "Corte (linha)",
+    "v": "Picote em V",
+    "length": "Profundidade",
+    "gap": "Espaço",
+    "width": "Largura",
+    "prompt": "Clique numa aresta para adicionar um picote de alinhamento (para dentro da peça; em linhas abertas, do lado do cursor). Os snaps valem."
+  },
+  "perpendicular": {
+    "name": "Perpendicular",
+    "along": "Ao longo",
+    "length": "Comprimento",
+    "promptEdge": "Clique numa aresta reta.",
+    "promptPlace": "Clique para posicionar uma linha perpendicular, ou digite a posição na aresta e o comprimento. Esc escolhe outra aresta."
+  },
+  "measure": {
+    "name": "Medir",
+    "mode": "Medir",
+    "distance": "Distância",
+    "angle": "Ângulo",
+    "length": "Comprimento",
+    "promptDistance": "Clique em dois pontos para medir a distância.",
+    "promptAngle": "Clique num ponto, no vértice e em outro ponto.",
+    "holes": "Nº de furos",
+    "edgeA": "Aresta 1",
+    "edgeB": "Aresta 2",
+    "promptHolesFirst": "Clique numa aresta de um conjunto de furos para contá-los (inclui os de canto).",
+    "promptHolesSecond": "Clique na aresta à qual ela é costurada.",
+    "holesMatch": "As duas arestas têm {count, plural, one {# furo} other {# furos}}: coincidem. Clique para comparar outro par.",
+    "holesDiffer": "Diferença: {a} contra {b} furos ({diff, plural, one {# furo} other {# furos}} de diferença). Ajuste um passo ou os comprimentos das arestas para a costura bater.",
+    "promptLength": "Passe sobre uma forma para ver o comprimento."
+  }
+}

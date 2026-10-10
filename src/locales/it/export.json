@@ -1,0 +1,47 @@
+{
+  "title": "Esporta",
+  "format": "Formato",
+  "formats": {
+    "pdf": "PDF, 1:1 per la stampa",
+    "svg": "SVG, 1:1 per laser, plotter da taglio o altre app",
+    "dxf": "DXF, 1:1 in mm per software laser e CNC",
+    "png": "Immagine PNG, per condividere o vedere l’anteprima"
+  },
+  "dxf": {
+    "noLabels": "Il DXF contiene solo le forme: le etichette sono escluse."
+  },
+  "png": {
+    "resolution": "Risoluzione",
+    "hint": "Un’immagine da condividere. Per realizzare il cartamodello usa PDF, SVG o DXF."
+  },
+  "layers": "Contenuto",
+  "cutOnly": "Solo livelli di taglio (laser)",
+  "includeLabels": "Includi etichette",
+  "polyline": "Curve come brevi segmenti retti (per software laser)",
+  "strokeWidth": "Spessore linea",
+  "strokeAsDrawn": "come disegnato",
+  "working": "Esportazione…",
+  "export": "Esporta {format}",
+  "svg": {
+    "title": "Esporta SVG",
+    "cutOnly": "Solo livelli di taglio (laser)",
+    "includeLabels": "Includi etichette"
+  },
+  "pdf": {
+    "paper": "Carta",
+    "single": "Una pagina, a misura del modello",
+    "orientation": "Orientamento",
+    "auto": "Meno pagine possibile",
+    "portrait": "Verticale",
+    "landscape": "Orizzontale",
+    "overlap": "Sovrapposizione",
+    "printHint": "Stampa al 100 % («Dimensioni effettive»), mai «Adatta alla pagina». Poi misura il quadrato di 50 mm sulla prima pagina.",
+    "scale": "Scala 1:1",
+    "calibration": "50 mm: misura questo quadrato per verificare la scala di stampa",
+    "instructions1": "Stampa al 100 % / «Dimensioni effettive». Non usare «Adatta alla pagina» né «Riduci pagine grandi».",
+    "instructions2": "Misura il quadrato: ogni lato deve essere di 50 mm esatti. Altrimenti controlla la scala della stampante e stampa di nuovo.",
+    "assembly": "I fogli si sovrappongono di {overlap} mm. Taglia lungo una linea tratteggiata o sovrapponi i fogli facendo combaciare i segni d’angolo e i numeri dei fogli sui bordi.",
+    "sheets": "Fogli"
+  },
+  "aiUnreviewed": "{count, plural, one {# oggetto è stato creato dall’IA e non è stato revisionato.} other {# oggetti sono stati creati dall’IA e non sono stati revisionati.}}"
+}

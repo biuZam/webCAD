@@ -1,0 +1,47 @@
+{
+  "title": "書き出し",
+  "format": "形式",
+  "formats": {
+    "pdf": "PDF（原寸 1:1、印刷用）",
+    "svg": "SVG（原寸 1:1、レーザー・カッティングプロッタ等用）",
+    "dxf": "DXF（原寸 1:1・mm、レーザー/CNC ソフト用）",
+    "png": "PNG 画像（共有・プレビュー用）"
+  },
+  "dxf": {
+    "noLabels": "DXF には図形のみ含まれ、ラベルは含まれません。"
+  },
+  "png": {
+    "resolution": "解像度",
+    "hint": "共有用の画像です。型紙づくりには PDF・SVG・DXF を使ってください。"
+  },
+  "layers": "内容",
+  "cutOnly": "裁断レイヤーのみ（レーザー）",
+  "includeLabels": "ラベルを含める",
+  "polyline": "曲線を短い直線に分割（レーザーソフト用）",
+  "strokeWidth": "線幅",
+  "strokeAsDrawn": "描画どおり",
+  "working": "書き出し中…",
+  "export": "{format} を書き出す",
+  "svg": {
+    "title": "SVG を書き出す",
+    "cutOnly": "裁断レイヤーのみ（レーザー）",
+    "includeLabels": "ラベルを含める"
+  },
+  "pdf": {
+    "paper": "用紙",
+    "single": "型紙サイズの 1 ページ",
+    "orientation": "向き",
+    "auto": "ページ数を最小に",
+    "portrait": "縦",
+    "landscape": "横",
+    "overlap": "重なり",
+    "printHint": "必ず 100 %（「実際のサイズ」）で印刷し、「ページに合わせる」は使わないでください。1 ページ目の 50 mm の正方形を測って確認します。",
+    "scale": "Scale 1:1",
+    "calibration": "50 mm: measure this square to check the print scale",
+    "instructions1": "Print at 100 % / \"Actual size\". Do not use \"Fit to page\" or \"Shrink oversized pages\".",
+    "instructions2": "Measure the square: it must be exactly 50 mm on each side. If not, check the printer scaling and print again.",
+    "assembly": "Sheets overlap by {overlap} mm. Trim along a dashed line or overlap the sheets, matching the corner marks and the sheet labels at the edges.",
+    "sheets": "Sheets"
+  },
+  "aiUnreviewed": "AI が作成した {count, plural, other {# 個のオブジェクト}}は未確認です。"
+}

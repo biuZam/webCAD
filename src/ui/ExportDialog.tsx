@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
+import { pdfLanguage } from '../i18n'
 import { useUiStore } from '../canvas/ui-store'
 import { documentStore, useDocument } from '../document/store'
 import { exportSvg, type SvgExportOptions } from '../export/svg'
@@ -70,7 +71,7 @@ function saveSettings(s: ExportSettings) {
 
 /** Text printed on the PDF pages, in the UI language (T4.2 embeds a CJK font when it is needed). */
 function pdfStrings(overlap: number): PdfStrings {
-  const t = i18next.getFixedT(i18next.language, 'export')
+  const t = i18next.getFixedT(pdfLanguage(i18next.language), 'export')
   return {
     scale: t('pdf.scale'),
     calibration: t('pdf.calibration'),

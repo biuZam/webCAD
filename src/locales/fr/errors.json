@@ -1,0 +1,12 @@
+{
+  "file": {
+    "notAProject": "Ce fichier n’est pas un projet LeatherDraft.",
+    "newerVersion": "Ce projet a été enregistré par une version plus récente de LeatherDraft.",
+    "noMigration": "Ce projet ne peut pas être mis à niveau vers la version actuelle.",
+    "notJson": "Ce fichier n’est pas un JSON valide ; ce ne peut donc pas être un projet LeatherDraft.",
+    "ioFailed": "Impossible de lire ou d’écrire le fichier. Vérifiez les autorisations puis réessayez.",
+    "exportFailed": "L’exportation a échoué. Réessayez ; si cela échoue encore, exportez moins de calques ou utilisez le SVG.",
+    "notDrawing": "Ce fichier n’est pas un dessin SVG ou DXF.",
+    "importNoLayer": "Aucun calque où importer : affichez ou déverrouillez le calque « Référence » ou le calque actif."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "title": "匯出",
+  "format": "格式",
+  "formats": {
+    "pdf": "PDF，1:1 列印",
+    "svg": "SVG，1:1，用於雷射切割機或其他軟體",
+    "dxf": "DXF，1:1（毫米），用於雷射與 CNC 軟體",
+    "png": "PNG 圖片，用於分享或預覽"
+  },
+  "dxf": {
+    "noLabels": "DXF 只包含圖形，不含標註文字。"
+  },
+  "png": {
+    "resolution": "解析度",
+    "hint": "用於分享的圖片。製作版型請使用 PDF、SVG 或 DXF。"
+  },
+  "layers": "內容",
+  "cutOnly": "僅裁切圖層（雷射）",
+  "includeLabels": "包含標註",
+  "polyline": "曲線轉為短直線（適用於雷射軟體）",
+  "strokeWidth": "線寬",
+  "strokeAsDrawn": "按原線寬",
+  "working": "正在匯出…",
+  "export": "匯出 {format}",
+  "svg": {
+    "title": "匯出 SVG",
+    "cutOnly": "僅裁切圖層（雷射）",
+    "includeLabels": "包含標註"
+  },
+  "pdf": {
+    "paper": "紙張",
+    "single": "單頁，按版型尺寸",
+    "orientation": "方向",
+    "auto": "頁數最少",
+    "portrait": "縱向",
+    "landscape": "橫向",
+    "overlap": "重疊",
+    "printHint": "請按 100%（“實際大小”）列印，切勿選擇“適合頁面”。然後測量第一頁上的 50 mm 方塊。",
+    "scale": "比例 1:1",
+    "calibration": "50 mm：測量此方塊以檢查列印比例",
+    "instructions1": "請按 100% /“實際大小”列印。不要使用“適合頁面”或“縮小超大頁面”。",
+    "instructions2": "測量方塊：每邊必須正好為 50 mm。否則請檢查印表機縮放設定後重新列印。",
+    "assembly": "各頁重疊 {overlap} mm。沿虛線裁剪或疊放各頁，對齊角標和頁邊的頁碼標籤。",
+    "sheets": "頁面"
+  },
+  "aiUnreviewed": "{count, plural, other {有 # 個物件由 AI 建立，尚未複核。}}"
+}

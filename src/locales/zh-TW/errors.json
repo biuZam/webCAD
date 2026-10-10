@@ -1,0 +1,12 @@
+{
+  "file": {
+    "notAProject": "此檔案不是 LeatherDraft 專案。",
+    "newerVersion": "此專案由更新版本的 LeatherDraft 儲存。",
+    "noMigration": "無法升級此專案的版本。",
+    "notJson": "此檔案不是有效的 JSON，因此不可能是 LeatherDraft 專案。",
+    "ioFailed": "無法讀取或寫入檔案。請檢查許可權後重試。",
+    "exportFailed": "匯出失敗。請重試；如仍失敗，可減少圖層或改用 SVG。",
+    "notDrawing": "此檔案不是 SVG 或 DXF 圖形。",
+    "importNoLayer": "沒有可匯入的圖層：請顯示或解鎖“參考”圖層或當前圖層。"
+  }
+}

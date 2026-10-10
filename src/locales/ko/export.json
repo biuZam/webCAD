@@ -1,0 +1,47 @@
+{
+  "title": "내보내기",
+  "format": "형식",
+  "formats": {
+    "pdf": "PDF, 1:1 인쇄용",
+    "svg": "SVG, 1:1 레이저·커팅 플로터 등용",
+    "dxf": "DXF, 1:1 mm, 레이저·CNC 소프트웨어용",
+    "png": "PNG 이미지, 공유·미리보기용"
+  },
+  "dxf": {
+    "noLabels": "DXF에는 도형만 포함되며 라벨은 제외됩니다."
+  },
+  "png": {
+    "resolution": "해상도",
+    "hint": "공유용 이미지입니다. 패턴 제작에는 PDF, SVG, DXF를 사용하세요."
+  },
+  "layers": "내용",
+  "cutOnly": "재단 레이어만 (레이저)",
+  "includeLabels": "라벨 포함",
+  "polyline": "곡선을 짧은 직선으로 (레이저 소프트웨어용)",
+  "strokeWidth": "선 두께",
+  "strokeAsDrawn": "그린 그대로",
+  "working": "내보내는 중…",
+  "export": "{format} 내보내기",
+  "svg": {
+    "title": "SVG 내보내기",
+    "cutOnly": "재단 레이어만 (레이저)",
+    "includeLabels": "라벨 포함"
+  },
+  "pdf": {
+    "paper": "용지",
+    "single": "패턴 크기의 한 페이지",
+    "orientation": "방향",
+    "auto": "페이지 수 최소",
+    "portrait": "세로",
+    "landscape": "가로",
+    "overlap": "겹침",
+    "printHint": "반드시 100 %('실제 크기')로 인쇄하고 '페이지에 맞춤'은 사용하지 마세요. 첫 페이지의 50 mm 정사각형을 재어 확인하세요.",
+    "scale": "Scale 1:1",
+    "calibration": "50 mm: measure this square to check the print scale",
+    "instructions1": "Print at 100 % / \"Actual size\". Do not use \"Fit to page\" or \"Shrink oversized pages\".",
+    "instructions2": "Measure the square: it must be exactly 50 mm on each side. If not, check the printer scaling and print again.",
+    "assembly": "Sheets overlap by {overlap} mm. Trim along a dashed line or overlap the sheets, matching the corner marks and the sheet labels at the edges.",
+    "sheets": "Sheets"
+  },
+  "aiUnreviewed": "{count, plural, other {AI가 만든 객체 #개를 아직 검토하지 않았습니다.}}"
+}

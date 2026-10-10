@@ -1,0 +1,262 @@
+{
+  "select": {
+    "name": "選択",
+    "prompt": "クリックで選択 · Shift+クリックで追加/解除 · 左→右ドラッグで完全に内側のみ、右→左ドラッグで触れたもの全て · 選択中の図形をドラッグで移動（Alt: コピー）· Delete で削除。",
+    "promptPoints": "点やハンドルをドラッグ · 点をダブルクリック: スムーズ ↔ 角 · 輪郭をダブルクリック: 点を追加 · 点をクリックして Delete: 削除 · Esc で選択解除。"
+  },
+  "line": {
+    "name": "線",
+    "polylineName": "ポリライン",
+    "mode": "モード",
+    "modeSegments": "個別の線分",
+    "modePolyline": "1 本のポリライン",
+    "length": "長さ",
+    "angle": "角度",
+    "promptFirst": "始点をクリックまたは入力。",
+    "promptNext": "次の点をクリック、または長さと角度を入力。Shift で 15° 固定。",
+    "promptMore": "次の点 · 始点をクリックで閉じる · Enter・ダブルクリック・右クリックで終了 · Backspace で 1 点戻す。"
+  },
+  "rectangle": {
+    "name": "長方形",
+    "shape": "形状",
+    "square": "正方形",
+    "side": "一辺",
+    "width": "幅",
+    "height": "高さ",
+    "cornerRadius": "角の半径",
+    "promptFirst": "最初の角をクリックまたは入力。Alt で中心から描画。",
+    "promptCorner": "対角をクリック、または幅と高さを入力。",
+    "promptCentre": "中心から: 角をクリック、または全体の幅と高さを入力。"
+  },
+  "circle": {
+    "name": "円",
+    "threeName": "3 点円",
+    "ellipseName": "楕円",
+    "radius": "半径",
+    "promptCentre": "中心をクリックまたは入力。",
+    "promptRadius": "円周上の点をクリック、または半径を入力。",
+    "mode": "モード",
+    "modeCentre": "中心と半径",
+    "modeThree": "3 点",
+    "modeEllipse": "楕円",
+    "radius2": "第 2 半径",
+    "promptP1": "円周上の 1 点目をクリック。",
+    "promptP2": "2 点目をクリック。",
+    "promptP3": "3 点目をクリック。",
+    "promptAxis": "第 1 軸の端をクリック（半径と向きを決定）。",
+    "promptOther": "クリックまたは入力でもう一方の半径を指定。"
+  },
+  "fillet": {
+    "name": "フィレット",
+    "radius": "半径",
+    "promptPick": "2 本の直線辺の角にカーソルを合わせます。Shift: その図形の全ての角。",
+    "promptApply": "クリックでこの角を丸める（Shift: 全ての角）。半径を入力して変更。",
+    "tooLarge": "この角には大きすぎます。入る最大半径は {max} mm です。",
+    "notApplicable": "この角は丸められません。"
+  },
+  "stitchHoles": {
+    "name": "縫い穴",
+    "pitch": "ピッチ",
+    "count": "{count, plural, other {# 穴}}",
+    "preset": "菱目打ち",
+    "custom": "カスタム",
+    "size": "穴のサイズ",
+    "shape": "形状",
+    "round": "丸",
+    "slit": "斜めスリット",
+    "corners": "角ごとに穴",
+    "promptPick": "縫い線（または任意の線）にカーソルを合わせると穴をプレビューします。",
+    "promptClick": "クリックでこの穴を追加。線にリンクし、線に追従します。"
+  },
+  "common": {
+    "x": "X",
+    "y": "Y",
+    "layerUnavailable": "現在のレイヤーがロックまたは非表示です。解除/表示するか、レイヤーパネルで別のレイヤーを選んでください。",
+    "explodeNone": "分解するには 2 つ以上の線分を持つパスを選択してください（長方形・ポリライン・輪郭）。",
+    "joinNone": "結合するには開いたパスを選択してください（端が接していれば閉じます）。",
+    "booleanNone": "閉じた図形（輪郭または円）を 2 つ以上選択してください。"
+  },
+  "transform": {
+    "promptPick": "オブジェクトを選択（クリック、Shift+クリック、範囲ドラッグ）し、Enter または右クリック。",
+    "copy": "元を残す（コピー）"
+  },
+  "move": {
+    "name": "移動",
+    "dx": "ΔX",
+    "dy": "ΔY",
+    "promptBase": "基点をクリックまたは入力。",
+    "promptTarget": "移動先をクリック、または ΔX と ΔY を入力。Shift で 15° 固定。"
+  },
+  "rotate": {
+    "name": "回転",
+    "angle": "角度",
+    "promptCentre": "回転中心をクリックまたは入力。",
+    "promptAngle": "クリックで角度を指定（+X 方向から）、または入力。Shift で 15° 刻み。"
+  },
+  "scale": {
+    "name": "拡大縮小",
+    "factor": "倍率",
+    "promptBase": "基点をクリックまたは入力（固定されます）。",
+    "promptRef": "倍率を入力、または参照点をクリック。",
+    "promptTarget": "参照点の移動先をクリック、または倍率を入力。"
+  },
+  "mirror": {
+    "name": "ミラー",
+    "angle": "軸の角度",
+    "promptFirst": "中心線をクリックしてそれを軸に反転、または軸の 1 点目をクリック。",
+    "promptSecond": "軸の 2 点目をクリック、または軸の角度を入力。Shift で 15° 固定。"
+  },
+  "offset": {
+    "name": "オフセット",
+    "distance": "距離",
+    "through": "カーソル位置",
+    "join": "角",
+    "joinMiter": "尖った角（マイター）",
+    "joinRound": "丸",
+    "joinBevel": "面取り",
+    "promptPick": "オフセットするパス、円、中心線をクリック。",
+    "promptSide": "オフセット側をクリック（距離はカーソルに追従、または入力）。再度クリックでもう 1 つ、Esc で元を選び直し。",
+    "promptApprox": "オフセットしました。0.02 mm 以内に収めるため、一部の曲線は細かいポリラインでオフセットしました。続けてクリックで再オフセット。"
+  },
+  "stitchLine": {
+    "name": "縫い線",
+    "promptPick": "縫い線を追加する輪郭をクリック。",
+    "promptSide": "内側か外側をクリックして側を指定（余白はプロジェクト設定、または入力）。線は輪郭にリンクします。",
+    "promptApprox": "縫い線を追加しました。0.02 mm 以内に収めるため、一部の曲線は細かいポリラインです。次の輪郭をクリック。"
+  },
+  "chamfer": {
+    "name": "面取り",
+    "d1": "距離",
+    "d2": "第 2 距離",
+    "angle": "角度",
+    "promptPick": "2 本の直線辺の角にカーソルを合わせます。Shift: その図形の全ての角。",
+    "promptApply": "クリックでこの角を面取り（Shift: 全ての角）。距離、または距離と角度を入力。",
+    "tooLarge": "この角には大きすぎます。各辺に沿って最大 {max} mm です。",
+    "notApplicable": "その角度ではこの角を面取りできません。"
+  },
+  "pen": {
+    "name": "ペン（曲線）",
+    "promptFirst": "クリックで角、ドラッグでスムーズな曲線の点。",
+    "promptNext": "クリックで角、ドラッグで曲線。直線辺は長さと角度を入力。Shift で 15° 固定。",
+    "promptMore": "始点をクリックで閉じる · Enter・ダブルクリック・右クリックで終了 · Backspace で最後の点を削除。"
+  },
+  "arc": {
+    "name": "円弧（3 点）",
+    "promptStart": "円弧の始点をクリックまたは入力。",
+    "promptEnd": "円弧の終点をクリックまたは入力。",
+    "promptThrough": "円弧が通る点をクリック。",
+    "collinear": "3 点が一直線上です。線から外れた点を選んでください。"
+  },
+  "centreLine": {
+    "name": "中心線",
+    "mode": "モード",
+    "modeShape": "図形の中心を通る",
+    "modePoints": "2 点",
+    "orientation": "方向",
+    "vertical": "垂直",
+    "horizontal": "水平",
+    "promptShape": "図形をクリックして中心を通る中心線を追加。ミラーの軸に使えます。",
+    "promptFirst": "1 点目をクリックまたは入力。",
+    "promptSecond": "2 点目をクリック。Shift で 15° 固定。"
+  },
+  "label": {
+    "name": "ラベル",
+    "mode": "モード",
+    "modeText": "テキスト",
+    "modeGrain": "地の目矢印",
+    "text": "テキスト",
+    "size": "サイズ",
+    "angle": "角度",
+    "length": "長さ",
+    "promptPlace": "テキストの開始位置（ベースライン左端）をクリックまたは入力。ラベルは「メモ」レイヤーに置かれます。",
+    "promptText": "テキスト（例: パーツ名と「2 枚裁断」）を入力して Enter。別の場所をクリックで移動 · Esc で取消。",
+    "promptGrainStart": "地の目矢印の一端をクリックまたは入力。",
+    "promptGrainEnd": "もう一端をクリック、または長さと角度を入力。Shift で 15° 固定。"
+  },
+  "parallel": {
+    "name": "平行線",
+    "distance": "距離",
+    "promptEdge": "直線辺をクリック。",
+    "promptPlace": "側と距離の位置をクリック、または距離を入力（側はカーソルで決定）。Esc で別の辺を選択。"
+  },
+  "trim": {
+    "name": "トリム / 延長 / 分割",
+    "mode": "モード",
+    "modeTrim": "トリム",
+    "modeExtend": "延長",
+    "modeSplit": "分割",
+    "promptTrim": "削除する線の部分をクリック。最も近い交点まで切り取られます。Shift+クリックで延長に切替。",
+    "promptExtend": "線の端付近をクリックすると次の線まで延長します。Shift+クリックでトリムに切替。",
+    "promptSplit": "線または輪郭をクリックしてその位置で分割。"
+  },
+  "punch": {
+    "name": "ポンチ穴 / 長穴",
+    "kind": "形状",
+    "round": "丸穴",
+    "slot": "長穴",
+    "preset": "ポンチ",
+    "custom": "カスタム",
+    "diameter": "直径",
+    "width": "幅",
+    "length": "長さ",
+    "angle": "角度",
+    "prompt": "クリックで穴を配置（中心や点にスナップ）、または X/Y を入力して Enter。リベット・ホック・ネジ足に合う直径を使ってください。",
+    "promptSlot": "クリックで長穴を中心位置に配置、または X/Y を入力して Enter。長さは端から端まで、幅はポンチの直径です。"
+  },
+  "seamAllowance": {
+    "name": "縫い代",
+    "allowance": "縫い代",
+    "promptPick": "閉じた輪郭をクリックして周囲に縫い代を追加。",
+    "promptAll": "縫い代 (mm): {values}。全辺の値を入力、または辺をクリック（Shift+クリックで複数）して個別に設定。Enter で輪郭を追加 · Esc で選び直し。",
+    "promptEdges": "縫い代 (mm): {values}。強調表示した辺の値を入力して Enter。未入力で Enter すると輪郭を追加 · Esc で辺の選択を解除。"
+  },
+  "array": {
+    "name": "配列複写",
+    "mode": "モード",
+    "linear": "直線",
+    "circular": "円形",
+    "count": "個数",
+    "sweep": "角度",
+    "promptBase": "直線配列: 基点をクリックまたは入力。個数には元を含みます。",
+    "promptStep": "次のコピーの位置をクリック、または ΔX と ΔY を入力。Shift で 15° 固定。",
+    "promptCentre": "円形配列: 中心をクリックまたは入力。個数には元を含みます。",
+    "promptCircular": "Enter またはクリックで配列を作成。360° は均等に配置、それ未満は最初から最後までの範囲。"
+  },
+  "notch": {
+    "name": "合い印",
+    "count": "合い印",
+    "single": "1 本",
+    "double": "2 本",
+    "style": "スタイル",
+    "line": "切り込み（線）",
+    "v": "V 型",
+    "length": "深さ",
+    "gap": "間隔",
+    "width": "幅",
+    "prompt": "辺をクリックして合い印を追加（パーツの内側へ。開いた線ではカーソル側）。スナップが有効です。"
+  },
+  "perpendicular": {
+    "name": "垂線",
+    "along": "辺上の位置",
+    "length": "長さ",
+    "promptEdge": "直線辺をクリック。",
+    "promptPlace": "クリックで垂線を配置、または辺に沿った位置と長さを入力。Esc で別の辺を選択。"
+  },
+  "measure": {
+    "name": "計測",
+    "mode": "計測",
+    "distance": "距離",
+    "angle": "角度",
+    "length": "長さ",
+    "promptDistance": "2 点をクリックして距離を計測。",
+    "promptAngle": "1 点目、頂点、もう 1 点の順にクリック。",
+    "holes": "穴数",
+    "edgeA": "辺 1",
+    "edgeB": "辺 2",
+    "promptHolesFirst": "縫い穴セットの辺をクリックして穴数を数えます（角の穴を含む）。",
+    "promptHolesSecond": "縫い合わせる相手の辺をクリック。",
+    "holesMatch": "両辺とも {count, plural, other {# 穴}}で一致しています。クリックで別の組を比較。",
+    "holesDiffer": "不一致: {a} 穴と {b} 穴（差 {diff, plural, other {# 穴}}）。ピッチか辺の長さを調整して、きれいに縫い合わせられるようにしてください。",
+    "promptLength": "図形にカーソルを合わせると長さを表示します。"
+  }
+}
