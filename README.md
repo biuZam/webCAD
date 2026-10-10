@@ -105,6 +105,7 @@ Fixture sessions are never autosaved, so they can't overwrite your own work.
 | `pnpm i18n:check` | Keys missing from non-English locales |
 | `pnpm bundle:check` | Initial download must stay under 600 KB gzipped |
 | `BENCH=1 pnpm test perf.bench` | Performance probe on 2,000 entities |
+| `pnpm exec tsx scripts/demo/record-demo.ts` + `python3 scripts/demo/make-gif.py` | Re-record `docs/media/demo.gif` (dev server on :5199 first; see the script header) |
 
 If package installs are slow where you are, try a registry mirror, e.g. `pnpm install --registry=https://registry.npmmirror.com`.
 

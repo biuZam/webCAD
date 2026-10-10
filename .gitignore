@@ -27,3 +27,6 @@ patterns
 # Playwright
 test-results
 playwright-report
+
+# Demo GIF screenshots (scripts/demo)
+demo-frames
