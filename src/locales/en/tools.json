@@ -6,6 +6,10 @@
   },
   "line": {
     "name": "Line",
+    "polylineName": "Polyline",
+    "mode": "Mode",
+    "modeSegments": "Separate segments",
+    "modePolyline": "One polyline",
     "length": "Length",
     "angle": "Angle",
     "promptFirst": "Click or type the first point.",
@@ -68,6 +72,7 @@
     "x": "X",
     "y": "Y",
     "layerUnavailable": "The active layer is locked or hidden. Unlock or show it, or pick another layer in the Layers panel.",
+    "explodeNone": "Select paths with more than one segment to explode (rectangles, polylines, outlines).",
     "joinNone": "Select open paths to join (or one whose ends meet, to close it).",
     "booleanNone": "Select two or more closed shapes (outlines or circles)."
   },

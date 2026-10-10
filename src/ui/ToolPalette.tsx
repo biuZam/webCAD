@@ -12,6 +12,8 @@ import { runCommand, useShortcuts } from './shortcuts-store'
 const ICONS: Record<VariantId, string> = {
   select: 'M5 3l11 7-5 1.5L8.5 17z',
   line: 'M4 16L16 4M4 16h0M16 4h0',
+  // A zigzag of joined segments: one object.
+  polyline: 'M3 15l4-8 5 6 5-9M3 15h0M7 7h0M12 13h0M17 4h0',
   rectangle: 'M4 5h12v10H4z',
   square: 'M4 4h12v12H4z',
   circle: 'M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12z',
@@ -48,6 +50,8 @@ const ICONS: Record<VariantId, string> = {
   // An edge with two snips into it.
   notch: 'M2 6h16M8 6v6M12 6v6M3 16h14',
   join: 'M2 14h6l2-4M18 6h-6l-2 4',
+  // A corner coming apart into separate segments.
+  explode: 'M3 15l4-8M9 5l5 9M3 17h0M15 16l2 1',
   union: 'M3 5h8v3h6v9H9v-3H3z',
   difference: 'M3 5h8v3M11 8v6H3V5M11 8h6v9H9v-3',
   flipH: 'M10 2v16M7 6L3 10l4 4M13 6l4 4-4 4',
@@ -70,6 +74,7 @@ function useVariantName() {
   const { t: tTools } = useTranslation('tools')
   return (v: Variant): string => {
     if (v.action) return t(`modify.${v.action}`)
+    if (v.id === 'polyline') return tTools('line.polylineName')
     if (v.id === 'square') return tTools('rectangle.square')
     if (v.id === 'circle3') return tTools('circle.threeName')
     if (v.id === 'ellipse') return tTools('circle.ellipseName')

@@ -6,7 +6,7 @@ import { create } from 'zustand'
 import type { ActionId } from '../tools/shortcuts'
 import type { InputField, InputValues, ToolId } from '../tools/types'
 
-export type VariantId = ToolId | ActionId | 'square' | 'circle3' | 'ellipse'
+export type VariantId = ToolId | ActionId | 'polyline' | 'square' | 'circle3' | 'ellipse'
 
 export interface Variant {
   id: VariantId
@@ -26,7 +26,7 @@ const action = (id: ActionId): Variant => ({ id, action: id })
 export const GROUPS: readonly (readonly Variant[] | null)[] = [
   [tool('select')],
   null,
-  [tool('line')],
+  [tool('line', { mode: 0 }), mode('polyline', 'line', { mode: 1 })],
   [tool('rectangle', { shape: 0 }), mode('square', 'rectangle', { shape: 1 })],
   [tool('circle', { mode: 0 }), mode('circle3', 'circle', { mode: 1 }), mode('ellipse', 'circle', { mode: 2 })],
   [tool('pen'), tool('arc')],
@@ -50,7 +50,7 @@ export const GROUPS: readonly (readonly Variant[] | null)[] = [
   [tool('measure')],
   null,
   [action('flipH'), action('flipV')],
-  [action('join')],
+  [action('join'), action('explode')],
   [action('union'), action('difference')],
 ]
 

@@ -61,6 +61,8 @@ export function runCommand(id: CommandId) {
       return toolSession.flip('vertical')
     case 'join':
       return toolSession.join()
+    case 'explode':
+      return toolSession.explode()
     case 'union':
     case 'difference':
       return toolSession.boolean(id)

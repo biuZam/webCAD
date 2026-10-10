@@ -51,6 +51,7 @@
     "extend": "Extend",
     "split": "Split",
     "join": "Join",
+    "explode": "Explode",
     "array": "Array",
     "addNotch": "Add notch",
     "union": "Union",
@@ -120,6 +121,7 @@
     "flipH": "Flip horizontal",
     "flipV": "Flip vertical",
     "join": "Join paths",
+    "explode": "Explode (into segments)",
     "union": "Union",
     "difference": "Difference (largest minus the others)"
   },

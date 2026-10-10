@@ -8,7 +8,7 @@ import { emptyBounds, entityBounds, isEmpty } from '../geometry/bounds'
 import { mirrorAcross } from '../geometry/transform'
 import type { Vec2 } from '../lib/vec2'
 import { snap, TRACKABLE, type SnapKind } from '../snapping/engine'
-import { booleanSelection, joinSelection, type PathOp } from './path-ops'
+import { booleanSelection, explodeSelection, joinSelection, type PathOp } from './path-ops'
 import { gridSpacing } from '../snapping/grid'
 import type {
   I18nKey,
@@ -238,6 +238,11 @@ export class ToolSession {
   /** M9 Join the selected open paths (or close one). */
   join() {
     this.applyPathOp(joinSelection(this.store.getState().project, this.selection), 'common.joinNone')
+  }
+
+  /** Explode the selected paths into separate segments (AutoCAD EXPLODE). */
+  explode() {
+    this.applyPathOp(explodeSelection(this.store.getState().project, this.selection), 'common.explodeNone')
   }
 
   /** M9 Union of the selected closed shapes, or the largest minus the others. */

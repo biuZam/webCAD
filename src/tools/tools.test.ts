@@ -42,7 +42,31 @@ beforeEach(() => {
 describe('line tool', () => {
   beforeEach(() => session.setTool('line'))
 
+  it('draws separate segments by default (CAD LINE), as one undo step', () => {
+    click([0, 0])
+    click([10, 0])
+    click([10, 5])
+    click([0, 0.3]) // back at the start: closes with a third segment
+    expect(entities().map((e) => (e as PathEntity).segments.map((s) => s.p))).toEqual([
+      [
+        [0, 0],
+        [10, 0],
+      ],
+      [
+        [10, 0],
+        [10, 5],
+      ],
+      [
+        [10, 5],
+        [0, 0],
+      ],
+    ])
+    expect(entities().every((e) => e.type === 'path' && !e.closed)).toBe(true)
+    expect(store.getState().past).toHaveLength(1)
+  })
+
   it('draws an open polyline as one undo step, finished with Enter', () => {
+    session.input({ mode: 1 }, false)
     click([0, 0])
     click([10, 0])
     click([10, 5])
@@ -59,6 +83,7 @@ describe('line tool', () => {
   })
 
   it('closes when clicking near the first point', () => {
+    session.input({ mode: 1 }, false)
     click([0, 0])
     click([10, 0])
     click([10, 10])
@@ -69,6 +94,7 @@ describe('line tool', () => {
   })
 
   it('finishes on a double-click without adding a duplicate point', () => {
+    session.input({ mode: 1 }, false)
     click([0, 0])
     click([10, 0])
     click([20, 5])

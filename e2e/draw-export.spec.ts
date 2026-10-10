@@ -264,3 +264,28 @@ test('no browser context menu on the app; language picker is an icon; the side p
   await page.getByRole('button', { name: 'Show side panel' }).click()
   await expect(page.getByRole('heading', { name: 'Layers' })).toBeVisible()
 })
+
+test('a continuous line is separate segments: clicking one selects just that segment', async ({ page }) => {
+  await page.keyboard.press('l')
+  for (const p of [
+    [0, 0],
+    [40, 0],
+    [40, 30],
+    [80, 30],
+  ] as [number, number][]) {
+    const at = await toPage(page, p)
+    await page.mouse.move(...at)
+    await page.mouse.click(...at)
+  }
+  await page.keyboard.press('Enter')
+  await page.keyboard.press('Escape') // back to Select
+
+  const mid = await toPage(page, [40, 15]) // on the middle (vertical) segment
+  await page.mouse.move(...mid)
+  await page.mouse.click(...mid)
+  await expect(page.getByText('1 selected')).toBeVisible()
+
+  // Exported: three separate two-point paths.
+  const svg = await exportSvg(page)
+  expect(paths(svg)).toEqual(['M0 0L40 0', 'M40 0L40 30', 'M40 30L80 30'])
+})

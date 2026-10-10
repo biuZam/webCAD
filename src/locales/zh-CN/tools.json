@@ -6,6 +6,10 @@
   },
   "line": {
     "name": "直线",
+    "polylineName": "多段线",
+    "mode": "方式",
+    "modeSegments": "每段独立",
+    "modePolyline": "整条多段线",
     "length": "长度",
     "angle": "角度",
     "promptFirst": "单击或输入第一个点。",
@@ -68,6 +72,7 @@
     "x": "X",
     "y": "Y",
     "layerUnavailable": "当前图层已锁定或隐藏。请解锁或显示它，或在“图层”面板中选择其他图层。",
+    "explodeNone": "请选择含多段的路径进行分解（矩形、多段线、轮廓）。",
     "joinNone": "请选择要连接的开放路径（或一条首尾相接的路径以将其闭合）。",
     "booleanNone": "请选择两个或更多闭合图形（轮廓或圆）。"
   },

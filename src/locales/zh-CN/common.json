@@ -51,6 +51,7 @@
     "extend": "延伸",
     "split": "打断",
     "join": "连接",
+    "explode": "分解",
     "array": "阵列",
     "addNotch": "添加对位刀口",
     "union": "并集",
@@ -120,6 +121,7 @@
     "flipH": "水平翻转",
     "flipV": "垂直翻转",
     "join": "连接路径",
+    "explode": "分解（拆成单段）",
     "union": "并集",
     "difference": "差集（最大的减去其余）"
   },

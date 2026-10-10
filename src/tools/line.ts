@@ -1,9 +1,12 @@
 // D1 Line / polyline: click point to point; type length + angle; click the first point to close.
-// The whole polyline is one entity and one undo step, committed when finished or closed.
+// Two modes, as in AutoCAD: Line (LINE) makes every segment its own entity, so each can be selected and edited
+// alone; Polyline (PLINE) makes one path. Either way the run is one undo step, committed when finished or closed.
+// Join (Shift+J) turns segments into a polyline; Explode (Shift+X) the reverse.
 
 import { addEntities } from '../document/commands'
 import { angleOf, constrainAngle, distance, polar, type Vec2 } from '../lib/vec2'
 import { ANGLE_STEP_DEG, CLOSE_TOLERANCE_PX, entityBase, pointFields, typedPoint } from './common'
+import type { PathEntity } from '../document/model'
 import type { InputField, InputValues, PreviewShape, Tool, ToolContext, ToolPointerEvent } from './types'
 
 export class LineTool implements Tool {
@@ -15,6 +18,7 @@ export class LineTool implements Tool {
   private next: Vec2 | null = null
   private mouse: Vec2 | null = null
   private typed: InputValues = {}
+  private polyline = false
 
   activate(ctx: ToolContext) {
     this.reset(ctx)
@@ -44,6 +48,9 @@ export class LineTool implements Tool {
   }
 
   onInput(values: InputValues, commit: boolean, ctx: ToolContext) {
+    const { mode, ...rest } = values
+    if (mode !== undefined) this.polyline = mode === 1
+    values = rest
     this.typed = values
     if (commit) {
       const p = this.resolve()
@@ -94,20 +101,25 @@ export class LineTool implements Tool {
   private commit(ctx: ToolContext, closed: boolean) {
     const target = ctx.target()
     if (target && this.points.length >= 2) {
-      ctx.dispatch(
-        addEntities(
-          target.pieceId,
-          [
-            {
-              ...entityBase(ctx, target.layerId),
-              type: 'path',
-              segments: this.points.map((p) => ({ p })),
+      const pts = this.points
+      const path = (segments: PathEntity['segments'], isClosed: boolean): PathEntity => ({
+        ...entityBase(ctx, target.layerId),
+        type: 'path',
+        segments,
+        closed: isClosed,
+      })
+      const entities = this.polyline
+        ? [
+            path(
+              pts.map((p) => ({ p })),
               closed,
-            },
-          ],
-          'history.addLine',
-        ),
-      )
+            ),
+          ]
+        : // One entity per segment; closing adds the segment back to the first point.
+          [...pts.slice(1).map((p, i) => [pts[i], p]), ...(closed ? [[pts[pts.length - 1], pts[0]]] : [])].map(
+            ([a, b]) => path([{ p: a }, { p: b }], false),
+          )
+      ctx.dispatch(addEntities(target.pieceId, entities, 'history.addLine'))
     }
     this.reset(ctx)
   }
@@ -126,11 +138,19 @@ export class LineTool implements Tool {
     if (pts.length >= 2) preview.push({ kind: 'path', segments: pts.map((p) => ({ p })), closed: false })
     ctx.setPreview(preview)
 
+    const modeField: InputField = {
+      key: 'mode',
+      kind: 'choice',
+      labelKey: 'line.mode',
+      options: ['line.modeSegments', 'line.modePolyline'],
+      live: this.polyline ? 1 : 0,
+    }
     if (!last) {
-      ctx.setPrompt('line.promptFirst', pointFields(this.mouse))
+      ctx.setPrompt('line.promptFirst', [modeField, ...pointFields(this.mouse)])
       return
     }
     const fields: InputField[] = [
+      modeField,
       {
         key: 'length',
         kind: 'length',

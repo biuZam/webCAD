@@ -12,7 +12,7 @@ It runs entirely in your browser: no account, no server, and your files never le
 
 **Drafting**
 
-- Lines, rectangles (with corner radius), circles (centre + radius, 3 points, ellipse), Bézier pen, 3-point arcs
+- Lines (each segment its own object, as in CAD) and polylines, rectangles and squares (with corner radius), circles (centre + radius, 3 points, ellipse), Bézier pen, 3-point arcs
 - Centre lines (usable as mirror axes) and perpendicular lines
 - Labels: text (piece name, "cut 2"…) and grain arrows, on the notes layer
 - Move, rotate, scale and mirror (each optionally as a copy), flip in place; linear and circular arrays
@@ -61,8 +61,9 @@ Print the PDF at **100 % / "Actual size"**, never "Fit to page", then measure th
 | U | Punch hole / slot | Y | Seam allowance (per edge) |
 | Q | Array (linear / circular) | J | Notch |
 | Shift+J | Join paths | Shift+U / Shift+D | Union / difference |
+| Shift+X | Explode into segments |  |  |
 
-Similar tools share a palette slot, as in Photoshop: **right-click** a slot with a corner triangle (or long-press, or press → on it) to pick another — rectangle / square, circle / 3-point circle / ellipse, pen / arc, perpendicular / parallel, fillet / chamfer, offset / seam allowance, punch / notch, flip horizontal / vertical, union / difference. The side panel folds away with the arrow at its top.
+Similar tools share a palette slot, as in Photoshop: **right-click** a slot with a corner triangle (or long-press, or press → on it) to pick another — line / polyline, rectangle / square, circle / 3-point circle / ellipse, pen / arc, perpendicular / parallel, fillet / chamfer, offset / seam allowance, punch / notch, flip horizontal / vertical, join / explode, union / difference. The side panel folds away with the arrow at its top.
 
 Every tool and action key can be changed under **Shortcuts…** in the toolbar (kept per browser).
 

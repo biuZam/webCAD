@@ -175,4 +175,46 @@ describe('join and booleans on the selection', () => {
     expect(all()).toHaveLength(1)
     expect(closedArea(get('a'))).toBeCloseTo(150, 6)
   })
+
+  it('explodes a rectangle into four segments (first keeps the id); Join puts them back', () => {
+    setup([rect('r', [0, 0], [10, 10])])
+    session.selectAll()
+    session.explode()
+    expect(all()).toHaveLength(4)
+    expect(all()[0].id).toBe('r')
+    expect(all().every((e) => e.type === 'path' && e.segments.length === 2 && !e.closed)).toBe(true)
+    expect(selection).toHaveLength(4)
+    expect(lastLabel()).toBe('history.explode')
+    session.join()
+    expect(all()).toHaveLength(1)
+    expect(get('r').closed).toBe(true)
+    expect(closedArea(get('r'))).toBeCloseTo(100, 9)
+  })
+
+  it('explode keeps curve handles on each piece and says why when there is nothing to explode', () => {
+    setup([
+      {
+        ...line('c', [0, 0], [10, 0]),
+        segments: [
+          { p: [0, 0], ho: [0, 5] },
+          { p: [10, 0], hi: [0, 5], ho: [0, -5] },
+          { p: [20, 0], hi: [0, -5] },
+        ],
+      },
+    ])
+    session.selectAll()
+    session.explode()
+    expect(all().map((e) => (e as PathEntity).segments)).toEqual([
+      [
+        { p: [0, 0], ho: [0, 5] },
+        { p: [10, 0], hi: [0, 5] },
+      ],
+      [
+        { p: [10, 0], ho: [0, -5] },
+        { p: [20, 0], hi: [0, -5] },
+      ],
+    ])
+    session.explode() // single segments now
+    expect(promptKey).toBe('common.explodeNone')
+  })
 })

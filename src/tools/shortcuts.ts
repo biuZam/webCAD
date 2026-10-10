@@ -7,7 +7,7 @@ import { TOOL_ORDER, TOOL_SHORTCUTS } from './index'
 import type { ToolId } from './types'
 
 /** Selection actions with shortcuts, besides the tools. */
-export const ACTION_IDS = ['flipH', 'flipV', 'join', 'union', 'difference'] as const
+export const ACTION_IDS = ['flipH', 'flipV', 'join', 'explode', 'union', 'difference'] as const
 export type ActionId = (typeof ACTION_IDS)[number]
 export type CommandId = ToolId | ActionId
 
@@ -18,6 +18,7 @@ export const DEFAULT_BINDINGS: Bindings = {
   flipH: 'Shift+H',
   flipV: 'Shift+V',
   join: 'Shift+J',
+  explode: 'Shift+X',
   union: 'Shift+U',
   difference: 'Shift+D',
 }
